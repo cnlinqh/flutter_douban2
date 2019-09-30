@@ -34,7 +34,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     ScreenSize.initScreen(context);
-
     return Scaffold(
       // body: IndexedStack(
       //   index: this._tabIndex,

@@ -6,7 +6,6 @@ import 'package:html/dom.dart';
 import 'package:html/dom_parsing.dart';
 import 'package:html/parser.dart';
 
-
 class ClientAPI {
   Dio webDio = initDio(
     baseUrl: "https://movie.douban.com",
@@ -44,5 +43,17 @@ class ClientAPI {
       hots.add(hot);
     });
     return hots;
+  }
+
+  Future<List> getMovieInTheaters({int start = 0, int count = 6}) async {
+    Response<Map> res = await apiDio.get('/v2/movie/in_theaters',
+        queryParameters: {"start": start, 'count': count});
+    return res.data['subjects'];
+  }
+
+  Future<List> getMovieComingSoon({int start = 0, int count = 6}) async {
+    Response<Map> res = await apiDio.get('/v2/movie/coming_soon',
+        queryParameters: {"start": start, 'count': count});
+    return res.data['subjects'];
   }
 }
