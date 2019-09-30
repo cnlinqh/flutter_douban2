@@ -27,12 +27,11 @@ class MovieSubjectSimple extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: CachedNetworkImageProvider(this.cover),
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fitWidth,
                 ),
                 borderRadius: BorderRadius.all(Radius.circular(3)),
               ),
             ),
-
             Text(
               this.title.length >= 7
                   ? this.title.substring(0, 7) + "..."
@@ -41,7 +40,15 @@ class MovieSubjectSimple extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            RateStar(this.rate),
+            this.rate != 0
+                ? RateStar(this.rate)
+                : Text(
+                    "暂无评分",
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 14,
+                    ),
+                  ),
           ],
         ),
         constraints: new BoxConstraints.expand(),

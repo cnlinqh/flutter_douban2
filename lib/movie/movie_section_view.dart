@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_douban2/movie/movie_subject_simple.dart';
- 
+import 'package:flutter_douban2/util/screen_size.dart';
 
 class MovieSectionView extends StatelessWidget {
   final String _title;
@@ -11,6 +11,7 @@ class MovieSectionView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      
       child: Column(
         children: <Widget>[
           Row(
@@ -49,7 +50,8 @@ class MovieSectionView extends StatelessWidget {
               return MovieSubjectSimple(
                 this._subjects[index]['title'],
                 this._subjects[index]['images']['small'],
-                double.parse(this._subjects[index]['rating']['average'].toString()),
+                double.parse(
+                    this._subjects[index]['rating']['average'].toString()),
               );
             },
           ),
