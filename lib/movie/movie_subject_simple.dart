@@ -29,7 +29,7 @@ class MovieSubjectSimple extends StatelessWidget {
                   image: CachedNetworkImageProvider(this.cover),
                   fit: BoxFit.fitWidth,
                 ),
-                borderRadius: BorderRadius.all(Radius.circular(3)),
+                borderRadius: BorderRadius.all(Radius.circular(12)),
               ),
             ),
             Text(

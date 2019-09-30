@@ -41,7 +41,7 @@ class MovieSectionView extends StatelessWidget {
             physics: NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
-              childAspectRatio: 0.54,
+              childAspectRatio: 0.55,
               mainAxisSpacing: 10,
               crossAxisSpacing: 10,
             ),

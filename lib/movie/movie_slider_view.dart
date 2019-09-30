@@ -34,7 +34,7 @@ class MovieSliderView extends StatelessWidget {
                             image: CachedNetworkImageProvider(item['cover']),
                             fit: BoxFit.cover,
                           ),
-                          borderRadius: BorderRadius.all(Radius.circular(3)),
+                          borderRadius: BorderRadius.all(Radius.circular(7)),
                         ),
                       ),
                       Opacity(
@@ -42,7 +42,7 @@ class MovieSliderView extends StatelessWidget {
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.black,
-                            borderRadius: BorderRadius.all(Radius.circular(3)),
+                            borderRadius: BorderRadius.all(Radius.circular(7)),
                           ),
                         ),
                       ),
