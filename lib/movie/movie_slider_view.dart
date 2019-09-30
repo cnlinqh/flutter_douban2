@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter_douban2/model/movie_hot_recommend.dart';
 import 'package:flutter/animation.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class MovieSlider extends StatelessWidget {
-  final List<MovieHotRecommend> _list;
+  final List _list;
   MovieSlider(this._list);
 
   @override
@@ -32,7 +31,7 @@ class MovieSlider extends StatelessWidget {
                         // child: Image.network(item.cover),
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: CachedNetworkImageProvider(item.cover),
+                            image: CachedNetworkImageProvider(item['cover']),
                             fit: BoxFit.cover,
                           ),
                           borderRadius: BorderRadius.all(Radius.circular(3)),
@@ -53,7 +52,7 @@ class MovieSlider extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              item.title,
+                              item['title'],
                               style: TextStyle(
                                 color: Colors.blue,
                                 fontSize: 16,
@@ -61,10 +60,10 @@ class MovieSlider extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              item.summary,
+                              item['summary'],
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
-                              style: TextStyle(color: Colors.yellow),
+                              style: TextStyle(color: Colors.white),
                             ),
                           ],
                         ),

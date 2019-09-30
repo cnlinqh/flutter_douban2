@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_douban2/model/movie_hot_recommend.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/movie/movie_slider_view.dart';
 class MoviePage extends StatefulWidget {
@@ -12,13 +11,13 @@ class MoviePage extends StatefulWidget {
 }
 
 class _MoviePageState extends State<MoviePage> {
-  List<MovieHotRecommend> _movieHotRecommandList = [];
+  List _movieHotRecommandList = [];
 
   Future<void>  _refreshData() async {
     ClientAPI client = ClientAPI();
     this._movieHotRecommandList = await client.getMovieHotRecommendList();
     this.setState(() {
-      print(this._movieHotRecommandList[0].cover);
+      
     });
   }
 
