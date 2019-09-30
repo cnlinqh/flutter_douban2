@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_douban2/movie/move_page.dart';
 import 'package:flutter_douban2/mine/mine_page.dart';
 
@@ -32,11 +33,14 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenSize.initScreen(context);
+
     return Scaffold(
-      body: IndexedStack(
-        index: this._tabIndex,
-        children: this._tabWidgets,
-      ),
+      // body: IndexedStack(
+      //   index: this._tabIndex,
+      //   children: this._tabWidgets,
+      // ),
+      body: this._tabWidgets[this._tabIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: _buildBottomNavigationItems(),
         type: BottomNavigationBarType.fixed,
