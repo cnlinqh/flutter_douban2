@@ -40,7 +40,7 @@ class _MoviePageState extends State<MoviePage> {
           onRefresh: this._refreshData,
           child: ListView(
             children: <Widget>[
-              new Text("热门推荐"),
+              // new Text("热门推荐"),
               new MovieSlider(this._movieHotRecommandList),
             ],
           ),
