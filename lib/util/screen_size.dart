@@ -53,4 +53,7 @@ class ScreenSize {
     return ScreenUtil.getInstance().setWidth(380);
   }
 
+  static get bottomSheetHeight {
+    return ScreenUtil.getInstance().setHeight(1200);
+  }
 }

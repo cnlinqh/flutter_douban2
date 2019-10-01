@@ -119,7 +119,7 @@ class MovieSubjectGeneral extends StatelessWidget {
     );
   }
 
-  Widget _buildWant() {
+  Widget _buildWant(context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -127,7 +127,28 @@ class MovieSubjectGeneral extends StatelessWidget {
           icon: Icon(Icons.favorite_border),
           color: Colors.orange,
           onPressed: () {
-            print("想看" + this._subject['title']);
+            print("想看 " + this._subject['title']);
+            showBottomSheet(
+                context: context,
+                builder: (_) => Stack(
+                      children: <Widget>[
+                        Container(
+                          height: ScreenSize.bottomSheetHeight,
+                          // width: 599,
+                          color: Colors.red,
+                        ),
+                        Positioned(
+                          top: 10,
+                          left: 10,
+                          child: IconButton(
+                            icon: Icon(Icons.close),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        )
+                      ],
+                    ));
           },
         ),
         Text(
@@ -168,7 +189,7 @@ class MovieSubjectGeneral extends StatelessWidget {
               )
             ],
           ),
-          _buildWant()
+          _buildWant(context)
         ],
       ),
     );
