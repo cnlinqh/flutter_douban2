@@ -27,11 +27,10 @@ class MovieSubjectSimple extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(7)),
             ),
           ),
-          // Icon(Icons.today),
           IconButton(
             icon: Icon(
               Icons.favorite_border,
-              color: Colors.yellow,
+              color: Colors.orangeAccent,
             ),
             onPressed: () {
               print("Press " + this.title);

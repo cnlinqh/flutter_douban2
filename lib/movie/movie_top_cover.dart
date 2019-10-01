@@ -42,7 +42,7 @@ class MovieTopCover extends StatelessWidget {
 
       if (sub['delta'] != null) {
         return Container(
-          width: ScreenSize.topCoverWidth - 30,
+          width: ScreenSize.topCoverWidth - 20,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -131,7 +131,7 @@ class MovieTopCover extends StatelessWidget {
           ),
           Positioned(
               top: ScreenSize.topCoverHeight / 2 + 20,
-              left: 20,
+              left: 15,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: this._buildTitleList(),

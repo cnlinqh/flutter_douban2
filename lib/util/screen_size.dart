@@ -48,4 +48,9 @@ class ScreenSize {
   static get topCoverHeight {
     return ScreenUtil.getInstance().setHeight(360);
   }
+
+  static get subjectGeneralWidth {
+    return ScreenUtil.getInstance().setWidth(380);
+  }
+
 }

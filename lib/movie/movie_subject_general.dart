@@ -1,11 +1,176 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_douban2/widget/rate_star.dart';
+import 'package:flutter_douban2/util/screen_size.dart';
+
 class MovieSubjectGeneral extends StatelessWidget {
-  const MovieSubjectGeneral({Key key}) : super(key: key);
+  final _subject;
+  const MovieSubjectGeneral(this._subject);
+
+  Widget _buildCoverImage() {
+    return GestureDetector(
+      onTap: () {
+        print("Tap on " + _subject['title']);
+      },
+      child: Stack(
+        children: <Widget>[
+          Container(
+            width: ScreenSize.movieCoverWidth,
+            height: ScreenSize.movieCoverHeight,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: CachedNetworkImageProvider(_subject['images']['small']),
+                fit: BoxFit.cover,
+              ),
+              borderRadius: BorderRadius.all(Radius.circular(7)),
+            ),
+          ),
+          // Icon(Icons.today),
+          IconButton(
+            icon: Icon(
+              Icons.favorite_border,
+              color: Colors.orangeAccent,
+            ),
+            onPressed: () {
+              print("Press " + _subject['title']);
+            },
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTitle() {
+    return RichText(
+      text: TextSpan(
+        children: <TextSpan>[
+          TextSpan(
+              text: this._subject['title'],
+              style: TextStyle(
+                // fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              )),
+          TextSpan(
+            text: "(" + this._subject['year'] + ")",
+            style: TextStyle(
+              color: Colors.grey,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRate() {
+    var rate = double.parse(this._subject['rating']['average'].toString());
+    return rate != 0
+        ? RateStar(rate)
+        : Text(
+            "暂无评分",
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: 14,
+            ),
+          );
+  }
+
+  Widget _buildDetails() {
+    String year = this._subject["year"].toString();
+    String genres = this._subject['genres'].join(",");
+    var pubdates = this._subject['pubdates'].map((pub) {
+      return pub.split(new RegExp(r"\("))[1].split(new RegExp(r"\)"))[0];
+    });
+    pubdates = pubdates.join(", ");
+
+    var directors = this._subject['directors'].map((dir) {
+      return dir["name"];
+    });
+    directors = directors.join(", ");
+
+    var casts = this._subject['casts'].map((dir) {
+      return dir["name"];
+    });
+    casts = casts.join(", ");
+
+    return Text(year +
+        " / " +
+        pubdates +
+        " / " +
+        genres +
+        " / " +
+        directors +
+        " / " +
+        casts);
+  }
+
+  Widget _buildDescription() {
+    return Container(
+      width: ScreenSize.subjectGeneralWidth,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          _buildTitle(),
+          _buildRate(),
+          _buildDetails(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildWant() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        IconButton(
+          icon: Icon(Icons.favorite_border),
+          color: Colors.orange,
+          onPressed: () {
+            print("想看" + this._subject['title']);
+          },
+        ),
+        Text(
+          "想看",
+          style: TextStyle(
+            color: Colors.orange,
+          ),
+        ),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text(""),
+      padding: EdgeInsets.fromLTRB(
+        ScreenSize.screenPaddingLeft,
+        ScreenSize.screenPaddingTop,
+        ScreenSize.screenPaddingRight,
+        ScreenSize.screenPaddingBottom,
+      ),
+      child: Row(
+        children: <Widget>[
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              _buildCoverImage(),
+              Container(
+                width: 10,
+                height: ScreenSize.movieCoverHeight,
+              ),
+              _buildDescription(),
+              Container(
+                width: 1,
+                height: ScreenSize.movieCoverHeight,
+                color: Colors.orangeAccent,
+              )
+            ],
+          ),
+          _buildWant()
+        ],
+      ),
     );
   }
 }

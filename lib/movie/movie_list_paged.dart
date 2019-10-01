@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/movie/movie_subject_general.dart';
 
 class MovieListPaged extends StatefulWidget {
   final String _title;
@@ -55,7 +56,7 @@ class _MovieListPagedState extends State<MovieListPaged> {
                     return Container();
                   } else {
                     return Container(
-                      child: Text(_dataList[index]['title']),
+                      child: MovieSubjectGeneral(_dataList[index]),
                     );
                   }
                 },
