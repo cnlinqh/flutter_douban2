@@ -7,6 +7,12 @@ import 'package:html/dom.dart';
 import 'package:html/parser.dart';
 
 class ClientAPI {
+
+  static ClientAPI api = new ClientAPI();
+  static getInstance(){
+     return api;
+  }
+  
   Dio webDio = initDio(
     baseUrl: "https://movie.douban.com",
   );

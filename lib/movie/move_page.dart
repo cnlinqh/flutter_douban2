@@ -24,7 +24,7 @@ class _MoviePageState extends State<MoviePage> {
   List _movieTop250 = [];
 
   Future<void> _refreshData() async {
-    ClientAPI client = ClientAPI();
+    ClientAPI client = ClientAPI.getInstance();
     this._movieHotRecommandList = await client.getMovieHotRecommendList();
     this._movieInTheaters = await client.getMovieInTheaters();
     this._movieComingSoon = await client.getMovieComingSoon();
