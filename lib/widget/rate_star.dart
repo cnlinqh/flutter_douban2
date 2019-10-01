@@ -65,7 +65,13 @@ class RateStar extends StatelessWidget {
             ? Colors.orange
             : _rate > 8 ? Colors.orangeAccent : Colors.black,
       ),
-      Text(_rate.toString()),
+      Text(
+        _rate.toString(),
+        style: TextStyle(
+          color: Colors.grey,
+          fontSize: this._size,
+        ),
+      ),
     ];
   }
 }
