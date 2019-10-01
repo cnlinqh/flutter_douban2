@@ -45,14 +45,44 @@ class ClientAPI {
     return hots;
   }
 
-  Future<List> getMovieInTheaters({int start = 0, int count = 6}) async {
+  Future<List> getMovieInTheaters({
+    int start = 0,
+    int count = 6,
+  }) async {
     Response<Map> res = await apiDio.get('/v2/movie/in_theaters',
         queryParameters: {"start": start, 'count': count});
     return res.data['subjects'];
   }
 
-  Future<List> getMovieComingSoon({int start = 0, int count = 6}) async {
+  Future<List> getMovieComingSoon({
+    int start = 0,
+    int count = 6,
+  }) async {
     Response<Map> res = await apiDio.get('/v2/movie/coming_soon',
+        queryParameters: {"start": start, 'count': count});
+    return res.data['subjects'];
+  }
+
+  Future<List> getMovieWeekly() async {
+    Response<Map> res = await apiDio.get('/v2/movie/weekly');
+    return res.data['subjects'];
+  }
+
+  Future<List> getMovieNew() async {
+    Response<Map> res = await apiDio.get('/v2/movie/new_movies');
+    return res.data['subjects'];
+  }
+
+  Future<List> getMovieUSBox() async {
+    Response<Map> res = await apiDio.get('/v2/movie/us_box');
+    return res.data['subjects'];
+  }
+
+  Future<List> getMovieTop250({
+    int start = 0,
+    int count = 6,
+  }) async {
+    Response<Map> res = await apiDio.get('/v2/movie/top250',
         queryParameters: {"start": start, 'count': count});
     return res.data['subjects'];
   }
