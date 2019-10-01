@@ -27,17 +27,17 @@ class ScreenSize {
   }
 
   static get screenPaddingBottom {
-    return ScreenUtil.getInstance().setWidth(ScreenSize.padding);
+    return ScreenUtil.getInstance().setHeight(ScreenSize.padding);
   }
 
   static get movieCoverWidth {
     return ScreenUtil.getInstance()
-            .setHeight(ScreenSize.width - ScreenSize.padding * 6) /
-        3;
+            .setWidth(ScreenSize.width - ScreenSize.padding * 6) /
+        3 ;
   }
 
   static get movieCoverHeight {
-    return ScreenUtil.getInstance().setHeight(280);
-    // return ScreenSize.movieCoverWidth/0.65;
+    // return ScreenUtil.getInstance().setHeight(280);
+    return ScreenSize.movieCoverWidth/0.65;
   }
 }
