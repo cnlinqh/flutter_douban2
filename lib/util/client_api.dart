@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 
 //https://pub.dev/packages/html#-installing-tab-
 import 'package:html/dom.dart';
-import 'package:html/dom_parsing.dart';
+// import 'package:html/dom_parsing.dart';
 import 'package:html/parser.dart';
 
 class ClientAPI {

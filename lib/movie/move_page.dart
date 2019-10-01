@@ -29,7 +29,6 @@ class _MoviePageState extends State<MoviePage> {
     this._movieInTheaters = await client.getMovieInTheaters();
     this._movieComingSoon = await client.getMovieComingSoon();
     this._movieWeekly = await client.getMovieWeekly();
-    print(this._movieWeekly[0]);
     this._movieNew = await client.getMovieNew();
     this._movieUSBox = await client.getMovieUSBox();
     this._movieTop250 = await client.getMovieTop250();

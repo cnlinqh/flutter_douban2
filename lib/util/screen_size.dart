@@ -33,11 +33,19 @@ class ScreenSize {
   static get movieCoverWidth {
     return ScreenUtil.getInstance()
             .setWidth(ScreenSize.width - ScreenSize.padding * 6) /
-        3 ;
+        3;
   }
 
   static get movieCoverHeight {
     // return ScreenUtil.getInstance().setHeight(280);
-    return ScreenSize.movieCoverWidth/0.65;
+    return ScreenSize.movieCoverWidth / 0.65;
+  }
+
+  static get topCoverWidth {
+    return ScreenUtil.getInstance().setWidth(380);
+  }
+
+  static get topCoverHeight {
+    return ScreenUtil.getInstance().setHeight(360);
   }
 }

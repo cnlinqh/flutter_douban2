@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_douban2/movie/movie_new_cover.dart';
 import 'package:flutter_douban2/movie/movie_section_header.dart';
-import 'package:flutter_douban2/movie/movie_top250_cover.dart';
-import 'package:flutter_douban2/movie/movie_usbox_cover.dart';
-import 'package:flutter_douban2/movie/movie_weekly_cover.dart';
+import 'package:flutter_douban2/movie/movie_top_cover.dart';
 
 class MovieTopList extends StatelessWidget {
-  String _title;
-  List _movieWeekly;
-  List _movieNew;
-  List _movieUSBox;
-  List _movieTop250;
+  final String _title;
+  final List _movieWeekly;
+  final List _movieNew;
+  final List _movieUSBox;
+  final List _movieTop250;
 
   MovieTopList(this._title, this._movieWeekly, this._movieNew, this._movieUSBox,
       this._movieTop250);
@@ -26,10 +23,10 @@ class MovieTopList extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                MovieWeeklyCover(this._movieWeekly),
-                MovieNewCover(this._movieNew),
-                MovieUSBoxCover(this._movieUSBox),
-                MovieTop250Cover(this._movieTop250),
+                MovieTopCover(this._movieWeekly,"一周口碑电影榜","每周五更新，共10部",Colors.brown[100]),
+                MovieTopCover(this._movieTop250,"豆瓣电影Top250","豆瓣榜单，共250部",Colors.black26),
+                MovieTopCover(this._movieNew,"豆瓣电影新片榜","最新新片",Colors.green),
+                MovieTopCover(this._movieUSBox,"豆瓣电影北美票房榜","北美票房",Colors.teal),
               ],
             ),
           ),
