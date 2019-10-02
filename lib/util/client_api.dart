@@ -85,7 +85,7 @@ class ClientAPI {
 
   Future<List> getMovieTop250({
     int start = 0,
-    int count = 6,
+    int count = 250,
   }) async {
     Response<Map> res = await apiDio.get('/v2/movie/top250',
         queryParameters: {"start": start, 'count': count});

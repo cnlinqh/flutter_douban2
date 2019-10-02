@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/movie/movie_list_paged.dart';
+import 'package:flutter_douban2/movie/movie_list_static.dart';
 import 'package:flutter_douban2/movie/movie_subject_detail.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 
@@ -17,6 +18,9 @@ class NavigatorHelper {
     NavigatorHelper.push(context, MovieListPaged(title, getData));
   }
 
+  static pushMoviedStatic(BuildContext context, String title, List subjects){
+    NavigatorHelper.push(context, MovieListStatic(title, subjects));
+  }
   static pushMovieListPage(BuildContext context, String title) {
     if (title == "影院热映") {
       pushMoviePaged(
