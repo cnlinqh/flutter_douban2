@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/movie/subject_general_section.dart';
+import 'package:flutter_douban2/movie/subject_rate_section.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -56,6 +57,7 @@ class _MovieSubjectDetailsState extends State<MovieSubjectDetails> {
           child: ListView(
             children: <Widget>[
               SubjectGeneralSection(this._subject, context),
+              SubjectRateSection(this._subject,context),
             ],
           ),
         ),

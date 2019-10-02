@@ -60,11 +60,15 @@ class _MoviePageState extends State<MoviePage> {
           onRefresh: this._refreshData,
           child: ListView(
             children: <Widget>[
-              new Text("豆瓣电影",style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.blue
-              ),),
+              new Text(
+                "豆瓣电影",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue,
+                  
+                ),
+              ),
               new MovieSliderView(
                 this._movieHotRecommandList,
               ),

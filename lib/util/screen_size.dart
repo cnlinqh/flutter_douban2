@@ -29,4 +29,15 @@ class ScreenSize {
   //the width of general sheet
   static const double key_width = 80;
   static const double value_width = 600;
+
+  //the width of rate section
+  static const double point_width = 300;
+  static const double graph_width = 430;
+  static const double rate_height = 160;
+  static const double summary_height = 40;
+
+  static const double star_width = 130;
+  static const double star_height = 20;
+  static const double bar_width = 250;
+  static const double bar_height = 14;
 }
