@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/widget/rate_star.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,20 +18,7 @@ class MovieSubjectGeneral extends StatelessWidget {
       },
       child: Stack(
         children: <Widget>[
-          Container(
-            width:
-                ScreenUtil.getInstance().setWidth(ScreenSize.movie_cover_width),
-            height: ScreenUtil.getInstance()
-                .setHeight(ScreenSize.movie_cover_height),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: CachedNetworkImageProvider(_subject['images']['small']),
-                fit: BoxFit.cover,
-              ),
-              borderRadius: BorderRadius.all(Radius.circular(7)),
-            ),
-          ),
-          // Icon(Icons.today),
+          MovieUtil.buildMovieCover(_subject['images']['small']),
           IconButton(
             icon: Icon(
               Icons.favorite_border,
