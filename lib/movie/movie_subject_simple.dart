@@ -60,7 +60,6 @@ class MovieSubjectSimple extends StatelessWidget {
             "暂无评分",
             style: TextStyle(
               color: Colors.grey,
-              fontSize: 14,
             ),
           );
   }

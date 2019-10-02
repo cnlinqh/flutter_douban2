@@ -5,6 +5,7 @@ class ScreenSize {
   //iPhone 6 resolution
   static const double width = 750;
   static const double height = 1334;
+  
   static const double padding = 10;
 
   static initScreen(BuildContext context) {

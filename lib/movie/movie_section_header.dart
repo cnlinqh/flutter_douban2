@@ -30,7 +30,6 @@ class MovieSectionHeader extends StatelessWidget {
               "全部>",
               style: TextStyle(
                 color: Colors.black,
-                fontSize: 16,
               ),
             ),
           ),
