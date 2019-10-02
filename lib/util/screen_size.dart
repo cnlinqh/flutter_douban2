@@ -1,60 +1,24 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter/material.dart';
 
 class ScreenSize {
   //iPhone 6 resolution
+  //full screen width and height
   static const double width = 750;
   static const double height = 1334;
-  
+
+  //fixed padding
   static const double padding = 10;
 
-  static initScreen(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil(
-      width: ScreenSize.width,
-      height: ScreenSize.height,
-    )..init(context);
-  }
+  //the height of bottom sheet
+  static const double bottom_sheet_height = 1200;
 
-  static get screenPaddingLeft {
-    return ScreenUtil.getInstance().setWidth(ScreenSize.padding);
-  }
+  //the width & height of movie cover
+  static const double movie_cover_width = (width - padding * 6) / 3;
+  static const double movie_cover_height = movie_cover_width / 0.65;
 
-  static get screenPaddingTop {
-    return ScreenUtil.getInstance().setWidth(ScreenSize.padding);
-  }
-
-  static get screenPaddingRight {
-    return ScreenUtil.getInstance().setWidth(ScreenSize.padding);
-  }
-
-  static get screenPaddingBottom {
-    return ScreenUtil.getInstance().setHeight(ScreenSize.padding);
-  }
-
-  static get movieCoverWidth {
-    return ScreenUtil.getInstance()
-            .setWidth(ScreenSize.width - ScreenSize.padding * 6) /
-        3;
-  }
-
-  static get movieCoverHeight {
-    // return ScreenUtil.getInstance().setHeight(280);
-    return ScreenSize.movieCoverWidth / 0.65;
-  }
-
-  static get topCoverWidth {
-    return ScreenUtil.getInstance().setWidth(380);
-  }
-
-  static get topCoverHeight {
-    return ScreenUtil.getInstance().setHeight(360);
-  }
-
-  static get subjectGeneralWidth {
-    return ScreenUtil.getInstance().setWidth(380);
-  }
-
-  static get bottomSheetHeight {
-    return ScreenUtil.getInstance().setHeight(1200);
-  }
+  //the width & height of top movie list cover
+  static const double top_cover_width = 380;
+  static const double top_cover_height = 360;
+  
+  //the width of movie description 
+  static const double movie_description_width = 300;
 }

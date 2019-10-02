@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MovieTopCover extends StatelessWidget {
   final List _movieTop;
@@ -42,7 +43,8 @@ class MovieTopCover extends StatelessWidget {
 
       if (sub['delta'] != null) {
         return Container(
-          width: ScreenSize.topCoverWidth - 20,
+          width: ScreenUtil.getInstance().setWidth(ScreenSize.top_cover_width) -
+              20,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -61,7 +63,8 @@ class MovieTopCover extends StatelessWidget {
         );
       } else {
         return Container(
-          width: ScreenSize.topCoverWidth - 30,
+          width: ScreenUtil.getInstance().setWidth(ScreenSize.top_cover_width) -
+              30,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -77,15 +80,17 @@ class MovieTopCover extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-        right: ScreenSize.screenPaddingRight,
-        top: ScreenSize.screenPaddingTop,
-        bottom: ScreenSize.screenPaddingBottom,
+        right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+        top: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+        bottom: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
       ),
       child: Stack(
         children: <Widget>[
           Container(
-            width: ScreenSize.topCoverWidth,
-            height: ScreenSize.topCoverHeight,
+            width:
+                ScreenUtil.getInstance().setWidth(ScreenSize.top_cover_width),
+            height:
+                ScreenUtil.getInstance().setHeight(ScreenSize.top_cover_height),
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: CachedNetworkImageProvider(_getCoverUrl()),
@@ -97,8 +102,10 @@ class MovieTopCover extends StatelessWidget {
           Opacity(
             opacity: 0.1,
             child: Container(
-              width: ScreenSize.topCoverWidth,
-              height: ScreenSize.topCoverHeight,
+              width:
+                  ScreenUtil.getInstance().setWidth(ScreenSize.top_cover_width),
+              height: ScreenUtil.getInstance()
+                  .setHeight(ScreenSize.top_cover_height),
               decoration: BoxDecoration(
                 color: this._color,
                 borderRadius: BorderRadius.all(Radius.circular(7)),
@@ -106,10 +113,15 @@ class MovieTopCover extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: ScreenSize.topCoverHeight / 2,
+            top: ScreenUtil.getInstance()
+                    .setHeight(ScreenSize.top_cover_height) /
+                2,
             child: Container(
-              width: ScreenSize.topCoverWidth,
-              height: ScreenSize.topCoverHeight / 2,
+              width:
+                  ScreenUtil.getInstance().setWidth(ScreenSize.top_cover_width),
+              height: ScreenUtil.getInstance()
+                      .setHeight(ScreenSize.top_cover_height) /
+                  2,
               color: this._color,
             ),
           ),
@@ -122,7 +134,9 @@ class MovieTopCover extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: ScreenSize.topCoverHeight / 4,
+            top: ScreenUtil.getInstance()
+                    .setHeight(ScreenSize.top_cover_height) /
+                4,
             left: 20,
             child: Text(
               this._title,
@@ -130,7 +144,10 @@ class MovieTopCover extends StatelessWidget {
             ),
           ),
           Positioned(
-              top: ScreenSize.topCoverHeight / 2 + 20,
+              top: ScreenUtil.getInstance()
+                          .setHeight(ScreenSize.top_cover_height) /
+                      2 +
+                  20,
               left: 15,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

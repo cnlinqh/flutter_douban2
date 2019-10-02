@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_douban2/util/navigator_helper.dart';
 import 'package:flutter_douban2/widget/rate_star.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MovieSubjectSimple extends StatelessWidget {
   final String title;
@@ -20,8 +21,8 @@ class MovieSubjectSimple extends StatelessWidget {
       child: Stack(
         children: <Widget>[
           Container(
-            width: ScreenSize.movieCoverWidth,
-            height: ScreenSize.movieCoverHeight,
+            width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_cover_width),
+            height:ScreenUtil.getInstance().setHeight(ScreenSize.movie_cover_height),
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: CachedNetworkImageProvider(this.cover),

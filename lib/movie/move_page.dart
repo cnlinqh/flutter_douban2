@@ -4,6 +4,7 @@ import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/movie/movie_slider_view.dart';
 import 'package:flutter_douban2/movie/movie_top_list.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MoviePage extends StatefulWidget {
   MoviePage({
@@ -50,10 +51,10 @@ class _MoviePageState extends State<MoviePage> {
     } else {
       return Container(
         padding: EdgeInsets.fromLTRB(
-          ScreenSize.screenPaddingLeft,
-          ScreenSize.screenPaddingTop,
-          ScreenSize.screenPaddingRight,
-          ScreenSize.screenPaddingBottom,
+          ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+          ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
         ),
         child: RefreshIndicator(
           onRefresh: this._refreshData,
