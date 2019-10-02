@@ -19,37 +19,57 @@ class MovieUtil {
     );
   }
 
-  static String getYear(subject) {
-    return subject["year"].toString();
+  static String getTitle(_subject) {
+    return _subject["title"].toString();
   }
 
-  static String getGenres(subject) {
-    return subject['genres'].join(",");
+  static String getAka(_subject, {join = ', '}) {
+    return _subject["aka"].join(join);
   }
 
-  static String getPub(subject) {
-    var pubdates = subject['pubdates'].map((pub) {
+  static String getYear(_subject) {
+    return _subject["year"].toString();
+  }
+
+  static String getGenres(_subject, {join = ', '}) {
+    return _subject['genres'].join(join);
+  }
+
+  static String getPubPlace(_subject, {join = ', '}) {
+    var pubdates = _subject['pubdates'].map((pub) {
       return pub.split(new RegExp(r"\("))[1].split(new RegExp(r"\)"))[0];
     });
-    return pubdates.join(", ");
+    return pubdates.join(join);
   }
 
-  static String getDirectors(subject) {
-    var directors = subject['directors'].map((dir) {
+  static String getPubDates(_subject, {join = ', '}) {
+    return _subject['pubdates'].join(join);
+  }
+
+  static String getDirectors(_subject, {join = ', '}) {
+    var directors = _subject['directors'].map((dir) {
       return dir["name"];
     });
-    return directors.join(", ");
+    return directors.join(join);
   }
 
-  static String getCasts(subject) {
-    var casts = subject['casts'].map((dir) {
+  static String getCasts(_subject, {join = ', '}) {
+    var casts = _subject['casts'].map((dir) {
       return dir["name"];
     });
-    return casts.join(", ");
+    return casts.join(join);
   }
 
-  static Widget buildRate(subject) {
-    var rate = double.parse(subject['rating']['average'].toString());
+  static String getDurations(_subject, {join = ', '}) {
+    return _subject["durations"].join(join);
+  }
+
+  static String getLanguagess(_subject, {join = ', '}) {
+    return _subject["languages"].join(join);
+  }
+
+  static Widget buildRate(_subject) {
+    var rate = double.parse(_subject['rating']['average'].toString());
     return rate != 0
         ? RateStar(rate)
         : Text(

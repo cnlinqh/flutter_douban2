@@ -62,7 +62,7 @@ class MovieSubjectGeneral extends StatelessWidget {
   Widget _buildDetails() {
     return Text(MovieUtil.getYear(this._subject) +
         " / " +
-        MovieUtil.getPub(this._subject) +
+        MovieUtil.getPubPlace(this._subject) +
         " / " +
         MovieUtil.getGenres(this._subject) +
         " / " +
