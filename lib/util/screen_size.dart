@@ -15,8 +15,8 @@ class ScreenSize {
   static const double movie_cover_height = 353; //movie_cover_width / 0.65;
 
   //the width & height of top movie list cover
-  static const double top_cover_width = 380;
-  static const double top_cover_height = 360;
+  static const double top_cover_width = 400;
+  static const double top_cover_height = 380;
 
   //the width of movie description
   static const double movie_description_width = 400;

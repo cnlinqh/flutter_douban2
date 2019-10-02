@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
-import 'package:flutter_douban2/widget/rate_star.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/navigator_helper.dart';
@@ -57,45 +56,26 @@ class MovieSubjectGeneral extends StatelessWidget {
   }
 
   Widget _buildRate() {
-    var rate = double.parse(this._subject['rating']['average'].toString());
-    return rate != 0
-        ? RateStar(rate)
-        : Text(
-            "暂无评分",
-            style: TextStyle(
-              color: Colors.grey,
-              fontSize: 14,
-            ),
-          );
+    return MovieUtil.buildRate(this._subject);
   }
 
   Widget _buildDetails() {
-    String year = this._subject["year"].toString();
-    String genres = this._subject['genres'].join(",");
-    var pubdates = this._subject['pubdates'].map((pub) {
-      return pub.split(new RegExp(r"\("))[1].split(new RegExp(r"\)"))[0];
-    });
-    pubdates = pubdates.join(", ");
+    return Text(MovieUtil.getYear(this._subject) +
+        " / " +
+        MovieUtil.getPub(this._subject) +
+        " / " +
+        MovieUtil.getGenres(this._subject) +
+        " / " +
+        MovieUtil.getDirectors(this._subject) +
+        " / " +
+        MovieUtil.getCasts(this._subject));
+  }
 
-    var directors = this._subject['directors'].map((dir) {
-      return dir["name"];
-    });
-    directors = directors.join(", ");
-
-    var casts = this._subject['casts'].map((dir) {
-      return dir["name"];
-    });
-    casts = casts.join(", ");
-
-    return Text(year +
-        " / " +
-        pubdates +
-        " / " +
-        genres +
-        " / " +
-        directors +
-        " / " +
-        casts);
+  Widget _buildSpace() {
+    return Container(
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+      height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_cover_height),
+    );
   }
 
   Widget _buildDescription() {
@@ -110,6 +90,14 @@ class MovieSubjectGeneral extends StatelessWidget {
           _buildDetails(),
         ],
       ),
+    );
+  }
+
+  Widget buildDivider() {
+    return Container(
+      width: ScreenUtil.getInstance().setWidth(1),
+      height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_cover_height),
+      color: Colors.orangeAccent,
     );
   }
 
@@ -176,18 +164,9 @@ class MovieSubjectGeneral extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               _buildCoverImage(context),
-              Container(
-                width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-                height: ScreenUtil.getInstance()
-                    .setHeight(ScreenSize.movie_cover_height),
-              ),
+              _buildSpace(),
               _buildDescription(),
-              Container(
-                width: ScreenUtil.getInstance().setWidth(1),
-                height: ScreenUtil.getInstance()
-                    .setHeight(ScreenSize.movie_cover_height),
-                color: Colors.orangeAccent,
-              )
+              buildDivider(),
             ],
           ),
           _buildWant(context)
