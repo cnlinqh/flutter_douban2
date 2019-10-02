@@ -126,8 +126,8 @@ class MovieTopCover extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 20,
-            right: 20,
+            top: 10,
+            right: 10,
             child: Text(
               this._subTitle,
               style: TextStyle(color: Colors.white),
@@ -137,10 +137,12 @@ class MovieTopCover extends StatelessWidget {
             top: ScreenUtil.getInstance()
                     .setHeight(ScreenSize.top_cover_height) /
                 4,
-            left: 20,
+            left: 10,
             child: Text(
               this._title,
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: TextStyle(
+                color: Colors.white,
+              ),
             ),
           ),
           Positioned(
@@ -148,7 +150,7 @@ class MovieTopCover extends StatelessWidget {
                           .setHeight(ScreenSize.top_cover_height) /
                       2 +
                   20,
-              left: 15,
+              left: 10,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: this._buildTitleList(),

@@ -54,7 +54,7 @@ class MovieSliderView extends StatelessWidget {
                             Text(
                               item['title'],
                               style: TextStyle(
-                                color: Colors.orange,
+                                color: Colors.blue,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),

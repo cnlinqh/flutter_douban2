@@ -114,45 +114,50 @@ class MovieSubjectGeneral extends StatelessWidget {
   }
 
   Widget _buildWant(context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        IconButton(
-          icon: Icon(Icons.favorite_border),
-          color: Colors.orange,
-          onPressed: () {
-            print("想看 " + this._subject['title']);
-            showBottomSheet(
-                context: context,
-                builder: (_) => Stack(
-                      children: <Widget>[
-                        Container(
-                          height: ScreenUtil.getInstance()
-                              .setWidth(ScreenSize.bottom_sheet_height),
-                          // width: 599,
-                          color: Colors.red,
-                        ),
-                        Positioned(
-                          top: 10,
-                          left: 10,
-                          child: IconButton(
-                            icon: Icon(Icons.close),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        )
-                      ],
-                    ));
-          },
-        ),
-        Text(
-          "想看",
-          style: TextStyle(
+    return Container(
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_want_width),
+
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          IconButton(
+            icon: Icon(Icons.favorite_border),
             color: Colors.orange,
+            onPressed: () {
+              print("想看 " + this._subject['title']);
+              showBottomSheet(
+                  context: context,
+                  builder: (_) => Stack(
+                        children: <Widget>[
+                          Container(
+                            height: ScreenUtil.getInstance()
+                                .setWidth(ScreenSize.bottom_sheet_height),
+                            // width: 599,
+                            color: Colors.red,
+                          ),
+                          Positioned(
+                            top: 10,
+                            left: 10,
+                            child: IconButton(
+                              icon: Icon(Icons.close),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          )
+                        ],
+                      ));
+            },
           ),
-        ),
-      ],
+          Text(
+            "想看",
+            style: TextStyle(
+              color: Colors.orange,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -173,7 +178,7 @@ class MovieSubjectGeneral extends StatelessWidget {
             children: <Widget>[
               _buildCoverImage(context),
               Container(
-                width: 10,
+                width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
                 height: ScreenUtil.getInstance()
                     .setHeight(ScreenSize.movie_cover_height),
               ),
