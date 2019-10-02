@@ -4,7 +4,7 @@ import 'package:flutter_douban2/movie/movie_subject_simple.dart';
 class MovieSectionBody extends StatelessWidget {
   final List first;
   final List second;
-  MovieSectionBody(this.first, this.second) ;
+  MovieSectionBody(this.first, this.second);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -15,7 +15,10 @@ class MovieSectionBody extends StatelessWidget {
               return MovieSubjectSimple(
                 sub['title'],
                 sub['images']['small'],
-                double.parse(sub['rating']['average'].toString()),
+                double.parse(
+                  sub['rating']['average'].toString(),
+                ),
+                sub['id'],
               );
             }).toList(),
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -25,7 +28,10 @@ class MovieSectionBody extends StatelessWidget {
               return MovieSubjectSimple(
                 sub['title'],
                 sub['images']['small'],
-                double.parse(sub['rating']['average'].toString()),
+                double.parse(
+                  sub['rating']['average'].toString(),
+                ),
+                sub['id'],
               );
             }).toList(),
             mainAxisAlignment: MainAxisAlignment.spaceAround,

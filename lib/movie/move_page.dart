@@ -60,11 +60,24 @@ class _MoviePageState extends State<MoviePage> {
           child: ListView(
             children: <Widget>[
               // new Text("热门推荐"),
-              new MovieSliderView(this._movieHotRecommandList),
-              new MovieSectionView("影院热映", this._movieInTheaters),
-              new MovieSectionView("即将上映", this._movieComingSoon),
-              new MovieTopList("豆瓣榜单", this._movieWeekly, this._movieNew,
-                  this._movieUSBox, this._movieTop250),
+              new MovieSliderView(
+                this._movieHotRecommandList,
+              ),
+              new MovieSectionView(
+                "影院热映",
+                this._movieInTheaters,
+              ),
+              new MovieSectionView(
+                "即将上映",
+                this._movieComingSoon,
+              ),
+              new MovieTopList(
+                "豆瓣榜单",
+                this._movieWeekly,
+                this._movieNew,
+                this._movieUSBox,
+                this._movieTop250,
+              ),
             ],
           ),
         ),

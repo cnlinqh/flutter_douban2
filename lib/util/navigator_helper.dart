@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/movie/movie_list_paged.dart';
+import 'package:flutter_douban2/movie/movie_subject_detail.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 
 class NavigatorHelper {
@@ -20,9 +21,13 @@ class NavigatorHelper {
     if (title == "影院热映") {
       pushMoviePaged(
           context, title, ClientAPI.getInstance().getMovieInTheaters);
-    }else if (title == "即将上映") {
+    } else if (title == "即将上映") {
       pushMoviePaged(
           context, title, ClientAPI.getInstance().getMovieComingSoon);
     }
+  }
+
+  static pushMovieSubjectDetailPage(BuildContext context, String id) {
+    NavigatorHelper.push(context, MovieSubjectDetails(id));
   }
 }

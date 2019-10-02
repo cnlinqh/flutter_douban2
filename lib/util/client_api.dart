@@ -7,12 +7,11 @@ import 'package:html/dom.dart';
 import 'package:html/parser.dart';
 
 class ClientAPI {
-
   static ClientAPI api = new ClientAPI();
-  static getInstance(){
-     return api;
+  static getInstance() {
+    return api;
   }
-  
+
   Dio webDio = initDio(
     baseUrl: "https://movie.douban.com",
   );
@@ -91,5 +90,10 @@ class ClientAPI {
     Response<Map> res = await apiDio.get('/v2/movie/top250',
         queryParameters: {"start": start, 'count': count});
     return res.data['subjects'];
+  }
+
+  Future getMovieSubject(id) async {
+    Response<Map> res = await apiDio.get('/v2/movie/subject/'+id);
+    return res.data;
   }
 }

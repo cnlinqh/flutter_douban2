@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_douban2/util/navigator_helper.dart';
 import 'package:flutter_douban2/widget/rate_star.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 
@@ -7,12 +8,14 @@ class MovieSubjectSimple extends StatelessWidget {
   final String title;
   final String cover;
   final double rate;
-  MovieSubjectSimple(this.title, this.cover, this.rate);
+  final String id;
+  MovieSubjectSimple(this.title, this.cover, this.rate, this.id);
 
-  Widget _buildCoverImage() {
+  Widget _buildCoverImage(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print("Tap on " + this.title);
+        print("Tap on " + this.title + "/" + this.id);
+        NavigatorHelper.pushMovieSubjectDetailPage(context, this.id);
       },
       child: Stack(
         children: <Widget>[
@@ -68,7 +71,7 @@ class MovieSubjectSimple extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          _buildCoverImage(),
+          _buildCoverImage(context),
           _buildTitle(),
           _buildRate(),
         ],
