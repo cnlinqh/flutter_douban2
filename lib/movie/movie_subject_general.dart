@@ -116,7 +116,6 @@ class MovieSubjectGeneral extends StatelessWidget {
   Widget _buildWant(context) {
     return Container(
       width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_want_width),
-
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -184,7 +183,7 @@ class MovieSubjectGeneral extends StatelessWidget {
               ),
               _buildDescription(),
               Container(
-                width: 1,
+                width: ScreenUtil.getInstance().setWidth(1),
                 height: ScreenUtil.getInstance()
                     .setHeight(ScreenSize.movie_cover_height),
                 color: Colors.orangeAccent,

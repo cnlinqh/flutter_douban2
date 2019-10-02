@@ -43,8 +43,8 @@ class MovieTopCover extends StatelessWidget {
 
       if (sub['delta'] != null) {
         return Container(
-          width: ScreenUtil.getInstance().setWidth(ScreenSize.top_cover_width) -
-              20,
+          width: ScreenUtil.getInstance()
+              .setWidth(ScreenSize.top_cover_width - ScreenSize.padding * 2),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -63,8 +63,8 @@ class MovieTopCover extends StatelessWidget {
         );
       } else {
         return Container(
-          width: ScreenUtil.getInstance().setWidth(ScreenSize.top_cover_width) -
-              30,
+          width: ScreenUtil.getInstance()
+              .setWidth(ScreenSize.top_cover_width - ScreenSize.padding * 2),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -114,20 +114,18 @@ class MovieTopCover extends StatelessWidget {
           ),
           Positioned(
             top: ScreenUtil.getInstance()
-                    .setHeight(ScreenSize.top_cover_height) /
-                2,
+                .setHeight(ScreenSize.top_cover_height / 2),
             child: Container(
               width:
                   ScreenUtil.getInstance().setWidth(ScreenSize.top_cover_width),
               height: ScreenUtil.getInstance()
-                      .setHeight(ScreenSize.top_cover_height) /
-                  2,
+                  .setHeight(ScreenSize.top_cover_height / 2),
               color: this._color,
             ),
           ),
           Positioned(
-            top: 10,
-            right: 10,
+            top: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+            right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
             child: Text(
               this._subTitle,
               style: TextStyle(color: Colors.white),
@@ -135,22 +133,20 @@ class MovieTopCover extends StatelessWidget {
           ),
           Positioned(
             top: ScreenUtil.getInstance()
-                    .setHeight(ScreenSize.top_cover_height) /
-                4,
-            left: 10,
+                .setHeight(ScreenSize.top_cover_height / 4),
+            left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
             child: Text(
               this._title,
               style: TextStyle(
                 color: Colors.white,
+                fontSize: 20,
               ),
             ),
           ),
           Positioned(
-              top: ScreenUtil.getInstance()
-                          .setHeight(ScreenSize.top_cover_height) /
-                      2 +
-                  20,
-              left: 10,
+              top: ScreenUtil.getInstance().setHeight(
+                  ScreenSize.top_cover_height / 2 + ScreenSize.padding),
+              left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: this._buildTitleList(),
