@@ -135,7 +135,7 @@ class SubjectGeneralSection extends StatelessWidget {
                 child: IconButton(
                   icon: Icon(Icons.close),
                   onPressed: () {
-                    Navigator.of(_statefulContext).pop();
+                    Navigator.of(_parentContext).pop();
                   },
                 ),
               )
