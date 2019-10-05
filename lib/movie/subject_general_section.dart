@@ -58,6 +58,8 @@ class SubjectGeneralSection extends StatelessWidget {
                     style: TextStyle(
                       color: Colors.white24,
                     ),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 Container(
