@@ -10,7 +10,7 @@ class DoubanApp extends StatelessWidget {
     return MaterialApp(
       title: 'Douban2',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.cyan,
       ),
       home: HomePage(),
     );
