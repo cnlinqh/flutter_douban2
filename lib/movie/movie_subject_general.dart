@@ -113,28 +113,6 @@ class MovieSubjectGeneral extends StatelessWidget {
             color: Colors.orange,
             onPressed: () {
               print("想看 " + this._subject['title']);
-              showBottomSheet(
-                  context: context,
-                  builder: (_) => Stack(
-                        children: <Widget>[
-                          Container(
-                            height: ScreenUtil.getInstance()
-                                .setWidth(ScreenSize.bottom_sheet_height),
-                            // width: 599,
-                            color: Colors.red,
-                          ),
-                          Positioned(
-                            top: 10,
-                            left: 10,
-                            child: IconButton(
-                              icon: Icon(Icons.close),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          )
-                        ],
-                      ));
             },
           ),
           Text(

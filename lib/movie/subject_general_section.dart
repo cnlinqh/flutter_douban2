@@ -45,7 +45,29 @@ class SubjectGeneralSection extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: _showGeneralSheet,
+                  // onTap: _showGeneralModelSheet,
+                  onTap: () {
+                    showBottomSheet(
+                      context: context,
+                      builder: (_) => Stack(
+                        children: <Widget>[
+                          _buildBottomSheetContent(),
+                          Positioned(
+                            top: ScreenUtil.getInstance()
+                                .setWidth(ScreenSize.padding),
+                            right: ScreenUtil.getInstance()
+                                .setHeight(ScreenSize.padding),
+                            child: IconButton(
+                              icon: Icon(Icons.close),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          )
+                        ],
+                      ),
+                    );
+                  },
                   child: Text(
                     MovieUtil.getPubPlace(_subject) +
                         " / " +
@@ -87,63 +109,88 @@ class SubjectGeneralSection extends StatelessWidget {
     );
   }
 
-  void _showGeneralSheet() {
-    showModalBottomSheet(
-        context: _parentContext,
-        builder: (builder) {
-          return Stack(
+  // void _showGeneralModelSheet() {
+  //   showModalBottomSheet(
+  //       context: _parentContext,
+  //       builder: (builder) {
+  //         return Stack(
+  //           children: <Widget>[
+  //             this._buildBottomSheetContent(),
+  //             Positioned(
+  //               top: 10,
+  //               right: 10,
+  //               child: IconButton(
+  //                 icon: Icon(Icons.close),
+  //                 onPressed: () {
+  //                   Navigator.of(_parentContext).pop();
+  //                 },
+  //               ),
+  //             )
+  //           ],
+  //         );
+  //       });
+  // }
+
+  Widget _buildBottomSheetContent() {
+    return Container(
+        height: ScreenUtil.screenHeight,
+        color: Colors.white,
+        padding: EdgeInsets.fromLTRB(
+          ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
+          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+          ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
+          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Container(
-                color: Colors.white,
-                padding: EdgeInsets.fromLTRB(
-                  ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
-                  ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-                  ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
-                  ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      "影片信息",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    _buildGeneralRow("片名", MovieUtil.getTitle(_subject)),
-                    _buildGeneralRow(
-                        "又名", MovieUtil.getAka(_subject, join: ' / ')),
-                    _buildGeneralRow(
-                        "导演", MovieUtil.getDirectors(_subject, join: ' / ')),
-                    _buildGeneralRow(
-                        "主演", MovieUtil.getCasts(_subject, join: ' / ')),
-                    _buildGeneralRow(
-                        "上映", MovieUtil.getPubDates(_subject, join: ' / ')),
-                    _buildGeneralRow(
-                        "类型", MovieUtil.getGenres(_subject, join: ' / ')),
-                    _buildGeneralRow("片长", MovieUtil.getDurations(_subject)),
-                    _buildGeneralRow(
-                        "地区", MovieUtil.getPubPlace(_subject, join: ' / ')),
-                    _buildGeneralRow(
-                        "语言", MovieUtil.getLanguagess(_subject, join: ' / ')),
-                    // _buildGeneralRow("主演", MovieUtil.getCasts(_subject)),
-                  ],
+              Text(
+                "影片信息",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              Positioned(
-                top: 10,
-                right: 10,
-                child: IconButton(
-                  icon: Icon(Icons.close),
-                  onPressed: () {
-                    Navigator.of(_parentContext).pop();
-                  },
-                ),
-              )
+              _buildGeneralRow(
+                "片名",
+                MovieUtil.getTitle(_subject),
+              ),
+              _buildGeneralRow(
+                "又名",
+                MovieUtil.getAka(_subject, join: ' / '),
+              ),
+              _buildGeneralRow(
+                "导演",
+                MovieUtil.getDirectors(_subject, join: ' / '),
+              ),
+              _buildGeneralRow(
+                "主演",
+                MovieUtil.getCasts(_subject, join: ' / '),
+              ),
+              _buildGeneralRow(
+                "上映",
+                MovieUtil.getPubDates(_subject, join: ' / '),
+              ),
+              _buildGeneralRow(
+                "类型",
+                MovieUtil.getGenres(_subject, join: ' / '),
+              ),
+              _buildGeneralRow(
+                "片长",
+                MovieUtil.getDurations(_subject),
+              ),
+              _buildGeneralRow(
+                "地区",
+                MovieUtil.getPubPlace(_subject, join: ' / '),
+              ),
+              _buildGeneralRow(
+                "语言",
+                MovieUtil.getLanguagess(_subject, join: ' / '),
+              ),
             ],
-          );
-        });
+          ),
+        ));
   }
 
   Row _buildGeneralRow(String key, String value) {
