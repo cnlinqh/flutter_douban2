@@ -189,12 +189,12 @@ class SubjectRateSection extends StatelessWidget {
                           height: ScreenUtil.getInstance()
                               .setHeight(ScreenSize.bar_height),
                         ),
-                        Container(
-                          width: ScreenUtil.getInstance()
-                              .setWidth(ScreenSize.padding),
-                          height: ScreenUtil.getInstance()
-                              .setHeight(ScreenSize.star_height),
-                        ),
+                        // Container(
+                        //   width: ScreenUtil.getInstance()
+                        //       .setWidth(ScreenSize.padding),
+                        //   height: ScreenUtil.getInstance()
+                        //       .setHeight(ScreenSize.star_height),
+                        // ),
                         Text(
                           percent.toStringAsFixed(0) + "%",
                           style: TextStyle(

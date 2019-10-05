@@ -43,6 +43,9 @@ class _MovieListPagedState extends State<MovieListPaged> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      appBar: AppBar(
+        title: Text(this._title),
+      ),
       body: Container(
         child: Column(
           children: <Widget>[

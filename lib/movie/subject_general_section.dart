@@ -56,7 +56,7 @@ class SubjectGeneralSection extends StatelessWidget {
                         MovieUtil.getDurations(_subject) +
                         " >",
                     style: TextStyle(
-                      color: Colors.white24,
+                      color: Colors.white,
                     ),
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,

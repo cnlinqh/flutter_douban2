@@ -1,6 +1,6 @@
 MaterialApp/MaterialApp
     home:home_page.dart/Scaffold
-        body:movie_page/Contaier
+        body:movie_page/Scaffold
             RefreshIndicator
                 ListView
                     movie_slider_view/MovieSliderView/Contaier
@@ -12,4 +12,4 @@ MaterialApp/MaterialApp
  movie_list_paged/MovieListPaged/Scaffold
  movie_list_static/MovieListStatic/Scaffold
 
- movie_subject_detail/MovieSubjectDetails/Container
+ movie_subject_detail/MovieSubjectDetails/Scaffold

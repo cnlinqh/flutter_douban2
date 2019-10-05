@@ -45,8 +45,11 @@ class _MovieSubjectDetailsState extends State<MovieSubjectDetails> {
       );
     } else {
       return Scaffold(
+        appBar: AppBar(
+          title: Text("电影详情"),
+        ),
         body: Container(
-          color: Colors.brown[300],
+          color: Colors.blueGrey,
           padding: EdgeInsets.fromLTRB(
             ScreenUtil.getInstance().setWidth(ScreenSize.padding),
             ScreenUtil.getInstance().setHeight(ScreenSize.padding),

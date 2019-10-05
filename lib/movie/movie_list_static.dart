@@ -9,16 +9,20 @@ class MovieListStatic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView.separated(
-      itemCount: this._subjects.length,
-      itemBuilder: (context, index) {
-        return Container(
-          child: _subjects[index]['subject'] != null
-              ? MovieSubjectGeneral(_subjects[index]['subject'])
-              : MovieSubjectGeneral(_subjects[index]),
-        );
-      },
-      separatorBuilder: (context, index) => Divider(),
-    ));
+      appBar: AppBar(
+        title: Text(this._title),
+      ),
+      body: ListView.separated(
+        itemCount: this._subjects.length,
+        itemBuilder: (context, index) {
+          return Container(
+            child: _subjects[index]['subject'] != null
+                ? MovieSubjectGeneral(_subjects[index]['subject'])
+                : MovieSubjectGeneral(_subjects[index]),
+          );
+        },
+        separatorBuilder: (context, index) => Divider(),
+      ),
+    );
   }
 }

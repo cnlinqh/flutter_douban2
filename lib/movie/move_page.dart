@@ -49,45 +49,41 @@ class _MoviePageState extends State<MoviePage> {
         child: new CircularProgressIndicator(),
       );
     } else {
-      return Container(
-        padding: EdgeInsets.fromLTRB(
-          ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-          ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+      return Scaffold(
+        appBar: AppBar(
+          title: Text("豆瓣电影"),
         ),
-        child: RefreshIndicator(
-          onRefresh: this._refreshData,
-          child: ListView(
-            children: <Widget>[
-              new Text(
-                "豆瓣电影",
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue,
-                  
+        body: Container(
+          padding: EdgeInsets.fromLTRB(
+            ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+            ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+            ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+            ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+          ),
+          child: RefreshIndicator(
+            onRefresh: this._refreshData,
+            child: ListView(
+              children: <Widget>[
+                new MovieSliderView(
+                  this._movieHotRecommandList,
                 ),
-              ),
-              new MovieSliderView(
-                this._movieHotRecommandList,
-              ),
-              new MovieSectionView(
-                "影院热映",
-                this._movieInTheaters,
-              ),
-              new MovieSectionView(
-                "即将上映",
-                this._movieComingSoon,
-              ),
-              new MovieTopList(
-                "豆瓣榜单",
-                this._movieWeekly,
-                this._movieNew,
-                this._movieUSBox,
-                this._movieTop250,
-              ),
-            ],
+                new MovieSectionView(
+                  "影院热映",
+                  this._movieInTheaters,
+                ),
+                new MovieSectionView(
+                  "即将上映",
+                  this._movieComingSoon,
+                ),
+                new MovieTopList(
+                  "豆瓣榜单",
+                  this._movieWeekly,
+                  this._movieNew,
+                  this._movieUSBox,
+                  this._movieTop250,
+                ),
+              ],
+            ),
           ),
         ),
       );
