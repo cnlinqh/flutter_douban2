@@ -46,7 +46,6 @@ class _MovieListPagedState extends State<MovieListPaged> {
       body: Container(
         child: Column(
           children: <Widget>[
-            ListTile(title: Text(this._title)),
             Expanded(
               child: ListView.separated(
                 itemCount: _dataList.length,

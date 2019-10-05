@@ -44,21 +44,23 @@ class _MovieSubjectDetailsState extends State<MovieSubjectDetails> {
         child: new CircularProgressIndicator(),
       );
     } else {
-      return Container(
-        color: Colors.brown[300],
-        padding: EdgeInsets.fromLTRB(
-          ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-          ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-        ),
-        child: RefreshIndicator(
-          onRefresh: getSubject,
-          child: ListView(
-            children: <Widget>[
-              SubjectGeneralSection(this._subject, context),
-              SubjectRateSection(this._subject,context),
-            ],
+      return Scaffold(
+        body: Container(
+          color: Colors.brown[300],
+          padding: EdgeInsets.fromLTRB(
+            ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+            ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+            ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+            ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+          ),
+          child: RefreshIndicator(
+            onRefresh: getSubject,
+            child: ListView(
+              children: <Widget>[
+                SubjectGeneralSection(this._subject, context),
+                SubjectRateSection(this._subject, context),
+              ],
+            ),
           ),
         ),
       );

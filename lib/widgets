@@ -1,0 +1,15 @@
+MaterialApp/MaterialApp
+    home:home_page.dart/Scaffold
+        body:movie_page/Contaier
+            RefreshIndicator
+                ListView
+                    movie_slider_view/MovieSliderView/Contaier
+                    movie_section_view/MovieSectionView/Contaier
+                    movie_top_list/MovieTopList/Container
+
+
+
+ movie_list_paged/MovieListPaged/Scaffold
+ movie_list_static/MovieListStatic/Scaffold
+
+ movie_subject_detail/MovieSubjectDetails/Container
