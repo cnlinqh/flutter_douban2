@@ -68,6 +68,10 @@ class MovieUtil {
     return _subject["languages"].join(join);
   }
 
+  static String getSummary(_subject) {
+    return _subject["summary"].toString();
+  }
+
   static Widget buildRate(_subject) {
     var rate = double.parse(_subject['rating']['average'].toString());
     return rate != 0
