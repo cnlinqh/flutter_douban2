@@ -43,4 +43,6 @@ class ScreenSize {
     //the width & height of movie cover
   static const double director_cast_cover_width = 200;
   static const double director_cast_cover_height = 220;
+
+  static const double celebrities_width = 460;
 }

@@ -91,7 +91,9 @@ class SubjectDirectorsCastsSection extends StatelessWidget {
           children: <Widget>[
             MovieUtil.buildDirectorCastCover(cele['avatar']),
             Container(
-              height: ScreenUtil.getInstance().setHeight(ScreenSize.director_cast_cover_height),
+              width: ScreenUtil.getInstance().setWidth(ScreenSize.celebrities_width),
+              height: ScreenUtil.getInstance()
+                  .setHeight(ScreenSize.director_cast_cover_height),
               margin: EdgeInsets.fromLTRB(
                 ScreenUtil.getInstance().setWidth(ScreenSize.padding),
                 ScreenUtil.getInstance().setHeight(ScreenSize.padding),
@@ -101,17 +103,33 @@ class SubjectDirectorsCastsSection extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  Text(cele['name'].toString()),
-                  Spacer(flex: 1,),
-                  Text(cele['name_en'].toString()),
-                  Spacer(flex: 3,),
+                  Text(
+                    cele['name'].toString(),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Spacer(
+                    flex: 1,
+                  ),
+                  Text(
+                    cele['name_en'].toString(),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Spacer(
+                    flex: 3,
+                  ),
                   Text(
                     cele['title'],
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: Colors.grey,
                     ),
                   ),
-                  Spacer(flex: 5,),
+                  Spacer(
+                    flex: 5,
+                  ),
                 ],
                 crossAxisAlignment: CrossAxisAlignment.start,
               ),
