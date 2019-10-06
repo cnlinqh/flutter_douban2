@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/util/navigator_helper.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_douban2/util/screen_size.dart';
 
 class MovieSectionHeader extends StatelessWidget {
   final String _title;
@@ -8,6 +10,10 @@ class MovieSectionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(
+        top: ScreenUtil.getInstance().setHeight(ScreenSize.padding*2),
+        bottom:  ScreenUtil.getInstance().setHeight(ScreenSize.padding*2)
+      ),
       child: Row(
         children: <Widget>[
           Text(
