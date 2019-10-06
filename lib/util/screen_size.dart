@@ -37,4 +37,10 @@ class ScreenSize {
   static const double star_height = 20;
   static const double bar_width = 250;
   static const double bar_height = 14;
+
+
+
+    //the width & height of movie cover
+  static const double director_cast_cover_width = 200;
+  static const double director_cast_cover_height = 220;
 }

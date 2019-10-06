@@ -16,6 +16,10 @@ class SubjectGeneralSection extends StatelessWidget {
 
   Widget _buildGeneralSection(context) {
     return Container(
+      padding: EdgeInsets.only(
+        top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
+        bottom: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[

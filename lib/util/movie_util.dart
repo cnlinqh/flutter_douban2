@@ -22,8 +22,7 @@ class MovieUtil {
   static buildFavoriteIcon() {
     return Positioned(
       child: GestureDetector(
-        onTap: () {
-        },
+        onTap: () {},
         child: Icon(
           Icons.favorite_border,
           color: Colors.orangeAccent,
@@ -96,5 +95,27 @@ class MovieUtil {
               fontSize: 14,
             ),
           );
+  }
+
+  static buildDirectorCastCover(cover) {
+    return Container(
+      width: ScreenUtil.getInstance()
+          .setWidth(ScreenSize.director_cast_cover_width),
+      height: ScreenUtil.getInstance()
+          .setHeight(ScreenSize.director_cast_cover_height),
+      margin: EdgeInsets.fromLTRB(
+        ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+        ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+        ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+        ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+      ),
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: CachedNetworkImageProvider(cover),
+          fit: BoxFit.cover,
+        ),
+        borderRadius: BorderRadius.all(Radius.circular(7)),
+      ),
+    );
   }
 }

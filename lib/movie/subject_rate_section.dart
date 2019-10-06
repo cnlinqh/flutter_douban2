@@ -9,39 +9,45 @@ class SubjectRateSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        Container(
-          color: Colors.grey,
-          child: Column(
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  _buildPointPart(),
-                  _buildGraphPart(),
-                ],
-              ),
-              _buildDividerPart(),
-              _buildSummaryPart(),
-            ],
-          ),
-        ),
-        Positioned(
-          left: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
-          top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
-          child: Opacity(
-            opacity: 0.6,
-            child: Container(
-              color: Colors.white10,
-              width: ScreenUtil.getInstance().setWidth(ScreenSize.point_width +
-                  ScreenSize.graph_width -
-                  ScreenSize.padding * 4),
-              height: ScreenUtil.getInstance()
-                  .setHeight(ScreenSize.rate_height - ScreenSize.padding * 2),
+    return Container(
+      padding: EdgeInsets.only(
+        top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
+        bottom: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
+      ),
+      child: Stack(
+        children: <Widget>[
+          Container(
+            color: Colors.grey,
+            child: Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    _buildPointPart(),
+                    _buildGraphPart(),
+                  ],
+                ),
+                _buildDividerPart(),
+                _buildSummaryPart(),
+              ],
             ),
           ),
-        )
-      ],
+          Positioned(
+            left: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
+            top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
+            child: Opacity(
+              opacity: 0.6,
+              child: Container(
+                color: Colors.white10,
+                width: ScreenUtil.getInstance().setWidth(ScreenSize.point_width +
+                    ScreenSize.graph_width -
+                    ScreenSize.padding * 4),
+                height: ScreenUtil.getInstance()
+                    .setHeight(ScreenSize.rate_height - ScreenSize.padding * 2),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 
