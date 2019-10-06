@@ -18,15 +18,7 @@ class MovieSubjectGeneral extends StatelessWidget {
       child: Stack(
         children: <Widget>[
           MovieUtil.buildMovieCover(_subject['images']['small']),
-          IconButton(
-            icon: Icon(
-              Icons.favorite_border,
-              color: Colors.orangeAccent,
-            ),
-            onPressed: () {
-              print("Press " + _subject['title']);
-            },
-          )
+          MovieUtil.buildFavoriteIcon(),
         ],
       ),
     );

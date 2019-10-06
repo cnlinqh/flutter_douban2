@@ -19,6 +19,19 @@ class MovieUtil {
     );
   }
 
+  static buildFavoriteIcon() {
+    return Positioned(
+      child: GestureDetector(
+        onTap: () {
+        },
+        child: Icon(
+          Icons.favorite_border,
+          color: Colors.orangeAccent,
+        ),
+      ),
+    );
+  }
+
   static String getTitle(_subject) {
     return _subject["title"].toString();
   }
