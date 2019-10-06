@@ -93,7 +93,34 @@ class ClientAPI {
   }
 
   Future getMovieSubject(id) async {
-    Response<Map> res = await apiDio.get('/v2/movie/subject/'+id);
+    Response<Map> res = await apiDio.get('/v2/movie/subject/' + id);
     return res.data;
+  }
+
+  Future<List> getAllDirectorsCastsList(id) async {
+    List celebrities = [];
+    Response res = await webDio.get("/subject/" + id + "/celebrities");
+    var document = parse(res.toString());
+    List<Element> items = document.body.getElementsByClassName('celebrity');
+    items.forEach((item) {
+      String title =
+          item.getElementsByClassName('role')[0].attributes['title'].toString();
+      String name =
+          item.getElementsByTagName('a')[0].attributes['title'].toString();
+      String avatar = item
+          .getElementsByClassName('avatar')[0]
+          .attributes['style']
+          .toString();
+
+      var celebrity = {
+        'title': title,
+        'name': name.split(" ")[0],
+        "name_en": name.substring(name.split(" ")[0].length + 1),
+        'avatar': avatar.substring(22, avatar.length - 1),
+      };
+      print(celebrity);
+      celebrities.add(celebrity);
+    });
+    return celebrities;
   }
 }

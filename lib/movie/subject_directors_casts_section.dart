@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SubjectDirectorsCastsSection extends StatelessWidget {
   final _subject;
+  List _celebrities;
   SubjectDirectorsCastsSection(this._subject, {Key key}) : super(key: key);
 
   List<Widget> _buildDirectorsCastsCover() {
@@ -34,8 +36,6 @@ class SubjectDirectorsCastsSection extends StatelessWidget {
 
     List<Widget> casts = [];
     this._subject['casts'].forEach((dir) {
-      print(dir['avatars']['small']);
-      // directors.add(Image.network(dir['avatars']['small']));
       casts.add(Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -64,6 +64,65 @@ class SubjectDirectorsCastsSection extends StatelessWidget {
     return directors;
   }
 
+  Widget _buildBottomSheetContent() {
+    print(_celebrities);
+    return Container(
+        height: ScreenUtil.screenHeight,
+        color: Colors.white,
+        padding: EdgeInsets.fromLTRB(
+          ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
+          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+          ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
+          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: _buildCelebrities(),
+          ),
+        ));
+  }
+
+  List<Widget> _buildCelebrities() {
+    List<Widget> list = List<Widget>.from(this._celebrities.map((cele) {
+      return Container(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            MovieUtil.buildDirectorCastCover(cele['avatar']),
+            Container(
+              height: ScreenUtil.getInstance().setHeight(ScreenSize.director_cast_cover_height),
+              margin: EdgeInsets.fromLTRB(
+                ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+                ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+                ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+                ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Text(cele['name'].toString()),
+                  Spacer(flex: 1,),
+                  Text(cele['name_en'].toString()),
+                  Spacer(flex: 3,),
+                  Text(
+                    cele['title'],
+                    style: TextStyle(
+                      color: Colors.grey,
+                    ),
+                  ),
+                  Spacer(flex: 5,),
+                ],
+                crossAxisAlignment: CrossAxisAlignment.start,
+              ),
+            )
+          ],
+        ),
+      );
+    }));
+    return list;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -86,10 +145,39 @@ class SubjectDirectorsCastsSection extends StatelessWidget {
               Expanded(
                 child: Text(""),
               ),
-              Text(
-                "全部>",
-                style: TextStyle(
-                  color: Colors.white,
+              GestureDetector(
+                onTap: () {
+                  ClientAPI.getInstance()
+                      .getAllDirectorsCastsList(this._subject['id'])
+                      .then((celebrities) {
+                    this._celebrities = celebrities;
+                    showBottomSheet(
+                      context: context,
+                      builder: (_) => Stack(
+                        children: <Widget>[
+                          _buildBottomSheetContent(),
+                          Positioned(
+                            top: ScreenUtil.getInstance()
+                                .setWidth(ScreenSize.padding),
+                            right: ScreenUtil.getInstance()
+                                .setHeight(ScreenSize.padding),
+                            child: IconButton(
+                              icon: Icon(Icons.close),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          )
+                        ],
+                      ),
+                    );
+                  });
+                },
+                child: Text(
+                  "全部>",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ],
