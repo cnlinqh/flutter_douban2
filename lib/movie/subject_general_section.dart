@@ -5,8 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SubjectGeneralSection extends StatelessWidget {
   final _subject;
-  final _parentContext;
-  SubjectGeneralSection(this._subject, this._parentContext);
+  // final _parentContext;
+  // SubjectGeneralSection(this._subject, this._parentContext);
+  SubjectGeneralSection(this._subject);
 
   @override
   Widget build(BuildContext context) {

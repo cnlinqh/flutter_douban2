@@ -5,8 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SubjectRateSection extends StatelessWidget {
   final _subject;
-  final _parentContext;
-  SubjectRateSection(this._subject, this._parentContext);
+  SubjectRateSection(this._subject);
 
   @override
   Widget build(BuildContext context) {

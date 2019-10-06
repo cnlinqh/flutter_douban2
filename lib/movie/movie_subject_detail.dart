@@ -61,8 +61,8 @@ class _MovieSubjectDetailsState extends State<MovieSubjectDetails> {
             onRefresh: getSubject,
             child: ListView(
               children: <Widget>[
-                SubjectGeneralSection(this._subject, context),
-                SubjectRateSection(this._subject, context),
+                SubjectGeneralSection(this._subject),
+                SubjectRateSection(this._subject),
                 SubjectSummarySection(this._subject),
               ],
             ),
