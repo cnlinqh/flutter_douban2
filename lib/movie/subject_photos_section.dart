@@ -47,7 +47,7 @@ class _SubjectPhotosSectionState extends State<SubjectPhotosSection> {
         children: <Widget>[
           SubjectPhotoTapped(this._photos, i + 2, second[i]['thumb'],
               scale: 0.5),
-          SubjectPhotoTapped(this._photos, i + 2, second[i + 1]['thumb'],
+          SubjectPhotoTapped(this._photos, i + 3, second[i + 1]['thumb'],
               scale: 0.5),
         ],
       ));
