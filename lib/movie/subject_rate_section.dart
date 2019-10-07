@@ -140,7 +140,6 @@ class SubjectRateSection extends StatelessWidget {
     double sum = 0;
     var i;
     for (i = 1; i <= 5; i++) {
-      // print(details[level.toString()]);
       sum = sum + double.parse(details[i.toString()].toString());
     }
     return sum == 0? 1: sum;
@@ -151,8 +150,6 @@ class SubjectRateSection extends StatelessWidget {
     double sum = _getRateTotal();
     var percent =
         double.parse(details[level.toString()].toString()) / sum * 100;
-    print(percent.toStringAsFixed(0) + "%");
-    print(percent * ScreenSize.bar_width / 100);
     List<Widget> stars = [];
     var i = 0;
     for (i = 0; i < level; i++) {

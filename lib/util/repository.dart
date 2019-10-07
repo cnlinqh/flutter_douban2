@@ -15,6 +15,16 @@ class Repository {
     _caches[key] = list;
   }
 
+  static dynamic getCachedObject(String key) {
+    print('=======Repository.getCachedObject($key)');
+    return _caches[key];
+  }
+
+  static void setCachedObject(key, obj) {
+    print('=======Repository.setCachedObject($key)');
+    _caches[key] = obj;
+  }
+
   static bool isCached(String key) {
     print('=======Repository.isCached($key): ' +
         _caches.containsKey(key).toString());

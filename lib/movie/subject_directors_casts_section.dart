@@ -65,7 +65,6 @@ class SubjectDirectorsCastsSection extends StatelessWidget {
   }
 
   Widget _buildBottomSheetContent() {
-    print(_celebrities);
     return Container(
         height: ScreenUtil.screenHeight,
         color: Colors.white,
