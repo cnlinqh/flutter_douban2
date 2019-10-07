@@ -15,7 +15,7 @@ class SubjectDirectorsCastsSection extends StatelessWidget {
       directors.add(Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          MovieUtil.buildDirectorCastCover(dir['avatars']['small']),
+          MovieUtil.buildDirectorCastCover(dir['avatars']!= null ? dir['avatars']['small']: ''),
           Text(
             dir['name'],
             maxLines: 1,
@@ -39,7 +39,7 @@ class SubjectDirectorsCastsSection extends StatelessWidget {
       casts.add(Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          MovieUtil.buildDirectorCastCover(dir['avatars']['small']),
+          MovieUtil.buildDirectorCastCover(dir['avatars']!= null ? dir['avatars']['small']:''),
           Text(
             dir['name'],
             maxLines: 1,
