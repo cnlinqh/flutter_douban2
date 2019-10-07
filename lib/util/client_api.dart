@@ -1,5 +1,6 @@
 //https://pub.dev/packages/dio#-installing-tab-
 import 'package:dio/dio.dart';
+import 'package:flutter_douban2/util/repository.dart';
 
 //https://pub.dev/packages/html#-installing-tab-
 import 'package:html/dom.dart';
@@ -33,6 +34,13 @@ class ClientAPI {
   }
 
   Future<List> getMovieHotRecommendList() async {
+    print("ClientAPI: getMovieHotRecommendList()");
+    var key = "getMovieHotRecommendList";
+    if (Repository.isCached(key)) {
+      return new Future<List>(() {
+        return Repository.getCachedList(key);
+      });
+    }
     List hots = [];
     Response res = await webDio.get("/");
     var document = parse(res.toString());
@@ -47,6 +55,7 @@ class ClientAPI {
       };
       hots.add(hot);
     });
+    Repository.setCachedList(key, hots);
     return hots;
   }
 
@@ -54,8 +63,17 @@ class ClientAPI {
     int start = 0,
     int count = 6,
   }) async {
+   
+    print("ClientAPI: getMovieInTheaters($start, $count)");
+    var key = "getMovieComingSoon#$start#$count";
+    if (Repository.isCached(key)) {
+      return new Future<List>(() {
+        return Repository.getCachedList(key);
+      });
+    }
     Response<Map> res = await apiDio.get('/v2/movie/in_theaters',
         queryParameters: {"start": start, 'count': count});
+    Repository.setCachedList(key, res.data['subjects']);
     return res.data['subjects'];
   }
 
@@ -63,23 +81,55 @@ class ClientAPI {
     int start = 0,
     int count = 6,
   }) async {
+    var key = "getMovieComingSoon#$start#$count";
+    if (Repository.isCached(key)) {
+      return new Future<List>(() {
+        return Repository.getCachedList(key);
+      });
+    }
+    print("ClientAPI: getMovieComingSoon($start, $count)");
     Response<Map> res = await apiDio.get('/v2/movie/coming_soon',
         queryParameters: {"start": start, 'count': count});
+    Repository.setCachedList(key, res.data['subjects']);
     return res.data['subjects'];
   }
 
   Future<List> getMovieWeekly() async {
+    print("ClientAPI: getMovieWeekly()");
+    var key = "getMovieWeekly";
+    if (Repository.isCached(key)) {
+      return new Future<List>(() {
+        return Repository.getCachedList(key);
+      });
+    }
     Response<Map> res = await apiDio.get('/v2/movie/weekly');
+    Repository.setCachedList(key, res.data['subjects']);
     return res.data['subjects'];
   }
 
   Future<List> getMovieNew() async {
+    print("ClientAPI: getMovieNew()");
+    var key = "getMovieNew";
+    if (Repository.isCached(key)) {
+      return new Future<List>(() {
+        return Repository.getCachedList(key);
+      });
+    }
     Response<Map> res = await apiDio.get('/v2/movie/new_movies');
+    Repository.setCachedList(key, res.data['subjects']);
     return res.data['subjects'];
   }
 
   Future<List> getMovieUSBox() async {
+    print("ClientAPI: getMovieUSBox()");
+    var key = "getMovieUSBox";
+    if (Repository.isCached(key)) {
+      return new Future<List>(() {
+        return Repository.getCachedList(key);
+      });
+    }
     Response<Map> res = await apiDio.get('/v2/movie/us_box');
+    Repository.setCachedList(key, res.data['subjects']);
     return res.data['subjects'];
   }
 
@@ -87,17 +137,27 @@ class ClientAPI {
     int start = 0,
     int count = 250,
   }) async {
+    print("ClientAPI: getMovieTop250($start, $count)");
+    var key = "getMovieTop250#$start#$count";
+    if (Repository.isCached(key)) {
+      return new Future<List>(() {
+        return Repository.getCachedList(key);
+      });
+    }
     Response<Map> res = await apiDio.get('/v2/movie/top250',
         queryParameters: {"start": start, 'count': count});
+    Repository.setCachedList(key, res.data['subjects']);
     return res.data['subjects'];
   }
 
   Future getMovieSubject(id) async {
+    print("ClientAPI: getMovieSubject($id)");
     Response<Map> res = await apiDio.get('/v2/movie/subject/' + id);
     return res.data;
   }
 
   Future<List> getAllDirectorsCastsList(id) async {
+    print("ClientAPI: getAllDirectorsCastsList($id)");
     List celebrities = [];
     Response res = await webDio.get("/subject/" + id + "/celebrities");
     var document = parse(res.toString());
