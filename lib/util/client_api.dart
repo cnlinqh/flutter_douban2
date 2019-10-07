@@ -201,4 +201,17 @@ class ClientAPI {
     Repository.setCachedList(key, celebrities);
     return celebrities;
   }
+
+  Future getSubjectPhotos(id) async {
+    print(">>>>>>>ClientAPI: getSubjectPhotos($id)");
+    var key = "getSubjectPhotos($id)";
+    if (Repository.isCached(key)) {
+      return new Future(() {
+        return Repository.getCachedList(key);
+      });
+    }
+    Response<Map> res = await apiDio.get('/v2/movie/subject/$id/photos');
+    Repository.setCachedList(key, res.data['photos']);
+    return res.data['photos'];
+  }
 }

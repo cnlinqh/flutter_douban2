@@ -38,11 +38,13 @@ class ScreenSize {
   static const double bar_width = 250;
   static const double bar_height = 14;
 
-
-
-    //the width & height of movie cover
+  //the width & height of movie cover
   static const double director_cast_cover_width = 200;
   static const double director_cast_cover_height = 220;
 
   static const double celebrities_width = 460;
+
+  //the width & height of photo
+  static const double photo_cover_width = 650;
+  static const double photo_cover_height = 400;
 }

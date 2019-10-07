@@ -122,4 +122,21 @@ class MovieUtil {
       ),
     );
   }
+
+  static buildPhotoCover(cover, {double scale = 1}) {
+    return Container(
+      width: ScreenUtil.getInstance()
+          .setWidth(ScreenSize.photo_cover_width * scale),
+      height: ScreenUtil.getInstance()
+          .setHeight(ScreenSize.photo_cover_height * scale),
+      margin: EdgeInsets.all(1),
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: CachedNetworkImageProvider(cover),
+          fit: BoxFit.cover,
+        ),
+        borderRadius: BorderRadius.all(Radius.circular(7)),
+      ),
+    );
+  }
 }

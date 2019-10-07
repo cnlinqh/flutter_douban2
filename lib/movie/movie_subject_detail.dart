@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/movie/subject_general_section.dart';
+import 'package:flutter_douban2/movie/subject_photos_section.dart';
 import 'package:flutter_douban2/movie/subject_rate_section.dart';
 import 'package:flutter_douban2/movie/subject_summary_section.dart';
 import 'package:flutter_douban2/movie/subject_directors_casts_section.dart';
@@ -66,6 +67,7 @@ class _MovieSubjectDetailsState extends State<MovieSubjectDetails> {
                 SubjectRateSection(this._subject),
                 SubjectSummarySection(this._subject),
                 SubjectDirectorsCastsSection(this._subject),
+                SubjectPhotosSection(this._subject),
               ],
             ),
           ),
