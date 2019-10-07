@@ -49,7 +49,11 @@ class MovieUtil {
 
   static String getPubPlace(_subject, {join = ', '}) {
     var pubdates = _subject['pubdates'].map((pub) {
-      return pub.split(new RegExp(r"\("))[1].split(new RegExp(r"\)"))[0];
+      if (pub.split(new RegExp(r"\(")).length > 1) {
+        return pub.split(new RegExp(r"\("))[1].split(new RegExp(r"\)"))[0];
+      } else {
+        return "";
+      }
     });
     return pubdates.join(join);
   }

@@ -31,7 +31,7 @@ class _MovieListPagedState extends State<MovieListPaged> {
       start: this._start,
       count: this._count,
     );
-    if (list.length == 0) {
+    if (list.length < this._count) {
       _done = true;
     }
     _dataList.insertAll(_dataList.length - 1, list.toList());
