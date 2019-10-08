@@ -47,4 +47,9 @@ class ScreenSize {
   //the width & height of photo
   static const double photo_cover_width = 650;
   static const double photo_cover_height = 400;
+
+  //the width & height of video
+  static const double video_width = 750;
+  static const double video_height = 450;
+
 }

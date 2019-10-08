@@ -12,45 +12,10 @@ class SubjectVideoSet extends StatefulWidget {
 }
 
 class _SubjectVideoSetState extends State<SubjectVideoSet> {
-  var url = '';
-  var index = 0;
-  var allVideos = [];
-  VideoPlayerController vController;
+  int selectedIndex = 0;
+  var videoList = [];
+  List<VideoPlayerController> vControllerList = [];
   ChewieController cController;
-
-  List<Widget> _buildVideoList(context) {
-    List<Widget> list = [];
-    this.allVideos.forEach((t) {
-      var scale = 0.5;
-      list.add(Container(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            GestureDetector(
-              onTap: () {
-                print(t['resource_url']);
-                // cController.dispose();
-                this.url = t['resource_url'];
-                updateVCController();
-                if (mounted) {
-                  // setState(() {});
-                }
-              },
-              child: MovieUtil.buildVideoCover(t['medium'], scale: scale),
-            ),
-            Expanded(
-              child: Text(
-                t['title'],
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-              ),
-            ),
-          ],
-        ),
-      ));
-    });
-    return list;
-  }
 
   @override
   void initState() {
@@ -58,15 +23,68 @@ class _SubjectVideoSetState extends State<SubjectVideoSet> {
     var trailers = MovieUtil.getTrailers(widget._subject);
     var bloopers = MovieUtil.getBloopers(widget._subject);
     trailers.addAll(bloopers);
-    this.allVideos = trailers;
-    this.url = allVideos[0]['resource_url'];
-    updateVCController();
+    this.videoList = trailers;
+    var i = 0;
+    for (i = 0; i < this.videoList.length; i++) {
+      vControllerList.add(
+          VideoPlayerController.network(this.videoList[i]['resource_url']));
+    }
+    this.selectedIndex = 0;
+    cController = chewieController;
   }
 
-  void updateVCController() {
-    vController = VideoPlayerController.network(this.url);
-    cController = ChewieController(
-      videoPlayerController: vController,
+  @override
+  void dispose() {
+    vControllerList.forEach((v) {
+      v.dispose();
+    });
+    cController.dispose();
+    super.dispose();
+  }
+
+  onVideoSelected(index) {
+    if (this.selectedIndex != index) {
+      if (mounted) {
+        setState(() {
+          cController.dispose();
+          vControllerList[selectedIndex].pause();
+          vControllerList[selectedIndex].seekTo(Duration(seconds: 0));
+          this.selectedIndex = index;
+          cController = chewieController;
+        });
+      }
+    }
+  }
+
+  List<Widget> _buildVideoList(context) {
+    List<Widget> list = [];
+    var i = 0;
+    for (i = 0; i < this.videoList.length; i++) {
+      list.add(Container(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            VideoPlaceHolder(videoList, i, onVideoSelected),
+            Expanded(
+              child: Text(
+                _buildTitle(i),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+                style: TextStyle(
+                  color: this.selectedIndex == i ? Colors.blue : Colors.black,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ));
+    }
+    return list;
+  }
+
+  ChewieController get chewieController {
+    return ChewieController(
+      videoPlayerController: vControllerList[this.selectedIndex],
       aspectRatio: 3 / 2,
       autoPlay: true,
       looping: true,
@@ -85,19 +103,19 @@ class _SubjectVideoSetState extends State<SubjectVideoSet> {
     );
   }
 
-  @override
-  void dispose() {
-    print('_SubjectVideoPlayerState.dispose() ');
-    // cController.dispose();
-    // vController.dispose();
-    super.dispose();
+  String _buildTitle(i) {
+    return this.videoList[i]['title'] +
+        " " +
+        (i + 1).toString() +
+        "/" +
+        this.videoList.length.toString();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("预告片 / 花絮"),
+        title: Text(_buildTitle(this.selectedIndex)),
       ),
       body: Container(
         width: ScreenUtil.getInstance().setWidth(ScreenSize.width),
@@ -111,8 +129,10 @@ class _SubjectVideoSetState extends State<SubjectVideoSet> {
           child: Column(
             children: <Widget>[
               Container(
-                width: ScreenUtil.getInstance().setWidth(ScreenSize.width),
-                height: ScreenUtil.getInstance().setHeight(500),
+                width:
+                    ScreenUtil.getInstance().setWidth(ScreenSize.video_width),
+                height:
+                    ScreenUtil.getInstance().setHeight(ScreenSize.video_height),
                 child: Chewie(
                   controller: cController,
                 ),
@@ -125,6 +145,25 @@ class _SubjectVideoSetState extends State<SubjectVideoSet> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class VideoPlaceHolder extends StatelessWidget {
+  final videoList;
+  final index;
+  final Function onVideoSelected;
+  const VideoPlaceHolder(this.videoList, this.index, this.onVideoSelected);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: GestureDetector(
+        onTap: () {
+          this.onVideoSelected(this.index);
+        },
+        child: MovieUtil.buildVideoCover(this.videoList[index]['medium'],
+            scale: 0.5),
       ),
     );
   }
