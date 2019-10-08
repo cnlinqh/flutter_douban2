@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/util/client_api.dart';
+import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/movie/subject_photos_tapped.dart';
+import 'package:flutter_douban2/movie/subject_video_tapped.dart';
 
 class SubjectPhotosSection extends StatefulWidget {
   final _subject;
@@ -23,6 +25,28 @@ class _SubjectPhotosSectionState extends State<SubjectPhotosSection> {
     this._photos =
         await ClientAPI.getInstance().getSubjectPhotos(widget._subject['id']);
     setState(() {});
+  }
+
+  List<Widget> _buildCovers(context) {
+    var videos = _buildVideoCovers(context);
+    var photos = _buildPhotosCovers(context);
+    videos.addAll(photos);
+    return videos;
+  }
+
+  List<Widget> _buildVideoCovers(context) {
+    List<Widget> covers = [];
+    var trails = MovieUtil.getTrailers(widget._subject);
+    if (trails.length > 0) {
+      covers.add(SubjectVideoTapped(this.widget._subject, trails[0]['medium']));
+    } else {
+      var bloopers = MovieUtil.getBloopers(widget._subject);
+      if (bloopers.length > 0) {
+        covers.add(
+            SubjectVideoTapped(this.widget._subject, bloopers[0]['medium']));
+      }
+    }
+    return covers;
   }
 
   List<Widget> _buildPhotosCovers(context) {
@@ -81,7 +105,7 @@ class _SubjectPhotosSectionState extends State<SubjectPhotosSection> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              "剧照",
+              "预告片 / 花絮 / 剧照",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -91,7 +115,7 @@ class _SubjectPhotosSectionState extends State<SubjectPhotosSection> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: _buildPhotosCovers(context),
+                children: _buildCovers(context),
               ),
             )
           ],

@@ -139,4 +139,62 @@ class MovieUtil {
       ),
     );
   }
+
+  static List getTrailers(_subject) {
+    return _subject['trailers'] != null ? _subject['trailers'] : [];
+  }
+
+  static List getBloopers(_subject) {
+    return _subject['trailers'] != null ? _subject['bloopers'] : [];
+  }
+
+  static buildVideoCover(cover, {double scale = 1}) {
+    return Stack(
+      children: <Widget>[
+        Container(
+          width: ScreenUtil.getInstance()
+              .setWidth(ScreenSize.photo_cover_width * scale),
+          height: ScreenUtil.getInstance()
+              .setHeight(ScreenSize.photo_cover_height * scale),
+          margin: EdgeInsets.all(1),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: CachedNetworkImageProvider(cover),
+              fit: BoxFit.cover,
+            ),
+            borderRadius: BorderRadius.all(Radius.circular(7)),
+          ),
+        ),
+        Container(
+          width: ScreenUtil.getInstance()
+              .setWidth(ScreenSize.photo_cover_width * scale),
+          height: ScreenUtil.getInstance()
+              .setHeight(ScreenSize.photo_cover_height * scale),
+          margin: EdgeInsets.all(1),
+          child: Center(
+            child: Opacity(
+              opacity: 0.8,
+              child: Container(
+                height:
+                    ScreenUtil.getInstance().setWidth(ScreenSize.padding * 8),
+                width:
+                    ScreenUtil.getInstance().setWidth(ScreenSize.padding * 8),
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(ScreenUtil.getInstance()
+                      .setWidth(ScreenSize.padding * 6)),
+                ),
+                child: Center(
+                  child: Icon(
+                    Icons.play_arrow,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 }
