@@ -3,9 +3,23 @@ import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SubjectSummarySection extends StatelessWidget {
+class SubjectSummarySection extends StatefulWidget {
   final _subject;
-  SubjectSummarySection(this._subject, {Key key}) : super(key: key);
+  SubjectSummarySection(this._subject);
+
+  _SubjectSummarySectionState createState() => _SubjectSummarySectionState();
+}
+
+class _SubjectSummarySectionState extends State<SubjectSummarySection> {
+  var _isFolded = true;
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      this._isFolded = true;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +39,39 @@ class SubjectSummarySection extends StatelessWidget {
             ),
           ),
           Text(
-            MovieUtil.getSummary(_subject),
+            MovieUtil.getSummary(widget._subject),
             style: TextStyle(
               color: Colors.white,
             ),
+            maxLines: _isFolded ? 2 : 10000, //just make sure big enough
+            overflow: TextOverflow.ellipsis,
           ),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                this._isFolded = !this._isFolded;
+              });
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  this._isFolded ? '展开' : '收起',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                  ),
+                ),
+                Icon(
+                  this._isFolded
+                      ? Icons.keyboard_arrow_down
+                      : Icons.keyboard_arrow_up,
+                  color: Colors.white,
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );
