@@ -42,11 +42,14 @@ class _SubjectPhotosGalleryState extends State<SubjectPhotosGallery> {
             return PhotoViewGalleryPageOptions(
               imageProvider: NetworkImage(widget._photos[index]['thumb']),
               initialScale: PhotoViewComputedScale.contained * 1,
+              scaleStateController: PhotoViewScaleStateController(),
+              maxScale: 10.0,
             );
           },
           itemCount: widget._photos.length,
           onPageChanged: onPageChanged,
           pageController: PageController(initialPage: _initialIndex),
+          enableRotation: true,
         ),
       ),
     );
