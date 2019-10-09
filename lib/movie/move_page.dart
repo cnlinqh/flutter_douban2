@@ -31,7 +31,6 @@ class _MoviePageState extends State<MoviePage> {
     views.add(new MovieTopList("豆瓣榜单"));
 
     if (mounted) {
-      print("_buildListViews()");
       this.setState(() {});
     }
   }
