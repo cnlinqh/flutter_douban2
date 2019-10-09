@@ -63,15 +63,16 @@ class _SubjectPhotosSectionState extends State<SubjectPhotosSection> {
 
     var i = 0;
     for (i = 0; i < first.length; i++) {
-      covers.add(SubjectPhotoTapped(this._photos, i, first[i]['thumb']));
+      covers.add(SubjectPhotoTapped(this._photos, i, first[i]['image']));
     }
 
-    for (i = 0; i < second.length; i = i + 2) {
+    for (i = 0; i < second.length ~/ 2; i = i + 1) {
       covers.add(Column(
         children: <Widget>[
-          SubjectPhotoTapped(this._photos, i + 2, second[i]['thumb'],
+          SubjectPhotoTapped(this._photos, i * 2 + 2, second[i * 2]['image'],
               scale: 0.5),
-          SubjectPhotoTapped(this._photos, i + 3, second[i + 1]['thumb'],
+          SubjectPhotoTapped(
+              this._photos, i * 2 + 1 + 2, second[i * 2 + 1]['image'],
               scale: 0.5),
         ],
       ));
@@ -81,8 +82,8 @@ class _SubjectPhotosSectionState extends State<SubjectPhotosSection> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           SubjectPhotoTapped(this._photos, this._photos.length - 1,
-              second[second.length - 1]['thumb'],
-              scale: 0.5),
+              second[second.length - 1]['image'],
+              scale: 1),
         ],
       ));
     }
