@@ -18,7 +18,10 @@ class SubjectRateSection extends StatelessWidget {
       child: Stack(
         children: <Widget>[
           Container(
-            color: Colors.grey,
+            decoration: BoxDecoration(
+              color: Colors.grey,
+              borderRadius: BorderRadius.all(Radius.circular(7)),
+            ),
             child: Column(
               children: <Widget>[
                 Row(
@@ -38,13 +41,16 @@ class SubjectRateSection extends StatelessWidget {
             child: Opacity(
               opacity: 0.6,
               child: Container(
-                color: Colors.white10,
                 width: ScreenUtil.getInstance().setWidth(
                     ScreenSize.point_width +
                         ScreenSize.graph_width -
                         ScreenSize.padding * 4),
                 height: ScreenUtil.getInstance()
                     .setHeight(ScreenSize.rate_height - ScreenSize.padding * 2),
+                decoration: BoxDecoration(
+                  color: Colors.white10,
+                  borderRadius: BorderRadius.all(Radius.circular(7)),
+                ),
               ),
             ),
           )
@@ -55,6 +61,7 @@ class SubjectRateSection extends StatelessWidget {
 
   Container _buildPointPart() {
     return Container(
+      // color: Colors.red,
       width: ScreenUtil.getInstance().setWidth(ScreenSize.point_width),
       height: ScreenUtil.getInstance().setHeight(ScreenSize.rate_height),
       child: Stack(
@@ -70,22 +77,28 @@ class SubjectRateSection extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: ScreenUtil.getInstance()
-                .setWidth(ScreenSize.point_width / 2 - 24),
-            top: ScreenUtil.getInstance()
-                .setHeight(ScreenSize.rate_height / 2 - 24),
-            child: Text(
-              this._subject['rating']['average'].toString(),
-              style: TextStyle(color: Colors.white, fontSize: 24),
+            child: Center(
+              child: Text(
+                this._subject['rating']['average'].toString(),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
             ),
           ),
           Positioned(
-            left: ScreenUtil.getInstance()
-                .setWidth(ScreenSize.point_width / 2 - 60),
             top: ScreenUtil.getInstance()
-                .setHeight(ScreenSize.rate_height / 2 + 20),
-            child: RateStar(
-                double.parse(this._subject['rating']['average'].toString())),
+                .setHeight(ScreenSize.rate_height / 2 + 24),
+            child: Container(
+              width: ScreenUtil.getInstance().setWidth(ScreenSize.point_width),
+              child: Center(
+                child: RateStar(
+                  double.parse(this._subject['rating']['average'].toString()),
+                  withNumber: false,
+                ),
+              ),
+            ),
           )
         ],
       ),
@@ -94,6 +107,7 @@ class SubjectRateSection extends StatelessWidget {
 
   Container _buildGraphPart() {
     return Container(
+      // color: Colors.green,
       width: ScreenUtil.getInstance().setWidth(ScreenSize.graph_width),
       height: ScreenUtil.getInstance().setHeight(ScreenSize.rate_height),
       child: Column(
@@ -191,18 +205,15 @@ class SubjectRateSection extends StatelessWidget {
                     Row(
                       children: <Widget>[
                         Container(
-                          color: Colors.orange,
+                          decoration: BoxDecoration(
+                            color: Colors.orange,
+                            borderRadius: BorderRadius.all(Radius.circular(7)),
+                          ),
                           width: ScreenUtil.getInstance()
                               .setWidth(ScreenSize.bar_width / 100 * percent),
                           height: ScreenUtil.getInstance()
                               .setHeight(ScreenSize.bar_height),
                         ),
-                        // Container(
-                        //   width: ScreenUtil.getInstance()
-                        //       .setWidth(ScreenSize.padding),
-                        //   height: ScreenUtil.getInstance()
-                        //       .setHeight(ScreenSize.star_height),
-                        // ),
                         Text(
                           percent.toStringAsFixed(0) + "%",
                           style: TextStyle(

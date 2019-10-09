@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class RateStar extends StatelessWidget {
   final double _size = 14;
   final double _rate;
-  RateStar(this._rate);
+  final bool withNumber;
+  RateStar(this._rate, {this.withNumber = true});
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +14,7 @@ class RateStar extends StatelessWidget {
   Container _buildContainer() {
     return Container(
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: _buildStars(),
       ),
     );
@@ -66,7 +68,7 @@ class RateStar extends StatelessWidget {
             : _rate > 8 ? Colors.orangeAccent : Colors.black,
       ),
       Text(
-        _rate.toString(),
+        withNumber?_rate.toString():"",
         style: TextStyle(
           color: Colors.grey,
           fontSize: this._size,
