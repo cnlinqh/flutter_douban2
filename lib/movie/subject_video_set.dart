@@ -71,7 +71,7 @@ class _SubjectVideoSetState extends State<SubjectVideoSet> {
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 style: TextStyle(
-                  color: this.selectedIndex == i ? Colors.blue : Colors.black,
+                  color: this.selectedIndex == i ? Colors.cyan : Colors.black,
                 ),
               ),
             ),
