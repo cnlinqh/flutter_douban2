@@ -34,7 +34,8 @@ class ClientAPI {
   }
 
   Future<List> getMovieHotRecommendList() async {
-    print(">>>>>>>ClientAPI: getMovieHotRecommendList()");
+    print(">>ClientAPI: getMovieHotRecommendList()");
+    var s = new DateTime.now();
     var key = "getMovieHotRecommendList";
     if (Repository.isCached(key)) {
       return new Future<List>(() {
@@ -56,6 +57,9 @@ class ClientAPI {
       hots.add(hot);
     });
     Repository.setCachedList(key, hots);
+    var e = new DateTime.now();
+    print(
+        "<<<<ClientAPI: getMovieHotRecommendList() ##########################  ${e.difference(s).inMilliseconds}");
     return hots;
   }
 
@@ -63,7 +67,8 @@ class ClientAPI {
     int start = 0,
     int count = 6,
   }) async {
-    print(">>>>>>>ClientAPI: getMovieInTheaters($start, $count)");
+    print(">>ClientAPI: getMovieInTheaters($start, $count)");
+    var s = new DateTime.now();
     var key = "getMovieComingSoon#$start#$count";
     if (Repository.isCached(key)) {
       return new Future<List>(() {
@@ -73,6 +78,9 @@ class ClientAPI {
     Response<Map> res = await apiDio.get('/v2/movie/in_theaters',
         queryParameters: {"start": start, 'count': count});
     Repository.setCachedList(key, res.data['subjects']);
+    var e = new DateTime.now();
+    print(
+        "<<<<ClientAPI: getMovieInTheaters() ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
 
@@ -80,21 +88,27 @@ class ClientAPI {
     int start = 0,
     int count = 6,
   }) async {
+    print(">>ClientAPI: getMovieComingSoon($start, $count)");
+    var s = new DateTime.now();
     var key = "getMovieComingSoon#$start#$count";
     if (Repository.isCached(key)) {
       return new Future<List>(() {
         return Repository.getCachedList(key);
       });
     }
-    print(">>>>>>>ClientAPI: getMovieComingSoon($start, $count)");
+
     Response<Map> res = await apiDio.get('/v2/movie/coming_soon',
         queryParameters: {"start": start, 'count': count});
     Repository.setCachedList(key, res.data['subjects']);
+    var e = new DateTime.now();
+    print(
+        "<<<<ClientAPI: getMovieComingSoon() ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
 
   Future<List> getMovieWeekly() async {
-    print(">>>>>>>ClientAPI: getMovieWeekly()");
+    print(">>ClientAPI: getMovieWeekly()");
+    var s = new DateTime.now();
     var key = "getMovieWeekly";
     if (Repository.isCached(key)) {
       return new Future<List>(() {
@@ -103,11 +117,15 @@ class ClientAPI {
     }
     Response<Map> res = await apiDio.get('/v2/movie/weekly');
     Repository.setCachedList(key, res.data['subjects']);
+    var e = new DateTime.now();
+    print(
+        "<<<<ClientAPI: getMovieWeekly() ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
 
   Future<List> getMovieNew() async {
-    print(">>>>>>>ClientAPI: getMovieNew()");
+    print(">>ClientAPI: getMovieNew()");
+    var s = new DateTime.now();
     var key = "getMovieNew";
     if (Repository.isCached(key)) {
       return new Future<List>(() {
@@ -116,11 +134,14 @@ class ClientAPI {
     }
     Response<Map> res = await apiDio.get('/v2/movie/new_movies');
     Repository.setCachedList(key, res.data['subjects']);
+    var e = new DateTime.now();
+    print("<<<<ClientAPI: getMovieNew() ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
 
   Future<List> getMovieUSBox() async {
-    print(">>>>>>>ClientAPI: getMovieUSBox()");
+    print(">>ClientAPI: getMovieUSBox()");
+    var s = new DateTime.now();
     var key = "getMovieUSBox";
     if (Repository.isCached(key)) {
       return new Future<List>(() {
@@ -129,6 +150,9 @@ class ClientAPI {
     }
     Response<Map> res = await apiDio.get('/v2/movie/us_box');
     Repository.setCachedList(key, res.data['subjects']);
+    var e = new DateTime.now();
+    print(
+        "<<<<ClientAPI: getMovieUSBox() ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
 
@@ -136,7 +160,8 @@ class ClientAPI {
     int start = 0,
     int count = 6,
   }) async {
-    print(">>>>>>>ClientAPI: getMovieTop250($start, $count)");
+    print(">>ClientAPI: getMovieTop250($start, $count)");
+    var s = new DateTime.now();
     var key = "getMovieTop250#$start#$count";
     if (Repository.isCached(key)) {
       return new Future<List>(() {
@@ -146,11 +171,15 @@ class ClientAPI {
     Response<Map> res = await apiDio.get('/v2/movie/top250',
         queryParameters: {"start": start, 'count': count});
     Repository.setCachedList(key, res.data['subjects']);
+    var e = new DateTime.now();
+    print(
+        "<<<<ClientAPI: getMovieTop250($start, $count) ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
 
   Future getMovieSubject(id) async {
-    print(">>>>>>>ClientAPI: getMovieSubject($id)");
+    print(">>ClientAPI: getMovieSubject($id)");
+    var s = new DateTime.now();
     var key = "getMovieSubject($id)";
     if (Repository.isCached(key)) {
       return new Future(() {
@@ -159,11 +188,15 @@ class ClientAPI {
     }
     Response<Map> res = await apiDio.get('/v2/movie/subject/' + id);
     Repository.setCachedObject(key, res.data);
+    var e = new DateTime.now();
+    print(
+        "<<<<ClientAPI: getMovieSubject($id) ##########################  ${e.difference(s).inMilliseconds}");
     return res.data;
   }
 
   Future<List> getAllDirectorsCastsList(id) async {
-    print(">>>>>>>ClientAPI: getAllDirectorsCastsList($id)");
+    print(">>ClientAPI: getAllDirectorsCastsList($id)");
+    var s = new DateTime.now();
     var key = "getAllDirectorsCastsList($id)";
     if (Repository.isCached(key)) {
       return new Future<List>(() {
@@ -199,11 +232,15 @@ class ClientAPI {
       celebrities.add(celebrity);
     });
     Repository.setCachedList(key, celebrities);
+    var e = new DateTime.now();
+    print(
+        "<<<<ClientAPI: getAllDirectorsCastsList($id) ##########################  ${e.difference(s).inMilliseconds}");
     return celebrities;
   }
 
   Future getSubjectPhotos(id) async {
-    print(">>>>>>>ClientAPI: getSubjectPhotos($id)");
+    print(">>ClientAPI: getSubjectPhotos($id)");
+    var s = new DateTime.now();
     var key = "getSubjectPhotos($id)";
     if (Repository.isCached(key)) {
       return new Future(() {
@@ -212,6 +249,9 @@ class ClientAPI {
     }
     Response<Map> res = await apiDio.get('/v2/movie/subject/$id/photos');
     Repository.setCachedList(key, res.data['photos']);
+    var e = new DateTime.now();
+    print(
+        "<<<<ClientAPI: getSubjectPhotos($id) ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['photos'];
   }
 }
