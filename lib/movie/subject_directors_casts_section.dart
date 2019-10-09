@@ -6,10 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SubjectDirectorsCastsSection extends StatelessWidget {
   final _subject;
-  List _celebrities;
   SubjectDirectorsCastsSection(this._subject, {Key key}) : super(key: key);
 
-  List<Widget> _buildDirectorsCastsCover() {
+  List<Widget> _buildDirectorsCastsCovers() {
     List<Widget> directors = [];
     this._subject['directors'].forEach((dir) {
       directors.add(Column(
@@ -64,7 +63,7 @@ class SubjectDirectorsCastsSection extends StatelessWidget {
     return directors;
   }
 
-  Widget _buildBottomSheetContent() {
+  Widget _buildBottomSheetContent(celebrities) {
     return Container(
         height: ScreenUtil.screenHeight,
         color: Colors.white,
@@ -77,13 +76,13 @@ class SubjectDirectorsCastsSection extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: _buildCelebrities(),
+            children: _buildCelebrities(celebrities),
           ),
         ));
   }
 
-  List<Widget> _buildCelebrities() {
-    List<Widget> list = List<Widget>.from(this._celebrities.map((cele) {
+  List<Widget> _buildCelebrities(celebrities) {
+    List<Widget> list = List<Widget>.from(celebrities.map((cele) {
       return Container(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -167,12 +166,11 @@ class SubjectDirectorsCastsSection extends StatelessWidget {
                   ClientAPI.getInstance()
                       .getAllDirectorsCastsList(this._subject['id'])
                       .then((celebrities) {
-                    this._celebrities = celebrities;
                     showBottomSheet(
                       context: context,
                       builder: (_) => Stack(
                         children: <Widget>[
-                          _buildBottomSheetContent(),
+                          _buildBottomSheetContent(celebrities),
                           Positioned(
                             top: ScreenUtil.getInstance()
                                 .setWidth(ScreenSize.padding),
@@ -203,7 +201,7 @@ class SubjectDirectorsCastsSection extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: _buildDirectorsCastsCover(),
+              children: _buildDirectorsCastsCovers(),
             ),
           )
         ],
