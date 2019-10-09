@@ -18,9 +18,10 @@ class NavigatorHelper {
     NavigatorHelper.push(context, MovieListPaged(title, getData));
   }
 
-  static pushMoviedStatic(BuildContext context, String title, List subjects){
+  static pushMoviedStatic(BuildContext context, String title, List subjects) {
     NavigatorHelper.push(context, MovieListStatic(title, subjects));
   }
+
   static pushMovieListPage(BuildContext context, String title) {
     if (title == "影院热映") {
       pushMoviePaged(
@@ -28,6 +29,8 @@ class NavigatorHelper {
     } else if (title == "即将上映") {
       pushMoviePaged(
           context, title, ClientAPI.getInstance().getMovieComingSoon);
+    } else if (title == "豆瓣电影Top250") {
+      pushMoviePaged(context, title, ClientAPI.getInstance().getMovieTop250);
     }
   }
 

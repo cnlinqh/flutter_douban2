@@ -134,7 +134,7 @@ class ClientAPI {
 
   Future<List> getMovieTop250({
     int start = 0,
-    int count = 250,
+    int count = 6,
   }) async {
     print(">>>>>>>ClientAPI: getMovieTop250($start, $count)");
     var key = "getMovieTop250#$start#$count";
