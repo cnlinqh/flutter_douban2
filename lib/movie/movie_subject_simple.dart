@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/navigator_helper.dart';
 import 'package:flutter_douban2/widget/rate_star.dart';
+import 'package:flutter_douban2/util/screen_size.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MovieSubjectSimple extends StatelessWidget {
   final String title;
@@ -9,41 +12,6 @@ class MovieSubjectSimple extends StatelessWidget {
   final double rate;
   final String id;
   MovieSubjectSimple(this.title, this.cover, this.rate, this.id);
-
-  Widget _buildCoverImage(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        print("Tap on " + this.title + "/" + this.id);
-        NavigatorHelper.pushMovieSubjectDetailPage(context, this.id);
-      },
-      child: Stack(
-        children: <Widget>[
-          MovieUtil.buildMovieCover(this.cover),
-          MovieUtil.buildFavoriteIcon(),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTitle() {
-    return Text(
-      this.title.length >= 7 ? this.title.substring(0, 7) + "..." : this.title,
-      style: TextStyle(
-        fontWeight: FontWeight.bold,
-      ),
-    );
-  }
-
-  Widget _buildRate() {
-    return this.rate != 0
-        ? RateStar(this.rate)
-        : Text(
-            "暂无评分",
-            style: TextStyle(
-              color: Colors.grey,
-            ),
-          );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,5 +25,44 @@ class MovieSubjectSimple extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Widget _buildCoverImage(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        NavigatorHelper.pushMovieSubjectDetailPage(context, this.id);
+      },
+      child: Stack(
+        children: <Widget>[
+          MovieUtil.buildMovieCover(this.cover),
+          MovieUtil.buildFavoriteIcon(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTitle() {
+    return Container(
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_cover_width),
+      child: Text(
+        this.title,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRate() {
+    return this.rate != 0
+        ? RateStar(this.rate)
+        : Text(
+            LabelConstant.MOVIE_NO_RATE,
+            style: TextStyle(
+              color: Colors.grey,
+            ),
+          );
   }
 }

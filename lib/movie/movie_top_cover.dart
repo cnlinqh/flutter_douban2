@@ -4,6 +4,7 @@ import 'package:flutter_douban2/util/navigator_helper.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/client_api.dart';
+import 'package:flutter_douban2/util/label_constant.dart';
 
 class MovieTopCover extends StatefulWidget {
   final String title;
@@ -20,20 +21,20 @@ class _MovieTopCoverState extends State<MovieTopCover> {
   @override
   void initState() {
     super.initState();
-    if (widget.title == "一周口碑电影榜") {
-      this._subTitle = '每周五更新，共10部';
+    if (widget.title == LabelConstant.MOVIE_TOP_WEEKLY) {
+      this._subTitle = LabelConstant.MOVIE_TOP_WEEKLY_SUB;
       this._color = Colors.brown[100];
       this._future = ClientAPI.getInstance().getMovieWeekly();
-    } else if (widget.title == "豆瓣电影Top250") {
-      this._subTitle = "豆瓣榜单，共250部";
+    } else if (widget.title == LabelConstant.MOVIE_TOP_TOP250) {
+      this._subTitle = LabelConstant.MOVIE_TOP_TOP250_SUB;
       this._color = Colors.black26;
       this._future = ClientAPI.getInstance().getMovieTop250();
-    } else if (widget.title == "豆瓣电影新片榜") {
-      this._subTitle = "最新新片";
+    } else if (widget.title == LabelConstant.MOVIE_TOP_NEW) {
+      this._subTitle = LabelConstant.MOVIE_TOP_NEW_SUB;
       this._future = ClientAPI.getInstance().getMovieNew();
       this._color = Colors.green;
-    } else if (widget.title == "豆瓣电影北美票房榜") {
-      this._subTitle = "北美票房";
+    } else if (widget.title == LabelConstant.MOVIE_TOP_US) {
+      this._subTitle = LabelConstant.MOVIE_TOP_US_SUB;
       this._color = Colors.teal;
       this._future = ClientAPI.getInstance().getMovieUSBox();
     }

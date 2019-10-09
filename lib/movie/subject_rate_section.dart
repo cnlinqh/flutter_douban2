@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_douban2/widget/rate_star.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,9 +39,10 @@ class SubjectRateSection extends StatelessWidget {
               opacity: 0.6,
               child: Container(
                 color: Colors.white10,
-                width: ScreenUtil.getInstance().setWidth(ScreenSize.point_width +
-                    ScreenSize.graph_width -
-                    ScreenSize.padding * 4),
+                width: ScreenUtil.getInstance().setWidth(
+                    ScreenSize.point_width +
+                        ScreenSize.graph_width -
+                        ScreenSize.padding * 4),
                 height: ScreenUtil.getInstance()
                     .setHeight(ScreenSize.rate_height - ScreenSize.padding * 2),
               ),
@@ -61,7 +63,7 @@ class SubjectRateSection extends StatelessWidget {
             left: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
             top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
             child: Text(
-              "豆瓣评分",
+              LabelConstant.MOVIE_DOUBAN_RATE,
               style: TextStyle(
                 color: Colors.white,
               ),
@@ -127,7 +129,11 @@ class SubjectRateSection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           Text(
-            this._subject['rating']['average'] == 0 ?"暂无评分": "总评分: " + _getRateTotal().toStringAsFixed(0),
+            this._subject['rating']['average'] == 0
+                ? LabelConstant.MOVIE_NO_RATE
+                : LabelConstant.MOVIE_TOTAL_RATE +
+                    " :" +
+                    _getRateTotal().toStringAsFixed(0),
             style: TextStyle(color: Colors.white),
           )
         ],
@@ -142,7 +148,7 @@ class SubjectRateSection extends StatelessWidget {
     for (i = 1; i <= 5; i++) {
       sum = sum + double.parse(details[i.toString()].toString());
     }
-    return sum == 0? 1: sum;
+    return sum == 0 ? 1 : sum;
   }
 
   Row _buildLevelRow(int level) {

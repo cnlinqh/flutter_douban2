@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_douban2/movie/movie_section_body.dart';
 import 'package:flutter_douban2/movie/movie_section_header.dart';
 import 'package:flutter_douban2/util/client_api.dart';
+import 'package:flutter_douban2/util/label_constant.dart';
 
 class MovieSectionView extends StatefulWidget {
   final String _title;
@@ -24,9 +25,9 @@ class _MovieSectionViewState extends State<MovieSectionView> {
 
   Future<void> _refreshData() async {
     ClientAPI client = ClientAPI.getInstance();
-    if (this._title == "影院热映") {
+    if (this._title == LabelConstant.MOVIE_IN_THEATERS_TITLE) {
       this._subjects = await client.getMovieInTheaters();
-    } else if (this._title == '即将上映') {
+    } else if (this._title == LabelConstant.MOVIE_COMING_SOON_TITLE) {
       this._subjects = await client.getMovieComingSoon();
     }
 
@@ -38,11 +39,15 @@ class _MovieSectionViewState extends State<MovieSectionView> {
   @override
   Widget build(BuildContext context) {
     if (this._subjects.length == 0) {
-      return new Center(
-        child: new CircularProgressIndicator(),
+      return Container(
+        child: Column(
+          children: <Widget>[
+            MovieSectionHeader(this._title),
+            CircularProgressIndicator(),
+          ],
+        ),
       );
     }
-
     return Container(
       child: Column(
         children: <Widget>[

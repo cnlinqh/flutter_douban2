@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -97,7 +98,7 @@ class SubjectGeneralSection extends StatelessWidget {
                     children: <Widget>[
                       RaisedButton(
                         onPressed: () {},
-                        child: Text("想看"),
+                        child: Text(LabelConstant.MOVIE_WANTED_TITLE),
                       ),
                       RaisedButton(
                         onPressed: () {},

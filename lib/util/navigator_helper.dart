@@ -3,6 +3,7 @@ import 'package:flutter_douban2/movie/movie_list_paged.dart';
 import 'package:flutter_douban2/movie/movie_list_static.dart';
 import 'package:flutter_douban2/movie/movie_subject_detail.dart';
 import 'package:flutter_douban2/util/client_api.dart';
+import 'package:flutter_douban2/util/label_constant.dart';
 
 class NavigatorHelper {
   static push(BuildContext context, Widget page) {
@@ -23,13 +24,13 @@ class NavigatorHelper {
   }
 
   static pushMovieListPage(BuildContext context, String title) {
-    if (title == "影院热映") {
+    if (title == LabelConstant.MOVIE_IN_THEATERS_TITLE) {
       pushMoviePaged(
           context, title, ClientAPI.getInstance().getMovieInTheaters);
-    } else if (title == "即将上映") {
+    } else if (title == LabelConstant.MOVIE_COMING_SOON_TITLE) {
       pushMoviePaged(
           context, title, ClientAPI.getInstance().getMovieComingSoon);
-    } else if (title == "豆瓣电影Top250") {
+    } else if (title == LabelConstant.MOVIE_TOP_TOP250) {
       pushMoviePaged(context, title, ClientAPI.getInstance().getMovieTop250);
     }
   }

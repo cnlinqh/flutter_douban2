@@ -22,12 +22,6 @@ class _SubjectPhotosGalleryState extends State<SubjectPhotosGallery> {
     super.initState();
   }
 
-  void onPageChanged(int index) {
-    setState(() {
-      _title = index + 1;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,9 +43,15 @@ class _SubjectPhotosGalleryState extends State<SubjectPhotosGallery> {
           itemCount: widget._photos.length,
           onPageChanged: onPageChanged,
           pageController: PageController(initialPage: _initialIndex),
-          enableRotation: true,
+          // enableRotation: true,
         ),
       ),
     );
+  }
+
+  void onPageChanged(int index) {
+    setState(() {
+      _title = index + 1;
+    });
   }
 }

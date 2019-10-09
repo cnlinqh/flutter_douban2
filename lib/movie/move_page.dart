@@ -5,6 +5,7 @@ import 'package:flutter_douban2/movie/movie_top_list.dart';
 import 'package:flutter_douban2/util/repository.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_douban2/util/label_constant.dart';
 
 class MoviePage extends StatefulWidget {
   MoviePage({
@@ -26,9 +27,9 @@ class _MoviePageState extends State<MoviePage> {
   _buildListViews() {
     views = [];
     views.add(new MovieSliderView());
-    views.add(new MovieSectionView("影院热映"));
-    views.add(new MovieSectionView("即将上映"));
-    views.add(new MovieTopList("豆瓣榜单"));
+    views.add(new MovieSectionView(LabelConstant.MOVIE_IN_THEATERS_TITLE));
+    views.add(new MovieSectionView(LabelConstant.MOVIE_COMING_SOON_TITLE));
+    views.add(new MovieTopList(LabelConstant.MOVIE_TOP_LIST_TITLE));
 
     if (mounted) {
       this.setState(() {});
@@ -44,7 +45,7 @@ class _MoviePageState extends State<MoviePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("豆瓣电影"),
+        title: Text(LabelConstant.MOVIE_PAGE_TITLE),
       ),
       body: Container(
         padding: EdgeInsets.fromLTRB(

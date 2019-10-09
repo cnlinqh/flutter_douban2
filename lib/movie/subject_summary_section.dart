@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,7 +33,7 @@ class _SubjectSummarySectionState extends State<SubjectSummarySection> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            "简介",
+            LabelConstant.MOVIE_SUMMARY,
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,
@@ -57,7 +58,9 @@ class _SubjectSummarySectionState extends State<SubjectSummarySection> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  this._isFolded ? '展开' : '收起',
+                  this._isFolded
+                      ? LabelConstant.MOVIE_UNFOLD
+                      : LabelConstant.MOVIE_FOLD,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 14,

@@ -34,6 +34,44 @@ class _SubjectVideoSetState extends State<SubjectVideoSet> {
   }
 
   @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(_buildTitle(this.selectedIndex)),
+      ),
+      body: Container(
+        width: ScreenUtil.getInstance().setWidth(ScreenSize.width),
+        padding: EdgeInsets.fromLTRB(
+          ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+          ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+        ),
+        child: Container(
+          child: Column(
+            children: <Widget>[
+              Container(
+                width:
+                    ScreenUtil.getInstance().setWidth(ScreenSize.video_width),
+                height:
+                    ScreenUtil.getInstance().setHeight(ScreenSize.video_height),
+                child: Chewie(
+                  controller: cController,
+                ),
+              ),
+              Expanded(
+                child: ListView(
+                  children: _buildVideoList(context),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
   void dispose() {
     vControllerList.forEach((v) {
       v.dispose();
@@ -42,7 +80,7 @@ class _SubjectVideoSetState extends State<SubjectVideoSet> {
     super.dispose();
   }
 
-  onVideoSelected(index) {
+  void onVideoSelected(index) {
     if (this.selectedIndex != index) {
       if (mounted) {
         setState(() {
@@ -109,44 +147,6 @@ class _SubjectVideoSetState extends State<SubjectVideoSet> {
         (i + 1).toString() +
         "/" +
         this.videoList.length.toString();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(_buildTitle(this.selectedIndex)),
-      ),
-      body: Container(
-        width: ScreenUtil.getInstance().setWidth(ScreenSize.width),
-        padding: EdgeInsets.fromLTRB(
-          ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-          ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-        ),
-        child: Container(
-          child: Column(
-            children: <Widget>[
-              Container(
-                width:
-                    ScreenUtil.getInstance().setWidth(ScreenSize.video_width),
-                height:
-                    ScreenUtil.getInstance().setHeight(ScreenSize.video_height),
-                child: Chewie(
-                  controller: cController,
-                ),
-              ),
-              Expanded(
-                child: ListView(
-                  children: _buildVideoList(context),
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
   }
 }
 

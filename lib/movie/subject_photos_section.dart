@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/util/client_api.dart';
+import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,6 +26,41 @@ class _SubjectPhotosSectionState extends State<SubjectPhotosSection> {
     this._photos =
         await ClientAPI.getInstance().getSubjectPhotos(widget._subject['id']);
     setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (this._photos.length == 0) {
+      return new Center(
+        child: new CircularProgressIndicator(),
+      );
+    } else {
+      return Container(
+        padding: EdgeInsets.only(
+          top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
+          bottom: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              LabelConstant.MOVIE_PHOTOS_TITLE,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+              ),
+            ),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: _buildCovers(context),
+              ),
+            )
+          ],
+        ),
+      );
+    }
   }
 
   List<Widget> _buildCovers(context) {
@@ -88,40 +124,5 @@ class _SubjectPhotosSectionState extends State<SubjectPhotosSection> {
       ));
     }
     return covers;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (this._photos.length == 0) {
-      return new Center(
-        child: new CircularProgressIndicator(),
-      );
-    } else {
-      return Container(
-        padding: EdgeInsets.only(
-          top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
-          bottom: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              "预告片 / 花絮 / 剧照",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-              ),
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: _buildCovers(context),
-              ),
-            )
-          ],
-        ),
-      );
-    }
   }
 }

@@ -20,8 +20,7 @@ class _MovieSliderViewState extends State<MovieSliderView> {
   }
 
   Future<void> _refreshData() async {
-    ClientAPI client = ClientAPI.getInstance();
-    this._list = await client.getMovieHotRecommendList();
+    this._list = await ClientAPI.getInstance().getMovieHotRecommendList();
     if (mounted) {
       this.setState(() {});
     }
@@ -52,47 +51,9 @@ class _MovieSliderViewState extends State<MovieSliderView> {
                   child: Container(
                     child: Stack(
                       children: <Widget>[
-                        Container(
-                          // child: Image.network(item.cover),
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: CachedNetworkImageProvider(item['cover']),
-                              fit: BoxFit.cover,
-                            ),
-                            borderRadius: BorderRadius.all(Radius.circular(7)),
-                          ),
-                        ),
-                        Opacity(
-                          opacity: 0.2,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(7)),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                item['title'],
-                                style: TextStyle(
-                                  color: Colors.blue,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                item['summary'],
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ],
-                          ),
-                        )
+                        _buildCover(item),
+                        _buildOpacity(item),
+                        _buildTitleSummary(item),
                       ],
                     ),
                   ),
@@ -103,5 +64,53 @@ class _MovieSliderViewState extends State<MovieSliderView> {
         ),
       );
     }
+  }
+
+  Widget _buildCover(item) {
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: CachedNetworkImageProvider(item['cover']),
+          fit: BoxFit.cover,
+        ),
+        borderRadius: BorderRadius.all(Radius.circular(7)),
+      ),
+    );
+  }
+
+  Widget _buildOpacity(item) {
+    return Opacity(
+      opacity: 0.2,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.all(Radius.circular(7)),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTitleSummary(item) {
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            item['title'],
+            style: TextStyle(
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            item['summary'],
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
+            style: TextStyle(color: Colors.white),
+          ),
+        ],
+      ),
+    );
   }
 }

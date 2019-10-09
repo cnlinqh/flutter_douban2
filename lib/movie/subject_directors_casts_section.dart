@@ -3,10 +3,88 @@ import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_douban2/util/label_constant.dart';
 
 class SubjectDirectorsCastsSection extends StatelessWidget {
   final _subject;
   SubjectDirectorsCastsSection(this._subject, {Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(
+        top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
+        bottom: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          _buildHeader(context),
+          _buildCovers(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildHeader(context) {
+    return Row(
+      children: <Widget>[
+        Expanded(
+          child: Text(
+            LabelConstant.MOVIE_ALL_PEOPLE,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+            ),
+          ),
+        ),
+        GestureDetector(
+          onTap: () {
+            ClientAPI.getInstance()
+                .getAllDirectorsCastsList(this._subject['id'])
+                .then((celebrities) {
+              showBottomSheet(
+                context: context,
+                builder: (_) => Stack(
+                  children: <Widget>[
+                    _buildBottomSheetContent(celebrities),
+                    Positioned(
+                      top:
+                          ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+                      right: ScreenUtil.getInstance()
+                          .setHeight(ScreenSize.padding),
+                      child: IconButton(
+                        icon: Icon(Icons.close),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    )
+                  ],
+                ),
+              );
+            });
+          },
+          child: Text(
+            LabelConstant.MOVIE_ALL_TITLE,
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildCovers() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: _buildDirectorsCastsCovers(),
+      ),
+    );
+  }
 
   List<Widget> _buildDirectorsCastsCovers() {
     List<Widget> directors = [];
@@ -14,7 +92,8 @@ class SubjectDirectorsCastsSection extends StatelessWidget {
       directors.add(Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          MovieUtil.buildDirectorCastCover(dir['avatars']!= null ? dir['avatars']['small']: ''),
+          MovieUtil.buildDirectorCastCover(
+              dir['avatars'] != null ? dir['avatars']['small'] : ''),
           Text(
             dir['name'],
             maxLines: 1,
@@ -24,7 +103,7 @@ class SubjectDirectorsCastsSection extends StatelessWidget {
             ),
           ),
           Text(
-            '导演/' + dir['name_en'],
+            LabelConstant.MOVIE_DIRECTOR + '/' + dir['name_en'],
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(color: Colors.white, fontSize: 10),
@@ -38,7 +117,8 @@ class SubjectDirectorsCastsSection extends StatelessWidget {
       casts.add(Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          MovieUtil.buildDirectorCastCover(dir['avatars']!= null ? dir['avatars']['small']:''),
+          MovieUtil.buildDirectorCastCover(
+              dir['avatars'] != null ? dir['avatars']['small'] : ''),
           Text(
             dir['name'],
             maxLines: 1,
@@ -48,7 +128,7 @@ class SubjectDirectorsCastsSection extends StatelessWidget {
             ),
           ),
           Text(
-            '演员/' + dir['name_en'],
+            LabelConstant.MOVIE_ACTOR + '/' + dir['name_en'],
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
@@ -89,7 +169,8 @@ class SubjectDirectorsCastsSection extends StatelessWidget {
           children: <Widget>[
             MovieUtil.buildDirectorCastCover(cele['avatar']),
             Container(
-              width: ScreenUtil.getInstance().setWidth(ScreenSize.celebrities_width),
+              width: ScreenUtil.getInstance()
+                  .setWidth(ScreenSize.celebrities_width),
               height: ScreenUtil.getInstance()
                   .setHeight(ScreenSize.director_cast_cover_height),
               margin: EdgeInsets.fromLTRB(
@@ -137,75 +218,5 @@ class SubjectDirectorsCastsSection extends StatelessWidget {
       );
     }));
     return list;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(
-        top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
-        bottom: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            children: <Widget>[
-              Text(
-                "演职员",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                ),
-              ),
-              Expanded(
-                child: Text(""),
-              ),
-              GestureDetector(
-                onTap: () {
-                  ClientAPI.getInstance()
-                      .getAllDirectorsCastsList(this._subject['id'])
-                      .then((celebrities) {
-                    showBottomSheet(
-                      context: context,
-                      builder: (_) => Stack(
-                        children: <Widget>[
-                          _buildBottomSheetContent(celebrities),
-                          Positioned(
-                            top: ScreenUtil.getInstance()
-                                .setWidth(ScreenSize.padding),
-                            right: ScreenUtil.getInstance()
-                                .setHeight(ScreenSize.padding),
-                            child: IconButton(
-                              icon: Icon(Icons.close),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          )
-                        ],
-                      ),
-                    );
-                  });
-                },
-                child: Text(
-                  "全部>",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: _buildDirectorsCastsCovers(),
-            ),
-          )
-        ],
-      ),
-    );
   }
 }

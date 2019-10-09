@@ -17,8 +17,7 @@ class ScreenSize {
 
   //the width of movie description
   static const double movie_description_width = 400;
-  //the width of movie want
-  static const double movie_want_width = 80;
+  
 
   //the width of subject details
   static const double subject_description_width = 470;

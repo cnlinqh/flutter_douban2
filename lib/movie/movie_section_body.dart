@@ -2,42 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:flutter_douban2/movie/movie_subject_simple.dart';
 
 class MovieSectionBody extends StatelessWidget {
-  final List first;
-  final List second;
-  MovieSectionBody(this.first, this.second);
+  final List firstRow;
+  final List secondRow;
+  MovieSectionBody(this.firstRow, this.secondRow);
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
         children: <Widget>[
           Row(
-            children: first.map((sub) {
-              return MovieSubjectSimple(
-                sub['title'],
-                sub['images']['small'],
-                double.parse(
-                  sub['rating']['average'].toString(),
-                ),
-                sub['id'],
-              );
+            children: firstRow.map((sub) {
+              return _buildSimple(sub);
             }).toList(),
             mainAxisAlignment: MainAxisAlignment.spaceAround,
           ),
           Row(
-            children: second.map((sub) {
-              return MovieSubjectSimple(
-                sub['title'],
-                sub['images']['small'],
-                double.parse(
-                  sub['rating']['average'].toString(),
-                ),
-                sub['id'],
-              );
+            children: secondRow.map((sub) {
+              return _buildSimple(sub);
             }).toList(),
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-          )
+          ),
         ],
       ),
+    );
+  }
+
+  MovieSubjectSimple _buildSimple(sub) {
+    return MovieSubjectSimple(
+      sub['title'],
+      sub['images']['small'],
+      double.parse(
+        sub['rating']['average'].toString(),
+      ),
+      sub['id'],
     );
   }
 }
