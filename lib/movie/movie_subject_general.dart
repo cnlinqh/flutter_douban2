@@ -44,7 +44,9 @@ class MovieSubjectGeneral extends StatelessWidget {
       },
       child: Stack(
         children: <Widget>[
-          MovieUtil.buildMovieCover(_subject['images']['small']),
+          MovieUtil.buildMovieCover(_subject['cover'] != null
+              ? _subject['cover']
+              : _subject['images']['small']),
           MovieUtil.buildFavoriteIcon(),
         ],
       ),
@@ -67,7 +69,9 @@ class MovieSubjectGeneral extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           _buildTitle(),
-          MovieUtil.buildRate(this._subject),
+          MovieUtil.buildRate(_subject['rate'] != null
+              ? _subject['rate'].toString()
+              : _subject['rating']['average'].toString()),
           _buildDetails(),
         ],
       ),
@@ -88,7 +92,7 @@ class MovieSubjectGeneral extends StatelessWidget {
             ),
           ),
           TextSpan(
-            text: " (${this._subject['year']})",
+            text: _subject['year'] == null ? "" : " (${this._subject['year']})",
             style: TextStyle(
               color: Colors.grey,
               fontWeight: FontWeight.bold,
@@ -100,15 +104,23 @@ class MovieSubjectGeneral extends StatelessWidget {
   }
 
   Widget _buildDetails() {
-    String details = MovieUtil.getYear(this._subject) +
-        " / " +
-        MovieUtil.getPubPlace(this._subject) +
-        " / " +
-        MovieUtil.getGenres(this._subject) +
-        " / " +
-        MovieUtil.getDirectors(this._subject) +
-        " / " +
-        MovieUtil.getCasts(this._subject);
+    String details;
+    if (_subject["year"] == null) {
+      details = _subject['directors'].join(", ") +
+          " ' " +
+          _subject['casts'].join(", ");
+    } else {
+      details = MovieUtil.getYear(this._subject) +
+          " / " +
+          MovieUtil.getPubPlace(this._subject) +
+          " / " +
+          MovieUtil.getGenres(this._subject) +
+          " / " +
+          MovieUtil.getDirectors(this._subject) +
+          " / " +
+          MovieUtil.getCasts(this._subject);
+    }
+
     return Text(details);
   }
 

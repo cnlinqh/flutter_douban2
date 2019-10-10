@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
+import 'package:flutter_douban2/movie/movie_subject_general.dart';
 
 class MovieCategorySearch extends StatefulWidget {
   final String style;
   final String country;
   final String year;
   final String special;
+  final String sortBy;
   MovieCategorySearch({
     Key key,
     this.style = "全部",
     this.country = "全部",
     this.year = "全部",
     this.special = "全部",
+    this.sortBy = "U",
   }) : super(key: key);
 
   _MovieCategorySearchState createState() => _MovieCategorySearchState();
@@ -25,9 +28,35 @@ class _MovieCategorySearchState extends State<MovieCategorySearch> {
   String _selectedYear;
   String _selectedSpecial;
 
-  int _start = 0;
-  String _sort = "U";
+  String _selectedSortBy = "U";
   String _range = "0,10";
+  // String _groupValue = "默认";
+
+  static const String _loading = "##loading##";
+  var _start = 0;
+  var _count = 20;
+  var _done = false;
+  var _dataList = <dynamic>[
+    {
+      "title": _loading,
+    }
+  ];
+
+  void _retrieveData() async {
+    if (_done) {
+      return;
+    }
+
+    var search = constructSearchString();
+    var list = await ClientAPI.getInstance().newSearchSubjects(search);
+
+    if (list.length < this._count) {
+      _done = true;
+    }
+    _dataList.insertAll(_dataList.length - 1, list.toList());
+    _start = _start + list.length;
+    setState(() {});
+  }
 
   @override
   void initState() {
@@ -35,7 +64,8 @@ class _MovieCategorySearchState extends State<MovieCategorySearch> {
     this._selectedStyle = widget.style;
     this._selectedCountry = widget.country;
     this._selectedYear = widget.year;
-    this._selectedSpecial = widget.style;
+    this._selectedSpecial = widget.special;
+    this._selectedSortBy = widget.sortBy;
   }
 
   @override
@@ -44,49 +74,87 @@ class _MovieCategorySearchState extends State<MovieCategorySearch> {
       appBar: AppBar(
         title: Text("分类找电影"),
       ),
-      body: SingleChildScrollView(
+      body: Container(
         child: Column(
           children: <Widget>[
-            SearchBar(this.sStyleList, this._selectedStyle, this.onStyleChange),
-            SearchBar(this.sCountriesList, this._selectedCountry,
-                this.onCountryChange),
-            SearchBar(this.sYearList, this._selectedYear, this.onYearChange),
-            SearchBar(
-                this.sSpecialList, this._selectedSpecial, this.onSpecialChange),
+            Container(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    SearchBar(this.sStyleList, this._selectedStyle,
+                        this.onStyleChange),
+                    SearchBar(this.sCountriesList, this._selectedCountry,
+                        this.onCountryChange),
+                    SearchBar(
+                        this.sYearList, this._selectedYear, this.onYearChange),
+                    SearchBar(this.sSpecialList, this._selectedSpecial,
+                        this.onSpecialChange),
+                    SortBar(onSortByChange, this._selectedSortBy),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              child: ListView.separated(
+                itemCount: _dataList.length,
+                itemBuilder: (context, index) {
+                  if (_dataList[index]['title'] == _loading) {
+                    _retrieveData();
+                    return Container();
+                  } else {
+                    return Container(
+                      child: MovieSubjectGeneral(_dataList[index]),
+                    );
+                  }
+                },
+                separatorBuilder: (context, index) => Divider(),
+              ),
+            )
           ],
         ),
       ),
     );
   }
 
+  void _refresh() {
+    _start = 0;
+    _done = false;
+    _dataList.removeRange(0, _dataList.length - 1);
+    setState(() {});
+  }
+
   void onStyleChange(style) {
-    this._selectedStyle = style;
-    search();
+    _refresh();
   }
 
   void onCountryChange(country) {
     this._selectedCountry = country;
-    search();
+    _refresh();
   }
 
   void onYearChange(year) {
     this._selectedYear = year;
-    search();
+    _refresh();
   }
 
   void onSpecialChange(special) {
     this._selectedSpecial = special;
-    search();
+    _refresh();
   }
 
-  void search() {
+  void onSortByChange(sort) {
+    this._selectedSortBy = sort;
+    _refresh();
+  }
+
+  String constructSearchString() {
     print("==================");
     print(this._selectedStyle);
     print(this._selectedCountry);
     print(this._selectedYear);
     print(this._selectedSpecial);
     var search =
-        "?start=${this._start}&sort=${this._sort}&range=${this._range}";
+        "?start=${this._start}&sort=${this._selectedSortBy}&range=${this._range}";
     if (this._selectedStyle != "全部") {
       search = search + "&genres=${this._selectedStyle}";
     }
@@ -117,13 +185,12 @@ class _MovieCategorySearchState extends State<MovieCategorySearch> {
     var tags =
         this._selectedSpecial == "全部" ? "电影" : "电影,${this._selectedSpecial}";
     search = search + "&tags=$tags";
-
     print(search);
-
-    fileSearch(search);
+    return search;
   }
 
-  void fileSearch(search) async {
+  void fileSearch() async {
+    var search = constructSearchString();
     var obj = await ClientAPI.getInstance().newSearchSubjects(search);
     print(obj);
   }
@@ -202,6 +269,89 @@ class _MovieCategorySearchState extends State<MovieCategorySearch> {
     "label": "特色",
     "list": ["全部", "经典", "青春", "文艺", "搞笑", "励志", "魔幻", "感人", "女性", "黑帮"],
   };
+}
+
+class SortBar extends StatefulWidget {
+  final Function onSelectionChange;
+  final String defaultSortBy;
+  SortBar(this.onSelectionChange, this.defaultSortBy);
+
+  _SortBarState createState() => _SortBarState();
+}
+
+class _SortBarState extends State<SortBar> {
+  String _sort;
+  @override
+  void initState() {
+    this._sort = widget.defaultSortBy;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: ScreenUtil.getInstance()
+          .setWidth(ScreenSize.width - 2 * ScreenSize.padding),
+      height: ScreenUtil.getInstance()
+          .setHeight(ScreenSize.movie_cate_search_bar_hight),
+      child: Row(
+        children: <Widget>[
+          Text(
+            "排序",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          Radio(
+            value: "U",
+            groupValue: this._sort,
+            onChanged: (v) {
+              this._sort = v;
+              widget.onSelectionChange(v);
+              setState(() {
+                this._sort = v;
+              });
+            },
+          ),
+          Text("默认"),
+          Radio(
+            value: "T",
+            groupValue: this._sort,
+            onChanged: (v) {
+              this._sort = v;
+              widget.onSelectionChange(v);
+              setState(() {
+                this._sort = v;
+              });
+            },
+          ),
+          Text("热度"),
+          Radio(
+            value: "S",
+            groupValue: this._sort,
+            onChanged: (v) {
+              this._sort = v;
+              widget.onSelectionChange(v);
+              setState(() {
+                this._sort = v;
+              });
+            },
+          ),
+          Text("评分"),
+          Radio(
+            value: "R",
+            groupValue: this._sort,
+            onChanged: (v) {
+              this._sort = v;
+              widget.onSelectionChange(v);
+              setState(() {
+                this._sort = v;
+              });
+            },
+          ),
+          Text("时间"),
+        ],
+      ),
+    );
+  }
 }
 
 class SearchBar extends StatefulWidget {

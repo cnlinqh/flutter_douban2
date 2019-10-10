@@ -88,8 +88,11 @@ class MovieUtil {
     return _subject["summary"].toString();
   }
 
-  static Widget buildRate(_subject) {
-    var rate = double.parse(_subject['rating']['average'].toString());
+  static Widget buildRate(String rating) {
+    if (rating == "") {
+      rating = "0";
+    }
+    var rate = double.parse(rating);
     return rate != 0
         ? RateStar(rate)
         : Text(
