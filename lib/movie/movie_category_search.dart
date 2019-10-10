@@ -3,6 +3,7 @@ import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_douban2/movie/movie_subject_general.dart';
+import 'package:flutter_range_slider/flutter_range_slider.dart' as frs;
 
 class MovieCategorySearch extends StatefulWidget {
   final String style;
@@ -10,6 +11,8 @@ class MovieCategorySearch extends StatefulWidget {
   final String year;
   final String special;
   final String sortBy;
+  final int rangeMin;
+  final int rangeMax;
   MovieCategorySearch({
     Key key,
     this.style = "全部",
@@ -17,6 +20,8 @@ class MovieCategorySearch extends StatefulWidget {
     this.year = "全部",
     this.special = "全部",
     this.sortBy = "U",
+    this.rangeMin = 0,
+    this.rangeMax = 10,
   }) : super(key: key);
 
   _MovieCategorySearchState createState() => _MovieCategorySearchState();
@@ -28,8 +33,9 @@ class _MovieCategorySearchState extends State<MovieCategorySearch> {
   String _selectedYear;
   String _selectedSpecial;
 
-  String _selectedSortBy = "U";
-  String _range = "0,10";
+  String _selectedSortBy;
+  int _selectedRangeMin;
+  int _selectedRangeMax;
   // String _groupValue = "默认";
 
   static const String _loading = "##loading##";
@@ -66,6 +72,8 @@ class _MovieCategorySearchState extends State<MovieCategorySearch> {
     this._selectedYear = widget.year;
     this._selectedSpecial = widget.special;
     this._selectedSortBy = widget.sortBy;
+    this._selectedRangeMin = widget.rangeMin;
+    this._selectedRangeMax = widget.rangeMax;
   }
 
   @override
@@ -90,6 +98,8 @@ class _MovieCategorySearchState extends State<MovieCategorySearch> {
                     SearchBar(this.sSpecialList, this._selectedSpecial,
                         this.onSpecialChange),
                     SortBar(onSortByChange, this._selectedSortBy),
+                    RangeBar(onRangeChange, this._selectedRangeMin,
+                        this._selectedRangeMax),
                   ],
                 ),
               ),
@@ -147,14 +157,15 @@ class _MovieCategorySearchState extends State<MovieCategorySearch> {
     _refresh();
   }
 
+  void onRangeChange(min, max) {
+    this._selectedRangeMin = min;
+    this._selectedRangeMax = max;
+    _refresh();
+  }
+
   String constructSearchString() {
-    print("==================");
-    print(this._selectedStyle);
-    print(this._selectedCountry);
-    print(this._selectedYear);
-    print(this._selectedSpecial);
     var search =
-        "?start=${this._start}&sort=${this._selectedSortBy}&range=${this._range}";
+        "?start=${this._start}&sort=${this._selectedSortBy}&range=${this._selectedRangeMin.toString()},${this._selectedRangeMax.toString()}";
     if (this._selectedStyle != "全部") {
       search = search + "&genres=${this._selectedStyle}";
     }
@@ -185,7 +196,6 @@ class _MovieCategorySearchState extends State<MovieCategorySearch> {
     var tags =
         this._selectedSpecial == "全部" ? "电影" : "电影,${this._selectedSpecial}";
     search = search + "&tags=$tags";
-    print(search);
     return search;
   }
 
@@ -196,7 +206,7 @@ class _MovieCategorySearchState extends State<MovieCategorySearch> {
   }
 
   var sStyleList = {
-    "label": " 类型",
+    "label": "类型",
     "list": [
       "全部",
       "剧情",
@@ -269,6 +279,65 @@ class _MovieCategorySearchState extends State<MovieCategorySearch> {
     "label": "特色",
     "list": ["全部", "经典", "青春", "文艺", "搞笑", "励志", "魔幻", "感人", "女性", "黑帮"],
   };
+}
+
+class RangeBar extends StatefulWidget {
+  final Function onSelectionChange;
+  final int defaultLowerValue;
+  final int defaultUpperValue;
+  RangeBar(
+      this.onSelectionChange, this.defaultLowerValue, this.defaultUpperValue);
+
+  _RangeBarState createState() => _RangeBarState();
+}
+
+class _RangeBarState extends State<RangeBar> {
+  double _lowerValue;
+  double _upperValue;
+  @override
+  void initState() {
+    super.initState();
+    this._lowerValue = widget.defaultLowerValue.toDouble();
+    this._upperValue = widget.defaultUpperValue.toDouble();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: ScreenUtil.getInstance()
+          .setWidth(ScreenSize.width - 2 * ScreenSize.padding),
+      height: ScreenUtil.getInstance()
+          .setHeight(ScreenSize.movie_cate_search_bar_hight),
+      child: Row(
+        children: <Widget>[
+          Text(
+            "评分",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          frs.RangeSlider(
+            min: 0,
+            max: 10,
+            lowerValue: _lowerValue,
+            upperValue: _upperValue,
+            divisions: 10,
+            showValueIndicator: true,
+            valueIndicatorMaxDecimals: 0,
+            onChanged: (double newLowerValue, double newUpperValue) {
+              setState(() {
+                _lowerValue = newLowerValue;
+                _upperValue = newUpperValue;
+              });
+            },
+            onChangeStart: (double startLowerValue, double startUpperValue) {},
+            onChangeEnd: (double newLowerValue, double newUpperValue) {
+              widget.onSelectionChange(
+                  newLowerValue.toInt(), newUpperValue.toInt());
+            },
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class SortBar extends StatefulWidget {
@@ -374,6 +443,8 @@ class _SearchBarState extends State<SearchBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: ScreenUtil.getInstance()
+          .setWidth(ScreenSize.width - 2 * ScreenSize.padding),
       height: ScreenUtil.getInstance()
           .setHeight(ScreenSize.movie_cate_search_bar_hight),
       child: Row(
