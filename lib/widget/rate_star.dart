@@ -4,7 +4,8 @@ class RateStar extends StatelessWidget {
   final double _size = 14;
   final double _rate;
   final bool withNumber;
-  RateStar(this._rate, {this.withNumber = true});
+  final MainAxisAlignment mainAxisAlignment;
+  RateStar(this._rate, {this.withNumber = true, this.mainAxisAlignment = MainAxisAlignment.start});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class RateStar extends StatelessWidget {
   Container _buildContainer() {
     return Container(
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: this.mainAxisAlignment,
         children: _buildStars(),
       ),
     );

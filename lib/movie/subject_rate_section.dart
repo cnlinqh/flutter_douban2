@@ -17,51 +17,61 @@ class SubjectRateSection extends StatelessWidget {
       ),
       child: Stack(
         children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.grey,
-              borderRadius: BorderRadius.all(Radius.circular(7)),
-            ),
-            child: Column(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    _buildPointPart(),
-                    _buildGraphPart(),
-                  ],
-                ),
-                _buildDividerPart(),
-                _buildSummaryPart(),
-              ],
+          _buildContentLayer(),
+          _buildOpacityLayer(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildContentLayer() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.grey,
+        borderRadius: BorderRadius.all(
+          Radius.circular(7),
+        ),
+      ),
+      child: Column(
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              _buildPointPart(),
+              _buildGraphPart(),
+            ],
+          ),
+          _buildDividerPart(),
+          _buildSummaryPart(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildOpacityLayer() {
+    return Positioned(
+      left: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
+      top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
+      child: Opacity(
+        opacity: 0.6,
+        child: Container(
+          width: ScreenUtil.getInstance().setWidth(ScreenSize.point_width +
+              ScreenSize.graph_width -
+              ScreenSize.padding * 4),
+          height: ScreenUtil.getInstance()
+              .setHeight(ScreenSize.rate_height - ScreenSize.padding * 2),
+          decoration: BoxDecoration(
+            color: Colors.white10,
+            borderRadius: BorderRadius.all(
+              Radius.circular(7),
             ),
           ),
-          Positioned(
-            left: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
-            top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
-            child: Opacity(
-              opacity: 0.6,
-              child: Container(
-                width: ScreenUtil.getInstance().setWidth(
-                    ScreenSize.point_width +
-                        ScreenSize.graph_width -
-                        ScreenSize.padding * 4),
-                height: ScreenUtil.getInstance()
-                    .setHeight(ScreenSize.rate_height - ScreenSize.padding * 2),
-                decoration: BoxDecoration(
-                  color: Colors.white10,
-                  borderRadius: BorderRadius.all(Radius.circular(7)),
-                ),
-              ),
-            ),
-          )
-        ],
+        ),
       ),
     );
   }
 
   Container _buildPointPart() {
     return Container(
-      // color: Colors.red,
       width: ScreenUtil.getInstance().setWidth(ScreenSize.point_width),
       height: ScreenUtil.getInstance().setHeight(ScreenSize.rate_height),
       child: Stack(
@@ -96,6 +106,7 @@ class SubjectRateSection extends StatelessWidget {
                 child: RateStar(
                   double.parse(this._subject['rating']['average'].toString()),
                   withNumber: false,
+                  mainAxisAlignment: MainAxisAlignment.center,
                 ),
               ),
             ),
@@ -107,20 +118,126 @@ class SubjectRateSection extends StatelessWidget {
 
   Container _buildGraphPart() {
     return Container(
-      // color: Colors.green,
       width: ScreenUtil.getInstance().setWidth(ScreenSize.graph_width),
       height: ScreenUtil.getInstance().setHeight(ScreenSize.rate_height),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          _buildLevelRow(5),
-          _buildLevelRow(4),
-          _buildLevelRow(3),
-          _buildLevelRow(2),
-          _buildLevelRow(1),
+          _buildRatingDetailsRow(5),
+          _buildRatingDetailsRow(4),
+          _buildRatingDetailsRow(3),
+          _buildRatingDetailsRow(2),
+          _buildRatingDetailsRow(1),
         ],
       ),
+    );
+  }
+
+  double _getRateTotal() {
+    var details = this._subject['rating']['details'];
+    double sum = 0;
+    var i;
+    for (i = 1; i <= 5; i++) {
+      sum = sum + double.parse(details[i.toString()].toString());
+    }
+    return sum == 0 ? 1 : sum;
+  }
+
+  Row _buildRatingDetailsRow(int level) {
+    var details = this._subject['rating']['details'];
+    double sum = _getRateTotal();
+    var percent =
+        double.parse(details[level.toString()].toString()) / sum * 100;
+    List<Widget> stars = [];
+    var i = 0;
+    for (i = 0; i < level; i++) {
+      stars.add(Icon(
+        Icons.star_border,
+        size: 14,
+      ));
+    }
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Container(
+          width: ScreenUtil.getInstance().setWidth(ScreenSize.star_width),
+          height: ScreenUtil.getInstance().setHeight(ScreenSize.star_height),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: stars,
+          ),
+        ),
+        Container(
+          width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+          height: ScreenUtil.getInstance().setHeight(ScreenSize.star_height),
+        ),
+        Container(
+            child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Stack(
+              children: <Widget>[
+                Container(
+                  width: ScreenUtil.getInstance().setWidth(
+                      ScreenSize.bar_width + ScreenSize.percent_width),
+                  height: ScreenUtil.getInstance()
+                      .setHeight(ScreenSize.star_height),
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.orange[50],
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(7),
+                          ),
+                        ),
+                        width: ScreenUtil.getInstance()
+                            .setWidth(ScreenSize.bar_width),
+                        height: ScreenUtil.getInstance()
+                            .setHeight(ScreenSize.bar_height),
+                      ),
+                      Expanded(
+                        child: Text(
+                          percent.toStringAsFixed(0) + "%",
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: Colors.white,
+                            
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Container(
+                  width:
+                      ScreenUtil.getInstance().setWidth(ScreenSize.bar_width),
+                  height: ScreenUtil.getInstance()
+                      .setHeight(ScreenSize.star_height),
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.orange,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(7),
+                          ),
+                        ),
+                        width: ScreenUtil.getInstance()
+                            .setWidth(ScreenSize.bar_width / 100 * percent),
+                        height: ScreenUtil.getInstance()
+                            .setHeight(ScreenSize.bar_height),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        )),
+      ],
     );
   }
 
@@ -152,82 +269,6 @@ class SubjectRateSection extends StatelessWidget {
           )
         ],
       ),
-    );
-  }
-
-  double _getRateTotal() {
-    var details = this._subject['rating']['details'];
-    double sum = 0;
-    var i;
-    for (i = 1; i <= 5; i++) {
-      sum = sum + double.parse(details[i.toString()].toString());
-    }
-    return sum == 0 ? 1 : sum;
-  }
-
-  Row _buildLevelRow(int level) {
-    var details = this._subject['rating']['details'];
-    double sum = _getRateTotal();
-    var percent =
-        double.parse(details[level.toString()].toString()) / sum * 100;
-    List<Widget> stars = [];
-    var i = 0;
-    for (i = 0; i < level; i++) {
-      stars.add(Icon(
-        Icons.star_border,
-        size: 14,
-      ));
-    }
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        Container(
-          width: ScreenUtil.getInstance().setWidth(ScreenSize.star_width),
-          height: ScreenUtil.getInstance().setHeight(ScreenSize.star_height),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: stars,
-          ),
-        ),
-        Container(
-          width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-          height: ScreenUtil.getInstance().setHeight(ScreenSize.star_height),
-        ),
-        Container(
-            width: ScreenUtil.getInstance().setWidth(ScreenSize.bar_width),
-            height: ScreenUtil.getInstance().setHeight(ScreenSize.star_height),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Stack(
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.orange,
-                            borderRadius: BorderRadius.all(Radius.circular(7)),
-                          ),
-                          width: ScreenUtil.getInstance()
-                              .setWidth(ScreenSize.bar_width / 100 * percent),
-                          height: ScreenUtil.getInstance()
-                              .setHeight(ScreenSize.bar_height),
-                        ),
-                        Text(
-                          percent.toStringAsFixed(0) + "%",
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: Colors.white,
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            )),
-      ],
     );
   }
 }
