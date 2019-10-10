@@ -135,7 +135,8 @@ class ClientAPI {
     Response<Map> res = await apiDio.get('/v2/movie/new_movies');
     Repository.setCachedList(key, res.data['subjects']);
     var e = new DateTime.now();
-    print("<<<<ClientAPI: getMovieNew() ##########################  ${e.difference(s).inMilliseconds}");
+    print(
+        "<<<<ClientAPI: getMovieNew() ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
 
@@ -253,5 +254,16 @@ class ClientAPI {
     print(
         "<<<<ClientAPI: getSubjectPhotos($id) ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['photos'];
+  }
+
+  Future newSearchSubjects(search) async {
+    print(">>ClientAPI: newSearchSubjects($search)");
+    var s = new DateTime.now();
+    String url = '/j/new_search_subjects?$search';
+    Response<Map> res = await webDio.get(url);
+    var e = new DateTime.now();
+    print(
+        "<<<<ClientAPI: newSearchSubjects($search) ##########################  ${e.difference(s).inMilliseconds}");
+    return res.data['data'];
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/movie/movie_category_search.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
+import 'package:flutter_douban2/util/navigator_helper.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -31,7 +33,9 @@ class MovieEntranceView extends StatelessWidget {
               ),
               LabelConstant.MOVIE_ENTRANCE_TOP_TITLE),
           _buildEntrance(
-              () {},
+              () {
+                NavigatorHelper.push(context, MovieCategorySearch());
+              },
               Icon(
                 Icons.category,
                 color: Colors.white,

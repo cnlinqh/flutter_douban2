@@ -20,6 +20,9 @@ class ScreenSize {
 
   //the width of movie description
   static const double movie_description_width = 400;
+
+
+  static const double movie_cate_search_bar_hight = 60;
   
 
   //the width of subject details
