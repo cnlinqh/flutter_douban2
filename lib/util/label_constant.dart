@@ -1,6 +1,12 @@
 class LabelConstant {
   static const String MOVIE_PAGE_TITLE = '豆瓣电影';
 
+  static const String MOVIE_ENTRANCE_SELECT_TITLE= "选电影";
+
+  static const String MOVIE_ENTRANCE_TOP_TITLE= "排行榜";
+  
+  static const String MOVIE_ENTRANCE_CATEGORY_TITLE= "电影分类";
+
   static const String MOVIE_IN_THEATERS_TITLE = '影院热映';
 
   static const String MOVIE_COMING_SOON_TITLE = '即将上映';

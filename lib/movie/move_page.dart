@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/movie/movie_entrance_view.dart';
 import 'package:flutter_douban2/movie/movie_section_view.dart';
 import 'package:flutter_douban2/movie/movie_slider_view.dart';
 import 'package:flutter_douban2/movie/movie_top_list.dart';
@@ -27,6 +28,7 @@ class _MoviePageState extends State<MoviePage> {
   _buildListViews() {
     views = [];
     views.add(new MovieSliderView());
+    views.add(new MovieEntranceView());
     views.add(new MovieSectionView(LabelConstant.MOVIE_IN_THEATERS_TITLE));
     views.add(new MovieSectionView(LabelConstant.MOVIE_COMING_SOON_TITLE));
     views.add(new MovieTopList(LabelConstant.MOVIE_TOP_LIST_TITLE));
