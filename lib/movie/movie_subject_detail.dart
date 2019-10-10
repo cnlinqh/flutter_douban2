@@ -4,6 +4,7 @@ import 'package:flutter_douban2/movie/subject_photos_section.dart';
 import 'package:flutter_douban2/movie/subject_rate_section.dart';
 import 'package:flutter_douban2/movie/subject_summary_section.dart';
 import 'package:flutter_douban2/movie/subject_directors_casts_section.dart';
+import 'package:flutter_douban2/movie/subject_tags_section.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
@@ -63,6 +64,7 @@ class _MovieSubjectDetailsState extends State<MovieSubjectDetails> {
               children: <Widget>[
                 SubjectGeneralSection(this._subject),
                 SubjectRateSection(this._subject),
+                SubjectTagsSection(this._subject),
                 SubjectSummarySection(this._subject),
                 SubjectDirectorsCastsSection(this._subject),
                 SubjectPhotosSection(this._subject),

@@ -51,6 +51,8 @@ class LabelConstant {
 
   static const String MOVIE_TOTAL_RATE = "总评分";
 
+  static const String MOVIE_TAGS_TITLE= "所属频道";
+
   static const String MOVIE_SUMMARY = "简介";
 
   static const String MOVIE_FOLD = "收起";
