@@ -1,11 +1,11 @@
 class LabelConstant {
   static const String MOVIE_PAGE_TITLE = '豆瓣电影';
 
-  static const String MOVIE_ENTRANCE_SELECT_TITLE= "选电影";
+  static const String MOVIE_ENTRANCE_SELECT_TITLE = "选电影";
 
-  static const String MOVIE_ENTRANCE_TOP_TITLE= "排行榜";
-  
-  static const String MOVIE_ENTRANCE_CATEGORY_TITLE= "电影分类";
+  static const String MOVIE_ENTRANCE_TOP_TITLE = "排行榜";
+
+  static const String MOVIE_ENTRANCE_CATEGORY_TITLE = "电影分类";
 
   static const String MOVIE_IN_THEATERS_TITLE = '影院热映';
 
@@ -51,11 +51,100 @@ class LabelConstant {
 
   static const String MOVIE_TOTAL_RATE = "总评分";
 
-  static const String MOVIE_TAGS_TITLE= "所属频道";
+  static const String MOVIE_TAGS_TITLE = "所属频道";
 
   static const String MOVIE_SUMMARY = "简介";
 
   static const String MOVIE_FOLD = "收起";
 
   static const String MOVIE_UNFOLD = "展开";
+
+  static const String MOVIE_CATEGORY_TITLE = "分类找电影";
+
+  static const String MOVIE_CATEGORY_ALL = "全部";
+
+  static var sStyleList = {
+    "label": "类型",
+    "list": [
+      "全部",
+      "剧情",
+      "喜剧",
+      "动作",
+      "爱情",
+      "科幻",
+      "动画",
+      "悬疑",
+      "惊悚",
+      "恐怖",
+      "犯罪",
+      "同性",
+      "音乐",
+      "歌舞",
+      "传记",
+      "历史",
+      "战争",
+      "西部",
+      "奇幻",
+      "冒险",
+      "灾难",
+      "武侠",
+      "情色"
+    ],
+  };
+
+  static var sCountriesList = {
+    "label": "地区",
+    "list": [
+      "全部",
+      "中国大陆",
+      "美国",
+      "中国香港",
+      "中国台湾",
+      "日本",
+      "韩国",
+      "英国",
+      "法国",
+      "德国",
+      "意大利",
+      "西班牙",
+      "印度",
+      "泰国",
+      "俄罗斯",
+      "伊朗",
+      "加拿大",
+      "澳大利亚",
+      "爱尔兰",
+      "瑞典",
+      "巴西",
+      "丹麦"
+    ],
+  };
+
+  static var sYearList = {
+    "label": "年代",
+    "list": [
+      "全部",
+      "2019",
+      "2018",
+      "2010年代",
+      "2000年代",
+      "90年代",
+      "80年代",
+      "70年代",
+      "60年代",
+      "更早"
+    ],
+  };
+  static var sSpecialList = {
+    "label": "特色",
+    "list": ["全部", "经典", "青春", "文艺", "搞笑", "励志", "魔幻", "感人", "女性", "黑帮"],
+  };
+
+    static const String MOVIE_CATEGORY_SORTBY = "排序";
+    static const String MOVIE_CATEGORY_SORTBY_DEFAULT = "默认";
+    static const String MOVIE_CATEGORY_SORTBY_HOT = "热度";
+    static const String MOVIE_CATEGORY_SORTBY_RATE = "评分";
+    static const String MOVIE_CATEGORY_SORTBY_TIME = "时间";
+
+    static const String MOVIE_CATEGORY_RANGE_RATE = "评分";
 }

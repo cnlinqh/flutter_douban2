@@ -1,0 +1,64 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_douban2/util/label_constant.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_douban2/util/screen_size.dart';
+import 'package:flutter_range_slider/flutter_range_slider.dart' as frs;
+
+class MovieCategoryRangeBar extends StatefulWidget {
+  final Function onSelectionChange;
+  final int defaultLowerValue;
+  final int defaultUpperValue;
+  MovieCategoryRangeBar(
+      this.onSelectionChange, this.defaultLowerValue, this.defaultUpperValue);
+
+  _MovieCategoryRangeBarState createState() => _MovieCategoryRangeBarState();
+}
+
+class _MovieCategoryRangeBarState extends State<MovieCategoryRangeBar> {
+  double _lowerValue;
+  double _upperValue;
+  @override
+  void initState() {
+    super.initState();
+    this._lowerValue = widget.defaultLowerValue.toDouble();
+    this._upperValue = widget.defaultUpperValue.toDouble();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: ScreenUtil.getInstance()
+          .setWidth(ScreenSize.width - 2 * ScreenSize.padding),
+      height: ScreenUtil.getInstance()
+          .setHeight(ScreenSize.movie_cate_search_bar_hight),
+      child: Row(
+        children: <Widget>[
+          Text(
+            LabelConstant.MOVIE_CATEGORY_RANGE_RATE,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          frs.RangeSlider(
+            min: 0,
+            max: 10,
+            lowerValue: _lowerValue,
+            upperValue: _upperValue,
+            divisions: 10,
+            showValueIndicator: true,
+            valueIndicatorMaxDecimals: 0,
+            onChanged: (double newLowerValue, double newUpperValue) {
+              setState(() {
+                _lowerValue = newLowerValue;
+                _upperValue = newUpperValue;
+              });
+            },
+            onChangeStart: (double startLowerValue, double startUpperValue) {},
+            onChangeEnd: (double newLowerValue, double newUpperValue) {
+              widget.onSelectionChange(
+                  newLowerValue.toInt(), newUpperValue.toInt());
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
