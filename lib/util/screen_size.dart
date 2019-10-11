@@ -22,9 +22,9 @@ class ScreenSize {
   static const double movie_description_width = 400;
 
 
-  static const double movie_cate_search_bar_hight = 60;
+  static const double movie_cate_search_bar_hight = 75;
   // static const double radio_width = 100;
-  static const double movie_cate_search_radio_height = 60;
+  static const double movie_cate_search_radio_height = 75;
 
   //the width of subject details
   static const double subject_description_width = 470;

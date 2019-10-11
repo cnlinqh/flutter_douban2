@@ -88,27 +88,36 @@ class _MovieCategoryRadioBarState extends State<MovieCategoryRadioBar>
           Positioned(
             top: 0,
             left: animation != null ? animation.value : 0,
-            child: Opacity(
-              opacity: 1,
-              child: Container(
-                margin: EdgeInsets.all(
-                  ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-                ),
-                padding: EdgeInsets.all(
-                    ScreenUtil.getInstance().setWidth(ScreenSize.padding / 2)),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(3)),
-                  color: Colors.cyan,
-                ),
-                child: Center(
-                  child: Text(
-                    widget.radios[this.index]["label"],
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
+            child: Container(
+              height: ScreenUtil.getInstance()
+                  .setHeight(ScreenSize.movie_cate_search_radio_height),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Center(
+                    child: Container(
+                      margin: EdgeInsets.all(
+                        ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+                      ),
+                      padding: EdgeInsets.all(ScreenUtil.getInstance()
+                          .setWidth(ScreenSize.padding / 2)),
+                      decoration: BoxDecoration(
+                        color: Colors.cyan,
+                        borderRadius: BorderRadius.all(Radius.circular(3)),
+                      ),
+                      child: Text(
+                        widget.radios[this.index]["label"],
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(3)),
               ),
             ),
-          )
+          ),
         ],
       ),
     );
