@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/movie/movie_category_condition_bars.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/movie/movie_subject_general.dart';
-import 'package:flutter_douban2/movie/movie_category_search_bar.dart';
-import 'package:flutter_douban2/movie/movie_category_sort_bar2.dart';
-import 'package:flutter_douban2/movie/movie_category_range_bar.dart';
 
 class MovieCategorySearch extends StatefulWidget {
   final String style;
@@ -33,7 +31,6 @@ class _MovieCategorySearchState extends State<MovieCategorySearch> {
   String _selectedCountry;
   String _selectedYear;
   String _selectedSpecial;
-
   String _selectedSortBy;
   int _selectedRangeMin;
   int _selectedRangeMax;
@@ -69,46 +66,20 @@ class _MovieCategorySearchState extends State<MovieCategorySearch> {
       body: Container(
         child: Column(
           children: <Widget>[
-            Container(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    MovieCategorySearchBar(
-                      LabelConstant.sStyleList,
-                      this._selectedStyle,
-                      this.onStyleChange,
-                    ),
-                    MovieCategorySearchBar(
-                      LabelConstant.sCountriesList,
-                      this._selectedCountry,
-                      this.onCountryChange,
-                    ),
-                    MovieCategorySearchBar(
-                      LabelConstant.sYearList,
-                      this._selectedYear,
-                      this.onYearChange,
-                    ),
-                    MovieCategorySearchBar(
-                      LabelConstant.sSpecialList,
-                      this._selectedSpecial,
-                      this.onSpecialChange,
-                    ),
-                    // MovieCategorySortBar(
-                    //   onSortByChange,
-                    //   this._selectedSortBy,
-                    // ),
-                    MovieCategorySortBar2(
-                      onSortByChange,
-                      this._selectedSortBy,
-                    ),
-                    MovieCategoryRangeBar(
-                      onRangeChange,
-                      this._selectedRangeMin,
-                      this._selectedRangeMax,
-                    ),
-                  ],
-                ),
-              ),
+            MovieCategoryConditionBars(
+              style: this._selectedStyle,
+              country: this._selectedCountry,
+              year: this._selectedYear,
+              special: this._selectedSpecial,
+              sortBy: this._selectedSortBy,
+              rangeMin: this._selectedRangeMin,
+              rangeMax: this._selectedRangeMax,
+              onStyleChange: this.onStyleChange,
+              onCountryChange: this.onStyleChange,
+              onYearChange: this.onYearChange,
+              onSpecialChange: this.onSpecialChange,
+              onSortByChange: this.onSortByChange,
+              onRangeChange: this.onRangeChange,
             ),
             Expanded(
               child: ListView.separated(

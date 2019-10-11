@@ -27,8 +27,8 @@ class _MovieCategoryRangeBarState extends State<MovieCategoryRangeBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: ScreenUtil.getInstance()
-          .setWidth(ScreenSize.width - 2 * ScreenSize.padding),
+      // width: ScreenUtil.getInstance()
+      //     .setWidth(ScreenSize.width - 2 * ScreenSize.padding),
       height: ScreenUtil.getInstance()
           .setHeight(ScreenSize.movie_cate_search_bar_hight),
       child: Row(
