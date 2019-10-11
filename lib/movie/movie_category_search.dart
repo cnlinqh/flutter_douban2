@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/movie/movie_category_condition_bars.dart';
+import 'package:flutter_douban2/movie/movie_category_filter_bar.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/movie/movie_subject_general.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_douban2/util/screen_size.dart';
 
 class MovieCategorySearch extends StatefulWidget {
   final String style;
@@ -14,7 +17,8 @@ class MovieCategorySearch extends StatefulWidget {
   final int rangeMax;
   MovieCategorySearch({
     Key key,
-    this.style = LabelConstant.MOVIE_CATEGORY_ALL,
+    // this.style = LabelConstant.MOVIE_CATEGORY_ALL,
+    this.style = "动作",
     this.country = LabelConstant.MOVIE_CATEGORY_ALL,
     this.year = LabelConstant.MOVIE_CATEGORY_ALL,
     this.special = LabelConstant.MOVIE_CATEGORY_ALL,
@@ -66,20 +70,34 @@ class _MovieCategorySearchState extends State<MovieCategorySearch> {
       body: Container(
         child: Column(
           children: <Widget>[
-            MovieCategoryConditionBars(
-              style: this._selectedStyle,
-              country: this._selectedCountry,
-              year: this._selectedYear,
-              special: this._selectedSpecial,
-              sortBy: this._selectedSortBy,
-              rangeMin: this._selectedRangeMin,
-              rangeMax: this._selectedRangeMax,
-              onStyleChange: this.onStyleChange,
-              onCountryChange: this.onStyleChange,
-              onYearChange: this.onYearChange,
-              onSpecialChange: this.onSpecialChange,
-              onSortByChange: this.onSortByChange,
-              onRangeChange: this.onRangeChange,
+            Stack(
+              children: <Widget>[
+                MovieCategoryConditionBars(
+                  style: this._selectedStyle,
+                  country: this._selectedCountry,
+                  year: this._selectedYear,
+                  special: this._selectedSpecial,
+                  sortBy: this._selectedSortBy,
+                  rangeMin: this._selectedRangeMin,
+                  rangeMax: this._selectedRangeMax,
+                  onStyleChange: this.onStyleChange,
+                  onCountryChange: this.onCountryChange,
+                  onYearChange: this.onYearChange,
+                  onSpecialChange: this.onSpecialChange,
+                  onSortByChange: this.onSortByChange,
+                  onRangeChange: this.onRangeChange,
+                ),
+                Positioned(
+                  bottom: ScreenUtil.getInstance()
+                      .setHeight(ScreenSize.movie_cate_search_bar_hight),
+                  right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+                  child: Center(
+                    child: MovieCategoryFilterBar(
+                        getSelectedInput: getSelectedInput,
+                        setSelectedOutput: setSelectedOutput),
+                  ),
+                )
+              ],
             ),
             Expanded(
               child: ListView.separated(
@@ -153,6 +171,33 @@ class _MovieCategorySearchState extends State<MovieCategorySearch> {
     this._selectedRangeMin = min;
     this._selectedRangeMax = max;
     _refresh();
+  }
+
+  dynamic getSelectedInput() {
+    return {
+      "style": this._selectedStyle,
+      "country": this._selectedCountry,
+      "year": this._selectedYear,
+      "special": this._selectedSpecial,
+      "sortBy": this._selectedSortBy,
+      "rangeMin": this._selectedRangeMin,
+      "rangeMax": this._selectedRangeMax
+    };
+    
+  }
+
+  void setSelectedOutput(output) {
+    this._selectedStyle = output['style'];
+    this._selectedCountry = output['country'];
+    this._selectedYear = output['year'];
+    this._selectedSpecial = output['special'];
+    this._selectedSortBy = output['sortBy'];
+    this._selectedRangeMin = output['rangeMin'];
+    this._selectedRangeMax = output['rangeMax'];
+     _refresh();
+     setState(() {
+       
+     });
   }
 
   String _buildRequestURL() {

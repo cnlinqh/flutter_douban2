@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
+import 'package:flutter_douban2/movie/movie_category_condition_bars.dart';
 
 class MovieCategoryFilterBar extends StatefulWidget {
-  MovieCategoryFilterBar({Key key}) : super(key: key);
+  final Function getSelectedInput;
+  final Function setSelectedOutput;
+  MovieCategoryFilterBar(
+      {Key key, this.getSelectedInput, this.setSelectedOutput})
+      : super(key: key);
 
   _MovieCategoryFilterBarState createState() => _MovieCategoryFilterBarState();
 }
@@ -25,6 +30,9 @@ class _MovieCategoryFilterBarState extends State<MovieCategoryFilterBar> {
                   child: IconButton(
                     icon: Icon(Icons.close),
                     onPressed: () {
+                      var input = widget.getSelectedInput();
+                      input['style'] = "动作";
+                      widget.setSelectedOutput(input);
                       Navigator.of(context).pop();
                     },
                   ),
@@ -52,17 +60,14 @@ class _MovieCategoryFilterBarState extends State<MovieCategoryFilterBar> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            GestureDetector(
-              onTap: () {
-                print("ClickMe");
-              },
-              child: Text(
-                "影片信息",
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+            MovieCategoryConditionBars(
+              style: widget.getSelectedInput()['style'],
+              country: widget.getSelectedInput()['country'],
+              year: widget.getSelectedInput()['year'],
+              special: widget.getSelectedInput()['special'],
+              sortBy: widget.getSelectedInput()['sortBy'],
+              rangeMin: widget.getSelectedInput()['rangeMin'],
+              rangeMax: widget.getSelectedInput()['rangeMax'],
             )
           ],
         ),

@@ -17,9 +17,16 @@ class _MovieCategorySortBar2State extends State<MovieCategorySortBar2> {
     {"id": "S", "label": LabelConstant.MOVIE_CATEGORY_SORTBY_RATE},
     {"id": "R", "label": LabelConstant.MOVIE_CATEGORY_SORTBY_TIME},
   ];
+  int defaultIndex = 0;
   @override
   void initState() {
     super.initState();
+    for (int i = 0; i < radios.length; i++) {
+      if (widget.defaultSortBy == radios[i]['id']) {
+        this.defaultIndex = i;
+        break;
+      }
+    }
   }
 
   @override
@@ -36,6 +43,7 @@ class _MovieCategorySortBar2State extends State<MovieCategorySortBar2> {
           ),
           MovieCategoryRadioBar(
             radios: radios,
+            defaultIndex: defaultIndex,
             onSelectionChange: widget.onSelectionChange,
           ),
         ],

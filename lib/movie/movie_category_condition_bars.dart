@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_douban2/movie/movie_category_filter_bar.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/movie/movie_category_search_bar.dart';
 import 'package:flutter_douban2/movie/movie_category_sort_bar2.dart';
 import 'package:flutter_douban2/movie/movie_category_range_bar.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_douban2/util/screen_size.dart';
 
 class MovieCategoryConditionBars extends StatefulWidget {
   final String style;
@@ -65,6 +62,49 @@ class _MovieCategoryConditionBarsState
     this._selectedRangeMax = widget.rangeMax;
   }
 
+  void onStyleChange(style) {
+    this._selectedStyle = style;
+    if (widget.onStyleChange != null) {
+      widget.onStyleChange(style);
+    }
+  }
+
+  void onCountryChange(country) {
+    this._selectedCountry = country;
+    if (widget.onCountryChange != null) {
+      widget.onCountryChange(country);
+    }
+  }
+
+  void onYearChange(year) {
+    this._selectedYear = year;
+    if (widget.onYearChange != null) {
+      widget.onYearChange(year);
+    }
+  }
+
+  void onSpecialChange(special) {
+    this._selectedSpecial = special;
+    if (widget.onSpecialChange != null) {
+      widget.onSpecialChange(special);
+    }
+  }
+
+  void onSortByChange(sort) {
+    this._selectedSortBy = sort;
+    if (widget.onSortByChange != null) {
+      widget.onSortByChange(sort);
+    }
+  }
+
+  void onRangeChange(min, max) {
+    this._selectedRangeMin = min;
+    this._selectedRangeMax = max;
+    if (widget.onRangeChange != null) {
+      widget.onRangeChange(min, max);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -77,48 +117,35 @@ class _MovieCategoryConditionBarsState
                   MovieCategorySearchBar(
                     LabelConstant.sStyleList,
                     this._selectedStyle,
-                    this.widget.onStyleChange,
+                    this.onStyleChange,
                   ),
                   MovieCategorySearchBar(
                     LabelConstant.sCountriesList,
                     this._selectedCountry,
-                    this.widget.onCountryChange,
+                    this.onCountryChange,
                   ),
                   MovieCategorySearchBar(
                     LabelConstant.sYearList,
                     this._selectedYear,
-                    this.widget.onYearChange,
+                    this.onYearChange,
                   ),
                   MovieCategorySearchBar(
                     LabelConstant.sSpecialList,
                     this._selectedSpecial,
-                    this.widget.onSpecialChange,
+                    this.onSpecialChange,
                   ),
                   // MovieCategorySortBar(
                   //   onSortByChange,
                   //   this._selectedSortBy,
                   // ),
                   MovieCategorySortBar2(
-                    this.widget.onSortByChange,
+                    this.onSortByChange,
                     this._selectedSortBy,
                   ),
-
-                  Row(
-                    children: <Widget>[
-                      Container(
-                        width: ScreenUtil.getInstance()
-                            .setWidth(ScreenSize.padding),
-                      ),
-                      MovieCategoryRangeBar(
-                        this.widget.onRangeChange,
-                        this._selectedRangeMin,
-                        this._selectedRangeMax,
-                      ),
-                      Expanded(
-                        child: Text(''),
-                      ),
-                      MovieCategoryFilterBar(),
-                    ],
+                  MovieCategoryRangeBar(
+                    this.onRangeChange,
+                    this._selectedRangeMin,
+                    this._selectedRangeMax,
                   )
                 ],
               ),
