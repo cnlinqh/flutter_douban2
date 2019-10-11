@@ -75,6 +75,7 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
             text,
             style: TextStyle(
               color: Colors.black,
+              fontWeight: this.selectedItem == text ? FontWeight.bold: FontWeight.normal,
             ),
           ),
         ),

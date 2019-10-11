@@ -7,7 +7,6 @@ class MovieCategorySortBar2 extends StatefulWidget {
   final Function onSelectionChange;
   final String defaultSortBy;
   MovieCategorySortBar2(this.onSelectionChange, this.defaultSortBy);
-
   _MovieCategorySortBar2State createState() => _MovieCategorySortBar2State();
 }
 
@@ -58,18 +57,17 @@ class _MovieCategoryRadioBarState extends State<MovieCategoryRadioBar>
     with TickerProviderStateMixin {
   Animation<double> animation;
   AnimationController controller;
-
   int index;
-  double left;
+  double left = 0;
+  List radioKeys = [];
 
   @override
   void initState() {
     super.initState();
+    widget.radios.forEach((radio) {
+      radioKeys.add(GlobalKey());
+    });
     this.index = widget.defaultIndex;
-    this.left = 0;
-    double newLeft =
-        this.index * ScreenUtil.getInstance().setWidth(ScreenSize.radio_width);
-    runAnimation(newLeft);
   }
 
   @override
@@ -78,10 +76,8 @@ class _MovieCategoryRadioBarState extends State<MovieCategoryRadioBar>
       child: Stack(
         children: <Widget>[
           Container(
-              width: ScreenUtil.getInstance()
-                  .setWidth(ScreenSize.radio_width * widget.radios.length),
-              height:
-                  ScreenUtil.getInstance().setHeight(ScreenSize.radio_height),
+              height: ScreenUtil.getInstance()
+                  .setHeight(ScreenSize.movie_cate_search_radio_height),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: _buildRadios(),
@@ -91,17 +87,15 @@ class _MovieCategoryRadioBarState extends State<MovieCategoryRadioBar>
               )),
           Positioned(
             top: 0,
-            left: animation.value,
+            left: animation != null ? animation.value : 0,
             child: Opacity(
               opacity: 1,
               child: Container(
-                width:
-                    ScreenUtil.getInstance().setWidth(ScreenSize.radio_width),
-                height: ScreenUtil.getInstance().setHeight(
-                    ScreenSize.radio_height - 2 * ScreenSize.padding),
                 margin: EdgeInsets.all(
-                    ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-                    ),
+                  ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+                ),
+                padding: EdgeInsets.all(
+                    ScreenUtil.getInstance().setWidth(ScreenSize.padding / 2)),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(3)),
                   color: Colors.cyan,
@@ -120,40 +114,69 @@ class _MovieCategoryRadioBarState extends State<MovieCategoryRadioBar>
     );
   }
 
+  void didChangeDependencies() {
+    WidgetsBinding.instance.addPostFrameCallback(_onAfterBuild);
+    super.didChangeDependencies();
+  }
+
   @override
   void dispose() {
     controller.dispose();
     super.dispose();
+  }
+  // @override
+  // void didUpdateWidget(Type oldWidget) {
+  //   WidgetsBinding.instance.addPostFrameCallback(onAfterBuild);
+  //   super.didUpdateWidget(oldWidget);
+  // }
+
+  void _onAfterBuild(Duration timeStamp) {
+    double newLeft = _getNewLeft(this.index);
+    this._runAnimation(newLeft);
   }
 
   List<Widget> _buildRadios() {
     List<Widget> list = [];
     var i = 0;
     for (i = 0; i < widget.radios.length; i++) {
-      list.add(Radio(i, widget.radios.length, widget.radios[i]["id"],
-          widget.radios[i]["label"], this.onSelection));
+      list.add(
+        MovieCategoryRadioButton(
+          index: i,
+          length: widget.radios.length,
+          id: widget.radios[i]["id"],
+          label: widget.radios[i]["label"],
+          onSelection: this.onSelection,
+          key: this.radioKeys[i],
+        ),
+      );
     }
     return list;
   }
 
   void onSelection(index) {
     this.index = index;
-    double newLeft =
-        index * ScreenUtil.getInstance().setWidth(ScreenSize.radio_width);
+    double newLeft = _getNewLeft(index);
     controller.dispose();
-    runAnimation(newLeft);
-
+    _runAnimation(newLeft);
     widget.onSelectionChange(widget.radios[this.index]['id']);
   }
 
-  void runAnimation(double newLeft) {
+  double _getNewLeft(index) {
+    double newLeft = 0;
+    for (int i = 0; i < index; i++) {
+      newLeft = newLeft +
+          this.radioKeys[i].currentContext.findRenderObject().size.width;
+    }
+    return newLeft;
+  }
+
+  void _runAnimation(double newLeft) {
     controller = new AnimationController(
         duration: const Duration(milliseconds: 500), vsync: this);
     animation = new Tween(begin: this.left, end: newLeft).animate(controller);
     animation.addListener(() {
-      setState(() {});
+      if (mounted) setState(() {});
     });
-
     animation.addStatusListener((state) {
       if (state == AnimationStatus.completed) {
         this.left = newLeft;
@@ -163,18 +186,21 @@ class _MovieCategoryRadioBarState extends State<MovieCategoryRadioBar>
   }
 }
 
-class Radio extends StatefulWidget {
+class MovieCategoryRadioButton extends StatefulWidget {
   final int index;
   final int length;
   final String id;
   final String label;
   final Function onSelection;
-  Radio(this.index, this.length, this.id, this.label, this.onSelection);
+  MovieCategoryRadioButton(
+      {Key key, this.index, this.length, this.id, this.label, this.onSelection})
+      : super(key: key);
 
-  _RadioState createState() => _RadioState();
+  _MovieCategoryRadioButtonState createState() =>
+      _MovieCategoryRadioButtonState();
 }
 
-class _RadioState extends State<Radio> {
+class _MovieCategoryRadioButtonState extends State<MovieCategoryRadioButton> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -182,8 +208,13 @@ class _RadioState extends State<Radio> {
         widget.onSelection(widget.index);
       },
       child: Container(
-        width: ScreenUtil.getInstance().setWidth(ScreenSize.radio_width),
-        height: ScreenUtil.getInstance().setHeight(ScreenSize.radio_height),
+        margin: EdgeInsets.all(
+          ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+        ),
+        padding: EdgeInsets.all(
+            ScreenUtil.getInstance().setWidth(ScreenSize.padding / 2)),
+        height: ScreenUtil.getInstance()
+            .setHeight(ScreenSize.movie_cate_search_radio_height),
         child: Center(
           child: Text(widget.label),
         ),
