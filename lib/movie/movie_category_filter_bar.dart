@@ -30,16 +30,21 @@ class _MovieCategoryFilterBarState extends State<MovieCategoryFilterBar> {
                   child: IconButton(
                     icon: Icon(Icons.close),
                     onPressed: () {
-                      var input = widget.getSelectedInput();
-                      input['style'] = "动作";
-                      widget.setSelectedOutput(input);
+                      print("Navigator.of(context).pop(input)----------------");
                       Navigator.of(context).pop();
                     },
                   ),
                 )
               ],
             ),
-          );
+          ).closed.whenComplete((){
+            print("whenComplete----------------");
+            // var input = widget.getSelectedInput();
+            // input['style']='动作';
+            // input['year']='2018';
+            // widget.setSelectedOutput(input);
+            //TODO, update search page state, and refresh data
+          });
         },
         child: Text("筛选..."),
       ),
