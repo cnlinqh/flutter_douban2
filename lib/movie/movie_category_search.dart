@@ -17,8 +17,7 @@ class MovieCategorySearch extends StatefulWidget {
   final int rangeMax;
   MovieCategorySearch({
     Key key,
-    // this.style = LabelConstant.MOVIE_CATEGORY_ALL,
-    this.style = "动作",
+    this.style = LabelConstant.MOVIE_CATEGORY_ALL,
     this.country = LabelConstant.MOVIE_CATEGORY_ALL,
     this.year = LabelConstant.MOVIE_CATEGORY_ALL,
     this.special = LabelConstant.MOVIE_CATEGORY_ALL,
@@ -183,7 +182,6 @@ class _MovieCategorySearchState extends State<MovieCategorySearch> {
       "rangeMin": this._selectedRangeMin,
       "rangeMax": this._selectedRangeMax
     };
-    
   }
 
   void setSelectedOutput(output) {
@@ -194,10 +192,7 @@ class _MovieCategorySearchState extends State<MovieCategorySearch> {
     this._selectedSortBy = output['sortBy'];
     this._selectedRangeMin = output['rangeMin'];
     this._selectedRangeMax = output['rangeMax'];
-     _refresh();
-     setState(() {
-       
-     });
+    _refresh();
   }
 
   String _buildRequestURL() {

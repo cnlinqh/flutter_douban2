@@ -2,22 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 
-class MovieCategorySearchBar extends StatefulWidget {
+class MovieCategorySearchBar extends StatelessWidget {
   final list;
-  final String defaultSelected;
+  final String selected;
   final Function onSelectionChange;
-  MovieCategorySearchBar(this.list, this.defaultSelected, this.onSelectionChange);
-
-  _MovieCategorySearchBarState createState() => _MovieCategorySearchBarState();
-}
-
-class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
-  String selectedItem;
-  @override
-  void initState() {
-    super.initState();
-    this.selectedItem = widget.defaultSelected;
-  }
+  MovieCategorySearchBar(this.list, this.selected, this.onSelectionChange);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +20,7 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
         children: <Widget>[
           Container(
             child: Text(
-              widget.list['label'],
+              this.list['label'],
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
@@ -39,9 +28,9 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: widget.list['list'].length,
+              itemCount: this.list['list'].length,
               itemBuilder: (context, index) {
-                return this._buildItem(widget.list['list'][index]);
+                return this._buildItem(this.list['list'][index]);
               },
               scrollDirection: Axis.horizontal,
             ),
@@ -54,10 +43,8 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
   Widget _buildItem(String text) {
     return GestureDetector(
       onTap: () {
-        setState(() {
-          this.selectedItem = text;
-        });
-        widget.onSelectionChange(text);
+        print(text);
+        this.onSelectionChange(text);
       },
       child: Center(
         child: Container(
@@ -68,14 +55,14 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
               ScreenUtil.getInstance().setWidth(ScreenSize.padding / 2)),
           decoration: BoxDecoration(
             color:
-                this.selectedItem == text ? Colors.cyan : Colors.white60,
+                this.selected == text ? Colors.cyan : Colors.white60,
             borderRadius: BorderRadius.all(Radius.circular(3)),
           ),
           child: Text(
             text,
             style: TextStyle(
               color: Colors.black,
-              fontWeight: this.selectedItem == text ? FontWeight.bold: FontWeight.normal,
+              fontWeight: this.selected == text ? FontWeight.bold: FontWeight.normal,
             ),
           ),
         ),

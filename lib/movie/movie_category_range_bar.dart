@@ -4,31 +4,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_range_slider/flutter_range_slider.dart' as frs;
 
-class MovieCategoryRangeBar extends StatefulWidget {
+class MovieCategoryRangeBar extends StatelessWidget {
   final Function onSelectionChange;
   final int defaultLowerValue;
   final int defaultUpperValue;
   MovieCategoryRangeBar(
       this.onSelectionChange, this.defaultLowerValue, this.defaultUpperValue);
 
-  _MovieCategoryRangeBarState createState() => _MovieCategoryRangeBarState();
-}
-
-class _MovieCategoryRangeBarState extends State<MovieCategoryRangeBar> {
-  double _lowerValue;
-  double _upperValue;
-  @override
-  void initState() {
-    super.initState();
-    this._lowerValue = widget.defaultLowerValue.toDouble();
-    this._upperValue = widget.defaultUpperValue.toDouble();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      // width: ScreenUtil.getInstance()
-      //     .setWidth(ScreenSize.width - 2 * ScreenSize.padding),
+      width: ScreenUtil.getInstance()
+          .setWidth(ScreenSize.width - 2 * ScreenSize.padding),
       height: ScreenUtil.getInstance()
           .setHeight(ScreenSize.movie_cate_search_bar_hight),
       child: Row(
@@ -40,20 +27,15 @@ class _MovieCategoryRangeBarState extends State<MovieCategoryRangeBar> {
           frs.RangeSlider(
             min: 0,
             max: 10,
-            lowerValue: _lowerValue,
-            upperValue: _upperValue,
+            lowerValue: this.defaultLowerValue.toDouble(),
+            upperValue: this.defaultUpperValue.toDouble(),
             divisions: 10,
             showValueIndicator: true,
             valueIndicatorMaxDecimals: 0,
-            onChanged: (double newLowerValue, double newUpperValue) {
-              setState(() {
-                _lowerValue = newLowerValue;
-                _upperValue = newUpperValue;
-              });
-            },
+            onChanged: (double newLowerValue, double newUpperValue) {},
             onChangeStart: (double startLowerValue, double startUpperValue) {},
             onChangeEnd: (double newLowerValue, double newUpperValue) {
-              widget.onSelectionChange(
+              this.onSelectionChange(
                   newLowerValue.toInt(), newUpperValue.toInt());
             },
           ),
