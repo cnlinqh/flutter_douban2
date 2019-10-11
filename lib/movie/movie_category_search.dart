@@ -3,7 +3,7 @@ import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/movie/movie_subject_general.dart';
 import 'package:flutter_douban2/movie/movie_category_search_bar.dart';
-import 'package:flutter_douban2/movie/movie_category_sort_bar.dart';
+import 'package:flutter_douban2/movie/movie_category_sort_bar2.dart';
 import 'package:flutter_douban2/movie/movie_category_range_bar.dart';
 
 class MovieCategorySearch extends StatefulWidget {
@@ -93,7 +93,11 @@ class _MovieCategorySearchState extends State<MovieCategorySearch> {
                       this._selectedSpecial,
                       this.onSpecialChange,
                     ),
-                    MovieCategorySortBar(
+                    // MovieCategorySortBar(
+                    //   onSortByChange,
+                    //   this._selectedSortBy,
+                    // ),
+                    MovieCategorySortBar2(
                       onSortByChange,
                       this._selectedSortBy,
                     ),

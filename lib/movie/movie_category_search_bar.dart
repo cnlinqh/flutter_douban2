@@ -61,17 +61,14 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
       },
       child: Center(
         child: Container(
-          margin: EdgeInsets.fromLTRB(
+          margin: EdgeInsets.all(
             ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-            ScreenUtil.getInstance().setWidth(ScreenSize.padding / 2),
-            ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-            ScreenUtil.getInstance().setWidth(ScreenSize.padding / 2),
           ),
           padding: EdgeInsets.all(
               ScreenUtil.getInstance().setWidth(ScreenSize.padding / 2)),
           decoration: BoxDecoration(
             color:
-                this.selectedItem == text ? Colors.cyan : Colors.white10,
+                this.selectedItem == text ? Colors.cyan : Colors.white60,
             borderRadius: BorderRadius.all(Radius.circular(3)),
           ),
           child: Text(
