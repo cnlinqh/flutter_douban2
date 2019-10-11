@@ -107,7 +107,7 @@ class MovieSubjectGeneral extends StatelessWidget {
     String details;
     if (_subject["year"] == null) {
       details = _subject['directors'].join(", ") +
-          " ' " +
+          " / " +
           _subject['casts'].join(", ");
     } else {
       details = MovieUtil.getYear(this._subject) +

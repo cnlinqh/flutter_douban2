@@ -71,7 +71,7 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
               ScreenUtil.getInstance().setWidth(ScreenSize.padding / 2)),
           decoration: BoxDecoration(
             color:
-                this.selectedItem == text ? Colors.greenAccent : Colors.white10,
+                this.selectedItem == text ? Colors.cyan : Colors.white10,
             borderRadius: BorderRadius.all(Radius.circular(3)),
           ),
           child: Text(

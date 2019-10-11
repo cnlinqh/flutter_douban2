@@ -150,6 +150,7 @@ class _MovieCategorySearchState extends State<MovieCategorySearch> {
   }
 
   void onStyleChange(style) {
+    this._selectedStyle = style;
     _refresh();
   }
 
