@@ -32,10 +32,10 @@ class MovieEntranceView extends StatelessWidget {
                 color: Colors.white,
               ),
               LabelConstant.MOVIE_ENTRANCE_TOP_TITLE),
-          _buildEntrance(
-              () {
-                NavigatorHelper.push(context, MovieCategorySearch());
-              },
+          _buildEntrance(() {
+            LabelConstant.resetSpecialList();
+            NavigatorHelper.push(context, MovieCategorySearch());
+          },
               Icon(
                 Icons.category,
                 color: Colors.white,

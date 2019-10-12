@@ -58,7 +58,6 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
   }
 
   void didChangeDependencies() {
-    print('----------------------didChangeDependencies');
     WidgetsBinding.instance.addPostFrameCallback(_onAfterBuild);
     super.didChangeDependencies();
   }
@@ -68,8 +67,6 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
   }
 
   void _autoScrollToSelected() {
-    print('---------------------_autoScrollToSelected');
-    print(this.widget.selected);
     double to = 0;
     for (int i = 0; i < localList['list'].length; i++) {
       if (this.widget.selected != localList['list'][i]) {

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
-
+import 'package:flutter_douban2/movie/movie_category_search.dart';
+import 'package:flutter_douban2/util/navigator_helper.dart';
 class SubjectTagsSection extends StatelessWidget {
   final _subject;
   const SubjectTagsSection(this._subject);
@@ -17,13 +18,13 @@ class SubjectTagsSection extends StatelessWidget {
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
-          children: _buildTags(),
+          children: _buildTags(context),
         ),
       ),
     );
   }
 
-  List<Widget> _buildTags() {
+  List<Widget> _buildTags(context) {
     List<Widget> list = [];
     list.add(Text(
       LabelConstant.MOVIE_TAGS_TITLE,
@@ -37,6 +38,8 @@ class SubjectTagsSection extends StatelessWidget {
       list.add(GestureDetector(
         onTap: () {
           print("onTap " + t);
+          LabelConstant.addOneSpecial(t);
+          NavigatorHelper.push(context, MovieCategorySearch(special:t));
         },
         child: Container(
           padding: EdgeInsets.all(

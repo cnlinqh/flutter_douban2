@@ -137,16 +137,53 @@ class LabelConstant {
   };
   static var sSpecialList = {
     "label": "特色",
-    "list": ["全部", "经典", "青春", "文艺", "搞笑", "励志", "魔幻", "感人", "女性", "黑帮", MOVIE_SPECIAL_SELF_DEFINE],
-  };  
+    "list": [
+      "全部",
+      "经典",
+      "青春",
+      "文艺",
+      "搞笑",
+      "励志",
+      "魔幻",
+      "感人",
+      "女性",
+      "黑帮",
+      MOVIE_SPECIAL_SELF_DEFINE
+    ],
+  };
 
-    static const String MOVIE_SPECIAL_SELF_DEFINE = "+自定义标签";
+  static void resetSpecialList() {
+    sSpecialList = {
+      "label": "特色",
+      "list": [
+        "全部",
+        "经典",
+        "青春",
+        "文艺",
+        "搞笑",
+        "励志",
+        "魔幻",
+        "感人",
+        "女性",
+        "黑帮",
+        MOVIE_SPECIAL_SELF_DEFINE
+      ],
+    };
+  }
 
-    static const String MOVIE_CATEGORY_SORTBY = "排序";
-    static const String MOVIE_CATEGORY_SORTBY_DEFAULT = "默认";
-    static const String MOVIE_CATEGORY_SORTBY_HOT = "热度";
-    static const String MOVIE_CATEGORY_SORTBY_RATE = "评分";
-    static const String MOVIE_CATEGORY_SORTBY_TIME = "时间";
+  static void addOneSpecial(special) {
+    resetSpecialList();
+    List list = sSpecialList['list'];
+    list.insert(list.length - 1, special);
+  }
 
-    static const String MOVIE_CATEGORY_RANGE_RATE = "评分";
+  static const String MOVIE_SPECIAL_SELF_DEFINE = "+自定义标签";
+
+  static const String MOVIE_CATEGORY_SORTBY = "排序";
+  static const String MOVIE_CATEGORY_SORTBY_DEFAULT = "默认";
+  static const String MOVIE_CATEGORY_SORTBY_HOT = "热度";
+  static const String MOVIE_CATEGORY_SORTBY_RATE = "评分";
+  static const String MOVIE_CATEGORY_SORTBY_TIME = "时间";
+
+  static const String MOVIE_CATEGORY_RANGE_RATE = "评分";
 }
