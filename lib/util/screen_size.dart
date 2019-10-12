@@ -21,7 +21,6 @@ class ScreenSize {
   //the width of movie description
   static const double movie_description_width = 400;
 
-
   static const double movie_cate_search_bar_hight = 75;
   // static const double radio_width = 100;
   static const double movie_cate_search_radio_height = 75;
@@ -59,4 +58,7 @@ class ScreenSize {
   static const double video_width = 750;
   static const double video_height = 450;
 
+  //the width & height of self define dialog
+  static const double self_define_dlg_width = 400;
+  static const double self_define_dlg_height = 200;
 }

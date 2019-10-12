@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
+import 'dart:ui' as ui;
 
 class MovieCategorySearchBar extends StatefulWidget {
   final list;
@@ -12,6 +14,7 @@ class MovieCategorySearchBar extends StatefulWidget {
 }
 
 class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
+  var localList;
   ScrollController _controller = new ScrollController();
   List itemKeys = [];
   @override
@@ -20,6 +23,7 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
     widget.list['list'].forEach((r) {
       itemKeys.add(GlobalKey());
     });
+    localList = widget.list;
   }
 
   @override
@@ -34,7 +38,7 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
         children: <Widget>[
           Container(
             child: Text(
-              this.widget.list['label'],
+              localList['label'],
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
@@ -67,8 +71,8 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
     print('---------------------_autoScrollToSelected');
     print(this.widget.selected);
     double to = 0;
-    for (int i = 0; i < this.widget.list['list'].length; i++) {
-      if (this.widget.selected != this.widget.list['list'][i]) {
+    for (int i = 0; i < localList['list'].length; i++) {
+      if (this.widget.selected != localList['list'][i]) {
         if (this.itemKeys[i].currentContext != null) {
           to = to +
               this.itemKeys[i].currentContext.findRenderObject().size.width;
@@ -91,8 +95,11 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
 
   List<Widget> _buildChildren() {
     List<Widget> children = [];
-    var list = this.widget.list['list'];
+    var list = localList['list'];
     for (int i = 0; i < list.length; i++) {
+      if (i >= itemKeys.length) {
+        itemKeys.add(GlobalKey());
+      }
       children.add(this._buildItem(list[i], itemKeys[i]));
     }
     return children;
@@ -103,7 +110,19 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
       key: key,
       onTap: () {
         print(text);
-        this.widget.onSelectionChange(text);
+        if (text != LabelConstant.MOVIE_SPECIAL_SELF_DEFINE) {
+          this.widget.onSelectionChange(text);
+        } else {
+          showHasInputDialog().then((newSpecial) {
+            setState(() {
+              this
+                  .localList['list']
+                  .insert(this.localList['list'].length - 1, newSpecial);
+              this.itemKeys.insert(this.itemKeys.length - 1, GlobalKey());
+              this.widget.onSelectionChange(newSpecial);
+            });
+          });
+        }
       },
       child: Center(
         child: Container(
@@ -119,7 +138,9 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
           child: Text(
             text,
             style: TextStyle(
-              color: Colors.black,
+              color: text == LabelConstant.MOVIE_SPECIAL_SELF_DEFINE
+                  ? Colors.green
+                  : Colors.black,
               fontWeight: this.widget.selected == text
                   ? FontWeight.bold
                   : FontWeight.normal,
@@ -127,6 +148,87 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<String> showHasInputDialog() async {
+    var widget = InputDialog();
+    var result = await showDialog(context: context, builder: (_) => widget);
+
+    print("result = $result");
+
+    return result;
+  }
+}
+
+class InputDialog extends StatefulWidget {
+  @override
+  _InputDialogState createState() => _InputDialogState();
+}
+
+class _InputDialogState extends State<InputDialog> with WidgetsBindingObserver {
+  TextEditingController _textEditingController = new TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeMetrics() {
+    super.didChangeMetrics();
+    if (this.mounted) setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var mediaQueryData = MediaQueryData.fromWindow(ui.window);
+    return AnimatedContainer(
+      color: Colors.transparent,
+      duration: const Duration(milliseconds: 300),
+      padding: EdgeInsets.only(bottom: mediaQueryData.viewInsets.bottom),
+      child: Material(
+          child: Container(
+        width:
+            ScreenUtil.getInstance().setWidth(ScreenSize.self_define_dlg_width),
+        height: ScreenUtil.getInstance()
+            .setHeight(ScreenSize.self_define_dlg_height),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextField(
+                controller: _textEditingController,
+                textAlign: TextAlign.center,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.of(context).pop(_textEditingController.text);
+                    },
+                    child: Text("OK"),
+                  ),
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text("Cancel"),
+                  )
+                ],
+              )
+            ],
+          ),
+        ),
+      )),
+      alignment: Alignment.center,
     );
   }
 }

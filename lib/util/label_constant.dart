@@ -137,8 +137,10 @@ class LabelConstant {
   };
   static var sSpecialList = {
     "label": "特色",
-    "list": ["全部", "经典", "青春", "文艺", "搞笑", "励志", "魔幻", "感人", "女性", "黑帮"],
-  };
+    "list": ["全部", "经典", "青春", "文艺", "搞笑", "励志", "魔幻", "感人", "女性", "黑帮", MOVIE_SPECIAL_SELF_DEFINE],
+  };  
+
+    static const String MOVIE_SPECIAL_SELF_DEFINE = "+自定义标签";
 
     static const String MOVIE_CATEGORY_SORTBY = "排序";
     static const String MOVIE_CATEGORY_SORTBY_DEFAULT = "默认";
