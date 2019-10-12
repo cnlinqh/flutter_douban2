@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
-class SubjectPhotosGallery extends StatefulWidget {
+class SubjectSectionMediaPhotosGallery extends StatefulWidget {
   final List _photos;
   final int _index;
-  SubjectPhotosGallery(this._photos, this._index);
+  SubjectSectionMediaPhotosGallery(this._photos, this._index);
 
-  _SubjectPhotosGalleryState createState() => _SubjectPhotosGalleryState();
+  _SubjectSectionMediaPhotosGalleryState createState() => _SubjectSectionMediaPhotosGalleryState();
 }
 
-class _SubjectPhotosGalleryState extends State<SubjectPhotosGallery> {
+class _SubjectSectionMediaPhotosGalleryState extends State<SubjectSectionMediaPhotosGallery> {
   int _initialIndex;
   int _length;
   int _title;

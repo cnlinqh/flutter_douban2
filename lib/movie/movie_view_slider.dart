@@ -4,13 +4,13 @@ import 'package:flutter/animation.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 
-class MovieSliderView extends StatefulWidget {
-  MovieSliderView();
+class MovieViewSlider extends StatefulWidget {
+  MovieViewSlider();
 
-  _MovieSliderViewState createState() => _MovieSliderViewState();
+  _MovieViewSliderState createState() => _MovieViewSliderState();
 }
 
-class _MovieSliderViewState extends State<MovieSliderView> {
+class _MovieViewSliderState extends State<MovieViewSlider> {
   List _list = [];
 
   @override

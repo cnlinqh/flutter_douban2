@@ -5,9 +5,9 @@ import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 
-class SubjectDirectorsCastsSection extends StatelessWidget {
+class SubjectSectionDirectorsCasts extends StatelessWidget {
   final _subject;
-  SubjectDirectorsCastsSection(this._subject, {Key key}) : super(key: key);
+  SubjectSectionDirectorsCasts(this._subject, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

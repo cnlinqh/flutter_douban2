@@ -6,13 +6,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 
-class MovieTopCover extends StatefulWidget {
+class MovieViewTopListCover extends StatefulWidget {
   final String title;
-  MovieTopCover({Key key, this.title}) : super(key: key);
-  _MovieTopCoverState createState() => _MovieTopCoverState();
+  MovieViewTopListCover({Key key, this.title}) : super(key: key);
+  _MovieViewTopListCoverState createState() => _MovieViewTopListCoverState();
 }
 
-class _MovieTopCoverState extends State<MovieTopCover> {
+class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
   List _movieTop;
   String _subTitle;
   Color _color;

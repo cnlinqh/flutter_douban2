@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/movie/movie_subject_general.dart';
 
-class MovieListStatic extends StatelessWidget {
+class MovieListStaticPage extends StatelessWidget {
   final String _title;
   final List _subjects;
-  MovieListStatic(this._title, this._subjects);
+  MovieListStaticPage(this._title, this._subjects);
 
   @override
   Widget build(BuildContext context) {

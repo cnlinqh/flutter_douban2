@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/movie/movie_subject_simple.dart';
 
-class MovieSectionBody extends StatelessWidget {
+class MovieViewSectionBody extends StatelessWidget {
   final List firstRow;
   final List secondRow;
-  MovieSectionBody(this.firstRow, this.secondRow);
+  MovieViewSectionBody(this.firstRow, this.secondRow);
   @override
   Widget build(BuildContext context) {
     return Container(

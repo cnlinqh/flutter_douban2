@@ -4,14 +4,14 @@ import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SubjectSummarySection extends StatefulWidget {
+class SubjectSectionSummary extends StatefulWidget {
   final _subject;
-  SubjectSummarySection(this._subject);
+  SubjectSectionSummary(this._subject);
 
-  _SubjectSummarySectionState createState() => _SubjectSummarySectionState();
+  _SubjectSectionSummaryState createState() => _SubjectSectionSummaryState();
 }
 
-class _SubjectSummarySectionState extends State<SubjectSummarySection> {
+class _SubjectSectionSummaryState extends State<SubjectSectionSummary> {
   var _isFolded = true;
 
   @override

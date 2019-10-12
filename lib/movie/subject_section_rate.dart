@@ -4,9 +4,9 @@ import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_douban2/widget/rate_star.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SubjectRateSection extends StatelessWidget {
+class SubjectSectionRate extends StatelessWidget {
   final _subject;
-  SubjectRateSection(this._subject);
+  SubjectSectionRate(this._subject);
 
   @override
   Widget build(BuildContext context) {

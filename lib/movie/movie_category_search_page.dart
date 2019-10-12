@@ -7,7 +7,7 @@ import 'package:flutter_douban2/movie/movie_subject_general.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 
-class MovieCategorySearch extends StatefulWidget {
+class MovieCategorySearchPage extends StatefulWidget {
   final String style;
   final String country;
   final String year;
@@ -15,7 +15,7 @@ class MovieCategorySearch extends StatefulWidget {
   final String sortBy;
   final int rangeMin;
   final int rangeMax;
-  MovieCategorySearch({
+  MovieCategorySearchPage({
     Key key,
     this.style = LabelConstant.MOVIE_CATEGORY_ALL,
     this.country = LabelConstant.MOVIE_CATEGORY_ALL,
@@ -26,10 +26,10 @@ class MovieCategorySearch extends StatefulWidget {
     this.rangeMax = 10,
   }) : super(key: key);
 
-  _MovieCategorySearchState createState() => _MovieCategorySearchState();
+  _MovieCategorySearchPageState createState() => _MovieCategorySearchPageState();
 }
 
-class _MovieCategorySearchState extends State<MovieCategorySearch> {
+class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
   String _selectedStyle;
   String _selectedCountry;
   String _selectedYear;

@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_douban2/movie/movie_section_body.dart';
-import 'package:flutter_douban2/movie/movie_section_header.dart';
+import 'package:flutter_douban2/movie/movie_view_section_body.dart';
+import 'package:flutter_douban2/movie/movie_view_section_header.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 
-class MovieSectionView extends StatefulWidget {
+class MovieViewSection extends StatefulWidget {
   final String _title;
-  MovieSectionView(this._title);
+  MovieViewSection(this._title);
 
-  _MovieSectionViewState createState() => _MovieSectionViewState(this._title);
+  _MovieViewSectionState createState() => _MovieViewSectionState(this._title);
 }
 
-class _MovieSectionViewState extends State<MovieSectionView> {
+class _MovieViewSectionState extends State<MovieViewSection> {
   String _title;
   List _subjects = [];
 
-  _MovieSectionViewState(this._title);
+  _MovieViewSectionState(this._title);
 
   @override
   void initState() {
@@ -42,7 +42,7 @@ class _MovieSectionViewState extends State<MovieSectionView> {
       return Container(
         child: Column(
           children: <Widget>[
-            MovieSectionHeader(this._title),
+            MovieViewSectionHeader(this._title),
             CircularProgressIndicator(),
           ],
         ),
@@ -51,8 +51,8 @@ class _MovieSectionViewState extends State<MovieSectionView> {
     return Container(
       child: Column(
         children: <Widget>[
-          MovieSectionHeader(this._title),
-          MovieSectionBody(
+          MovieViewSectionHeader(this._title),
+          MovieViewSectionBody(
             this._subjects.sublist(0, 3),
             this._subjects.sublist(3, 6),
           ),

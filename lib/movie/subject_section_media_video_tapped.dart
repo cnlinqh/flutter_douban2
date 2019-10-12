@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_douban2/movie/subject_video_set.dart';
+import 'package:flutter_douban2/movie/subject_section_media_video_set.dart';
 import 'package:flutter_douban2/util/navigator_helper.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 
-class SubjectVideoTapped extends StatelessWidget {
+class SubjectSectionMediaVideoTapped extends StatelessWidget {
   final _subject;
   final String _cover;
-  SubjectVideoTapped(this._subject, this._cover);
+  SubjectSectionMediaVideoTapped(this._subject, this._cover);
 
   @override
   Widget build(BuildContext context) {

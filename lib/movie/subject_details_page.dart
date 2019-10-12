@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_douban2/movie/subject_general_section.dart';
-import 'package:flutter_douban2/movie/subject_photos_section.dart';
-import 'package:flutter_douban2/movie/subject_rate_section.dart';
-import 'package:flutter_douban2/movie/subject_summary_section.dart';
-import 'package:flutter_douban2/movie/subject_directors_casts_section.dart';
-import 'package:flutter_douban2/movie/subject_tags_section.dart';
+import 'package:flutter_douban2/movie/subject_section_general.dart';
+import 'package:flutter_douban2/movie/subject_section_media.dart';
+import 'package:flutter_douban2/movie/subject_section_rate.dart';
+import 'package:flutter_douban2/movie/subject_section_summary.dart';
+import 'package:flutter_douban2/movie/subject_section_directors_casts.dart';
+import 'package:flutter_douban2/movie/subject_section_tags.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class MovieSubjectDetails extends StatefulWidget {
+class SubjectDetailsPage extends StatefulWidget {
   final String _id;
 
-  MovieSubjectDetails(this._id);
+  SubjectDetailsPage(this._id);
 
-  _MovieSubjectDetailsState createState() =>
-      _MovieSubjectDetailsState();
+  _SubjectDetailsPageState createState() =>
+      _SubjectDetailsPageState();
 }
 
-class _MovieSubjectDetailsState extends State<MovieSubjectDetails> {
+class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
   var _subject;
 
   @override
@@ -62,12 +62,12 @@ class _MovieSubjectDetailsState extends State<MovieSubjectDetails> {
             onRefresh: _getSubject,
             child: ListView(
               children: <Widget>[
-                SubjectGeneralSection(this._subject),
-                SubjectRateSection(this._subject),
-                SubjectTagsSection(this._subject),
-                SubjectSummarySection(this._subject),
-                SubjectDirectorsCastsSection(this._subject),
-                SubjectPhotosSection(this._subject),
+                SubjectSectionGeneral(this._subject),
+                SubjectSectionRate(this._subject),
+                SubjectSectionTags(this._subject),
+                SubjectSectionSummary(this._subject),
+                SubjectSectionDirectorsCasts(this._subject),
+                SubjectSectionMedia(this._subject),
               ],
             ),
           ),

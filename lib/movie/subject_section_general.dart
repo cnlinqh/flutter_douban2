@@ -4,11 +4,11 @@ import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SubjectGeneralSection extends StatelessWidget {
+class SubjectSectionGeneral extends StatelessWidget {
   final _subject;
   // final _parentContext;
-  // SubjectGeneralSection(this._subject, this._parentContext);
-  SubjectGeneralSection(this._subject);
+  // SubjectSectionGeneral(this._subject, this._parentContext);
+  SubjectSectionGeneral(this._subject);
 
   @override
   Widget build(BuildContext context) {

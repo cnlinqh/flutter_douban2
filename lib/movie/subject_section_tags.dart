@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
-import 'package:flutter_douban2/movie/movie_category_search.dart';
+import 'package:flutter_douban2/movie/movie_category_search_page.dart';
 import 'package:flutter_douban2/util/navigator_helper.dart';
-class SubjectTagsSection extends StatelessWidget {
+class SubjectSectionTags extends StatelessWidget {
   final _subject;
-  const SubjectTagsSection(this._subject);
+  const SubjectSectionTags(this._subject);
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class SubjectTagsSection extends StatelessWidget {
         onTap: () {
           print("onTap " + t);
           LabelConstant.addOneSpecial(t);
-          NavigatorHelper.push(context, MovieCategorySearch(special:t));
+          NavigatorHelper.push(context, MovieCategorySearchPage(special:t));
         },
         child: Container(
           padding: EdgeInsets.all(

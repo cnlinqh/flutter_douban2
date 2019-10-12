@@ -4,9 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 
-class MovieSectionHeader extends StatelessWidget {
+class MovieViewSectionHeader extends StatelessWidget {
   final String _title;
-  MovieSectionHeader(this._title);
+  MovieViewSectionHeader(this._title);
 
   @override
   Widget build(BuildContext context) {
