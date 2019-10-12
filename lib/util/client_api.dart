@@ -266,4 +266,16 @@ class ClientAPI {
         "<<<<ClientAPI: newSearchSubjects($search) ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['data'];
   }
+
+  Future yearRankList({year = '2018', type = '1'}) async {
+    print(">>ClientAPI: yearRankList($year, $type)");
+    var s = new DateTime.now();
+    String url = '/ithil_j/activity/movie_annual$year/widget/$type';
+    print(url);
+    Response<Map> res = await webDio.get(url);
+    var e = new DateTime.now();
+    print(
+        "<<<<ClientAPI: newSearchSubjects($year, $type) ##########################  ${e.difference(s).inMilliseconds}");
+    return res.data['res'];
+  }
 }

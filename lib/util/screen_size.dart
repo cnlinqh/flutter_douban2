@@ -61,4 +61,13 @@ class ScreenSize {
   //the width & height of self define dialog
   static const double self_define_dlg_width = 400;
   static const double self_define_dlg_height = 200;
+
+
+
+  //the height of year rank
+  static const double year_rank_height = 160;
+  static const double rank_bg_cover_width = 365;
+  static const double rank_bg_cover_height = 160;
+  static const double triangle_top_width = 120;
+
 }
