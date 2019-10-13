@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_douban2/movie/movie_list_paged_page.dart';
 import 'package:flutter_douban2/movie/movie_list_static_page.dart';
 import 'package:flutter_douban2/movie/movie_rank_page_list_static.dart';
+import 'package:flutter_douban2/movie/movie_rank_page_top20_static.dart';
 import 'package:flutter_douban2/movie/subject_details_page.dart';
 import 'package:flutter_douban2/movie/movie_rank_page.dart';
 import 'package:flutter_douban2/movie/movie_rank_years_page.dart';
@@ -90,6 +91,17 @@ class NavigatorHelper {
 
       case LabelConstant.MOVIE_YEAR_TOP_DETAILS_TITLE:
         _push(context, MovieRankListStaticPage(content));
+        break;
+      case LabelConstant.MOVIE_RANK_TOP20_LOVE:
+      case LabelConstant.MOVIE_RANK_TOP20_COMEDY:
+      case LabelConstant.MOVIE_RANK_TOP20_STORY:
+      case LabelConstant.MOVIE_RANK_TOP20_DONGHUA:
+      case LabelConstant.MOVIE_RANK_TOP20_KEHUAN:
+      case LabelConstant.MOVIE_RANK_TOP20_JILU:
+      case LabelConstant.MOVIE_RANK_TOP20_TONGXIN:
+      case LabelConstant.MOVIE_RANK_TOP20_YINGYUE:
+      case LabelConstant.MOVIE_RANK_TOP20_GEWU:
+        _push(context, MovieRankTop20StaticPage({'title': title, 'subjects': content}));
         break;
       default:
     }

@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_douban2/movie/movie_view_section_header.dart';
 import 'package:flutter_douban2/movie/movie_rank_section_year.dart';
+import 'package:flutter_douban2/movie/movie_view_section.dart';
+import 'package:flutter_douban2/util/label_constant.dart';
 
 class MovieRankPage extends StatefulWidget {
   MovieRankPage({Key key}) : super(key: key);
@@ -41,7 +43,21 @@ class _MovieRankPageState extends State<MovieRankPage> {
       title: "年度冷门佳片",
       subTitle: "年度电影",
     ));
+    views.add(MovieViewSectionHeader(
+      "豆瓣高分榜",
+      navigatable: false,
+    ));
 
+
+   
+    views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_LOVE, rowCount: 1, fontSize: 20,));
+    views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_COMEDY, rowCount: 1, fontSize: 20,));
+    views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_STORY, rowCount: 1, fontSize: 20,));
+    views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_DONGHUA, rowCount: 1, fontSize: 20,));
+    views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_SHORT, rowCount: 1, fontSize: 20,));
+    views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_TONGXIN, rowCount: 1, fontSize: 20,));
+    views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_YINGYUE, rowCount: 1, fontSize: 20,));
+    views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_GEWU, rowCount: 1, fontSize: 20,));
     if (mounted) {
       this.setState(() {});
     }

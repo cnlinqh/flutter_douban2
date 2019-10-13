@@ -30,9 +30,11 @@ class MovieViewSectionBody extends StatelessWidget {
   MovieSubjectSimple _buildSimple(sub) {
     return MovieSubjectSimple(
       sub['title'],
-      sub['images']['small'],
+      sub['cover'] != null ? sub['cover'] : sub['images']['small'],
       double.parse(
-        sub['rating']['average'].toString(),
+        sub['rate'] != null
+            ? sub['rate'].toString()
+            : sub['rating']['average'].toString(),
       ),
       sub['id'],
     );

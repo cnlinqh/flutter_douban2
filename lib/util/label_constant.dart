@@ -195,4 +195,15 @@ class LabelConstant {
   static const String MOVIE_CATEGORY_RANGE_RATE = "评分";
 
   static const String MOVIE_YEAR_TOP_DETAILS_TITLE="年度最高列表";
+
+  static const String MOVIE_RANK_TOP20_LOVE="爱情片TOP20";
+  static const String MOVIE_RANK_TOP20_COMEDY="喜剧片TOP20";
+  static const String MOVIE_RANK_TOP20_STORY="剧情片TOP20";
+  static const String MOVIE_RANK_TOP20_DONGHUA="动画片TOP20";
+  static const String MOVIE_RANK_TOP20_KEHUAN="科幻片TOP20";
+  static const String MOVIE_RANK_TOP20_JILU="记录片TOP20";
+  static const String MOVIE_RANK_TOP20_SHORT="短片TOP20";
+  static const String MOVIE_RANK_TOP20_TONGXIN="同性片TOP20";
+  static const String MOVIE_RANK_TOP20_YINGYUE="音乐片TOP20";
+  static const String MOVIE_RANK_TOP20_GEWU="歌舞片TOP20";
 }

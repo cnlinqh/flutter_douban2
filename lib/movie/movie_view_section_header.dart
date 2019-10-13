@@ -6,10 +6,15 @@ import 'package:flutter_douban2/util/label_constant.dart';
 
 class MovieViewSectionHeader extends StatelessWidget {
   final String _title;
-  MovieViewSectionHeader(this._title);
+  final bool navigatable;
+  final double fontSize;
+  final List subjects;
+  MovieViewSectionHeader(this._title,
+      {this.navigatable = true, this.fontSize = 24, this.subjects});
 
   @override
   Widget build(BuildContext context) {
+    print(fontSize);
     return Container(
       padding: EdgeInsets.only(
         top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
@@ -22,17 +27,17 @@ class MovieViewSectionHeader extends StatelessWidget {
               this._title,
               style: TextStyle(
                 color: Colors.black,
-                fontSize: 24,
+                fontSize: this.fontSize,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
           GestureDetector(
             onTap: () {
-              NavigatorHelper.pushToPage(context, _title);
+              if (this.navigatable) NavigatorHelper.pushToPage(context, _title, content: this.subjects);
             },
             child: Text(
-              LabelConstant.MOVIE_ALL_TITLE,
+              this.navigatable ? LabelConstant.MOVIE_ALL_TITLE : '',
               style: TextStyle(
                 color: Colors.black,
               ),
