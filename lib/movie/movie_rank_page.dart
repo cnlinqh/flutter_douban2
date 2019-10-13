@@ -30,7 +30,7 @@ class _MovieRankPageState extends State<MovieRankPage> {
 
     views.add(MovieRankSectionYear(
       year: '2018',
-      type: '4',
+      type: '2',
       title: "评分最高外语电影",
       subTitle: "评分最高",
     ));

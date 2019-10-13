@@ -33,7 +33,7 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
         .yearRankList(year: widget.year, type: widget.type);
     this.color = Color(int.parse("0xff" +
         res['subject']['color_scheme']['primary_color_light'].toString()));
-    this.setState(() {});
+    if (mounted) this.setState(() {});
   }
 
   @override

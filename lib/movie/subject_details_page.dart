@@ -15,8 +15,7 @@ class SubjectDetailsPage extends StatefulWidget {
 
   SubjectDetailsPage(this._id);
 
-  _SubjectDetailsPageState createState() =>
-      _SubjectDetailsPageState();
+  _SubjectDetailsPageState createState() => _SubjectDetailsPageState();
 }
 
 class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
@@ -29,8 +28,9 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
   }
 
   Future<void> _getSubject() async {
-    this._subject = await ClientAPI.getInstance().getMovieSubject(this.widget._id);
-    this.setState(() {});
+    this._subject =
+        await ClientAPI.getInstance().getMovieSubject(this.widget._id);
+    if (mounted) this.setState(() {});
   }
 
   @override
