@@ -42,19 +42,19 @@ class _MovieViewSectionState extends State<MovieViewSection> {
     } else if (this._title == LabelConstant.MOVIE_RANK_TOP20_STORY) {
       this._subjects = await client
           .newSearchSubjects('?start=0&sort=S&range=0,10&genres=剧情&tags=电影');
-    } else if (this._title == LabelConstant.MOVIE_RANK_TOP20_DONGHUA) {
+    } else if (this._title == LabelConstant.MOVIE_RANK_TOP20_CARTOON) {
       this._subjects = await client
           .newSearchSubjects('?start=0&sort=S&range=0,10&genres=动画&tags=电影');
     } else if (this._title == LabelConstant.MOVIE_RANK_TOP20_SHORT) {
       this._subjects = await client
           .newSearchSubjects('?start=0&sort=S&range=0,10&genres=爱情&tags=电影');
-    } else if (this._title == LabelConstant.MOVIE_RANK_TOP20_TONGXIN) {
+    } else if (this._title == LabelConstant.MOVIE_RANK_TOP20_LGBT) {
       this._subjects = await client
           .newSearchSubjects('?start=0&sort=S&range=0,10&genres=同性&tags=电影');
-    } else if (this._title == LabelConstant.MOVIE_RANK_TOP20_YINGYUE) {
+    } else if (this._title == LabelConstant.MOVIE_RANK_TOP20_MUSICAL) {
       this._subjects = await client
           .newSearchSubjects('?start=0&sort=S&range=0,10&genres=音乐&tags=电影');
-    } else if (this._title == LabelConstant.MOVIE_RANK_TOP20_GEWU) {
+    } else if (this._title == LabelConstant.MOVIE_RANK_TOP20_DANCE) {
       this._subjects = await client
           .newSearchSubjects('?start=0&sort=S&range=0,10&genres=歌舞&tags=电影');
     }

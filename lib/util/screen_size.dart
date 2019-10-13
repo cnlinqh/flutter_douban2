@@ -72,6 +72,6 @@ class ScreenSize {
 
 
   static const double rank_top_image_width = 750;
-  static const double rank_top_image_height = 750;
+  static const double rank_top_image_height = 400;
 
 }

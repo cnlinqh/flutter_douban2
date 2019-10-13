@@ -106,7 +106,6 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
     return GestureDetector(
       key: key,
       onTap: () {
-        print(text);
         if (text != LabelConstant.MOVIE_SPECIAL_SELF_DEFINE) {
           this.widget.onSelectionChange(text);
         } else {

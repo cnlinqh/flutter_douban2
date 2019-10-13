@@ -57,7 +57,6 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
         ),
         GestureDetector(
           onTap: () {
-            print(res);
             NavigatorHelper.pushToPage(
                 context, LabelConstant.MOVIE_YEAR_TOP_DETAILS_TITLE,
                 content: res);

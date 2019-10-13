@@ -18,30 +18,40 @@ class MovieViewEntrance extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           _buildEntrance(
-              () {},
-              Icon(
-                Icons.find_in_page,
-                color: Colors.white,
-              ),
-              LabelConstant.MOVIE_ENTRANCE_SELECT_TITLE),
+            () {},
+            Icon(
+              Icons.find_in_page,
+              color: Colors.white,
+            ),
+            LabelConstant.MOVIE_ENTRANCE_SELECT_ICON,
+          ),
           _buildEntrance(
-              () {
-                NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_RANK_TITLE);
-              },
-              Icon(
-                Icons.assessment,
-                color: Colors.white,
-              ),
-              LabelConstant.MOVIE_ENTRANCE_TOP_TITLE),
-          _buildEntrance(() {
-            LabelConstant.resetSpecialList();
-            NavigatorHelper.pushToPage(context,LabelConstant.MOVIE_CATEGORY_TITLE);
-          },
-              Icon(
-                Icons.category,
-                color: Colors.white,
-              ),
-              LabelConstant.MOVIE_ENTRANCE_CATEGORY_TITLE),
+            () {
+              NavigatorHelper.pushToPage(
+                context,
+                LabelConstant.MOVIE_RANK_LIST_TITLE,
+              );
+            },
+            Icon(
+              Icons.assessment,
+              color: Colors.white,
+            ),
+            LabelConstant.MOVIE_ENTRANCE_RANK_ICON,
+          ),
+          _buildEntrance(
+            () {
+              LabelConstant.resetSpecialList();
+              NavigatorHelper.pushToPage(
+                context,
+                LabelConstant.MOVIE_CATEGORY_TITLE,
+              );
+            },
+            Icon(
+              Icons.category,
+              color: Colors.white,
+            ),
+            LabelConstant.MOVIE_ENTRANCE_CATEGORY_ICON,
+          ),
         ],
       ),
     );

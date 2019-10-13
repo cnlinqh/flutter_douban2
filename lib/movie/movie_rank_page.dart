@@ -53,11 +53,11 @@ class _MovieRankPageState extends State<MovieRankPage> {
     views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_LOVE, rowCount: 1, fontSize: 20,));
     views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_COMEDY, rowCount: 1, fontSize: 20,));
     views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_STORY, rowCount: 1, fontSize: 20,));
-    views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_DONGHUA, rowCount: 1, fontSize: 20,));
+    views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_CARTOON, rowCount: 1, fontSize: 20,));
     views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_SHORT, rowCount: 1, fontSize: 20,));
-    views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_TONGXIN, rowCount: 1, fontSize: 20,));
-    views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_YINGYUE, rowCount: 1, fontSize: 20,));
-    views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_GEWU, rowCount: 1, fontSize: 20,));
+    views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_LGBT, rowCount: 1, fontSize: 20,));
+    views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_MUSICAL, rowCount: 1, fontSize: 20,));
+    views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_DANCE, rowCount: 1, fontSize: 20,));
     if (mounted) {
       this.setState(() {});
     }
@@ -71,7 +71,7 @@ class _MovieRankPageState extends State<MovieRankPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('豆瓣榜单'),
+        title: Text(LabelConstant.MOVIE_RANK_LIST_TITLE),
       ),
       body: Container(
         padding: EdgeInsets.fromLTRB(

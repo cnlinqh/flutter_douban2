@@ -14,7 +14,6 @@ class MovieViewSectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(fontSize);
     return Container(
       padding: EdgeInsets.only(
         top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),

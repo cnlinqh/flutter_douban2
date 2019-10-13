@@ -36,7 +36,6 @@ class SubjectSectionTags extends StatelessWidget {
       ));
       list.add(GestureDetector(
         onTap: () {
-          print("onTap " + t);
           LabelConstant.addOneSpecial(t);
           NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_CATEGORY_TITLE, content: t);
         },

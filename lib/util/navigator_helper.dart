@@ -24,7 +24,7 @@ class NavigatorHelper {
 
   static pushToPage(BuildContext context, String title, {dynamic content}) {
     print("pushToPage $title");
-    print(content);
+    print("content $content");
     switch (title) {
       case LabelConstant.MOVIE_IN_THEATERS_TITLE: //影院热映
         _push(
@@ -70,7 +70,7 @@ class NavigatorHelper {
       case LabelConstant.MOVIE_VIDEO_TITLE: //预告片/花絮
         _push(context, SubjectVideoSet(content));
         break;
-      case LabelConstant.MOVIE_RANK_TITLE: //豆瓣榜单
+      case LabelConstant.MOVIE_RANK_LIST_TITLE: //豆瓣榜单
         _push(context, MovieRankPage());
         break;
 
@@ -95,12 +95,12 @@ class NavigatorHelper {
       case LabelConstant.MOVIE_RANK_TOP20_LOVE:
       case LabelConstant.MOVIE_RANK_TOP20_COMEDY:
       case LabelConstant.MOVIE_RANK_TOP20_STORY:
-      case LabelConstant.MOVIE_RANK_TOP20_DONGHUA:
-      case LabelConstant.MOVIE_RANK_TOP20_KEHUAN:
-      case LabelConstant.MOVIE_RANK_TOP20_JILU:
-      case LabelConstant.MOVIE_RANK_TOP20_TONGXIN:
-      case LabelConstant.MOVIE_RANK_TOP20_YINGYUE:
-      case LabelConstant.MOVIE_RANK_TOP20_GEWU:
+      case LabelConstant.MOVIE_RANK_TOP20_CARTOON:
+      case LabelConstant.MOVIE_RANK_TOP20_FICTION:
+      case LabelConstant.MOVIE_RANK_TOP20_DOCUMENTARY:
+      case LabelConstant.MOVIE_RANK_TOP20_LGBT:
+      case LabelConstant.MOVIE_RANK_TOP20_MUSICAL:
+      case LabelConstant.MOVIE_RANK_TOP20_DANCE:
         _push(context, MovieRankTop20StaticPage({'title': title, 'subjects': content}));
         break;
       default:
