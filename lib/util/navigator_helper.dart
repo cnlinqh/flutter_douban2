@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/movie/movie_list_paged_page.dart';
 import 'package:flutter_douban2/movie/movie_list_static_page.dart';
+import 'package:flutter_douban2/movie/movie_rank_page_list_static.dart';
 import 'package:flutter_douban2/movie/subject_details_page.dart';
 import 'package:flutter_douban2/movie/movie_rank_page.dart';
 import 'package:flutter_douban2/movie/movie_rank_years_page.dart';
@@ -85,6 +86,10 @@ class NavigatorHelper {
         } else {
           _push(context, MovieCategorySearchPage());
         }
+        break;
+
+      case LabelConstant.MOVIE_YEAR_TOP_DETAILS_TITLE:
+        _push(context, MovieRankListStaticPage(content));
         break;
       default:
     }

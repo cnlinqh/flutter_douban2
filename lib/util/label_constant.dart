@@ -193,4 +193,6 @@ class LabelConstant {
   static const String MOVIE_CATEGORY_SORTBY_TIME = "时间";
 
   static const String MOVIE_CATEGORY_RANGE_RATE = "评分";
+
+  static const String MOVIE_YEAR_TOP_DETAILS_TITLE="年度最高列表";
 }

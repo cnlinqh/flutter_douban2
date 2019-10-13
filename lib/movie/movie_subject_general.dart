@@ -6,8 +6,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/navigator_helper.dart';
 
 class MovieSubjectGeneral extends StatelessWidget {
-  final _subject;
-  const MovieSubjectGeneral(this._subject);
+  final cover;
+  final title;
+  final year;
+  final rate;
+  final details;
+  final id;
+  const MovieSubjectGeneral({
+    this.cover,
+    this.title,
+    this.year,
+    this.rate,
+    this.details,
+    this.id,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +52,15 @@ class MovieSubjectGeneral extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_DETAILS_TITLE,
-            content: this._subject['id']);
+            // content: this._subject['id']);
+             content: this.id);
       },
       child: Stack(
         children: <Widget>[
-          MovieUtil.buildMovieCover(_subject['cover'] != null
-              ? _subject['cover']
-              : _subject['images']['small']),
+          // MovieUtil.buildMovieCover(_subject['cover'] != null
+          //     ? _subject['cover']
+          //     : _subject['images']['small']),
+          MovieUtil.buildMovieCover(this.cover),
           MovieUtil.buildFavoriteIcon(),
         ],
       ),
@@ -69,9 +83,7 @@ class MovieSubjectGeneral extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           _buildTitle(),
-          MovieUtil.buildRate(_subject['rate'] != null
-              ? _subject['rate'].toString()
-              : _subject['rating']['average'].toString()),
+          MovieUtil.buildRate(this.rate),
           _buildDetails(),
         ],
       ),
@@ -85,14 +97,14 @@ class MovieSubjectGeneral extends StatelessWidget {
       text: TextSpan(
         children: <TextSpan>[
           TextSpan(
-            text: this._subject['title'],
+            text: this.title,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),
           ),
           TextSpan(
-            text: _subject['year'] == null ? "" : " (${this._subject['year']})",
+            text: this.year == null ? "" : " (${this.year})",
             style: TextStyle(
               color: Colors.grey,
               fontWeight: FontWeight.bold,
@@ -104,24 +116,24 @@ class MovieSubjectGeneral extends StatelessWidget {
   }
 
   Widget _buildDetails() {
-    String details;
-    if (_subject["year"] == null) {
-      details = _subject['directors'].join(", ") +
-          " / " +
-          _subject['casts'].join(", ");
-    } else {
-      details = MovieUtil.getYear(this._subject) +
-          " / " +
-          MovieUtil.getPubPlace(this._subject) +
-          " / " +
-          MovieUtil.getGenres(this._subject) +
-          " / " +
-          MovieUtil.getDirectors(this._subject) +
-          " / " +
-          MovieUtil.getCasts(this._subject);
-    }
+    // String details = "";
+    // if (_subject["year"] == null) {
+    //   details = _subject['directors'].join(", ") +
+    //       " / " +
+    //       _subject['casts'].join(", ");
+    // } else {
+    //   details = MovieUtil.getYear(this._subject) +
+    //       " / " +
+    //       MovieUtil.getPubPlace(this._subject) +
+    //       " / " +
+    //       MovieUtil.getGenres(this._subject) +
+    //       " / " +
+    //       MovieUtil.getDirectors(this._subject) +
+    //       " / " +
+    //       MovieUtil.getCasts(this._subject);
+    // }
 
-    return Text(details);
+    return Text(this.details);
   }
 
   Widget buildDivider() {

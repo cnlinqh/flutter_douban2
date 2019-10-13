@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/movie/movie_subject_general.dart';
+import 'package:flutter_douban2/util/movie_util.dart';
 
 class MovieListPagedPage extends StatefulWidget {
   final String title;
@@ -53,8 +54,16 @@ class _MovieListPagedPageState extends State<MovieListPagedPage> {
                     _retrieveData();
                     return Container();
                   } else {
+                    var subject = getSubject(index);
                     return Container(
-                      child: MovieSubjectGeneral(_dataList[index]),
+                      child: MovieSubjectGeneral(
+                        cover: getCover(subject),
+                        title: getTitle(subject),
+                        year: getYear(subject),
+                        rate: getRate(subject),
+                        details: getDetails(subject),
+                        id: getId(subject),
+                      ),
                     );
                   }
                 },
@@ -65,5 +74,44 @@ class _MovieListPagedPageState extends State<MovieListPagedPage> {
         ),
       ),
     );
+  }
+
+  dynamic getSubject(index) {
+    return _dataList[index]['subject'] != null
+        ? _dataList[index]['subject']
+        : _dataList[index];
+  }
+
+  dynamic getCover(subject) {
+    return subject['images']['small'];
+  }
+
+  dynamic getTitle(subject) {
+    return subject['title'];
+  }
+
+  dynamic getYear(subject) {
+    return subject['year'];
+  }
+
+  dynamic getRate(subject) {
+    return subject['rating']['average'].toString();
+  }
+
+  dynamic getDetails(subject) {
+    String details = MovieUtil.getYear(subject) +
+        " / " +
+        MovieUtil.getPubPlace(subject) +
+        " / " +
+        MovieUtil.getGenres(subject) +
+        " / " +
+        MovieUtil.getDirectors(subject) +
+        " / " +
+        MovieUtil.getCasts(subject);
+    return details;
+  }
+
+  dynamic getId(subject) {
+    return subject['id'];
   }
 }

@@ -70,4 +70,8 @@ class ScreenSize {
   static const double rank_bg_cover_height = 160;
   static const double triangle_top_width = 120;
 
+
+  static const double rank_top_image_width = 750;
+  static const double rank_top_image_height = 750;
+
 }

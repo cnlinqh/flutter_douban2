@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/util/client_api.dart';
+import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_douban2/util/navigator_helper.dart';
 
 class MovieRankSectionYear extends StatefulWidget {
   final String year;
@@ -56,6 +58,9 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
         GestureDetector(
           onTap: () {
             print(res);
+            NavigatorHelper.pushToPage(
+                context, LabelConstant.MOVIE_YEAR_TOP_DETAILS_TITLE,
+                content: res);
           },
           child: Container(
             color: this.color,
