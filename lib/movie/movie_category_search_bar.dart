@@ -111,6 +111,7 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
           this.widget.onSelectionChange(text);
         } else {
           showHasInputDialog().then((newSpecial) {
+            if (newSpecial == null) return;
             setState(() {
               this
                   .localList['list']
@@ -151,9 +152,6 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
   Future<String> showHasInputDialog() async {
     var widget = InputDialog();
     var result = await showDialog(context: context, builder: (_) => widget);
-
-    print("result = $result");
-
     return result;
   }
 }
