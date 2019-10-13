@@ -42,7 +42,6 @@ class _MovieRankPageState extends State<MovieRankPage> {
       subTitle: "年度电影",
     ));
 
-    //2018评分最高的华语电影
     if (mounted) {
       this.setState(() {});
     }

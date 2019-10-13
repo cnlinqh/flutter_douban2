@@ -3,6 +3,7 @@ import 'package:flutter_douban2/movie/movie_list_paged_page.dart';
 import 'package:flutter_douban2/movie/movie_list_static_page.dart';
 import 'package:flutter_douban2/movie/subject_details_page.dart';
 import 'package:flutter_douban2/movie/movie_rank_page.dart';
+import 'package:flutter_douban2/movie/movie_rank_years_page.dart';
 import 'package:flutter_douban2/movie/movie_category_search_page.dart';
 import 'package:flutter_douban2/movie/subject_section_media_photos_gallery.dart';
 import 'package:flutter_douban2/movie/subject_section_media_video_set.dart';
@@ -69,6 +70,10 @@ class NavigatorHelper {
         break;
       case LabelConstant.MOVIE_RANK_TITLE: //豆瓣榜单
         _push(context, MovieRankPage());
+        break;
+
+      case LabelConstant.MOVIE_TOP_LIST_YEAR_TITLE: //豆瓣榜单
+        _push(context, MovieRankYearsPage());
         break;
       case LabelConstant.MOVIE_CATEGORY_TITLE: //分类找电影
         if (content != null) {

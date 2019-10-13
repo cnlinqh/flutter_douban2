@@ -12,6 +12,8 @@ class LabelConstant {
   static const String MOVIE_COMING_SOON_TITLE = '即将上映';
 
   static const String MOVIE_TOP_LIST_TITLE = '豆瓣榜单';
+  
+  static const String MOVIE_TOP_LIST_YEAR_TITLE = '豆瓣年度榜单';
 
   static const String MOVIE_TOP_WEEKLY = "一周口碑电影榜";
 
