@@ -59,6 +59,11 @@ class LabelConstant {
 
   static const String MOVIE_UNFOLD = "展开";
 
+  static const String MOVIE_VIDEO_TITLE = "预告片/花絮";
+
+  static const String MOVIE_PHOTO_TITLE = "剧照";
+
+  static const String MOVIE_RANK_TITLE = "豆瓣榜单";
   static const String MOVIE_CATEGORY_TITLE = "分类找电影";
 
   static const String MOVIE_CATEGORY_ALL = "全部";

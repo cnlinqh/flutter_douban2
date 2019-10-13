@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_douban2/movie/movie_category_search_page.dart';
-import 'package:flutter_douban2/movie/movie_rank_page.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/navigator_helper.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
@@ -28,7 +26,7 @@ class MovieViewEntrance extends StatelessWidget {
               LabelConstant.MOVIE_ENTRANCE_SELECT_TITLE),
           _buildEntrance(
               () {
-                NavigatorHelper.push(context, MovieRankPage());
+                NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_RANK_TITLE);
               },
               Icon(
                 Icons.assessment,
@@ -37,7 +35,7 @@ class MovieViewEntrance extends StatelessWidget {
               LabelConstant.MOVIE_ENTRANCE_TOP_TITLE),
           _buildEntrance(() {
             LabelConstant.resetSpecialList();
-            NavigatorHelper.push(context, MovieCategorySearchPage());
+            NavigatorHelper.pushToPage(context,LabelConstant.MOVIE_CATEGORY_TITLE);
           },
               Icon(
                 Icons.category,

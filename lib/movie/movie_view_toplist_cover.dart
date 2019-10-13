@@ -74,13 +74,8 @@ class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
               ),
               child: GestureDetector(
                 onTap: () {
-                  print("Tap " + widget.title);
-                  if (widget.title != "豆瓣电影Top250") {
-                    NavigatorHelper.pushMoviedStatic(
-                        context, widget.title, this._movieTop);
-                  } else {
-                    NavigatorHelper.pushMovieListPage(context, widget.title);
-                  }
+                  NavigatorHelper.pushToPage(context, widget.title,
+                      content: this._movieTop);
                 },
                 child: Stack(
                   children: <Widget>[

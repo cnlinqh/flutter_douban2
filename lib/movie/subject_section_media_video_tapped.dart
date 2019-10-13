@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_douban2/movie/subject_section_media_video_set.dart';
+import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/navigator_helper.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 
@@ -12,7 +12,8 @@ class SubjectSectionMediaVideoTapped extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        NavigatorHelper.push(context, SubjectVideoSet(this._subject));
+        NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_VIDEO_TITLE,
+            content: this._subject);
       },
       child: MovieUtil.buildVideoCover(this._cover),
     );

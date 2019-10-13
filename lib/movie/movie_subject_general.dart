@@ -39,8 +39,8 @@ class MovieSubjectGeneral extends StatelessWidget {
   Widget _buildCoverImage(context) {
     return GestureDetector(
       onTap: () {
-        NavigatorHelper.pushMovieSubjectDetailPage(
-            context, this._subject['id']);
+        NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_DETAILS_TITLE,
+            content: this._subject['id']);
       },
       child: Stack(
         children: <Widget>[

@@ -2,17 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_douban2/movie/movie_subject_general.dart';
 
 class MovieListPagedPage extends StatefulWidget {
-  final String _title;
-  final Function _getData;
-  MovieListPagedPage(this._title, this._getData);
+  final String title;
+  final Function api;
+  MovieListPagedPage({this.title, this.api});
 
-  _MovieListPagedPageState createState() =>
-      _MovieListPagedPageState(this._title, this._getData);
+  _MovieListPagedPageState createState() => _MovieListPagedPageState();
 }
 
 class _MovieListPagedPageState extends State<MovieListPagedPage> {
-  final String _title;
-  final Function _getData;
   static const String _loading = "##loading##";
   var _start = 0;
   var _count = 10;
@@ -27,7 +24,7 @@ class _MovieListPagedPageState extends State<MovieListPagedPage> {
     if (_done) {
       return;
     }
-    var list = await this._getData(
+    var list = await widget.api(
       start: this._start,
       count: this._count,
     );
@@ -39,12 +36,11 @@ class _MovieListPagedPageState extends State<MovieListPagedPage> {
     setState(() {});
   }
 
-  _MovieListPagedPageState(this._title, this._getData);
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
-        title: Text(this._title),
+        title: Text(widget.title),
       ),
       body: Container(
         child: Column(

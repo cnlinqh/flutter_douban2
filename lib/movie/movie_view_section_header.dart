@@ -29,7 +29,7 @@ class MovieViewSectionHeader extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              NavigatorHelper.pushMovieListPage(context, _title);
+              NavigatorHelper.pushToPage(context, _title);
             },
             child: Text(
               LabelConstant.MOVIE_ALL_TITLE,
