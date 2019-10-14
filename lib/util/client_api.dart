@@ -278,4 +278,18 @@ class ClientAPI {
         "<<<<ClientAPI: newSearchSubjects($year, $type) ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['res'];
   }
+
+  Future searchSubjects(
+      {int start = 0, int count = 20, String tag = '热门'}) async {
+    print(">>ClientAPI: searchSubjects($start, $count, $tag)");
+    var s = new DateTime.now();
+    String url =
+        '/j/search_subjects?type=movie&tag=$tag&page_limit=$count&page_start=$start';
+    print(url);
+    Response<Map> res = await webDio.get(url);
+    var e = new DateTime.now();
+    print(
+        "<<<<ClientAPI: searchSubjects($start, $count, $tag) ##########################  ${e.difference(s).inMilliseconds}");
+    return res.data['subjects'];
+  }
 }

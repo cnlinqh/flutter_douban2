@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/movie/movie_choose_page.dart';
 import 'package:flutter_douban2/movie/movie_list_paged_page.dart';
 import 'package:flutter_douban2/movie/movie_list_static_page.dart';
 import 'package:flutter_douban2/movie/movie_rank_page_list_static.dart';
@@ -77,6 +78,9 @@ class NavigatorHelper {
       case LabelConstant.MOVIE_TOP_LIST_YEAR_TITLE: //豆瓣榜单
         _push(context, MovieRankYearsPage());
         break;
+      case LabelConstant.MOVIE_ENTRANCE_SELECT_ICON:
+        _push(context, MovieChoosePage());
+        break;
       case LabelConstant.MOVIE_CATEGORY_TITLE: //分类找电影
         if (content != null) {
           _push(
@@ -101,7 +105,8 @@ class NavigatorHelper {
       case LabelConstant.MOVIE_RANK_TOP20_LGBT:
       case LabelConstant.MOVIE_RANK_TOP20_MUSICAL:
       case LabelConstant.MOVIE_RANK_TOP20_DANCE:
-        _push(context, MovieRankTop20StaticPage({'title': title, 'subjects': content}));
+        _push(context,
+            MovieRankTop20StaticPage({'title': title, 'subjects': content}));
         break;
       default:
     }

@@ -18,7 +18,12 @@ class MovieViewEntrance extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           _buildEntrance(
-            () {},
+            () {
+              NavigatorHelper.pushToPage(
+                context,
+                LabelConstant.MOVIE_ENTRANCE_SELECT_ICON,
+              );
+            },
             Icon(
               Icons.find_in_page,
               color: Colors.white,

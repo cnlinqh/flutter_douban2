@@ -170,4 +170,51 @@ class LabelConstant {
     List list = sSpecialList['list'];
     list.insert(list.length - 1, special);
   }
+
+  static const String MOVIE_CHOOSE_TOPIC = "专题";
+  static const List MOVIE_CHOOSE_TOPIC_LIST = [
+    "豆瓣热门",
+    "最新电影",
+    "冷门佳片",
+    "豆瓣高分",
+    "经典电影"
+  ];
+  static const String MOVIE_CHOOSE_TYPE = "类型";
+  static const List MOVIE_CHOOSE_TYPE_LIST = [
+    "喜剧",
+    "动作",
+    "爱情",
+    "科幻",
+    "动画",
+    "纪录片",
+    "悬疑",
+    "犯罪",
+    "奇幻",
+    "歌舞",
+    "同性",
+  ];
+  static const String MOVIE_CHOOSE_PLACE = "地区";
+  static const List MOVIE_CHOOSE_PLACE_LIST = [
+    "中国大陆",
+    "美国",
+    "中国香港",
+    "日本",
+    "韩国",
+    "中国台湾",
+    "英国",
+    "法国",
+    "德国",
+  ];
+  static const String MOVIE_CHOOSE_SPEICAL = "特色";
+  static const List MOVIE_CHOOSE_SPEICAL_LIST = [
+    "青春",
+    "治愈",
+    "文艺",
+    "女性",
+    "小说改编",
+    "超级英雄",
+    "美食",
+    "宗教",
+    "励志",
+  ];
 }
