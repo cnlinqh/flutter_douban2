@@ -104,7 +104,7 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
                 itemCount: _dataList.length,
                 itemBuilder: (context, index) {
                   if (_dataList[index]['title'] == _loading) {
-                    _retrieveData();
+                    _retrieveData(context);
                     return Container();
                   } else {
                     return Container(
@@ -127,7 +127,7 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
         : _dataList[index];
   }
 
-  void _retrieveData() async {
+  void _retrieveData(context) async {
     if (_done) {
       return;
     }
@@ -138,6 +138,10 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
     }
     _dataList.insertAll(_dataList.length - 1, list.toList());
     _start = _start + list.length;
+    if (_done && this._dataList.length == 1) {
+      final snackBar = new SnackBar(content: new Text('No Result!'));
+      Scaffold.of(context).showSnackBar(snackBar);
+    }
     setState(() {});
   }
 
