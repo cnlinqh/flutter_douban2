@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/movie/movie_subject_general.dart';
-import 'package:flutter_douban2/util/movie_util.dart';
 
 class MovieListPagedPage extends StatefulWidget {
   final String title;
   final Function api;
-  MovieListPagedPage({this.title, this.api});
+  final String tag;
+  MovieListPagedPage({this.title, this.api, this.tag = ""});
 
   _MovieListPagedPageState createState() => _MovieListPagedPageState();
 }
@@ -13,7 +13,7 @@ class MovieListPagedPage extends StatefulWidget {
 class _MovieListPagedPageState extends State<MovieListPagedPage> {
   static const String _loading = "##loading##";
   var _start = 0;
-  var _count = 10;
+  var _count = 20;
   var _done = false;
   var _dataList = <dynamic>[
     {
@@ -25,10 +25,20 @@ class _MovieListPagedPageState extends State<MovieListPagedPage> {
     if (_done) {
       return;
     }
-    var list = await widget.api(
-      start: this._start,
-      count: this._count,
-    );
+    var list;
+    if (widget.tag == "") {
+      list = await widget.api(
+        start: this._start,
+        count: this._count,
+      );
+    } else {
+      list = await widget.api(
+        start: this._start,
+        count: this._count,
+        tag: widget.tag,
+      );
+    }
+
     if (list.length < this._count) {
       _done = true;
     }
@@ -83,7 +93,9 @@ class _MovieListPagedPageState extends State<MovieListPagedPage> {
   }
 
   dynamic getCover(subject) {
-    return subject['images']['small'];
+    return subject['cover'] != null
+        ? subject['cover']
+        : subject['images']['small'];
   }
 
   dynamic getTitle(subject) {
@@ -95,20 +107,21 @@ class _MovieListPagedPageState extends State<MovieListPagedPage> {
   }
 
   dynamic getRate(subject) {
-    return subject['rating']['average'].toString();
+    return subject['rate'] != null ? subject['rate']: subject['rating']['average'].toString();
   }
 
   dynamic getDetails(subject) {
-    String details = MovieUtil.getYear(subject) +
-        " / " +
-        MovieUtil.getPubPlace(subject) +
-        " / " +
-        MovieUtil.getGenres(subject) +
-        " / " +
-        MovieUtil.getDirectors(subject) +
-        " / " +
-        MovieUtil.getCasts(subject);
-    return details;
+    // String details = MovieUtil.getYear(subject) +
+    //     " / " +
+    //     MovieUtil.getPubPlace(subject) +
+    //     " / " +
+    //     MovieUtil.getGenres(subject) +
+    //     " / " +
+    //     MovieUtil.getDirectors(subject) +
+    //     " / " +
+    //     MovieUtil.getCasts(subject);
+    // return details;
+    return "";
   }
 
   dynamic getId(subject) {

@@ -104,6 +104,16 @@ class NavigatorHelper {
         _push(context,
             MovieRankTop20StaticPage({'title': title, 'subjects': content}));
         break;
+      case LabelConstant.MOVIE_CHOOSE_TOPIC:
+        _push(
+          context,
+          MovieListPagedPage(
+            title: title,
+            api: ClientAPI.getInstance().searchSubjects,
+            tag: content,
+          ),
+        );
+        break;
       default:
     }
   }

@@ -96,6 +96,22 @@ class _MovieChooseBoxState extends State<MovieChooseBox> {
 
   void onTapGo(context) {
     if (widget.title == LabelConstant.MOVIE_CHOOSE_TOPIC) {
+      if (widget.label == "豆瓣热门") {
+        NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_CHOOSE_TOPIC,
+            content: "热门");
+      } else if (widget.label == "最新电影") {
+        NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_CHOOSE_TOPIC,
+            content: "最新");
+      } else if (widget.label == "冷门佳片") {
+        NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_CHOOSE_TOPIC,
+            content: "冷门佳片");
+      } else if (widget.label == "豆瓣高分") {
+        NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_CHOOSE_TOPIC,
+            content: "豆瓣高分");
+      } else if (widget.label == "经典电影") {
+        NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_CHOOSE_TOPIC,
+            content: "经典");
+      }
     } else if (widget.title == LabelConstant.MOVIE_CHOOSE_TYPE) {
       NavigatorHelper.pushToPage(
         context,

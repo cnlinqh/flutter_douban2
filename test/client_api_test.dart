@@ -4,10 +4,7 @@ void main() {
   ClientAPI api = new ClientAPI();
   api.getMovieHotRecommendList().then((hots) {
     hots.forEach((hot) {
-      print(hot.cover);
-      print(hot.link);
-      print(hot.title);
-      print(hot.summary);
+      print(hot);
     });
   });
 }
