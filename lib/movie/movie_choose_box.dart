@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
+import 'package:flutter_douban2/util/navigator_helper.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_douban2/movie/movie_category_search_page.dart';
 
 class MovieChooseBox extends StatefulWidget {
   final String title;
@@ -78,20 +80,57 @@ class _MovieChooseBoxState extends State<MovieChooseBox> {
     if (this.photo == null) {
       return _buildIndicator();
     } else {}
-    return Stack(
-      children: <Widget>[
-        _buildBackgroud(),
-        _buildOpacity(),
-        _buildLabel(),
-      ],
+    return GestureDetector(
+      onTap: () {
+        onTapGo(context);
+      },
+      child: Stack(
+        children: <Widget>[
+          _buildBackgroud(),
+          _buildOpacity(),
+          _buildLabel(),
+        ],
+      ),
     );
+  }
+
+  void onTapGo(context) {
+    if (widget.title == LabelConstant.MOVIE_CHOOSE_TOPIC) {
+    } else if (widget.title == LabelConstant.MOVIE_CHOOSE_TYPE) {
+      NavigatorHelper.pushToPage(
+        context,
+        LabelConstant.MOVIE_CATEGORY_TITLE,
+        content: MovieCategorySearchPage(
+          style: widget.label,
+        ),
+      );
+    } else if (widget.title == LabelConstant.MOVIE_CHOOSE_PLACE) {
+      NavigatorHelper.pushToPage(
+        context,
+        LabelConstant.MOVIE_CATEGORY_TITLE,
+        content: MovieCategorySearchPage(
+          country: widget.label,
+        ),
+      );
+    } else if (widget.title == LabelConstant.MOVIE_CHOOSE_SPEICAL) {
+      LabelConstant.resetSpecialList();
+      LabelConstant.addOneSpecial(widget.label);
+      NavigatorHelper.pushToPage(
+        context,
+        LabelConstant.MOVIE_CATEGORY_TITLE,
+        content: MovieCategorySearchPage(
+          special: widget.label,
+        ),
+      );
+    }
   }
 
   Widget _buildIndicator() {
     return Center(
       child: Container(
         width: ScreenUtil.getInstance().setWidth(ScreenSize.choose_image_width),
-        height: ScreenUtil.getInstance().setHeight(ScreenSize.choose_image_height),
+        height:
+            ScreenUtil.getInstance().setHeight(ScreenSize.choose_image_height),
         child: Center(
           child: CircularProgressIndicator(),
         ),
@@ -103,14 +142,12 @@ class _MovieChooseBoxState extends State<MovieChooseBox> {
     return Center(
       child: Container(
         width: ScreenUtil.getInstance().setWidth(ScreenSize.choose_image_width),
-        height: ScreenUtil.getInstance().setHeight(ScreenSize.choose_image_height),
+        height:
+            ScreenUtil.getInstance().setHeight(ScreenSize.choose_image_height),
         child: Center(
           child: Text(
             widget.label,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16
-            ),
+            style: TextStyle(color: Colors.white, fontSize: 16),
           ),
         ),
       ),
@@ -121,7 +158,8 @@ class _MovieChooseBoxState extends State<MovieChooseBox> {
     return Center(
       child: Container(
         width: ScreenUtil.getInstance().setWidth(ScreenSize.choose_image_width),
-        height: ScreenUtil.getInstance().setHeight(ScreenSize.choose_image_height),
+        height:
+            ScreenUtil.getInstance().setHeight(ScreenSize.choose_image_height),
         // color: Colors.green,
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -139,8 +177,10 @@ class _MovieChooseBoxState extends State<MovieChooseBox> {
       opacity: 0.5,
       child: Center(
         child: Container(
-          width: ScreenUtil.getInstance().setWidth(ScreenSize.choose_image_width),
-          height: ScreenUtil.getInstance().setHeight(ScreenSize.choose_image_height),
+          width:
+              ScreenUtil.getInstance().setWidth(ScreenSize.choose_image_width),
+          height: ScreenUtil.getInstance()
+              .setHeight(ScreenSize.choose_image_height),
           // color: Colors.green,
           decoration: BoxDecoration(
             color: Colors.black,

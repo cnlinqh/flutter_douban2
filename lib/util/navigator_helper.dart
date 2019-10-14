@@ -83,11 +83,7 @@ class NavigatorHelper {
         break;
       case LabelConstant.MOVIE_CATEGORY_TITLE: //分类找电影
         if (content != null) {
-          _push(
-              context,
-              MovieCategorySearchPage(
-                special: content,
-              ));
+          _push(context, content);
         } else {
           _push(context, MovieCategorySearchPage());
         }

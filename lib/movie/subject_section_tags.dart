@@ -3,6 +3,8 @@ import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_douban2/util/navigator_helper.dart';
+import 'package:flutter_douban2/movie/movie_category_search_page.dart';
+
 class SubjectSectionTags extends StatelessWidget {
   final _subject;
   const SubjectSectionTags(this._subject);
@@ -37,7 +39,13 @@ class SubjectSectionTags extends StatelessWidget {
       list.add(GestureDetector(
         onTap: () {
           LabelConstant.addOneSpecial(t);
-          NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_CATEGORY_TITLE, content: t);
+          NavigatorHelper.pushToPage(
+            context,
+            LabelConstant.MOVIE_CATEGORY_TITLE,
+            content: MovieCategorySearchPage(
+              special: t,
+            ),
+          );
         },
         child: Container(
           padding: EdgeInsets.all(
