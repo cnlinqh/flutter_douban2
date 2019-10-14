@@ -172,12 +172,17 @@ class LabelConstant {
   }
 
   static const String MOVIE_CHOOSE_TOPIC = "专题";
+  static const String MOVIE_CHOOSE_TOPIC_HOT = "豆瓣热门";
+  static const String MOVIE_CHOOSE_TOPIC_NEW = "最新电影";
+  static const String MOVIE_CHOOSE_TOPIC_COOL = "冷门佳片";
+  static const String MOVIE_CHOOSE_TOPIC_HIGH = "豆瓣高分";
+  static const String MOVIE_CHOOSE_TOPIC_CLASSIC = "经典电影";
   static const List MOVIE_CHOOSE_TOPIC_LIST = [
-    "豆瓣热门",
-    "最新电影",
-    "冷门佳片",
-    "豆瓣高分",
-    "经典电影"
+    MOVIE_CHOOSE_TOPIC_HOT,
+    MOVIE_CHOOSE_TOPIC_NEW,
+    MOVIE_CHOOSE_TOPIC_COOL,
+    MOVIE_CHOOSE_TOPIC_HIGH,
+    MOVIE_CHOOSE_TOPIC_CLASSIC
   ];
   static const String MOVIE_CHOOSE_TYPE = "类型";
   static const List MOVIE_CHOOSE_TYPE_LIST = [

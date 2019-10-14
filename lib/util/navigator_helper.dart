@@ -105,6 +105,11 @@ class NavigatorHelper {
             MovieRankTop20StaticPage({'title': title, 'subjects': content}));
         break;
       case LabelConstant.MOVIE_CHOOSE_TOPIC:
+      case LabelConstant.MOVIE_CHOOSE_TOPIC_HOT:
+      case LabelConstant.MOVIE_CHOOSE_TOPIC_NEW:
+      case LabelConstant.MOVIE_CHOOSE_TOPIC_COOL:
+      case LabelConstant.MOVIE_CHOOSE_TOPIC_HIGH:
+      case LabelConstant.MOVIE_CHOOSE_TOPIC_CLASSIC:
         _push(
           context,
           MovieListPagedPage(
