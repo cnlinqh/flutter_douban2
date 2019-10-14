@@ -28,10 +28,10 @@ class MovieRankListStaticPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  width:
-                      ScreenUtil.getInstance().setWidth(ScreenSize.video_width),
+                  width: ScreenUtil.getInstance()
+                      .setWidth(ScreenSize.rank_top_image_width),
                   height: ScreenUtil.getInstance()
-                      .setHeight(ScreenSize.video_height),
+                      .setHeight(ScreenSize.rank_top_image_height),
                   child: _buildTopImage(res['payload']['background_img']),
                 ),
                 Expanded(
@@ -62,7 +62,7 @@ class MovieRankListStaticPage extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: ScreenUtil.getInstance().setWidth(ScreenSize.padding*8),
+          top: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 8),
           left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

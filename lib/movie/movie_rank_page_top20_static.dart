@@ -1,19 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/movie/movie_subject_general.dart';
+import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-class MovieRankTop20StaticPage extends StatelessWidget {
+class MovieRankTop20StaticPage extends StatefulWidget {
   final res;
-  MovieRankTop20StaticPage(this.res);
+  MovieRankTop20StaticPage(this.res, {Key key}) : super(key: key);
+
+  _MovieRankTop20StaticPageState createState() =>
+      _MovieRankTop20StaticPageState();
+}
+
+class _MovieRankTop20StaticPageState extends State<MovieRankTop20StaticPage> {
+  var _subjectNo1;
+  @override
+  void initState() {
+    super.initState();
+    this._refresh();
+  }
+
+  void _refresh() async {
+    this._subjectNo1 = await ClientAPI.getInstance()
+        .getMovieSubject(widget.res['subjects'][0]['id']);
+    if (mounted) setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(res['title']),
+          title: Text(widget.res['title']),
         ),
         body: Container(
           width: ScreenUtil.getInstance().setWidth(ScreenSize.width),
@@ -28,11 +47,11 @@ class MovieRankTop20StaticPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  width:
-                      ScreenUtil.getInstance().setWidth(ScreenSize.video_width),
+                  width: ScreenUtil.getInstance()
+                      .setWidth(ScreenSize.rank_top_image_width),
                   height: ScreenUtil.getInstance()
-                      .setHeight(ScreenSize.video_height),
-                  child: _buildTopImage(res['subjects'][0]['cover']),
+                      .setHeight(ScreenSize.rank_top_image_height),
+                  child: _buildTopImage(),
                 ),
                 Expanded(
                   child: ListView(
@@ -45,7 +64,21 @@ class MovieRankTop20StaticPage extends StatelessWidget {
         ));
   }
 
-  Widget _buildTopImage(cover) {
+  Widget _buildTopImage() {
+    if (this._subjectNo1 == null) {
+      return Container(
+        width:
+            ScreenUtil.getInstance().setWidth(ScreenSize.rank_top_image_width),
+        height: ScreenUtil.getInstance()
+            .setHeight(ScreenSize.rank_top_image_height),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(7)),
+        ),
+        child: Center(
+          child: new CircularProgressIndicator(),
+        ),
+      );
+    }
     return Stack(
       children: <Widget>[
         Container(
@@ -55,20 +88,21 @@ class MovieRankTop20StaticPage extends StatelessWidget {
               .setHeight(ScreenSize.rank_top_image_height),
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: CachedNetworkImageProvider(cover),
+              image: CachedNetworkImageProvider(
+                  this._subjectNo1['photos'][0]['image']),
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.all(Radius.circular(7)),
           ),
         ),
         Positioned(
-          top: ScreenUtil.getInstance().setWidth(ScreenSize.padding*8),
+          top: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 8),
           left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                res['title'],
+                widget.res['title'],
                 style: TextStyle(color: Colors.white, fontSize: 24),
               ),
               Text(
@@ -84,15 +118,13 @@ class MovieRankTop20StaticPage extends StatelessWidget {
 
   List<Widget> _buildSubjectList(context) {
     List<Widget> list = [];
-
     var i = 0;
-    for (i = 0; i < res['subjects'].length; i++) {
+    for (i = 0; i < widget.res['subjects'].length; i++) {
       list.add(Container(
         height: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
       ));
-      list.add(_buildSubject(i, res['subjects'][i]));
+      list.add(_buildSubject(i, widget.res['subjects'][i]));
     }
-
     return list;
   }
 
@@ -104,7 +136,7 @@ class MovieRankTop20StaticPage extends StatelessWidget {
           title: getTitle(subject),
           year: getYear(subject),
           rate: getRate(subject),
-          details: getDetails(subject),
+          details: getDetails(subject, i),
           id: getId(subject),
         ),
         Positioned(
@@ -148,12 +180,25 @@ class MovieRankTop20StaticPage extends StatelessWidget {
     return subject['rate'].toString();
   }
 
-  dynamic getDetails(subject) {
-    // String details = subject['orig_title'] +
-    //     " / " +
-    //     subject['rating_count'].toString() +
-    //     "评价";
-    return "details";
+  dynamic getDetails(subject, index) {
+    if (this._subjectNo1 == null) {
+      return "";
+    } else {
+      if (index == 0) {
+        String details = MovieUtil.getYear(this._subjectNo1) +
+            " / " +
+            MovieUtil.getPubPlace(this._subjectNo1) +
+            " / " +
+            MovieUtil.getGenres(this._subjectNo1) +
+            " / " +
+            MovieUtil.getDirectors(this._subjectNo1) +
+            " / " +
+            MovieUtil.getCasts(this._subjectNo1);
+        return details;
+      } else {
+        return "";
+      }
+    }
   }
 
   dynamic getId(subject) {
