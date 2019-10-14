@@ -5,6 +5,7 @@ import 'package:flutter_douban2/movie/movie_view_section_header.dart';
 import 'package:flutter_douban2/movie/movie_rank_section_year.dart';
 import 'package:flutter_douban2/movie/movie_view_section.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
+import 'package:flutter_douban2/movie/movie_view_toplist.dart';
 
 class MovieRankPage extends StatefulWidget {
   MovieRankPage({Key key}) : super(key: key);
@@ -22,6 +23,10 @@ class _MovieRankPageState extends State<MovieRankPage> {
 
   _buildListViews() {
     views = [];
+    views.add(MovieViewTopList(
+      LabelConstant.MOVIE_RANK_LIST_TITLE,
+      showTitle: false,
+    ));
     views.add(MovieViewSectionHeader("豆瓣年度榜单"));
     views.add(MovieRankSectionYear(
       year: '2018',
@@ -48,16 +53,46 @@ class _MovieRankPageState extends State<MovieRankPage> {
       navigatable: false,
     ));
 
-
-   
-    views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_LOVE, rowCount: 1, fontSize: 20,));
-    views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_COMEDY, rowCount: 1, fontSize: 20,));
-    views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_STORY, rowCount: 1, fontSize: 20,));
-    views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_CARTOON, rowCount: 1, fontSize: 20,));
-    views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_SHORT, rowCount: 1, fontSize: 20,));
-    views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_LGBT, rowCount: 1, fontSize: 20,));
-    views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_MUSICAL, rowCount: 1, fontSize: 20,));
-    views.add(MovieViewSection(LabelConstant.MOVIE_RANK_TOP20_DANCE, rowCount: 1, fontSize: 20,));
+    views.add(MovieViewSection(
+      LabelConstant.MOVIE_RANK_TOP20_LOVE,
+      rowCount: 1,
+      fontSize: 20,
+    ));
+    views.add(MovieViewSection(
+      LabelConstant.MOVIE_RANK_TOP20_COMEDY,
+      rowCount: 1,
+      fontSize: 20,
+    ));
+    views.add(MovieViewSection(
+      LabelConstant.MOVIE_RANK_TOP20_STORY,
+      rowCount: 1,
+      fontSize: 20,
+    ));
+    views.add(MovieViewSection(
+      LabelConstant.MOVIE_RANK_TOP20_CARTOON,
+      rowCount: 1,
+      fontSize: 20,
+    ));
+    views.add(MovieViewSection(
+      LabelConstant.MOVIE_RANK_TOP20_SHORT,
+      rowCount: 1,
+      fontSize: 20,
+    ));
+    views.add(MovieViewSection(
+      LabelConstant.MOVIE_RANK_TOP20_LGBT,
+      rowCount: 1,
+      fontSize: 20,
+    ));
+    views.add(MovieViewSection(
+      LabelConstant.MOVIE_RANK_TOP20_MUSICAL,
+      rowCount: 1,
+      fontSize: 20,
+    ));
+    views.add(MovieViewSection(
+      LabelConstant.MOVIE_RANK_TOP20_DANCE,
+      rowCount: 1,
+      fontSize: 20,
+    ));
     if (mounted) {
       this.setState(() {});
     }

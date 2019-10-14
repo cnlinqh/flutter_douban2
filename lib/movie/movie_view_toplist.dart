@@ -4,29 +4,35 @@ import 'package:flutter_douban2/movie/movie_view_toplist_cover.dart';
 
 class MovieViewTopList extends StatelessWidget {
   final String _title;
-
-  MovieViewTopList(this._title);
+  final bool showTitle;
+  MovieViewTopList(this._title, {this.showTitle = true});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
-        children: <Widget>[
-          MovieViewSectionHeader(this._title),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                MovieViewTopListCover(title: "一周口碑电影榜"),
-                MovieViewTopListCover(title: "豆瓣电影Top250"),
-                MovieViewTopListCover(title: "豆瓣电影新片榜"),
-                MovieViewTopListCover(title: "豆瓣电影北美票房榜"),
-              ],
-            ),
-          ),
-        ],
+        children: this._buildChildren(),
       ),
     );
+  }
+
+  List<Widget> _buildChildren() {
+    List<Widget> list = [];
+    if (this.showTitle) {
+      list.add(MovieViewSectionHeader(this._title));
+    }
+    list.add(SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          MovieViewTopListCover(title: "一周口碑电影榜"),
+          MovieViewTopListCover(title: "豆瓣电影Top250"),
+          MovieViewTopListCover(title: "豆瓣电影新片榜"),
+          MovieViewTopListCover(title: "豆瓣电影北美票房榜"),
+        ],
+      ),
+    ));
+    return list;
   }
 }
