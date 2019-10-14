@@ -107,16 +107,8 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
                     _retrieveData();
                     return Container();
                   } else {
-                    var subject = getSubject(index);
                     return Container(
-                      child: MovieSubjectGeneral(
-                        cover: getCover(subject),
-                        title: getTitle(subject),
-                        year: getYear(subject),
-                        rate: getRate(subject),
-                        details: getDetails(subject),
-                        id: getId(subject),
-                      ),
+                      child: MovieSubjectGeneral(getSubject(index)['id']),
                     );
                   }
                 },
@@ -133,32 +125,6 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
     return _dataList[index]['subject'] != null
         ? _dataList[index]['subject']
         : _dataList[index];
-  }
-
-  dynamic getCover(subject) {
-    return subject['cover'];
-  }
-
-  dynamic getTitle(subject) {
-    return subject['title'];
-  }
-
-  dynamic getYear(subject) {
-    return subject['year'];
-  }
-
-  dynamic getRate(subject) {
-    return subject['rate'];
-  }
-
-  dynamic getDetails(subject) {
-    String details =
-        subject['directors'].join(", ") + " / " + subject['casts'].join(", ");
-    return details;
-  }
-
-  dynamic getId(subject) {
-    return subject['id'];
   }
 
   void _retrieveData() async {

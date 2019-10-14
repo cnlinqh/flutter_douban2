@@ -1,28 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/navigator_helper.dart';
 
-class MovieSubjectGeneral extends StatelessWidget {
-  final cover;
-  final title;
-  final year;
-  final rate;
-  final details;
+class MovieSubjectGeneral extends StatefulWidget {
   final id;
-  const MovieSubjectGeneral({
-    this.cover,
-    this.title,
-    this.year,
-    this.rate,
-    this.details,
-    this.id,
-  });
+  
+  MovieSubjectGeneral(this.id);
+
+  _MovieSubjectGeneralState createState() => _MovieSubjectGeneralState();
+}
+
+class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
+  var subject;
+  @override
+  void initState() {
+    super.initState();
+    _refresh();
+  }
+
+  void _refresh() async {
+    subject = await ClientAPI.getInstance().getMovieSubject(widget.id);
+    if (mounted) setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (subject == null) {
+      return Container();
+    }
     return Container(
       padding: EdgeInsets.fromLTRB(
         ScreenUtil.getInstance().setWidth(ScreenSize.padding),
@@ -52,15 +61,11 @@ class MovieSubjectGeneral extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_DETAILS_TITLE,
-            // content: this._subject['id']);
-             content: this.id);
+            content: this.subject['id']);
       },
       child: Stack(
         children: <Widget>[
-          // MovieUtil.buildMovieCover(_subject['cover'] != null
-          //     ? _subject['cover']
-          //     : _subject['images']['small']),
-          MovieUtil.buildMovieCover(this.cover),
+          MovieUtil.buildMovieCover(this.subject['images']['small']),
           MovieUtil.buildFavoriteIcon(),
         ],
       ),
@@ -83,7 +88,7 @@ class MovieSubjectGeneral extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           _buildTitle(),
-          MovieUtil.buildRate(this.rate),
+          MovieUtil.buildRate(this.subject['rating']['average'].toString()),
           _buildDetails(),
         ],
       ),
@@ -97,14 +102,14 @@ class MovieSubjectGeneral extends StatelessWidget {
       text: TextSpan(
         children: <TextSpan>[
           TextSpan(
-            text: this.title,
+            text: this.subject['title'],
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),
           ),
           TextSpan(
-            text: this.year == null ? "" : " (${this.year})",
+            text: " (${this.subject['year']})",
             style: TextStyle(
               color: Colors.grey,
               fontWeight: FontWeight.bold,
@@ -116,24 +121,19 @@ class MovieSubjectGeneral extends StatelessWidget {
   }
 
   Widget _buildDetails() {
-    // String details = "";
-    // if (_subject["year"] == null) {
-    //   details = _subject['directors'].join(", ") +
-    //       " / " +
-    //       _subject['casts'].join(", ");
-    // } else {
-    //   details = MovieUtil.getYear(this._subject) +
-    //       " / " +
-    //       MovieUtil.getPubPlace(this._subject) +
-    //       " / " +
-    //       MovieUtil.getGenres(this._subject) +
-    //       " / " +
-    //       MovieUtil.getDirectors(this._subject) +
-    //       " / " +
-    //       MovieUtil.getCasts(this._subject);
-    // }
+    String details = "";
 
-    return Text(this.details);
+    details = MovieUtil.getYear(this.subject) +
+        " / " +
+        MovieUtil.getPubPlace(this.subject) +
+        " / " +
+        MovieUtil.getGenres(this.subject) +
+        " / " +
+        MovieUtil.getDirectors(this.subject) +
+        " / " +
+        MovieUtil.getCasts(this.subject);
+
+    return Text(details);
   }
 
   Widget buildDivider() {

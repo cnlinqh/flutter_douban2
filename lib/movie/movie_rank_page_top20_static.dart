@@ -3,7 +3,6 @@ import 'package:flutter_douban2/movie/movie_subject_general.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class MovieRankTop20StaticPage extends StatefulWidget {
@@ -131,14 +130,7 @@ class _MovieRankTop20StaticPageState extends State<MovieRankTop20StaticPage> {
   Widget _buildSubject(i, subject) {
     return Stack(
       children: <Widget>[
-        MovieSubjectGeneral(
-          cover: getCover(subject),
-          title: getTitle(subject),
-          year: getYear(subject),
-          rate: getRate(subject),
-          details: getDetails(subject, i),
-          id: getId(subject),
-        ),
+        MovieSubjectGeneral(subject['id']),
         Positioned(
           bottom: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 4),
           left: ScreenUtil.getInstance()
@@ -162,46 +154,5 @@ class _MovieRankTop20StaticPageState extends State<MovieRankTop20StaticPage> {
         )
       ],
     );
-  }
-
-  dynamic getCover(subject) {
-    return subject['cover'];
-  }
-
-  dynamic getTitle(subject) {
-    return subject['title'];
-  }
-
-  dynamic getYear(subject) {
-    return subject['year'];
-  }
-
-  dynamic getRate(subject) {
-    return subject['rate'].toString();
-  }
-
-  dynamic getDetails(subject, index) {
-    if (this._subjectNo1 == null) {
-      return "";
-    } else {
-      if (index == 0) {
-        String details = MovieUtil.getYear(this._subjectNo1) +
-            " / " +
-            MovieUtil.getPubPlace(this._subjectNo1) +
-            " / " +
-            MovieUtil.getGenres(this._subjectNo1) +
-            " / " +
-            MovieUtil.getDirectors(this._subjectNo1) +
-            " / " +
-            MovieUtil.getCasts(this._subjectNo1);
-        return details;
-      } else {
-        return "";
-      }
-    }
-  }
-
-  dynamic getId(subject) {
-    return subject['id'];
   }
 }

@@ -100,12 +100,7 @@ class MovieRankListStaticPage extends StatelessWidget {
     return Stack(
       children: <Widget>[
         MovieSubjectGeneral(
-          cover: getCover(subject),
-          title: getTitle(subject),
-          year: getYear(subject),
-          rate: getRate(subject),
-          details: getDetails(subject),
-          id: getId(subject),
+          subject['id'],
         ),
         Positioned(
           bottom: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 4),
@@ -130,33 +125,5 @@ class MovieRankListStaticPage extends StatelessWidget {
         )
       ],
     );
-  }
-
-  dynamic getCover(subject) {
-    return subject['cover'];
-  }
-
-  dynamic getTitle(subject) {
-    return subject['title'];
-  }
-
-  dynamic getYear(subject) {
-    return subject['year'];
-  }
-
-  dynamic getRate(subject) {
-    return subject['rating'].toString();
-  }
-
-  dynamic getDetails(subject) {
-    String details = subject['orig_title'] +
-        " / " +
-        subject['rating_count'].toString() +
-        "评价";
-    return details;
-  }
-
-  dynamic getId(subject) {
-    return subject['id'];
   }
 }

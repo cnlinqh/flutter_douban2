@@ -64,16 +64,8 @@ class _MovieListPagedPageState extends State<MovieListPagedPage> {
                     _retrieveData();
                     return Container();
                   } else {
-                    var subject = getSubject(index);
                     return Container(
-                      child: MovieSubjectGeneral(
-                        cover: getCover(subject),
-                        title: getTitle(subject),
-                        year: getYear(subject),
-                        rate: getRate(subject),
-                        details: getDetails(subject),
-                        id: getId(subject),
-                      ),
+                      child: MovieSubjectGeneral(getSubject(index)['id']),
                     );
                   }
                 },
@@ -90,41 +82,5 @@ class _MovieListPagedPageState extends State<MovieListPagedPage> {
     return _dataList[index]['subject'] != null
         ? _dataList[index]['subject']
         : _dataList[index];
-  }
-
-  dynamic getCover(subject) {
-    return subject['cover'] != null
-        ? subject['cover']
-        : subject['images']['small'];
-  }
-
-  dynamic getTitle(subject) {
-    return subject['title'];
-  }
-
-  dynamic getYear(subject) {
-    return subject['year'];
-  }
-
-  dynamic getRate(subject) {
-    return subject['rate'] != null ? subject['rate']: subject['rating']['average'].toString();
-  }
-
-  dynamic getDetails(subject) {
-    // String details = MovieUtil.getYear(subject) +
-    //     " / " +
-    //     MovieUtil.getPubPlace(subject) +
-    //     " / " +
-    //     MovieUtil.getGenres(subject) +
-    //     " / " +
-    //     MovieUtil.getDirectors(subject) +
-    //     " / " +
-    //     MovieUtil.getCasts(subject);
-    // return details;
-    return "";
-  }
-
-  dynamic getId(subject) {
-    return subject['id'];
   }
 }
