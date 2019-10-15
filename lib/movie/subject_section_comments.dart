@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_douban2/movie/subject_section_comment_template.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_douban2/movie/subject_section_comments_all.dart';
 
 class SubjectSectionComments extends StatelessWidget {
   final subject;
@@ -28,7 +29,7 @@ class SubjectSectionComments extends StatelessWidget {
       ),
       child: Column(
         children: <Widget>[
-          _buildHeader(),
+          _buildHeader(context),
           _buildComments(),
           _buildFooter(),
         ],
@@ -36,7 +37,7 @@ class SubjectSectionComments extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(context) {
     return Container(
       width: ScreenUtil.getInstance()
           .setWidth(ScreenSize.width - ScreenSize.padding * 10),
@@ -56,7 +57,26 @@ class SubjectSectionComments extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              print("All Comments");
+              showBottomSheet(
+                context: context,
+                builder: (_) => Stack(
+                  children: <Widget>[
+                    _buildBottomSheetContent(),
+                    Positioned(
+                      top:
+                          ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+                      right: ScreenUtil.getInstance()
+                          .setHeight(ScreenSize.padding),
+                      child: IconButton(
+                        icon: Icon(Icons.close),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    )
+                  ],
+                ),
+              );
             },
             child: Text("全部>"),
           )
@@ -65,13 +85,28 @@ class SubjectSectionComments extends StatelessWidget {
     );
   }
 
-  Widget _buildComments() {
-    return Column(
-      children: _buildChildre(),
+  Widget _buildBottomSheetContent() {
+    return Container(
+      width: ScreenUtil.screenWidth,
+      height: ScreenUtil.screenHeight,
+      color: Colors.white,
+      padding: EdgeInsets.fromLTRB(
+        ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
+        ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+        ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
+        ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+      ),
+      child: SubjectSectionCommentsAll(this.subject['id'])     ,
     );
   }
 
-  List<Widget> _buildChildre() {
+  Widget _buildComments() {
+    return Column(
+      children: _buildChildren(),
+    );
+  }
+
+  List<Widget> _buildChildren() {
     List<Widget> children = [];
     this.subject['popular_comments'].forEach((comment) {
       children.add(_builcComment(comment));
@@ -80,7 +115,16 @@ class SubjectSectionComments extends StatelessWidget {
   }
 
   Widget _builcComment(comment) {
-    return SubjectSectionCommentTemplate(comment);
+    return SubjectSectionCommentTemplate(
+      authorAvatar: comment['author']['avatar'],
+      authorName: comment['author']['name'],
+      ratingValue: comment['rating']['value'].toString(),
+      ratingMin: comment['rating']['min'].toString(),
+      ratingMax: comment['rating']['max'].toString(),
+      createdAt: comment['created_at'],
+      content: comment['content'],
+      usefufCount: comment['useful_count'].toString(),
+    );
   }
 
   Widget _buildFooter() {

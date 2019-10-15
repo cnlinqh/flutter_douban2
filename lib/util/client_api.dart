@@ -292,4 +292,71 @@ class ClientAPI {
         "<<<<ClientAPI: searchSubjects($start, $count, $tag) ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
+
+  Future<List> getAllComments({
+    String subjectId,
+    int start = 0,
+    int count = 0,
+    String sort = 'new_score', //new_score 热门， time 最新
+    String status = 'P', //P 看过， F 想看
+  }) async {
+    print(
+        ">>ClientAPI: getAllComment($subjectId, $start, $count, $sort, $status)");
+    var s = new DateTime.now();
+    List comments = [];
+    Response res = await webDio.get(
+        "/subject/$subjectId/comments?start=$start&limit=$count&sort=$sort&status=$status&comments_only=1");
+
+    String html = "<!DOCTYPE html><html><body>" +
+        res.data['html'].toString() +
+        "</body></html>";
+    var document = parse(html);
+    List<Element> commentRatings =
+        document.body.getElementsByClassName('rating');
+    List<Element> commentAvatars =
+        document.body.getElementsByClassName('avatar');
+    List<Element> commentTimes =
+        document.body.getElementsByClassName('comment-time ');
+
+    List<Element> commentContents =
+        document.body.getElementsByClassName('short');
+    List<Element> commentVotes = document.body.getElementsByClassName('votes');
+    int i = 0;
+    for (i = 0; i < commentTimes.length; i++) {
+      var comment = {
+        'authorAvatar': commentAvatars[i].getElementsByTagName('img').length > 0
+            ? commentAvatars[i].getElementsByTagName('img')[0].attributes['src']
+            : "",
+        'authorName': commentAvatars[i].getElementsByTagName('a').length > 0
+            ? commentAvatars[i].getElementsByTagName('a')[0].attributes['title']
+            : '',
+        'ratingValue': convertToStar(
+            i < commentRatings.length ? commentRatings[i].classes : ""),
+        'createdAt': commentTimes[i].attributes['title'],
+        'content': commentContents[i].text,
+        'usefufCount': commentVotes[i].text,
+      };
+      comments.add(comment);
+    }
+    var e = new DateTime.now();
+    print(
+        "<<<<ClientAPI: getAllComment($subjectId, $start, $count, $sort, $status) ##########################  ${e.difference(s).inMilliseconds}");
+    return comments;
+  }
+
+  static String convertToStar(star) {
+    if (star == "allstar50 rating") {
+      return "5";
+    } else if (star == "allstar40 rating") {
+      return "4";
+    } else if (star == "allstar30 rating") {
+      return "3";
+    } else if (star == "allstar20 rating") {
+      return "2";
+    } else if (star == "allstar10 rating") {
+      return "1";
+    } else {
+      return "0";
+    }
+  }
 }

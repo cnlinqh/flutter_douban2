@@ -6,8 +6,25 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 
 class SubjectSectionCommentTemplate extends StatefulWidget {
-  final comment;
-  SubjectSectionCommentTemplate(this.comment, {Key key}) : super(key: key);
+  final String authorAvatar;
+  final String authorName;
+  final String ratingValue;
+  final String ratingMin;
+  final String ratingMax;
+  final String createdAt;
+  final String content;
+  final String usefufCount;
+  SubjectSectionCommentTemplate({
+    Key key,
+    this.authorAvatar,
+    this.authorName,
+    this.ratingValue,
+    this.ratingMin,
+    this.ratingMax,
+    this.createdAt,
+    this.content,
+    this.usefufCount,
+  }) : super(key: key);
 
   _SubjectSectionCommentTemplateState createState() =>
       _SubjectSectionCommentTemplateState();
@@ -38,28 +55,25 @@ class _SubjectSectionCommentTemplateState
         children: <Widget>[
           Row(
             children: <Widget>[
-              MovieUtil.buildAuthorCover(widget.comment['author']['avatar']),
+              MovieUtil.buildAuthorCover(widget.authorAvatar),
               Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(widget.comment['author']['name']),
+                  Text(widget.authorName),
                   Row(
                     children: <Widget>[
                       RateStar(
-                        double.parse(
-                            widget.comment['rating']['value'].toString()),
-                        max: double.parse(
-                            widget.comment['rating']['max'].toString()),
-                        min: double.parse(
-                            widget.comment['rating']['min'].toString()),
+                        double.parse(widget.ratingValue),
+                        max: double.parse(widget.ratingMin),
+                        min: double.parse(widget.ratingMax),
                         labled: false,
                       ),
                       SizedBox(
                         width: ScreenUtil.getInstance()
                             .setHeight(ScreenSize.padding),
                       ),
-                      Text(this._formatDate(widget.comment['created_at'])),
+                      Text(this._formatDate(widget.createdAt)),
                     ],
                   )
                 ],
@@ -70,7 +84,7 @@ class _SubjectSectionCommentTemplateState
             height: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
           ),
           Text(
-            widget.comment['content'],
+            widget.content,
             maxLines: _isFolded ? 2 : 10000, //just make sure big enough
             overflow: TextOverflow.ellipsis,
           ),
@@ -109,7 +123,7 @@ class _SubjectSectionCommentTemplateState
               SizedBox(
                 width: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
               ),
-              Text(widget.comment['useful_count'].toString()),
+              Text(widget.usefufCount),
             ],
           ),
           SizedBox(
