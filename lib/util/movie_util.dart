@@ -19,6 +19,28 @@ class MovieUtil {
     );
   }
 
+  static buildIndexNo(index) {
+    return Positioned(
+      bottom: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 4),
+      left: ScreenUtil.getInstance()
+          .setWidth(ScreenSize.movie_cover_width + ScreenSize.padding * 2),
+      child: Container(
+        child: Text(
+          "No. ${index + 1}",
+          style: TextStyle(
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
+        ),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(3)),
+            color: index == 0
+                ? Colors.red
+                : index == 1
+                    ? Colors.redAccent
+                    : index == 2 ? Colors.orange : Colors.grey),
+      ),
+    );
+  }
+
   static buildFavoriteIcon() {
     return Positioned(
       child: GestureDetector(

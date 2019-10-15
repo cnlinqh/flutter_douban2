@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/movie/movie_subject_general.dart';
+import 'package:flutter_douban2/util/movie_util.dart';
 
 class MovieListStaticPage extends StatelessWidget {
   final String _title;
   final List _subjects;
-  MovieListStaticPage(this._title, this._subjects);
+  final bool rank;
+  MovieListStaticPage(this._title, this._subjects, {this.rank = false});
 
   @override
   Widget build(BuildContext context) {
@@ -16,14 +18,25 @@ class MovieListStaticPage extends StatelessWidget {
         itemCount: this._subjects.length,
         itemBuilder: (context, index) {
           return Container(
-            child: MovieSubjectGeneral(
-              getSubject(index)['id'],
-            ),
+            child: _buildMovieGeneral(index),
           );
         },
         separatorBuilder: (context, index) => Divider(),
       ),
     );
+  }
+
+  Widget _buildMovieGeneral(index) {
+    if (this.rank) {
+      return Stack(
+        children: <Widget>[
+          MovieSubjectGeneral(getSubject(index)['id']),
+          MovieUtil.buildIndexNo(index),
+        ],
+      );
+    } else {
+      return MovieSubjectGeneral(getSubject(index)['id']);
+    }
   }
 
   dynamic getSubject(index) {

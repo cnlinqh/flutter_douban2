@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/movie/movie_subject_general.dart';
+import 'package:flutter_douban2/util/movie_util.dart';
 
 class MovieListPagedPage extends StatefulWidget {
   final String title;
   final Function api;
   final String tag;
-  MovieListPagedPage({this.title, this.api, this.tag = ""});
+  final rank;
+  MovieListPagedPage({this.title, this.api, this.tag = "", this.rank = false});
 
   _MovieListPagedPageState createState() => _MovieListPagedPageState();
 }
@@ -65,7 +67,7 @@ class _MovieListPagedPageState extends State<MovieListPagedPage> {
                     return Container();
                   } else {
                     return Container(
-                      child: MovieSubjectGeneral(getSubject(index)['id']),
+                      child: _buildMovieGeneral(index),
                     );
                   }
                 },
@@ -76,6 +78,19 @@ class _MovieListPagedPageState extends State<MovieListPagedPage> {
         ),
       ),
     );
+  }
+
+  Widget _buildMovieGeneral(index) {
+    if (this.widget.rank) {
+      return Stack(
+        children: <Widget>[
+          MovieSubjectGeneral(getSubject(index)['id']),
+          MovieUtil.buildIndexNo(index),
+        ],
+      );
+    } else {
+      return MovieSubjectGeneral(getSubject(index)['id']);
+    }
   }
 
   dynamic getSubject(index) {

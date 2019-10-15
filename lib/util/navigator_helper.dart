@@ -51,13 +51,14 @@ class NavigatorHelper {
           MovieListPagedPage(
             title: title,
             api: ClientAPI.getInstance().getMovieTop250,
+            rank: true,
           ),
         );
         break;
       case LabelConstant.MOVIE_TOP_WEEKLY: //一周口碑电影榜
       case LabelConstant.MOVIE_TOP_NEW: //豆瓣电影新片榜
       case LabelConstant.MOVIE_TOP_US: //豆瓣电影北美票房榜
-        _push(context, MovieListStaticPage(title, content));
+        _push(context, MovieListStaticPage(title, content, rank: true,));
         break;
       case LabelConstant.MOVIE_DETAILS_TITLE: //电影详情
         _push(context, SubjectDetailsPage(content));
@@ -104,7 +105,6 @@ class NavigatorHelper {
         _push(context,
             MovieRankTop20StaticPage({'title': title, 'subjects': content}));
         break;
-      case LabelConstant.MOVIE_CHOOSE_TOPIC:
       case LabelConstant.MOVIE_CHOOSE_TOPIC_HOT:
       case LabelConstant.MOVIE_CHOOSE_TOPIC_NEW:
       case LabelConstant.MOVIE_CHOOSE_TOPIC_COOL:
