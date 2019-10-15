@@ -32,10 +32,10 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
       count: this._count,
     );
 
-    if (list.length < this._count) {
+    if (list['comments'].length < this._count) {
       _done = true;
     }
-    _dataList.insertAll(_dataList.length - 1, list.toList());
+    _dataList.insertAll(_dataList.length - 1, list['comments'].toList());
     _start = _start + list.length;
     setState(() {});
   }

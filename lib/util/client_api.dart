@@ -293,26 +293,22 @@ class ClientAPI {
     return res.data['subjects'];
   }
 
-  Future<List> getAllComments({
+  Future getAllComments({
     String subjectId,
     int start = 0,
     int count = 0,
     String sort = 'new_score', //new_score 热门， time 最新
-    String status = 'P', //P 看过， F 想看
+    String status = 'F', //P 看过， F 想看
   }) async {
     print(
         ">>ClientAPI: getAllComment($subjectId, $start, $count, $sort, $status)");
     var s = new DateTime.now();
     List comments = [];
     var url =
-        "/subject/$subjectId/comments?start=$start&limit=$count&sort=$sort&status=$status&comments_only=1";
+        "/subject/$subjectId/comments?start=$start&limit=$count&sort=$sort&status=$status";
     Response res = await webDio.get(url);
-    String html = "<!DOCTYPE html><html><body>" +
-        res.data['html'].toString() +
-        "</body></html>";
-    var document = parse(html);
+    var document = parse(res.toString());
     List<Element> items = document.body.getElementsByClassName('comment-item');
-    print(items.length);
     items.forEach((item) {
       var comment = {
         'authorAvatar': item.getElementsByTagName('img')[0].attributes['src'],
@@ -328,10 +324,17 @@ class ClientAPI {
       };
       comments.add(comment);
     });
+
+    List<Element> isActives = document.body.getElementsByClassName('is-active');
+    var total = isActives[0].getElementsByTagName('span')[0].text;
+    print("total: " + total);
     var e = new DateTime.now();
     print(
         "<<<<ClientAPI: getAllComment($subjectId, $start, $count, $sort, $status) ##########################  ${e.difference(s).inMilliseconds}");
-    return comments;
+    return {
+      "comments": comments,
+      "total": total,
+    };
   }
 
   static String convertToStar(star) {
