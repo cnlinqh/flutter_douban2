@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/movie/subject_section_comments.dart';
 import 'package:flutter_douban2/movie/subject_section_general.dart';
 import 'package:flutter_douban2/movie/subject_section_media.dart';
 import 'package:flutter_douban2/movie/subject_section_rate.dart';
@@ -68,6 +69,7 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
                 SubjectSectionSummary(this._subject),
                 SubjectSectionDirectorsCasts(this._subject),
                 SubjectSectionMedia(this._subject),
+                SubjectSectionComments(this._subject),
               ],
             ),
           ),

@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 
 class RateStar extends StatelessWidget {
-  final double _size = 14;
-  final double _rate;
-  final bool withNumber;
+  final double rate;
+  final double min;
+  final double max;
+  final bool labled;
+  final double size;
   final MainAxisAlignment mainAxisAlignment;
-  RateStar(this._rate, {this.withNumber = true, this.mainAxisAlignment = MainAxisAlignment.start});
+
+  RateStar(
+    this.rate, {
+    this.min = 0.0,
+    this.max = 10.0,
+    this.labled = true,
+    this.size = 14,
+    this.mainAxisAlignment = MainAxisAlignment.start,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,65 +26,40 @@ class RateStar extends StatelessWidget {
     return Container(
       child: Row(
         mainAxisAlignment: this.mainAxisAlignment,
-        children: _buildStars(),
+        children: _build5Stars(),
       ),
     );
   }
 
-  List<Widget> _buildStars() {
+  List<Widget> _build5Stars() {
     return <Widget>[
-      Icon(
-        _rate >= 2
-            ? Icons.star
-            : _rate > 0 ? Icons.star_half : Icons.star_border,
-        size: _size,
-        color: _rate >= 2
-            ? Colors.orange
-            : _rate > 0 ? Colors.orangeAccent : Colors.black,
-      ),
-      Icon(
-        _rate >= 4
-            ? Icons.star
-            : _rate > 2 ? Icons.star_half : Icons.star_border,
-        size: _size,
-        color: _rate >= 4
-            ? Colors.orange
-            : _rate > 2 ? Colors.orangeAccent : Colors.black,
-      ),
-      Icon(
-        _rate >= 6
-            ? Icons.star
-            : _rate > 4 ? Icons.star_half : Icons.star_border,
-        size: _size,
-        color: _rate >= 6
-            ? Colors.orange
-            : _rate > 4 ? Colors.orangeAccent : Colors.black,
-      ),
-      Icon(
-        _rate >= 8
-            ? Icons.star
-            : _rate > 6 ? Icons.star_half : Icons.star_border,
-        size: _size,
-        color: _rate >= 8
-            ? Colors.orange
-            : _rate > 6 ? Colors.orangeAccent : Colors.black,
-      ),
-      Icon(
-        _rate >= 10
-            ? Icons.star
-            : _rate > 8 ? Icons.star_half : Icons.star_border,
-        size: _size,
-        color: _rate >= 10
-            ? Colors.orange
-            : _rate > 8 ? Colors.orangeAccent : Colors.black,
-      ),
+      _buildStar(1),
+      _buildStar(2),
+      _buildStar(3),
+      _buildStar(4),
+      _buildStar(5),
       Text(
-        withNumber?_rate.toString():"",
+        labled ? rate.toString() : "",
         style: TextStyle(
           color: Colors.grey,
-          fontSize: this._size,
+          fontSize: this.size,
         ),
       ),
     ];
+  }
+
+  Widget _buildStar(int index) {
+    double range = (max - min) / 5;
+    double top = range * index.toDouble();
+    double bottom = range * (index.toDouble() - 1);
+    return Icon(
+      rate >= top
+          ? Icons.star
+          : rate > bottom ? Icons.star_half : Icons.star_border,
+      size: size,
+      color: rate >= top
+          ? Colors.orange
+          : rate > bottom ? Colors.orangeAccent : Colors.black,
+    );
   }
 }

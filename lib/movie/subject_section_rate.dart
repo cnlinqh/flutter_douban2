@@ -105,7 +105,7 @@ class SubjectSectionRate extends StatelessWidget {
               child: Center(
                 child: RateStar(
                   double.parse(this._subject['rating']['average'].toString()),
-                  withNumber: false,
+                  labled: false,
                   mainAxisAlignment: MainAxisAlignment.center,
                 ),
               ),

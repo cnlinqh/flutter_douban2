@@ -222,4 +222,10 @@ class MovieUtil {
       ],
     );
   }
+
+  static buildAuthorCover(cover) {
+    return CircleAvatar(
+      backgroundImage: CachedNetworkImageProvider(cover),
+    );
+  }
 }
