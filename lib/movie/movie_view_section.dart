@@ -14,10 +14,11 @@ class MovieViewSection extends StatefulWidget {
 }
 
 class _MovieViewSectionState extends State<MovieViewSection> {
+
   String _title;
   List _subjects = [];
   double _fontSize;
-
+  bool coming = false;
   _MovieViewSectionState(this._title);
 
   @override
@@ -32,6 +33,7 @@ class _MovieViewSectionState extends State<MovieViewSection> {
     if (this._title == LabelConstant.MOVIE_IN_THEATERS_TITLE) {
       this._subjects = await client.getMovieInTheaters();
     } else if (this._title == LabelConstant.MOVIE_COMING_SOON_TITLE) {
+      this.coming = true;
       this._subjects = await client.getMovieComingSoon();
     } else if (this._title == LabelConstant.MOVIE_RANK_TOP20_LOVE) {
       this._subjects = await client
@@ -90,6 +92,7 @@ class _MovieViewSectionState extends State<MovieViewSection> {
           MovieViewSectionBody(
             this._subjects.sublist(0, 3),
             this.widget.rowCount > 1 ? this._subjects.sublist(3, 6) : [],
+            this.coming,
           ),
         ],
       ),

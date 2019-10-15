@@ -11,26 +11,40 @@ class MovieSubjectSimple extends StatelessWidget {
   final String cover;
   final double rate;
   final String id;
-  MovieSubjectSimple(this.title, this.cover, this.rate, this.id);
+  final bool coming;
+  final String mainlandPubdate;
+  MovieSubjectSimple(this.title, this.cover, this.rate, this.id,
+      {this.coming = false, this.mainlandPubdate = ''});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          _buildCoverImage(context),
-          _buildTitle(),
-          _buildRate(),
-        ],
+        children: _buildChildren(context),
       ),
     );
+  }
+
+  List<Widget> _buildChildren(context) {
+    List<Widget> list = [];
+    list.add(_buildCoverImage(context));
+    list.add(
+      _buildTitle(),
+    );
+    list.add(_buildRate());
+
+    if (this.coming) {
+      list.add(_buildPubDate());
+    }
+    return list;
   }
 
   Widget _buildCoverImage(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_DETAILS_TITLE, content:this.id);
+        NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_DETAILS_TITLE,
+            content: this.id);
       },
       child: Stack(
         children: <Widget>[
@@ -64,5 +78,24 @@ class MovieSubjectSimple extends StatelessWidget {
               color: Colors.grey,
             ),
           );
+  }
+
+  Widget _buildPubDate() {
+    return Container(
+      padding: EdgeInsets.all(ScreenUtil.getInstance().setWidth(5)),
+      decoration: BoxDecoration(
+          border: Border.all(
+        color: Colors.red,
+        width: 2.0,
+        style: BorderStyle.solid,
+      )),
+      child: Text(
+        this.mainlandPubdate,
+        style: TextStyle(
+          color: Colors.red,
+          fontSize: 12,
+        ),
+      ),
+    );
   }
 }

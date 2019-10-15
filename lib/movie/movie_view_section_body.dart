@@ -4,7 +4,8 @@ import 'package:flutter_douban2/movie/movie_subject_simple.dart';
 class MovieViewSectionBody extends StatelessWidget {
   final List firstRow;
   final List secondRow;
-  MovieViewSectionBody(this.firstRow, this.secondRow);
+  final bool coming;
+  MovieViewSectionBody(this.firstRow, this.secondRow, this.coming);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,6 +38,8 @@ class MovieViewSectionBody extends StatelessWidget {
             : sub['rating']['average'].toString(),
       ),
       sub['id'],
+      coming: this.coming,
+      mainlandPubdate: sub['mainland_pubdate'],
     );
   }
 }
