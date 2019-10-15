@@ -304,40 +304,30 @@ class ClientAPI {
         ">>ClientAPI: getAllComment($subjectId, $start, $count, $sort, $status)");
     var s = new DateTime.now();
     List comments = [];
-    Response res = await webDio.get(
-        "/subject/$subjectId/comments?start=$start&limit=$count&sort=$sort&status=$status&comments_only=1");
-
+    var url =
+        "/subject/$subjectId/comments?start=$start&limit=$count&sort=$sort&status=$status&comments_only=1";
+    Response res = await webDio.get(url);
     String html = "<!DOCTYPE html><html><body>" +
         res.data['html'].toString() +
         "</body></html>";
     var document = parse(html);
-    List<Element> commentRatings =
-        document.body.getElementsByClassName('rating');
-    List<Element> commentAvatars =
-        document.body.getElementsByClassName('avatar');
-    List<Element> commentTimes =
-        document.body.getElementsByClassName('comment-time ');
-
-    List<Element> commentContents =
-        document.body.getElementsByClassName('short');
-    List<Element> commentVotes = document.body.getElementsByClassName('votes');
-    int i = 0;
-    for (i = 0; i < commentTimes.length; i++) {
+    List<Element> items = document.body.getElementsByClassName('comment-item');
+    print(items.length);
+    items.forEach((item) {
       var comment = {
-        'authorAvatar': commentAvatars[i].getElementsByTagName('img').length > 0
-            ? commentAvatars[i].getElementsByTagName('img')[0].attributes['src']
-            : "",
-        'authorName': commentAvatars[i].getElementsByTagName('a').length > 0
-            ? commentAvatars[i].getElementsByTagName('a')[0].attributes['title']
-            : '',
+        'authorAvatar': item.getElementsByTagName('img')[0].attributes['src'],
+        'authorName': item.getElementsByTagName('a')[0].attributes['title'],
         'ratingValue': convertToStar(
-            i < commentRatings.length ? commentRatings[i].classes : ""),
-        'createdAt': commentTimes[i].attributes['title'],
-        'content': commentContents[i].text,
-        'usefufCount': commentVotes[i].text,
+            item.getElementsByClassName('rating').length > 0
+                ? item.getElementsByClassName('rating')[0].classes
+                : ""),
+        'createdAt':
+            item.getElementsByClassName('comment-time ')[0].attributes['title'],
+        'content': item.getElementsByClassName('short')[0].text,
+        'usefufCount': item.getElementsByClassName('votes')[0].text,
       };
       comments.add(comment);
-    }
+    });
     var e = new DateTime.now();
     print(
         "<<<<ClientAPI: getAllComment($subjectId, $start, $count, $sort, $status) ##########################  ${e.difference(s).inMilliseconds}");
