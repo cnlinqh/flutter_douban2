@@ -16,12 +16,14 @@ class MovieCategorySearchBar extends StatefulWidget {
 class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
   var localList;
   ScrollController _controller = new ScrollController();
-  List itemKeys = [];
+  List _vkeys = [];
+  List _hkeys = [];
   @override
   void initState() {
     super.initState();
     widget.list['list'].forEach((r) {
-      itemKeys.add(GlobalKey());
+      _vkeys.add(GlobalKey());
+      _hkeys.add(GlobalKey());
     });
     localList = widget.list;
   }
@@ -33,27 +35,52 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
           .setWidth(ScreenSize.width - 2 * ScreenSize.padding),
       height: ScreenUtil.getInstance()
           .setHeight(ScreenSize.movie_cate_search_bar_hight),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: Stack(
         children: <Widget>[
-          Container(
-            child: Text(
-              localList['label'],
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Expanded(
-            child: ListView(
-              children: _buildChildren(),
-              controller: this._controller,
-              scrollDirection: Axis.horizontal,
-              addAutomaticKeepAlives: true,
-            ),
-          )
+          _buildHiddenChild(),
+          _buildOpacity(),
+          _buildVisibleChild(),
         ],
       ),
+    );
+  }
+
+  Widget _buildHiddenChild() {
+    return Stack(
+      children: _buildHiddenItems(),
+    );
+  }
+
+  Widget _buildOpacity() {
+    return Opacity(
+      opacity: 1,
+      child: Container(
+        color: Colors.white,
+      ),
+    );
+  }
+
+  Widget _buildVisibleChild() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Container(
+          child: Text(
+            localList['label'],
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        Expanded(
+          child: ListView(
+            children: _buildVisibleItems(),
+            controller: this._controller,
+            scrollDirection: Axis.horizontal,
+            addAutomaticKeepAlives: true,
+          ),
+        )
+      ],
     );
   }
 
@@ -67,12 +94,12 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
   }
 
   void _autoScrollToSelected() {
+    printAllSize();
     double to = 0;
     for (int i = 0; i < localList['list'].length; i++) {
       if (this.widget.selected != localList['list'][i]) {
-        if (this.itemKeys[i].currentContext != null) {
-          to = to +
-              this.itemKeys[i].currentContext.findRenderObject().size.width;
+        if (this._hkeys[i].currentContext != null) {
+          to = to + this._hkeys[i].currentContext.findRenderObject().size.width;
         }
       } else {
         break;
@@ -84,65 +111,107 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
     }
   }
 
+  printAllSize() {
+    // print("printAllSize start");
+    // for (int i = 0; i < localList['list'].length; i++) {
+    //   if (this._hkeys[i].currentContext != null) {
+    //     print(localList['list'][i]);
+    //     print(this._hkeys[i].currentContext.findRenderObject().size.width);
+    //   }
+    // }
+    // print('----------------');
+    // for (int i = 0; i < localList['list'].length; i++) {
+    //   if (this._vkeys[i].currentContext != null) {
+    //     print(localList['list'][i]);
+    //     print(this._vkeys[i].currentContext.findRenderObject().size.width);
+    //   }
+    // }
+    // print("printAllSize  end");
+  }
+
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
 
-  List<Widget> _buildChildren() {
+  List<Widget> _buildVisibleItems() {
     List<Widget> children = [];
     var list = localList['list'];
     for (int i = 0; i < list.length; i++) {
-      if (i >= itemKeys.length) {
-        itemKeys.add(GlobalKey());
+      if (i >= _vkeys.length) {
+        _vkeys.add(GlobalKey());
       }
-      children.add(this._buildItem(list[i], itemKeys[i]));
+      children.add(this._buildItem(list[i], _vkeys[i]));
+    }
+    return children;
+  }
+
+  List<Widget> _buildHiddenItems() {
+    List<Widget> children = [];
+    var list = localList['list'];
+    for (int i = 0; i < list.length; i++) {
+      if (i >= _hkeys.length) {
+        _hkeys.add(GlobalKey());
+      }
+      children.add(this._buildItem(list[i], _hkeys[i]));
     }
     return children;
   }
 
   Widget _buildItem(String text, Key key) {
-    return GestureDetector(
-      key: key,
-      onTap: () {
-        if (text != LabelConstant.MOVIE_SPECIAL_SELF_DEFINE) {
-          this.widget.onSelectionChange(text);
-        } else {
-          showHasInputDialog().then((newSpecial) {
-            if (newSpecial == null) return;
-            setState(() {
-              this
-                  .localList['list']
-                  .insert(this.localList['list'].length - 1, newSpecial);
-              this.itemKeys.insert(this.itemKeys.length - 1, GlobalKey());
-              this.widget.onSelectionChange(newSpecial);
+    return Container(
+      child: GestureDetector(
+        key: key,
+        onTap: () {
+          this.printAllSize();
+          if (text != LabelConstant.MOVIE_SPECIAL_SELF_DEFINE) {
+            if (this.widget.onSelectionChange != null) {
+              this.widget.onSelectionChange(text);
+            }
+          } else {
+            showHasInputDialog().then((newSpecial) {
+              if (newSpecial == null) return;
+              setState(() {
+                this
+                    .localList['list']
+                    .insert(this.localList['list'].length - 1, newSpecial);
+                this._hkeys.insert(this._hkeys.length - 1, GlobalKey());
+                this._vkeys.insert(this._vkeys.length - 1, GlobalKey());
+                if (this.widget.onSelectionChange != null) {
+                  this.widget.onSelectionChange(newSpecial);
+                }
+              });
             });
-          });
-        }
-      },
-      child: Center(
-        child: Container(
-          margin: EdgeInsets.all(
-            ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-          ),
-          padding: EdgeInsets.all(
-              ScreenUtil.getInstance().setWidth(ScreenSize.padding / 2)),
-          decoration: BoxDecoration(
-            color: this.widget.selected == text ? Colors.cyan : Colors.white60,
-            borderRadius: BorderRadius.all(Radius.circular(3)),
-          ),
-          child: Text(
-            text,
-            style: TextStyle(
-              color: text == LabelConstant.MOVIE_SPECIAL_SELF_DEFINE
-                  ? Colors.green
-                  : Colors.black,
-              fontWeight: this.widget.selected == text
-                  ? FontWeight.bold
-                  : FontWeight.normal,
-            ),
-          ),
+          }
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.all(
+                ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+              ),
+              padding: EdgeInsets.all(
+                  ScreenUtil.getInstance().setWidth(ScreenSize.padding / 2)),
+              decoration: BoxDecoration(
+                color:
+                    this.widget.selected == text ? Colors.cyan : Colors.white60,
+                borderRadius: BorderRadius.all(Radius.circular(3)),
+              ),
+              child: Text(
+                text,
+                style: TextStyle(
+                  color: text == LabelConstant.MOVIE_SPECIAL_SELF_DEFINE
+                      ? Colors.green
+                      : Colors.black,
+                  fontWeight: this.widget.selected == text
+                      ? FontWeight.bold
+                      : FontWeight.normal,
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );
