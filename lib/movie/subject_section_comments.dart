@@ -33,6 +33,9 @@ class SubjectSectionComments extends StatelessWidget {
           _buildHeader(context),
           _buildComments(),
           _buildFooter(context),
+          SizedBox(
+            height: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+          ),
         ],
       ),
     );
@@ -63,18 +66,6 @@ class SubjectSectionComments extends StatelessWidget {
                 builder: (_) => Stack(
                   children: <Widget>[
                     _buildBottomSheetContent(),
-                    Positioned(
-                      top:
-                          ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-                      right: ScreenUtil.getInstance()
-                          .setHeight(ScreenSize.padding),
-                      child: IconButton(
-                        icon: Icon(Icons.close),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    )
                   ],
                 ),
               );
@@ -124,7 +115,7 @@ class SubjectSectionComments extends StatelessWidget {
       ratingMax: comment['rating']['max'].toString(),
       createdAt: comment['created_at'],
       content: comment['content'],
-      usefufCount: comment['useful_count'].toString(),
+      usefulCount: comment['useful_count'].toString(),
     );
   }
 
@@ -139,16 +130,6 @@ class SubjectSectionComments extends StatelessWidget {
             builder: (_) => Stack(
               children: <Widget>[
                 _buildBottomSheetContent(),
-                Positioned(
-                  top: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-                  right: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-                  child: IconButton(
-                    icon: Icon(Icons.close),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                )
               ],
             ),
           );

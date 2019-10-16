@@ -69,6 +69,22 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
         children: <Widget>[
           Row(
             children: <Widget>[
+              Expanded(
+                child: Center(
+                  child: Container(
+                    width: ScreenUtil.getInstance().setWidth(ScreenSize.close_bar_width),
+                    height: ScreenUtil.getInstance().setHeight(ScreenSize.close_bar_height),
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.all(Radius.circular(7)),
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+          Row(
+            children: <Widget>[
               Text(
                 LabelConstant.MOIVE_ALL_COMMENTS,
                 style: TextStyle(fontSize: 24),
@@ -209,7 +225,7 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
       ratingMax: "5",
       createdAt: comment['createdAt'],
       content: comment['content'],
-      usefufCount: comment['usefufCount'],
+      usefulCount: comment['usefufCount'],
     );
   }
 

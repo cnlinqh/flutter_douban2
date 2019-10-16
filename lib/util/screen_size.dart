@@ -78,4 +78,6 @@ class ScreenSize {
   static const double choose_image_width = 180;
   static const double choose_image_height = 80;
 
+  static const double close_bar_width = 100;
+  static const double close_bar_height = 10;
 }

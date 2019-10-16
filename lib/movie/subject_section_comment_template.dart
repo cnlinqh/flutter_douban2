@@ -13,17 +13,17 @@ class SubjectSectionCommentTemplate extends StatefulWidget {
   final String ratingMax;
   final String createdAt;
   final String content;
-  final String usefufCount;
+  final String usefulCount;
   SubjectSectionCommentTemplate({
     Key key,
-    this.authorAvatar,
-    this.authorName,
-    this.ratingValue,
-    this.ratingMin,
-    this.ratingMax,
-    this.createdAt,
-    this.content,
-    this.usefufCount,
+    @required this.authorAvatar,
+    @required this.authorName,
+    @required this.ratingValue,
+    @required this.ratingMin,
+    @required this.ratingMax,
+    @required this.createdAt,
+    @required this.content,
+    @required this.usefulCount,
   }) : super(key: key);
 
   _SubjectSectionCommentTemplateState createState() =>
@@ -52,92 +52,114 @@ class _SubjectSectionCommentTemplateState
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        children: _buildChildren(),
+      ),
+    );
+  }
+
+  List<Widget> _buildChildren() {
+    List<Widget> list = [];
+    list.addAll(_buildHeader());
+    list.addAll(_buildContent());
+    list.addAll(_buildFooter());
+    return list;
+  }
+
+  List<Widget> _buildHeader() {
+    return [
+      Row(
         children: <Widget>[
-          Row(
+          MovieUtil.buildAuthorCover(widget.authorAvatar),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              MovieUtil.buildAuthorCover(widget.authorAvatar),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
+              Text(widget.authorName),
+              Row(
                 children: <Widget>[
-                  Text(widget.authorName),
-                  Row(
-                    children: <Widget>[
-                      RateStar(
-                        double.parse(widget.ratingValue),
-                        min: double.parse(widget.ratingMin),
-                        max: double.parse(widget.ratingMax),
-                        labled: false,
-                      ),
-                      SizedBox(
-                        width: ScreenUtil.getInstance()
-                            .setHeight(ScreenSize.padding),
-                      ),
-                      Text(this._formatDate(widget.createdAt)),
-                    ],
-                  )
+                  RateStar(
+                    double.parse(widget.ratingValue),
+                    min: double.parse(widget.ratingMin),
+                    max: double.parse(widget.ratingMax),
+                    labled: false,
+                  ),
+                  SizedBox(
+                    width:
+                        ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+                  ),
+                  Text(this._formatDate(widget.createdAt)),
                 ],
               )
             ],
-          ),
-          SizedBox(
-            height: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-          ),
-          Text(
-            widget.content,
-            maxLines: _isFolded ? 2 : 10000, //just make sure big enough
-            overflow: TextOverflow.ellipsis,
-          ),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                this._isFolded = !this._isFolded;
-              });
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  this._isFolded
-                      ? LabelConstant.MOVIE_UNFOLD
-                      : LabelConstant.MOVIE_FOLD,
-                  style: TextStyle(
-                    fontSize: 14,
-                  ),
-                ),
-                Icon(
-                  this._isFolded
-                      ? Icons.keyboard_arrow_down
-                      : Icons.keyboard_arrow_up,
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-          ),
-          Row(
-            children: <Widget>[
-              Icon(Icons.thumb_up),
-              SizedBox(
-                width: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+          )
+        ],
+      )
+    ];
+  }
+
+  List<Widget> _buildContent() {
+    return [
+      SizedBox(
+        height: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+      ),
+      Text(
+        widget.content,
+        maxLines: _isFolded ? 2 : 10000, //just make sure big enough
+        overflow: TextOverflow.ellipsis,
+      ),
+      GestureDetector(
+        onTap: () {
+          setState(() {
+            this._isFolded = !this._isFolded;
+          });
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              this._isFolded
+                  ? LabelConstant.MOVIE_UNFOLD
+                  : LabelConstant.MOVIE_FOLD,
+              style: TextStyle(
+                fontSize: 14,
               ),
-              Text(widget.usefufCount),
-            ],
-          ),
+            ),
+            Icon(
+              this._isFolded
+                  ? Icons.keyboard_arrow_down
+                  : Icons.keyboard_arrow_up,
+            ),
+          ],
+        ),
+      )
+    ];
+  }
+
+  List<Widget> _buildFooter() {
+    return [
+      SizedBox(
+        height: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+      ),
+      Row(
+        children: <Widget>[
+          Icon(Icons.thumb_up),
           SizedBox(
-            height: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+            width: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
           ),
-          Container(
-            width: ScreenUtil.getInstance()
-                .setWidth(ScreenSize.width - ScreenSize.padding * 10),
-            height: 1,
-            color: Colors.grey,
-          ),
+          Text(widget.usefulCount),
         ],
       ),
-    );
+      SizedBox(
+        height: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+      ),
+      Container(
+        width: ScreenUtil.getInstance()
+            .setWidth(ScreenSize.width - ScreenSize.padding * 10),
+        height: 1,
+        color: Colors.grey,
+      )
+    ];
   }
 
   String _formatDate(date) {
