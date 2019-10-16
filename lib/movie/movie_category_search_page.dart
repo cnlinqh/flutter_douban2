@@ -183,7 +183,7 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
               child: MovieSubjectSimple(
                 getSubject(index)['title'],
                 getSubject(index)['cover'],
-                getSubject(index)['rate'] == "" ? 0 : double.parse(sub['rate']),
+                getSubject(index)['rate'] == "" ? 0 : double.parse(getSubject(index)['rate']),
                 getSubject(index)['id'],
               ),
             );
