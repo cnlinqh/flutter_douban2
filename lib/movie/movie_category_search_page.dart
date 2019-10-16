@@ -171,7 +171,7 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
       return GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
-          childAspectRatio: 0.6,
+          childAspectRatio: 0.55,
         ),
         itemCount: _dataList.length,
         itemBuilder: (context, index) {
