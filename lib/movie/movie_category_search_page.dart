@@ -6,6 +6,7 @@ import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/movie/movie_subject_general.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
+import 'package:flutter_douban2/movie/movie_subject_simple.dart';
 
 class MovieCategorySearchPage extends StatefulWidget {
   final String style;
@@ -31,6 +32,8 @@ class MovieCategorySearchPage extends StatefulWidget {
 }
 
 class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
+  bool _isListView = true; //ListView or GridView
+
   String _selectedStyle;
   String _selectedCountry;
   String _selectedYear;
@@ -66,6 +69,46 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(LabelConstant.MOVIE_CATEGORY_TITLE),
+        actions: <Widget>[
+          GestureDetector(
+            child: Container(
+              padding: EdgeInsets.only(
+                left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+                right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+              ),
+              child: Icon(
+                Icons.chrome_reader_mode,
+                color: this._isListView ? Colors.orange : null,
+              ),
+            ),
+            onTap: () {
+              if (mounted) {
+                setState(() {
+                  this._isListView = true;
+                });
+              }
+            },
+          ),
+          GestureDetector(
+            child: Container(
+              padding: EdgeInsets.only(
+                left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+                right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+              ),
+              child: Icon(
+                Icons.apps,
+                color: !this._isListView ? Colors.orange : null,
+              ),
+            ),
+            onTap: () {
+              if (mounted) {
+                setState(() {
+                  this._isListView = false;
+                });
+              }
+            },
+          ),
+        ],
       ),
       body: Container(
         child: Column(
@@ -100,25 +143,54 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
               ],
             ),
             Expanded(
-              child: ListView.separated(
-                itemCount: _dataList.length,
-                itemBuilder: (context, index) {
-                  if (_dataList[index]['title'] == _loading) {
-                    _retrieveData(context);
-                    return Container();
-                  } else {
-                    return Container(
-                      child: MovieSubjectGeneral(getSubject(index)['id']),
-                    );
-                  }
-                },
-                separatorBuilder: (context, index) => Divider(),
-              ),
+              child: _buildScrollView(),
             )
           ],
         ),
       ),
     );
+  }
+
+  Widget _buildScrollView() {
+    if (this._isListView) {
+      return ListView.separated(
+        itemCount: _dataList.length,
+        itemBuilder: (context, index) {
+          if (_dataList[index]['title'] == _loading) {
+            _retrieveData(context);
+            return Container();
+          } else {
+            return Container(
+              child: MovieSubjectGeneral(getSubject(index)['id']),
+            );
+          }
+        },
+        separatorBuilder: (context, index) => Divider(),
+      );
+    } else {
+      return GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          childAspectRatio: 0.6,
+        ),
+        itemCount: _dataList.length,
+        itemBuilder: (context, index) {
+          if (_dataList[index]['title'] == _loading) {
+            _retrieveData(context);
+            return Container();
+          } else {
+            return Container(
+              child: MovieSubjectSimple(
+                getSubject(index)['title'],
+                getSubject(index)['cover'],
+                getSubject(index)['rate'] == "" ? 0 : double.parse(sub['rate']),
+                getSubject(index)['id'],
+              ),
+            );
+          }
+        },
+      );
+    }
   }
 
   dynamic getSubject(index) {
