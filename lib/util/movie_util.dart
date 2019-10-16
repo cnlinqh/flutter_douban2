@@ -228,4 +228,23 @@ class MovieUtil {
       backgroundImage: CachedNetworkImageProvider(cover),
     );
   }
+
+  static showAlerDialog(BuildContext context, String titleStr, String conentStr) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return new AlertDialog(
+            title: new Text(titleStr),
+            content: new Text(conentStr),
+            actions: <Widget>[
+              new FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: new Text("我知道了"),
+              ),
+            ],
+          );
+        });
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/movie/subject_section_comment_template.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
+import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/movie/subject_section_comments_all.dart';
@@ -51,8 +52,16 @@ class SubjectSectionComments extends StatelessWidget {
             LabelConstant.MOVIE_SHORT_COMMENTS,
             style: TextStyle(fontSize: 24),
           ),
-          Icon(
-            Icons.help_outline,
+          IconButton(
+            icon: Icon(
+              Icons.help_outline,
+            ),
+            onPressed: () {
+              MovieUtil.showAlerDialog(
+                  context,
+                  LabelConstant.MOVIE_SHORT_COMMENTS,
+                  LabelConstant.MOVIE_COMMENTS_HELP);
+            },
           ),
           Container(
             child: Expanded(

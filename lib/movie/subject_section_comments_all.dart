@@ -5,6 +5,7 @@ import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/widget/radio_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
+import 'package:flutter_douban2/util/movie_util.dart';
 
 class SubjectSectionCommentsAll extends StatefulWidget {
   final subjectId;
@@ -72,8 +73,10 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
               Expanded(
                 child: Center(
                   child: Container(
-                    width: ScreenUtil.getInstance().setWidth(ScreenSize.close_bar_width),
-                    height: ScreenUtil.getInstance().setHeight(ScreenSize.close_bar_height),
+                    width: ScreenUtil.getInstance()
+                        .setWidth(ScreenSize.close_bar_width),
+                    height: ScreenUtil.getInstance()
+                        .setHeight(ScreenSize.close_bar_height),
                     decoration: BoxDecoration(
                       color: Colors.grey,
                       borderRadius: BorderRadius.all(Radius.circular(7)),
@@ -89,8 +92,16 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
                 LabelConstant.MOIVE_ALL_COMMENTS,
                 style: TextStyle(fontSize: 24),
               ),
-              Icon(
-                Icons.help_outline,
+              IconButton(
+                icon: Icon(
+                  Icons.help_outline,
+                ),
+                onPressed: () {
+                  MovieUtil.showAlerDialog(
+                      context,
+                      LabelConstant.MOVIE_SHORT_COMMENTS,
+                      LabelConstant.MOVIE_COMMENTS_HELP);
+                },
               ),
             ],
           ),

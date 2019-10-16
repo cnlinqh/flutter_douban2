@@ -47,7 +47,7 @@ class LabelConstant {
   static const String MOVIE_VIDEO_TITLE = "预告片/花絮";
   static const String MOVIE_PHOTO_TITLE = "剧照";
   static const String MOVIE_SHORT_COMMENTS="短评";
-
+  static const String MOVIE_COMMENTS_HELP ="短评区仅仅展示部分短评，由算法根据时间、热度等因素进行筛选，并随机展示。\n影片上映之前的、与影片无关的或包含人身攻击等内容的短评将被折叠，且其评分不计入豆瓣评分。";
 
   static const String MOVIE_TOP_LIST_YEAR_TITLE = '豆瓣年度榜单';
   static const String MOVIE_YEAR_TOP_DETAILS_TITLE = "年度最高列表";
