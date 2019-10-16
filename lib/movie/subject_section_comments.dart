@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/movie/subject_section_comment_template.dart';
+import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/movie/subject_section_comments_all.dart';
@@ -31,7 +32,7 @@ class SubjectSectionComments extends StatelessWidget {
         children: <Widget>[
           _buildHeader(context),
           _buildComments(),
-          _buildFooter(),
+          _buildFooter(context),
         ],
       ),
     );
@@ -44,7 +45,7 @@ class SubjectSectionComments extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Text(
-            '短评',
+            LabelConstant.MOVIE_SHORT_COMMENTS,
             style: TextStyle(fontSize: 24),
           ),
           Icon(
@@ -78,7 +79,7 @@ class SubjectSectionComments extends StatelessWidget {
                 ),
               );
             },
-            child: Text("全部>"),
+            child: Text(LabelConstant.MOVIE_ALL_TITLE),
           )
         ],
       ),
@@ -96,7 +97,7 @@ class SubjectSectionComments extends StatelessWidget {
         ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
         ScreenUtil.getInstance().setHeight(ScreenSize.padding),
       ),
-      child: SubjectSectionCommentsAll(this.subject['id'])     ,
+      child: SubjectSectionCommentsAll(this.subject['id']),
     );
   }
 
@@ -127,20 +128,42 @@ class SubjectSectionComments extends StatelessWidget {
     );
   }
 
-  Widget _buildFooter() {
+  Widget _buildFooter(context) {
     return Container(
       width: ScreenUtil.getInstance()
           .setWidth(ScreenSize.width - ScreenSize.padding * 10),
-      child: Row(
-        children: <Widget>[
-          Text(
-            '查看全部短评:',
-          ),
-          Expanded(
-            child: Container(),
-          ),
-          Text(">")
-        ],
+      child: GestureDetector(
+        onTap: () {
+          showBottomSheet(
+            context: context,
+            builder: (_) => Stack(
+              children: <Widget>[
+                _buildBottomSheetContent(),
+                Positioned(
+                  top: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+                  right: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+                  child: IconButton(
+                    icon: Icon(Icons.close),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                )
+              ],
+            ),
+          );
+        },
+        child: Row(
+          children: <Widget>[
+            Text(
+              LabelConstant.MOIVE_VIEW_ALL_COMMENTS,
+            ),
+            Expanded(
+              child: Container(),
+            ),
+            Text(">")
+          ],
+        ),
       ),
     );
   }

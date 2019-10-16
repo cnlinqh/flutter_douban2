@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/movie/subject_section_comment_template.dart';
+import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/widget/radio_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
@@ -57,8 +58,8 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
   }
 
   List radios = [
-    {"id": "new_score", "label": '热门'},
-    {"id": "time", "label": '最新'},
+    {"id": "new_score", "label": LabelConstant.MOIVE_COMMENT_HOT},
+    {"id": "time", "label": LabelConstant.MOIVE_COMMENT_NEW},
   ];
 
   @override
@@ -69,7 +70,7 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
           Row(
             children: <Widget>[
               Text(
-                '全部短评',
+                LabelConstant.MOIVE_ALL_COMMENTS,
                 style: TextStyle(fontSize: 24),
               ),
               Icon(
@@ -119,7 +120,9 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
                   child: Center(
                       child: Row(
                     children: <Widget>[
-                      Text(this._status == "P" ? "看过" : "想看"),
+                      Text(this._status == "P"
+                          ? LabelConstant.MOIVE_COMMENT_ALREADY
+                          : LabelConstant.MOIVE_COMMENT_WANT),
                       Icon(Icons.keyboard_arrow_down),
                     ],
                   )),
@@ -162,11 +165,11 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
         barrierDismissible: false,
         builder: (context) {
           return new SimpleDialog(
-            title: new Text("标记"),
+            title: new Text(LabelConstant.MOIVE_COMMENT_DLG_TITLE),
             children: <Widget>[
               new SimpleDialogOption(
                 child: Container(
-                  child: new Text("看过"),
+                  child: new Text(LabelConstant.MOIVE_COMMENT_ALREADY),
                   color: this._status == 'P' ? Colors.cyan : Colors.transparent,
                 ),
                 onPressed: () {
@@ -175,7 +178,7 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
               ),
               new SimpleDialogOption(
                 child: Container(
-                  child: new Text("想看"),
+                  child: new Text(LabelConstant.MOIVE_COMMENT_WANT),
                   color: this._status == 'F' ? Colors.cyan : Colors.transparent,
                 ),
                 onPressed: () {
@@ -184,7 +187,7 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
               ),
               new SimpleDialogOption(
                 child: Container(
-                  child: new Text("取消"),
+                  child: new Text(LabelConstant.MOIVE_COMMENT_DLG_CANCEL),
                   color: this._status == 'C' ? Colors.cyan : Colors.transparent,
                 ),
                 onPressed: () {
@@ -227,21 +230,21 @@ class SelectDialog extends StatelessWidget {
       child: Row(
         children: <Widget>[
           RaisedButton(
-            child: Text('看过'),
+            child: Text(LabelConstant.MOIVE_COMMENT_ALREADY),
             color: this.status == 'P' ? Colors.cyan : Colors.grey,
             onPressed: () {
               Navigator.of(context).pop('P');
             },
           ),
           RaisedButton(
-            child: Text('想看'),
+            child: Text(LabelConstant.MOIVE_COMMENT_WANT),
             color: this.status == 'F' ? Colors.cyan : Colors.grey,
             onPressed: () {
               Navigator.of(context).pop('F');
             },
           ),
           RaisedButton(
-            child: Text('取消'),
+            child: Text(LabelConstant.MOIVE_COMMENT_DLG_CANCEL),
             color: this.status == 'C' ? Colors.cyan : Colors.grey,
             onPressed: () {
               Navigator.of(context).pop('C');
