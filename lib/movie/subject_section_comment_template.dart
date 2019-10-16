@@ -65,8 +65,8 @@ class _SubjectSectionCommentTemplateState
                     children: <Widget>[
                       RateStar(
                         double.parse(widget.ratingValue),
-                        max: double.parse(widget.ratingMin),
-                        min: double.parse(widget.ratingMax),
+                        min: double.parse(widget.ratingMin),
+                        max: double.parse(widget.ratingMax),
                         labled: false,
                       ),
                       SizedBox(

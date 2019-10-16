@@ -298,7 +298,7 @@ class ClientAPI {
     int start = 0,
     int count = 0,
     String sort = 'new_score', //new_score 热门， time 最新
-    String status = 'F', //P 看过， F 想看
+    String status = 'P', //P 看过， F 想看
   }) async {
     print(
         ">>ClientAPI: getAllComment($subjectId, $start, $count, $sort, $status)");
@@ -315,12 +315,12 @@ class ClientAPI {
         'authorName': item.getElementsByTagName('a')[0].attributes['title'],
         'ratingValue': convertToStar(
             item.getElementsByClassName('rating').length > 0
-                ? item.getElementsByClassName('rating')[0].classes
+                ? item.getElementsByClassName('rating')[0].classes.toString()
                 : ""),
         'createdAt':
             item.getElementsByClassName('comment-time ')[0].attributes['title'],
         'content': item.getElementsByClassName('short')[0].text,
-        'usefufCount': item.getElementsByClassName('votes')[0].text,
+        'usefufCount': item.getElementsByClassName('votes')[0].text,    
       };
       comments.add(comment);
     });
