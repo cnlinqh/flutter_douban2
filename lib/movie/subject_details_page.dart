@@ -21,7 +21,6 @@ class SubjectDetailsPage extends StatefulWidget {
 
 class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
   var _subject;
-
   @override
   void initState() {
     super.initState();
@@ -51,26 +50,36 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
         appBar: AppBar(
           title: Text(LabelConstant.MOVIE_DETAILS_TITLE),
         ),
-        body: Container(
-          color: Colors.blueGrey,
-          padding: EdgeInsets.fromLTRB(
-            ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-            ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-            ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-            ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-          ),
-          child: RefreshIndicator(
-            onRefresh: _getSubject,
-            child: ListView(
-              children: <Widget>[
-                SubjectSectionGeneral(this._subject),
-                SubjectSectionRate(this._subject),
-                SubjectSectionTags(this._subject),
-                SubjectSectionSummary(this._subject),
-                SubjectSectionDirectorsCasts(this._subject),
-                SubjectSectionMedia(this._subject),
-                SubjectSectionComments(this._subject),
-              ],
+        body: NotificationListener<ScrollNotification>(
+          onNotification: (ScrollNotification notification) {
+            double progress = notification.metrics.pixels /
+                notification.metrics.maxScrollExtent;
+            var _progress = "${(progress * 100).toInt()}%";
+            print(_progress);
+            print("BottomEdge: ${notification.metrics.extentAfter == 0}");
+            return false;
+          },
+          child: Container(
+            color: Colors.blueGrey,
+            padding: EdgeInsets.fromLTRB(
+              ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+              ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+              ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+              ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+            ),
+            child: RefreshIndicator(
+              onRefresh: _getSubject,
+              child: ListView(
+                children: <Widget>[
+                  SubjectSectionGeneral(this._subject),
+                  SubjectSectionRate(this._subject),
+                  SubjectSectionTags(this._subject),
+                  SubjectSectionSummary(this._subject),
+                  SubjectSectionDirectorsCasts(this._subject),
+                  SubjectSectionMedia(this._subject),
+                  SubjectSectionComments(this._subject),
+                ],
+              ),
             ),
           ),
         ),
