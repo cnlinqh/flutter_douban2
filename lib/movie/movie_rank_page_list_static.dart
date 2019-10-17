@@ -99,7 +99,7 @@ class _MovieRankListStaticPageState extends State<MovieRankListStaticPage> {
               widget.res['payload']['background_img']),
           fit: BoxFit.cover,
         ),
-        borderRadius: BorderRadius.all(Radius.circular(7)),
+        // borderRadius: BorderRadius.all(Radius.circular(7)),
       ),
     );
   }

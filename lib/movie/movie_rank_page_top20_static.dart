@@ -94,7 +94,7 @@ class _MovieRankTop20StaticPageState extends State<MovieRankTop20StaticPage> {
             ),
           ),
         ],
-      ),
+      ),    
       background: _buildbackground(),
     );
   }
@@ -110,7 +110,7 @@ class _MovieRankTop20StaticPageState extends State<MovieRankTop20StaticPage> {
               this._subjectNo1['photos'][0]['image']),
           fit: BoxFit.cover,
         ),
-        borderRadius: BorderRadius.all(Radius.circular(7)),
+        // borderRadius: BorderRadius.all(Radius.circular(7)),
       ),
     );
   }
