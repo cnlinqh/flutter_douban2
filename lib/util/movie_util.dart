@@ -229,7 +229,8 @@ class MovieUtil {
     );
   }
 
-  static showAlerDialog(BuildContext context, String titleStr, String conentStr) {
+  static showAlerDialog(
+      BuildContext context, String titleStr, String conentStr) {
     showDialog(
         context: context,
         builder: (context) {

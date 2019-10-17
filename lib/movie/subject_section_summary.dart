@@ -2,25 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
+import 'package:flutter_douban2/widget/max_lines_text.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SubjectSectionSummary extends StatefulWidget {
+class SubjectSectionSummary extends StatelessWidget {
   final _subject;
   SubjectSectionSummary(this._subject);
-
-  _SubjectSectionSummaryState createState() => _SubjectSectionSummaryState();
-}
-
-class _SubjectSectionSummaryState extends State<SubjectSectionSummary> {
-  var _isFolded = true;
-
-  @override
-  void initState() {
-    super.initState();
-    setState(() {
-      this._isFolded = true;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,41 +26,17 @@ class _SubjectSectionSummaryState extends State<SubjectSectionSummary> {
               fontSize: 20,
             ),
           ),
-          Text(
-            MovieUtil.getSummary(widget._subject),
+          MaxLinesText(
+            text: MovieUtil.getSummary(this._subject),
+            maxLines: 5,
             style: TextStyle(
               color: Colors.white,
             ),
-            maxLines: _isFolded ? 2 : 10000, //just make sure big enough
-            overflow: TextOverflow.ellipsis,
-          ),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                this._isFolded = !this._isFolded;
-              });
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  this._isFolded
-                      ? LabelConstant.MOVIE_UNFOLD
-                      : LabelConstant.MOVIE_FOLD,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                  ),
-                ),
-                Icon(
-                  this._isFolded
-                      ? Icons.keyboard_arrow_down
-                      : Icons.keyboard_arrow_up,
-                  color: Colors.white,
-                ),
-              ],
+            unfoldTextStyle: TextStyle(
+              color: Colors.white,
+              fontSize: 14,
             ),
+            unfoldArrowColor: Colors.white,
           )
         ],
       ),

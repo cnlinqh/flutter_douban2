@@ -3,7 +3,7 @@ import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/widget/rate_star.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_douban2/util/label_constant.dart';
+import 'package:flutter_douban2/widget/max_lines_text.dart';
 
 class SubjectSectionCommentTemplate extends StatefulWidget {
   final String authorAvatar;
@@ -32,15 +32,6 @@ class SubjectSectionCommentTemplate extends StatefulWidget {
 
 class _SubjectSectionCommentTemplateState
     extends State<SubjectSectionCommentTemplate> {
-  var _isFolded = true;
-  @override
-  void initState() {
-    super.initState();
-    setState(() {
-      this._isFolded = true;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -102,37 +93,9 @@ class _SubjectSectionCommentTemplateState
       SizedBox(
         height: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
       ),
-      Text(
-        widget.content,
-        maxLines: _isFolded ? 2 : 10000, //just make sure big enough
-        overflow: TextOverflow.ellipsis,
+      MaxLinesText(
+        text: widget.content,
       ),
-      GestureDetector(
-        onTap: () {
-          setState(() {
-            this._isFolded = !this._isFolded;
-          });
-        },
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              this._isFolded
-                  ? LabelConstant.MOVIE_UNFOLD
-                  : LabelConstant.MOVIE_FOLD,
-              style: TextStyle(
-                fontSize: 14,
-              ),
-            ),
-            Icon(
-              this._isFolded
-                  ? Icons.keyboard_arrow_down
-                  : Icons.keyboard_arrow_up,
-            ),
-          ],
-        ),
-      )
     ];
   }
 
@@ -164,6 +127,6 @@ class _SubjectSectionCommentTemplateState
 
   String _formatDate(date) {
     var time = DateTime.parse(date);
-    return "${time.month}月${time.day}日";
+    return "${time.year}年${time.month}月${time.day}日";
   }
 }
