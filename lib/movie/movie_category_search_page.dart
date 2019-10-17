@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/movie/movie_category_condition_bars.dart';
-import 'package:flutter_douban2/movie/movie_category_filter_bar.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/movie/movie_subject_general.dart';
@@ -33,6 +32,7 @@ class MovieCategorySearchPage extends StatefulWidget {
 
 class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
   bool _isListView = true; //ListView or GridView
+  bool _isFilterShow = true;
 
   String _selectedStyle;
   String _selectedCountry;
@@ -69,79 +69,12 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(LabelConstant.MOVIE_CATEGORY_TITLE),
-        actions: <Widget>[
-          GestureDetector(
-            child: Container(
-              padding: EdgeInsets.only(
-                left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-                right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-              ),
-              child: Icon(
-                Icons.chrome_reader_mode,
-                color: this._isListView ? Colors.orange : null,
-              ),
-            ),
-            onTap: () {
-              if (mounted) {
-                setState(() {
-                  this._isListView = true;
-                });
-              }
-            },
-          ),
-          GestureDetector(
-            child: Container(
-              padding: EdgeInsets.only(
-                left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-                right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-              ),
-              child: Icon(
-                Icons.apps,
-                color: !this._isListView ? Colors.orange : null,
-              ),
-            ),
-            onTap: () {
-              if (mounted) {
-                setState(() {
-                  this._isListView = false;
-                });
-              }
-            },
-          ),
-        ],
+        actions: _buildActions(),
       ),
       body: Container(
         child: Column(
           children: <Widget>[
-            Stack(
-              children: <Widget>[
-                MovieCategoryConditionBars(
-                  style: this._selectedStyle,
-                  country: this._selectedCountry,
-                  year: this._selectedYear,
-                  special: this._selectedSpecial,
-                  sortBy: this._selectedSortBy,
-                  rangeMin: this._selectedRangeMin,
-                  rangeMax: this._selectedRangeMax,
-                  onStyleChange: this.onStyleChange,
-                  onCountryChange: this.onCountryChange,
-                  onYearChange: this.onYearChange,
-                  onSpecialChange: this.onSpecialChange,
-                  onSortByChange: this.onSortByChange,
-                  onRangeChange: this.onRangeChange,
-                ),
-                Positioned(
-                  bottom: ScreenUtil.getInstance()
-                      .setHeight(ScreenSize.movie_cate_search_bar_hight),
-                  right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-                  child: Center(
-                    child: MovieCategoryFilterBar(
-                        getSelectedInput: getSelectedInput,
-                        setSelectedOutput: setSelectedOutput),
-                  ),
-                )
-              ],
-            ),
+            _buildConditionBars(),
             Expanded(
               child: _buildScrollView(),
             )
@@ -149,6 +82,105 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
         ),
       ),
     );
+  }
+
+  List<Widget> _buildActions() {
+    List<Widget> actions = [
+      GestureDetector(
+        child: Container(
+          padding: EdgeInsets.only(
+            left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+            right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+          ),
+          child: Icon(
+            Icons.chrome_reader_mode,
+            color: this._isListView ? Colors.orange : null,
+          ),
+        ),
+        onTap: () {
+          if (mounted) {
+            setState(() {
+              this._isListView = true;
+            });
+          }
+        },
+      ),
+      GestureDetector(
+        child: Container(
+          padding: EdgeInsets.only(
+            left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+            right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+          ),
+          child: Icon(
+            Icons.apps,
+            color: !this._isListView ? Colors.orange : null,
+          ),
+        ),
+        onTap: () {
+          if (mounted) {
+            setState(() {
+              this._isListView = false;
+            });
+          }
+        },
+      ),
+      GestureDetector(
+        child: Container(
+          padding: EdgeInsets.only(
+            left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+            right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+          ),
+          child: Icon(
+            Icons.search,
+            color: this._isFilterShow ? Colors.orange : null,
+          ),
+        ),
+        onTap: () {
+          if (mounted) {
+            setState(() {
+              this._isFilterShow = !this._isFilterShow;
+            });
+          }
+        },
+      )
+    ];
+    return actions;
+  }
+
+  Widget _buildConditionBars() {
+    if (!this._isFilterShow) {
+      return Container();
+    } else {
+      return Stack(
+        children: <Widget>[
+          MovieCategoryConditionBars(
+            style: this._selectedStyle,
+            country: this._selectedCountry,
+            year: this._selectedYear,
+            special: this._selectedSpecial,
+            sortBy: this._selectedSortBy,
+            rangeMin: this._selectedRangeMin,
+            rangeMax: this._selectedRangeMax,
+            onStyleChange: this.onStyleChange,
+            onCountryChange: this.onCountryChange,
+            onYearChange: this.onYearChange,
+            onSpecialChange: this.onSpecialChange,
+            onSortByChange: this.onSortByChange,
+            onRangeChange: this.onRangeChange,
+          ),
+          // Positioned(
+          //   bottom: ScreenUtil.getInstance()
+          //       .setHeight(ScreenSize.movie_cate_search_bar_hight),
+          //   right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+          //   child: Center(
+          //     child: MovieCategoryFilterBar(
+          //         getSelectedInput: getSelectedInput,
+          //         setSelectedOutput: setSelectedOutput),
+          //   ),
+          // )
+        ],
+      );
+    }
   }
 
   Widget _buildScrollView() {
@@ -169,12 +201,14 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
       );
     } else {
       return Container(
-        padding: EdgeInsets.all(ScreenUtil.getInstance().setWidth(ScreenSize.padding)),
+        padding: EdgeInsets.all(
+            ScreenUtil.getInstance().setWidth(ScreenSize.padding)),
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
             childAspectRatio: 0.55,
-            crossAxisSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+            crossAxisSpacing:
+                ScreenUtil.getInstance().setWidth(ScreenSize.padding),
           ),
           itemCount: _dataList.length,
           itemBuilder: (context, index) {
@@ -186,7 +220,9 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
                 child: MovieSubjectSimple(
                   getSubject(index)['title'],
                   getSubject(index)['cover'],
-                  getSubject(index)['rate'] == "" ? 0 : double.parse(getSubject(index)['rate']),
+                  getSubject(index)['rate'] == ""
+                      ? 0
+                      : double.parse(getSubject(index)['rate']),
                   getSubject(index)['id'],
                 ),
               );
