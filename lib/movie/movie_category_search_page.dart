@@ -168,27 +168,31 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
         separatorBuilder: (context, index) => Divider(),
       );
     } else {
-      return GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          childAspectRatio: 0.55,
+      return Container(
+        padding: EdgeInsets.all(ScreenUtil.getInstance().setWidth(ScreenSize.padding)),
+        child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            childAspectRatio: 0.55,
+            crossAxisSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+          ),
+          itemCount: _dataList.length,
+          itemBuilder: (context, index) {
+            if (_dataList[index]['title'] == _loading) {
+              _retrieveData(context);
+              return Container();
+            } else {
+              return Container(
+                child: MovieSubjectSimple(
+                  getSubject(index)['title'],
+                  getSubject(index)['cover'],
+                  getSubject(index)['rate'] == "" ? 0 : double.parse(getSubject(index)['rate']),
+                  getSubject(index)['id'],
+                ),
+              );
+            }
+          },
         ),
-        itemCount: _dataList.length,
-        itemBuilder: (context, index) {
-          if (_dataList[index]['title'] == _loading) {
-            _retrieveData(context);
-            return Container();
-          } else {
-            return Container(
-              child: MovieSubjectSimple(
-                getSubject(index)['title'],
-                getSubject(index)['cover'],
-                getSubject(index)['rate'] == "" ? 0 : double.parse(getSubject(index)['rate']),
-                getSubject(index)['id'],
-              ),
-            );
-          }
-        },
       );
     }
   }
