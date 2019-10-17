@@ -51,6 +51,8 @@ class LabelConstant {
 
   static const String MOVIE_TOP_LIST_YEAR_TITLE = '豆瓣年度榜单';
   static const String MOVIE_YEAR_TOP_DETAILS_TITLE = "年度最高列表";
+  static const String MOVIE_RANK_YEAR_TOP20 = "豆瓣年度电影Top20";
+  static const String MOVIE_RANK_YEAR_LIST = "豆瓣年度电影榜单";
   static const String MOVIE_RANK_TOP20_LOVE = "爱情片TOP20";
   static const String MOVIE_RANK_TOP20_COMEDY = "喜剧片TOP20";
   static const String MOVIE_RANK_TOP20_STORY = "剧情片TOP20";

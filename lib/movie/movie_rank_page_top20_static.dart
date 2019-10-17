@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/movie/movie_subject_general.dart';
 import 'package:flutter_douban2/util/client_api.dart';
+import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,14 +16,24 @@ class MovieRankTop20StaticPage extends StatefulWidget {
 }
 
 class _MovieRankTop20StaticPageState extends State<MovieRankTop20StaticPage> {
+  ScrollController _scrollController;
+  double kExpandedHeight = 0;
   var _subjectNo1;
   @override
   void initState() {
     super.initState();
-    this._refresh();
+    this._fetchBackgroudImage();
+    _scrollController = ScrollController()..addListener(() => setState(() {}));
+    kExpandedHeight =
+        ScreenUtil.getInstance().setHeight(ScreenSize.rank_top_image_height);
   }
 
-  void _refresh() async {
+  bool get _collapsed {
+    return _scrollController.hasClients &&
+        _scrollController.offset > kExpandedHeight - kToolbarHeight;
+  }
+
+  void _fetchBackgroudImage() async {
     this._subjectNo1 = await ClientAPI.getInstance()
         .getMovieSubject(widget.res['subjects'][0]['id']);
     if (mounted) setState(() {});
@@ -31,101 +42,77 @@ class _MovieRankTop20StaticPageState extends State<MovieRankTop20StaticPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.res['title']),
-        ),
-        body: Container(
-          width: ScreenUtil.getInstance().setWidth(ScreenSize.width),
-          padding: EdgeInsets.fromLTRB(
-            ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-            ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-            ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-            ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+      body: CustomScrollView(
+        controller: _scrollController,
+        slivers: <Widget>[
+          SliverAppBar(
+            pinned: true,
+            expandedHeight: kExpandedHeight,
+            title: _buildTitle(),
+            flexibleSpace: _buildFlexibleSpace(),
           ),
-          child: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  width: ScreenUtil.getInstance()
-                      .setWidth(ScreenSize.rank_top_image_width),
-                  height: ScreenUtil.getInstance()
-                      .setHeight(ScreenSize.rank_top_image_height),
-                  child: _buildTopImage(),
-                ),
-                Expanded(
-                  child: ListView(
-                    children: _buildSubjectList(context),
-                  ),
-                )
-              ],
+          SliverList(
+            delegate: SliverChildListDelegate(
+              List<Widget>.generate(widget.res['subjects'].length, (int i) {
+                return _buildSubject(i, widget.res['subjects'][i]);
+              }),
             ),
           ),
-        ));
-  }
-
-  Widget _buildTopImage() {
-    if (this._subjectNo1 == null) {
-      return Container(
-        width:
-            ScreenUtil.getInstance().setWidth(ScreenSize.rank_top_image_width),
-        height: ScreenUtil.getInstance()
-            .setHeight(ScreenSize.rank_top_image_height),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(7)),
-        ),
-        child: Center(
-          child: new CircularProgressIndicator(),
-        ),
-      );
-    }
-    return Stack(
-      children: <Widget>[
-        Container(
-          width: ScreenUtil.getInstance()
-              .setWidth(ScreenSize.rank_top_image_width),
-          height: ScreenUtil.getInstance()
-              .setHeight(ScreenSize.rank_top_image_height),
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: CachedNetworkImageProvider(
-                  this._subjectNo1['photos'][0]['image']),
-              fit: BoxFit.cover,
-            ),
-            borderRadius: BorderRadius.all(Radius.circular(7)),
-          ),
-        ),
-        Positioned(
-          top: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 8),
-          left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                widget.res['title'],
-                style: TextStyle(color: Colors.white, fontSize: 24),
-              ),
-              Text(
-                "豆瓣年度电影top20",
-                style: TextStyle(color: Colors.white),
-              ),
-            ],
-          ),
-        )
-      ],
+        ],
+      ),
     );
   }
 
-  List<Widget> _buildSubjectList(context) {
-    List<Widget> list = [];
-    var i = 0;
-    for (i = 0; i < widget.res['subjects'].length; i++) {
-      list.add(Container(
-        height: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
-      ));
-      list.add(_buildSubject(i, widget.res['subjects'][i]));
+  Widget _buildTitle() {
+    if (!_collapsed) {
+      return null;
     }
-    return list;
+    return Text(
+      widget.res['title'],
+      style: TextStyle(color: Colors.black),
+    );
+  }
+
+  Widget _buildFlexibleSpace() {
+    if (_collapsed) {
+      return null;
+    }
+    return FlexibleSpaceBar(
+      title: new Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            widget.res['title'],
+            style: TextStyle(color: Colors.white, fontSize: 14),
+          ),
+          Text(
+            LabelConstant.MOVIE_RANK_YEAR_TOP20,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 10,
+            ),
+          ),
+        ],
+      ),
+      background: _buildbackground(),
+    );
+  }
+
+  Widget _buildbackground() {
+    if (this._subjectNo1 == null) {
+      return Container();
+    }
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: CachedNetworkImageProvider(
+              this._subjectNo1['photos'][0]['image']),
+          fit: BoxFit.cover,
+        ),
+        borderRadius: BorderRadius.all(Radius.circular(7)),
+      ),
+    );
   }
 
   Widget _buildSubject(i, subject) {
