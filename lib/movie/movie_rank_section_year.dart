@@ -43,6 +43,9 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
         width: ScreenUtil.getInstance()
             .setWidth(ScreenSize.width - 2 * ScreenSize.padding),
         height: ScreenUtil.getInstance().setHeight(ScreenSize.year_rank_height),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(7)),
+        ),
         child: Center(
           child: CircularProgressIndicator(),
         ),
@@ -54,108 +57,143 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
           width: ScreenUtil.getInstance()
               .setWidth(ScreenSize.width - 2 * ScreenSize.padding),
           height: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(7)),
+          ),
         ),
         GestureDetector(
           onTap: () {
             NavigatorHelper.pushToPage(
-                context, LabelConstant.MOVIE_YEAR_TOP_DETAILS_TITLE,
-                content: res);
+              context,
+              LabelConstant.MOVIE_YEAR_TOP_DETAILS_TITLE,
+              content: res,
+            );
           },
           child: Container(
-            color: this.color,
             width: ScreenUtil.getInstance()
                 .setWidth(ScreenSize.width - 2 * ScreenSize.padding),
             height:
                 ScreenUtil.getInstance().setHeight(ScreenSize.year_rank_height),
+            decoration: BoxDecoration(
+              color: this.color,
+              borderRadius: BorderRadius.all(Radius.circular(7)),
+            ),
             child: Center(
               child: Stack(
                 children: <Widget>[
-                  Positioned(
-                    top: 0,
-                    right: 0,
-                    child: Container(
-                      width: ScreenUtil.getInstance()
-                          .setWidth(ScreenSize.rank_bg_cover_width),
-                      height: ScreenUtil.getInstance()
-                          .setHeight(ScreenSize.rank_bg_cover_height),
-                      decoration: BoxDecoration(
-                        color: Colors.red,
-                        image: DecorationImage(
-                          image: CachedNetworkImageProvider(
-                              res['payload']['background_img']),
-                          fit: BoxFit.cover,
-                        ),
-                        // borderRadius: BorderRadius.all(Radius.circular(7)),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 0,
-                    left: ScreenUtil.getInstance().setWidth(ScreenSize.width -
-                        2 * ScreenSize.padding -
-                        ScreenSize.rank_bg_cover_width),
-                    child: Container(
-                      width: ScreenUtil.getInstance()
-                          .setWidth(ScreenSize.triangle_top_width),
-                      height: ScreenUtil.getInstance()
-                          .setHeight(ScreenSize.rank_bg_cover_height),
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                      ),
-                      child: CustomPaint(
-                        painter: new TriangleCustomPainter(this.color),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: ScreenUtil.getInstance()
-                        .setHeight(ScreenSize.padding * 2),
-                    left: ScreenUtil.getInstance()
-                        .setWidth(2 * ScreenSize.padding),
-                    child: Text(widget.year,
-                        style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold)),
-                  ),
-                  Opacity(
-                    opacity: 0.3,
-                    child: Container(
-                      width: ScreenUtil.getInstance()
-                          .setWidth(ScreenSize.width - 2 * ScreenSize.padding),
-                      height: ScreenUtil.getInstance()
-                          .setHeight(ScreenSize.year_rank_height),
-                      color: this.color,
-                    ),
-                  ),
-                  Positioned(
-                    top: ScreenUtil.getInstance()
-                        .setHeight(ScreenSize.year_rank_height / 2 - 24),
-                    left: ScreenUtil.getInstance()
-                        .setWidth(2 * ScreenSize.padding),
-                    child: Text(widget.title,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold)),
-                  ),
-                  Positioned(
-                    top: ScreenUtil.getInstance()
-                        .setHeight(ScreenSize.padding * 2.8),
-                    left: ScreenUtil.getInstance()
-                        .setWidth(2 * ScreenSize.padding),
-                    child: Text(widget.subTitle,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                        )),
-                  ),
+                  _buildRightImage(),
+                  _buildTriangle(),
+                  _buildYear(),
+                  _buildOpacity(),
+                  _buildTitle(),
+                  _buildSubtitle(),
                 ],
               ),
             ),
           ),
         )
       ],
+    );
+  }
+
+  Widget _buildRightImage() {
+    return Positioned(
+      top: 0,
+      right: 0,
+      child: Container(
+        width:
+            ScreenUtil.getInstance().setWidth(ScreenSize.rank_bg_cover_width),
+        height:
+            ScreenUtil.getInstance().setHeight(ScreenSize.rank_bg_cover_height),
+        decoration: BoxDecoration(
+          color: Colors.red,
+          image: DecorationImage(
+            image: CachedNetworkImageProvider(res['payload']['background_img']),
+            fit: BoxFit.cover,
+          ),
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(7),
+            bottomRight: Radius.circular(7),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTriangle() {
+    return Positioned(
+      top: 0,
+      left: ScreenUtil.getInstance().setWidth(ScreenSize.width -
+          2 * ScreenSize.padding -
+          ScreenSize.rank_bg_cover_width),
+      child: Container(
+        width: ScreenUtil.getInstance().setWidth(ScreenSize.triangle_top_width),
+        height:
+            ScreenUtil.getInstance().setHeight(ScreenSize.rank_bg_cover_height),
+        decoration: BoxDecoration(
+          color: Colors.transparent,
+        ),
+        child: CustomPaint(
+          painter: new TriangleCustomPainter(this.color),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildYear() {
+    return Positioned(
+      top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
+      left: ScreenUtil.getInstance().setWidth(2 * ScreenSize.padding),
+      child: Text(
+        widget.year,
+        style: TextStyle(
+            color: Colors.grey, fontSize: 24, fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+
+  Widget _buildOpacity() {
+    return Opacity(
+      opacity: 0.3,
+      child: Container(
+        width: ScreenUtil.getInstance()
+            .setWidth(ScreenSize.width - 2 * ScreenSize.padding),
+        height: ScreenUtil.getInstance().setHeight(ScreenSize.year_rank_height),
+        decoration: BoxDecoration(
+          color: this.color,
+          borderRadius: BorderRadius.all(Radius.circular(7)),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTitle() {
+    return Positioned(
+      top: ScreenUtil.getInstance()
+          .setHeight(ScreenSize.year_rank_height / 2 - 24),
+      left: ScreenUtil.getInstance().setWidth(2 * ScreenSize.padding),
+      child: Text(
+        widget.title,
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSubtitle() {
+    return Positioned(
+      top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2.8),
+      left: ScreenUtil.getInstance().setWidth(2 * ScreenSize.padding),
+      child: Text(
+        widget.subTitle,
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 12,
+        ),
+      ),
     );
   }
 }
