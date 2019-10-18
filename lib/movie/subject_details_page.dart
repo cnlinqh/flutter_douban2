@@ -9,7 +9,9 @@ import 'package:flutter_douban2/movie/subject_section_tags.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
+import 'package:flutter_douban2/widget/rate_star.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class SubjectDetailsPage extends StatefulWidget {
   final String _id;
@@ -21,6 +23,7 @@ class SubjectDetailsPage extends StatefulWidget {
 
 class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
   var _subject;
+  bool isTitleShow = false;
   @override
   void initState() {
     super.initState();
@@ -36,8 +39,47 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      appBar: _buildAppBar(),
       body: _buildBody(),
     );
+  }
+
+  Widget _buildAppBar() {
+    if (this.isTitleShow && this._subject != null) {
+      return AppBar(
+        title: Row(
+          children: <Widget>[
+            Container(
+              width: kToolbarHeight,
+              height: kToolbarHeight,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: CachedNetworkImageProvider(
+                    this._subject['images']['small'],
+                  ),
+                  fit: BoxFit.cover,
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(kToolbarHeight)),
+              ),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(this._subject['title']),
+                RateStar(
+                  double.parse(this._subject['rating']['average'].toString()),
+                )
+              ],
+            )
+          ],
+        ),
+      );
+    } else {
+      return AppBar(
+        title: Text(LabelConstant.MOVIE_DETAILS_TITLE),
+      );
+    }
   }
 
   Widget _buildBody() {
@@ -46,40 +88,37 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
         child: new CircularProgressIndicator(),
       );
     } else {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text(LabelConstant.MOVIE_DETAILS_TITLE),
-        ),
-        body: NotificationListener<ScrollNotification>(
-          onNotification: (ScrollNotification notification) {
-            double progress = notification.metrics.pixels /
-                notification.metrics.maxScrollExtent;
-            var _progress = "${(progress * 100).toInt()}%";
-            print(_progress);
-            print("BottomEdge: ${notification.metrics.extentAfter == 0}");
-            return false;
-          },
-          child: Container(
-            color: Colors.blueGrey,
-            padding: EdgeInsets.fromLTRB(
-              ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-              ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-              ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-              ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-            ),
-            child: RefreshIndicator(
-              onRefresh: _getSubject,
-              child: ListView(
-                children: <Widget>[
-                  SubjectSectionGeneral(this._subject),
-                  SubjectSectionRate(this._subject),
-                  SubjectSectionTags(this._subject),
-                  SubjectSectionSummary(this._subject),
-                  SubjectSectionDirectorsCasts(this._subject),
-                  SubjectSectionMedia(this._subject),
-                  SubjectSectionComments(this._subject),
-                ],
-              ),
+      return NotificationListener<ScrollNotification>(
+        onNotification: (ScrollNotification notification) {
+          setState(() {
+            isTitleShow = notification.metrics.pixels > 20;
+          });
+          // var _progress = notification.metrics.pixels /
+          //       notification.metrics.maxScrollExtent;
+          // print("${(_progress * 100).toInt()}%");
+          // print("BottomEdge: ${notification.metrics.extentAfter == 0}");
+          return true;
+        },
+        child: Container(
+          color: Colors.blueGrey,
+          padding: EdgeInsets.fromLTRB(
+            ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+            ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+            ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+            ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+          ),
+          child: RefreshIndicator(
+            onRefresh: _getSubject,
+            child: ListView(
+              children: <Widget>[
+                SubjectSectionGeneral(this._subject),
+                SubjectSectionRate(this._subject),
+                SubjectSectionTags(this._subject),
+                SubjectSectionSummary(this._subject),
+                SubjectSectionDirectorsCasts(this._subject),
+                SubjectSectionMedia(this._subject),
+                SubjectSectionComments(this._subject),
+              ],
             ),
           ),
         ),
