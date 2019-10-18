@@ -62,22 +62,20 @@ class ScreenSize {
   static const double self_define_dlg_width = 400;
   static const double self_define_dlg_height = 200;
 
-
-
   //the height of year rank
   static const double year_rank_height = 160;
   static const double rank_bg_cover_width = 365;
   static const double rank_bg_cover_height = 160;
   static const double triangle_top_width = 120;
 
-
   static const double rank_top_image_width = 750;
   static const double rank_top_image_height = 300;
-
 
   static const double choose_image_width = 180;
   static const double choose_image_height = 80;
 
   static const double close_bar_width = 100;
   static const double close_bar_height = 10;
+
+  static const double movie_review_place_holder_height = 200;
 }

@@ -320,7 +320,7 @@ class ClientAPI {
         'createdAt':
             item.getElementsByClassName('comment-time ')[0].attributes['title'],
         'content': item.getElementsByClassName('short')[0].text,
-        'usefufCount': item.getElementsByClassName('votes')[0].text,    
+        'usefufCount': item.getElementsByClassName('votes')[0].text,
       };
       comments.add(comment);
     });
@@ -338,18 +338,93 @@ class ClientAPI {
   }
 
   static String convertToStar(star) {
-    if (star == "allstar50 rating") {
+    if (star == "allstar50 rating" || star == "allstar50 main-title-rating") {
       return "5";
-    } else if (star == "allstar40 rating") {
+    } else if (star == "allstar40 rating" ||
+        star == "allstar40 main-title-rating") {
       return "4";
-    } else if (star == "allstar30 rating") {
+    } else if (star == "allstar30 rating" ||
+        star == "allstar30 main-title-rating") {
       return "3";
-    } else if (star == "allstar20 rating") {
+    } else if (star == "allstar20 rating" ||
+        star == "allstar20 main-title-rating") {
       return "2";
-    } else if (star == "allstar10 rating") {
+    } else if (star == "allstar10 rating" ||
+        star == "allstar10 main-title-rating") {
       return "1";
     } else {
       return "0";
     }
+  }
+
+  Future getAllReviews({
+    String subjectId,
+    int start = 0,
+    int count = 20,
+    String sort = 'hotest', //hotest 最受欢迎， time 最新发布
+    String rating = '', // 1,2,3,4,5, ,
+  }) async {
+    print(
+        ">>ClientAPI: getAllReviews($subjectId, $start, $count, $sort, $rating)");
+    var s = new DateTime.now();
+    List reviews = [];
+    var url =
+        "/subject/$subjectId/reviews?start=$start&count=$count&sort=$sort&rating=$rating";
+    print(url);
+    Response res = await webDio.get(url);
+    var document = parse(res.toString());
+    List<Element> items =
+        document.body.getElementsByClassName('main review-item');
+    items.forEach((item) {
+      var rid =
+          item.getElementsByClassName('review-short')[0].attributes['data-rid'];
+      var avator = item.getElementsByTagName('img')[0].attributes['src'];
+      var name = item.getElementsByClassName('name')[0].text.trim();
+      var ratingValue = convertToStar(
+          item.getElementsByClassName('main-title-rating').length > 0
+              ? item
+                  .getElementsByClassName('main-title-rating')[0]
+                  .classes
+                  .toString()
+              : "");
+      var title = item.getElementsByTagName('h2')[0].firstChild.text.trim();
+      var shortContent =
+          item.getElementsByClassName('short-content')[0].text.trim();
+      var up = item
+          .getElementsByClassName('action-btn up')[0]
+          .getElementsByTagName('span')[0]
+          .text
+          .trim();
+      var down = item
+          .getElementsByClassName('action-btn down')[0]
+          .getElementsByTagName('span')[0]
+          .text
+          .trim();
+      var createdAt = item.getElementsByClassName('main-meta')[0].text.trim();
+
+      var review = {
+        'rid': rid,
+        'avator': avator,
+        'name': name,
+        'ratingValue': ratingValue,
+        'title': title,
+        'shortContent': shortContent,
+        'up': up,
+        'down': down,
+        'createdAt': createdAt,
+      };
+      reviews.add(review);
+    });
+
+    List<Element> isActives = document.body.getElementsByClassName('droplist');
+    var total = isActives[0].getElementsByTagName('a')[0].text.trim();
+    print("total: " + total);
+    var e = new DateTime.now();
+    print(
+        "<<<<ClientAPI: getAllReviews($subjectId, $start, $count, $sort, $rating) ##########################  ${e.difference(s).inMilliseconds}");
+    return {
+      "reviews": reviews,
+      "total": total,
+    };
   }
 }
