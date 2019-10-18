@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
+import 'package:flutter_douban2/util/navigator_helper.dart';
 import 'package:flutter_douban2/widget/rate_star.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_douban2/util/client_api.dart';
 
 class SubjectSectionReviewTemplate extends StatefulWidget {
   final String rid;
@@ -43,11 +46,23 @@ class _SubjectSectionReviewTemplateState
         ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
         ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: _buildChildren(),
+      child: GestureDetector(
+        onTap: () {
+          gotoFullReview();
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: _buildChildren(),
+        ),
       ),
     );
+  }
+
+  void gotoFullReview() async {
+    var full = await ClientAPI.getInstance().fetchFullReview(widget.rid);
+
+    NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_FULL_REVIEW,
+        content: full['html']);
   }
 
   List<Widget> _buildChildren() {

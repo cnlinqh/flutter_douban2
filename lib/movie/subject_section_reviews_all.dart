@@ -26,12 +26,12 @@ class _SubjectSectionReviewsAllState extends State<SubjectSectionReviewsAll> {
     }
   ];
 
-  void _refresh() {
-    _start = 0;
-    _done = false;
-    _dataList.removeRange(0, _dataList.length - 1);
-    setState(() {});
-  }
+  // void _refresh() {
+  //   _start = 0;
+  //   _done = false;
+  //   _dataList.removeRange(0, _dataList.length - 1);
+  //   setState(() {});
+  // }
 
   void _retrieveData() async {
     if (_done) {

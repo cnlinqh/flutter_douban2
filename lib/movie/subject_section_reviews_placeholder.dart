@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/util/client_api.dart';
+import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/movie/subject_section_reviews_all.dart';
@@ -71,13 +72,12 @@ class SubjectSectionReviewsPlaceHolderState
           ),
           GestureDetector(
             onTap: () {
-              print("------------OnTap");
-              showContent();
+              showReviewsContent();
             },
             child: Row(
               children: <Widget>[
                 Text(
-                  '影评',
+                  LabelConstant.MOVIE_LONG_REVIEW,
                   style: TextStyle(
                     fontSize: 24,
                     color: Colors.black,
@@ -92,7 +92,7 @@ class SubjectSectionReviewsPlaceHolderState
     );
   }
 
-  void showContent() {
+  void showReviewsContent() {
     showBottomSheet(
       context: context,
       builder: (_) => Stack(

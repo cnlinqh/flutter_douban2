@@ -427,4 +427,21 @@ class ClientAPI {
       "total": total,
     };
   }
+
+  Future fetchFullReview(rid) async {
+    print(">>ClientAPI: fetchFullReview($rid)");
+    var s = new DateTime.now();
+    var key = "fetchFullReview($rid)";
+    if (Repository.isCached(key)) {
+      return new Future(() {
+        return Repository.getCachedObject(key);
+      });
+    }
+    Response<Map> res = await webDio.get('/j/review/$rid/full');
+    Repository.setCachedObject(key, res.data);
+    var e = new DateTime.now();
+    print(
+        "<<<<ClientAPI: fetchFullReview($rid) ##########################  ${e.difference(s).inMilliseconds}");
+    return res.data;
+  }
 }

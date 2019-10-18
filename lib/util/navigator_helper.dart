@@ -10,6 +10,7 @@ import 'package:flutter_douban2/movie/movie_rank_years_page.dart';
 import 'package:flutter_douban2/movie/movie_category_search_page.dart';
 import 'package:flutter_douban2/movie/subject_section_media_photos_gallery.dart';
 import 'package:flutter_douban2/movie/subject_section_media_video_set.dart';
+import 'package:flutter_douban2/movie/subject_section_review_full.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 
@@ -58,7 +59,13 @@ class NavigatorHelper {
       case LabelConstant.MOVIE_TOP_WEEKLY: //一周口碑电影榜
       case LabelConstant.MOVIE_TOP_NEW: //豆瓣电影新片榜
       case LabelConstant.MOVIE_TOP_US: //豆瓣电影北美票房榜
-        _push(context, MovieListStaticPage(title, content, rank: true,));
+        _push(
+            context,
+            MovieListStaticPage(
+              title,
+              content,
+              rank: true,
+            ));
         break;
       case LabelConstant.MOVIE_DETAILS_TITLE: //电影详情
         _push(context, SubjectDetailsPage(content));
@@ -117,6 +124,12 @@ class NavigatorHelper {
             api: ClientAPI.getInstance().searchSubjects,
             tag: content,
           ),
+        );
+        break;
+      case LabelConstant.MOVIE_FULL_REVIEW:
+        _push(
+          context,
+          SubjectSectionReviewFull(content),
         );
         break;
       default:

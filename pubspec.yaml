@@ -28,6 +28,7 @@ dependencies:
   video_player: ^0.10.2+3 #https://pub.dev/packages/video_player#-installing-tab-
   chewie: ^0.9.8+1 #https://pub.dev/packages/chewie#-readme-tab-
   flutter_range_slider: ^1.4.0 #https://pub.dev/packages/flutter_range_slider#-readme-tab-
+  flutter_html: ^0.11.0 # https://pub.dev/packages/flutter_html#-readme-tab-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
