@@ -110,7 +110,7 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
             _position = notification.metrics.pixels;
             if (notification.metrics.extentAfter == 0) {
               print(notification.metrics.extentAfter);
-              reviewsSectionKey.currentState.showContent();
+              reviewsSectionKey.currentState.showReviewsContent();
             }
           }
           if (_position - notification.metrics.pixels >= _sensitivityFactor) {
