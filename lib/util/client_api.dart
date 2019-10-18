@@ -416,15 +416,30 @@ class ClientAPI {
       reviews.add(review);
     });
 
-    List<Element> isActives = document.body.getElementsByClassName('droplist');
-    var total = isActives[0].getElementsByTagName('a')[0].text.trim();
+    List<Element> droplist = document.body.getElementsByClassName('droplist');
+    var total = droplist[0].getElementsByTagName('a')[0].text.trim();
     print("total: " + total);
+    var total5 = droplist[0].getElementsByTagName('a')[1].text.trim();
+    print("total: " + total5);
+    var total4 = droplist[0].getElementsByTagName('a')[2].text.trim();
+    print("total: " + total4);
+    var total3 = droplist[0].getElementsByTagName('a')[3].text.trim();
+    print("total: " + total3);
+    var total2 = droplist[0].getElementsByTagName('a')[4].text.trim();
+    print("total: " + total2);
+    var total1 = droplist[0].getElementsByTagName('a')[5].text.trim();
+    print("total: " + total1);
     var e = new DateTime.now();
     print(
         "<<<<ClientAPI: getAllReviews($subjectId, $start, $count, $sort, $rating) ##########################  ${e.difference(s).inMilliseconds}");
     return {
       "reviews": reviews,
       "total": total,
+      "total5": total5,
+      "total4": total4,
+      "total3": total3,
+      "total2": total2,
+      "total1": total1,
     };
   }
 
@@ -443,5 +458,40 @@ class ClientAPI {
     print(
         "<<<<ClientAPI: fetchFullReview($rid) ##########################  ${e.difference(s).inMilliseconds}");
     return res.data;
+  }
+
+  Future<List> getAlsoLikeMovies(subjectId) async {
+    print(">>ClientAPI: getAlsoLikeMovies($subjectId)");
+    var s = new DateTime.now();
+    var key = "getAlsoLikeMovies($subjectId)";
+    if (Repository.isCached(key)) {
+      return new Future(() {
+        return Repository.getCachedObject(key);
+      });
+    }
+    List movies = [];
+    var url = '/subject/$subjectId/?from=showing';
+    Response res = await webDio.get(url);
+    var document = parse(res.toString());
+    List<Element> items =
+        document.body.getElementsByClassName('recommendations-bd');
+    items = items[0].getElementsByTagName('dl');
+    items.forEach((item) {
+      var movie = {
+        'cover': item.getElementsByTagName('img')[0].attributes['src'],
+        'title': item.getElementsByTagName('img')[0].attributes['alt'],
+        'href': item.getElementsByTagName('a')[0].attributes['href'],
+      };
+      RegExp id = new RegExp(r'\d+');
+      RegExpMatch match = id.firstMatch(movie['href'].toString());
+      movie['id'] = match.group(0);
+      movies.add(movie);
+    });
+
+    Repository.setCachedObject(key, res.data);
+    var e = new DateTime.now();
+    print(
+        "<<<<ClientAPI: getAlsoLikeMovies($subjectId) ##########################  ${e.difference(s).inMilliseconds}");
+    return movies;
   }
 }

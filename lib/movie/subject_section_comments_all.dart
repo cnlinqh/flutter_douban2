@@ -29,6 +29,11 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
     }
   ];
 
+  List radios = [
+    {"id": "new_score", "label": LabelConstant.MOIVE_COMMENT_HOT},
+    {"id": "time", "label": LabelConstant.MOIVE_COMMENT_NEW},
+  ];
+
   void _refresh() {
     _start = 0;
     _done = false;
@@ -58,135 +63,156 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
     if (mounted) setState(() {});
   }
 
-  List radios = [
-    {"id": "new_score", "label": LabelConstant.MOIVE_COMMENT_HOT},
-    {"id": "time", "label": LabelConstant.MOIVE_COMMENT_NEW},
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
         children: <Widget>[
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: Center(
-                  child: Container(
-                    width: ScreenUtil.getInstance()
-                        .setWidth(ScreenSize.close_bar_width),
-                    height: ScreenUtil.getInstance()
-                        .setHeight(ScreenSize.close_bar_height),
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.all(Radius.circular(7)),
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              Text(
-                LabelConstant.MOIVE_ALL_COMMENTS,
-                style: TextStyle(fontSize: 24),
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.help_outline,
-                ),
-                onPressed: () {
-                  MovieUtil.showAlerDialog(
-                      context,
-                      LabelConstant.MOVIE_SHORT_COMMENTS,
-                      LabelConstant.MOVIE_COMMENTS_HELP);
-                },
-              ),
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              Text(this.total),
-              Expanded(
-                child: Container(),
-              ),
-              RadioBar(
-                radios: radios,
-                onSelectionChange: onSortSelectionChange,
-              ),
-              GestureDetector(
-                onTap: () {
-                  showSelectDialog().then((status) {
-                    if (status != "C" && mounted) {
-                      setState(() {
-                        this._status = status;
-                      });
-
-                      _refresh();
-                    }
-                  });
-                },
-                child: Container(
-                  padding: EdgeInsets.only(
-                    left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-                    right:
-                        ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-                  ),
-                  margin: EdgeInsets.all(
-                      ScreenUtil.getInstance().setWidth(ScreenSize.padding)),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(14),
-                    ),
-                    border: Border.all(
-                      color: Colors.black,
-                    ),
-                  ),
-                  child: Center(
-                      child: Row(
-                    children: <Widget>[
-                      Text(this._status == "P"
-                          ? LabelConstant.MOIVE_COMMENT_ALREADY
-                          : LabelConstant.MOIVE_COMMENT_WANT),
-                      Icon(Icons.keyboard_arrow_down),
-                    ],
-                  )),
-                ),
-              )
-            ],
-          ),
-          Expanded(
-            child: ListView.separated(
-              itemCount: _dataList.length,
-              itemBuilder: (context, index) {
-                if (_dataList[index]['title'] == _loading) {
-                  _retrieveData();
-                  return Container();
-                } else {
-                  return Container(
-                    child: _buildComment(_dataList[index]),
-                  );
-                }
-              },
-              separatorBuilder: (context, index) => Divider(),
-            ),
-          )
+          _buildTopBar(),
+          _buildTitle(),
+          _buildCondition(),
+          _buildComments(),
         ],
       ),
     );
   }
 
-  Future<String> showSelectDialog() async {
-    // var widget = SelectDialog(this._status);
-    // var result = await showDialog(
-    //   context: context,
-    //   builder: (_) => widget,
-    //   barrierDismissible: false,
-    // );
-    // return result;
+  Widget _buildTopBar() {
+    return Row(
+      children: <Widget>[
+        Expanded(
+          child: Center(
+            child: Container(
+              width:
+                  ScreenUtil.getInstance().setWidth(ScreenSize.close_bar_width),
+              height: ScreenUtil.getInstance()
+                  .setHeight(ScreenSize.close_bar_height),
+              decoration: BoxDecoration(
+                color: Colors.grey,
+                borderRadius: BorderRadius.all(Radius.circular(7)),
+              ),
+            ),
+          ),
+        )
+      ],
+    );
+  }
 
+  Widget _buildTitle() {
+    return Row(
+      children: <Widget>[
+        Text(
+          LabelConstant.MOIVE_ALL_COMMENTS,
+          style: TextStyle(fontSize: 24),
+        ),
+        IconButton(
+          icon: Icon(
+            Icons.help_outline,
+          ),
+          onPressed: () {
+            MovieUtil.showAlerDialog(
+              context,
+              LabelConstant.MOVIE_SHORT_COMMENTS,
+              LabelConstant.MOVIE_COMMENTS_HELP,
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildCondition() {
+    return Row(
+      children: <Widget>[
+        Text(this.total),
+        Expanded(
+          child: Container(),
+        ),
+        RadioBar(
+          radios: radios,
+          onSelectionChange: (id) {
+            this._sort = id;
+            _refresh();
+          },
+        ),
+        GestureDetector(
+          onTap: () {
+            showSelectDialog().then((status) {
+              if (status != "C" && mounted) {
+                setState(() {
+                  this._status = status;
+                });
+                _refresh();
+              }
+            });
+          },
+          child: Container(
+            padding: EdgeInsets.only(
+              left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+              right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+            ),
+            margin: EdgeInsets.all(
+                ScreenUtil.getInstance().setWidth(ScreenSize.padding)),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(
+                Radius.circular(14),
+              ),
+              border: Border.all(
+                color: Colors.black,
+              ),
+            ),
+            child: Center(
+              child: Row(
+                children: <Widget>[
+                  Text(
+                    this._status == "P"
+                        ? LabelConstant.MOIVE_COMMENT_ALREADY
+                        : LabelConstant.MOIVE_COMMENT_WANT,
+                  ),
+                  Icon(Icons.keyboard_arrow_down),
+                ],
+              ),
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _buildComments() {
+    return Expanded(
+      child: ListView.separated(
+        itemCount: _dataList.length,
+        itemBuilder: (context, index) {
+          if (_dataList[index]['title'] == _loading) {
+            _retrieveData();
+            return Container();
+          } else {
+            return Container(
+              child: _buildComment(_dataList[index]),
+            );
+          }
+        },
+        separatorBuilder: (context, index) => Divider(),
+      ),
+    );
+  }
+
+  Widget _buildComment(comment) {
+    return SubjectSectionCommentTemplate(
+      authorAvatar: comment['authorAvatar'],
+      authorName: comment['authorName'],
+      ratingValue: comment['ratingValue'],
+      ratingMin: "0",
+      ratingMax: "5",
+      createdAt: comment['createdAt'],
+      content: comment['content'],
+      usefulCount: comment['usefufCount'],
+    );
+  }
+
+  Future<String> showSelectDialog() async {
     var result = await showDialog(
         context: context,
         barrierDismissible: false,
@@ -226,24 +252,6 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
         });
     return result.toString();
   }
-
-  Widget _buildComment(comment) {
-    return SubjectSectionCommentTemplate(
-      authorAvatar: comment['authorAvatar'],
-      authorName: comment['authorName'],
-      ratingValue: comment['ratingValue'],
-      ratingMin: "0",
-      ratingMax: "5",
-      createdAt: comment['createdAt'],
-      content: comment['content'],
-      usefulCount: comment['usefufCount'],
-    );
-  }
-
-  void onSortSelectionChange(id) {
-    this._sort = id;
-    _refresh();
-  }
 }
 
 class SelectDialog extends StatelessWidget {
@@ -253,7 +261,6 @@ class SelectDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      // color: Colors.red,
       child: Row(
         children: <Widget>[
           RaisedButton(
