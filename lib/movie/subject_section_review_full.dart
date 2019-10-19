@@ -23,43 +23,11 @@ class SubjectSectionReviewFull extends StatelessWidget {
         ),
         child: Column(
           children: <Widget>[
-            Row(
-              children: <Widget>[
-                Text(
-                  this.content['title'],
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                )
-              ],
+            _buildTitle(),
+            SizedBox(
+              height: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
             ),
-            Row(
-              children: <Widget>[
-                MovieUtil.buildAuthorCover(this.content['avator']),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(this.content['name'] + " 的影评"),
-                    Row(
-                      children: <Widget>[
-                        RateStar(
-                          double.parse(this.content['ratingValue']),
-                          min: 0,
-                          max: 5,
-                          labled: false,
-                        ),
-                        SizedBox(
-                          width: ScreenUtil.getInstance()
-                              .setWidth(ScreenSize.padding),
-                        ),
-                        Text(this._formatDate(this.content['createdAt'])),
-                      ],
-                    )
-                  ],
-                ),
-              ],
-            ),
+            _buildAuthor(),
             Expanded(
               child: SingleChildScrollView(
                 child: _buildHtml(),
@@ -101,6 +69,48 @@ class SubjectSectionReviewFull extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  Widget _buildTitle() {
+    return Container(
+      width: ScreenUtil.getInstance()
+          .setWidth(ScreenSize.width - ScreenSize.padding * 2),
+      child: Text(
+        this.content['title'],
+        style: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAuthor() {
+    return Row(
+      children: <Widget>[
+        MovieUtil.buildAuthorCover(this.content['avator']),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(this.content['name'] + " 的影评"),
+            Row(
+              children: <Widget>[
+                RateStar(
+                  double.parse(this.content['ratingValue']),
+                  min: 0,
+                  max: 5,
+                  labled: false,
+                ),
+                SizedBox(
+                  width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+                ),
+                Text(this._formatDate(this.content['createdAt'])),
+              ],
+            )
+          ],
+        ),
+      ],
     );
   }
 

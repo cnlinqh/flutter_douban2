@@ -6,6 +6,7 @@ import 'package:flutter_douban2/movie/subject_section_rate.dart';
 import 'package:flutter_douban2/movie/subject_section_reviews_placeholder.dart';
 import 'package:flutter_douban2/movie/subject_section_summary.dart';
 import 'package:flutter_douban2/movie/subject_section_directors_casts.dart';
+import 'package:flutter_douban2/movie/subject_section_also_like.dart';
 import 'package:flutter_douban2/movie/subject_section_tags.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
@@ -98,23 +99,27 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
     } else {
       return NotificationListener<ScrollNotification>(
         onNotification: (ScrollNotification notification) {
-          setState(() {
-            isTitleShow = notification.metrics.pixels > 20;
-          });
+          if (notification.metrics.axis == Axis.vertical) {
+            setState(() {
+              isTitleShow = notification.metrics.pixels > 20;
+            });
+          }
+
           // var _progress = notification.metrics.pixels /
           //       notification.metrics.maxScrollExtent;
           // print("${(_progress * 100).toInt()}%");
           // print("BottomEdge: ${notification.metrics.extentAfter == 0}");
           if (notification.metrics.pixels - _position >= _sensitivityFactor) {
-            print('Axis Scroll Direction : Up');
+            // print('Axis Scroll Direction : Up');
             _position = notification.metrics.pixels;
-            if (notification.metrics.extentAfter == 0) {
-              print(notification.metrics.extentAfter);
+            if (notification.metrics.extentAfter == 0 &&
+                notification.metrics.axis == Axis.vertical) {
+              // print(notification.metrics.extentAfter);
               reviewsSectionKey.currentState.showReviewsContent();
             }
           }
           if (_position - notification.metrics.pixels >= _sensitivityFactor) {
-            print('Axis Scroll Direction : Down');
+            // print('Axis Scroll Direction : Down');
             _position = notification.metrics.pixels;
           }
           return true;
@@ -139,6 +144,7 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
                     SubjectSectionSummary(this._subject),
                     SubjectSectionDirectorsCasts(this._subject),
                     SubjectSectionMedia(this._subject),
+                    SubjectSectionAlsoLike(this._subject),
                     SubjectSectionComments(this._subject),
                     SubjectSectionReviewsPlaceHolder(
                       this._subject,

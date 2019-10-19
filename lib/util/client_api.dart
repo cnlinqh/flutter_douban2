@@ -488,7 +488,7 @@ class ClientAPI {
       movies.add(movie);
     });
 
-    Repository.setCachedObject(key, res.data);
+    Repository.setCachedObject(key, movies);
     var e = new DateTime.now();
     print(
         "<<<<ClientAPI: getAlsoLikeMovies($subjectId) ##########################  ${e.difference(s).inMilliseconds}");
