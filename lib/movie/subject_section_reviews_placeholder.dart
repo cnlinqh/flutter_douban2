@@ -45,36 +45,38 @@ class SubjectSectionReviewsPlaceHolderState
         height: ScreenUtil.getInstance().setHeight(this.widget.height),
       );
     }
-    return Container(
-      width: ScreenUtil.getInstance().setWidth(ScreenSize.width),
-      height: ScreenUtil.getInstance().setHeight(this.widget.height),
-      color: Colors.white,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(
-                  top: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-                ),
-                width: ScreenUtil.getInstance()
-                    .setWidth(ScreenSize.close_bar_width),
-                height: ScreenUtil.getInstance()
-                    .setHeight(ScreenSize.close_bar_height),
-                decoration: BoxDecoration(
-                  color: Colors.grey,
-                  borderRadius: BorderRadius.all(Radius.circular(7)),
-                ),
-              )
-            ],
-          ),
-          GestureDetector(
-            onTap: () {
-              showReviewsContent();
-            },
-            child: Row(
+    return GestureDetector(
+      onTap: showReviewsContent,
+      child: Container(
+        width: ScreenUtil.getInstance()
+            .setWidth(ScreenSize.width - ScreenSize.padding * 2),
+        height: ScreenUtil.getInstance().setHeight(this.widget.height),
+        decoration: BoxDecoration(
+          color: Colors.cyan,
+          borderRadius: BorderRadius.all(Radius.circular(7)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(
+                    top: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+                  ),
+                  width: ScreenUtil.getInstance()
+                      .setWidth(ScreenSize.close_bar_width),
+                  height: ScreenUtil.getInstance()
+                      .setHeight(ScreenSize.close_bar_height),
+                  decoration: BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.all(Radius.circular(7)),
+                  ),
+                )
+              ],
+            ),
+            Row(
               children: <Widget>[
                 Text(
                   LabelConstant.MOVIE_LONG_REVIEW,
@@ -86,8 +88,8 @@ class SubjectSectionReviewsPlaceHolderState
                 Text(this.total)
               ],
             ),
-          )
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -114,7 +116,7 @@ class SubjectSectionReviewsPlaceHolderState
         ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
         ScreenUtil.getInstance().setHeight(ScreenSize.padding),
       ),
-      child: SubjectSectionReviewsAll(widget._subject["id"]),
+      child: SubjectSectionReviewsAll(widget._subject),
     );
   }
 }

@@ -6,8 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 
 class SubjectSectionReviewsAll extends StatefulWidget {
-  final subjectId;
-  SubjectSectionReviewsAll(this.subjectId, {Key key}) : super(key: key);
+  final subject;
+  SubjectSectionReviewsAll(this.subject, {Key key}) : super(key: key);
 
   _SubjectSectionReviewsAllState createState() =>
       _SubjectSectionReviewsAllState();
@@ -52,7 +52,7 @@ class _SubjectSectionReviewsAllState extends State<SubjectSectionReviewsAll> {
     }
     var list;
     list = await ClientAPI.getInstance().getAllReviews(
-      subjectId: this.widget.subjectId,
+      subjectId: this.widget.subject['id'],
       start: this._start,
       count: this._count,
       sort: this._sort,
@@ -124,6 +124,7 @@ class _SubjectSectionReviewsAllState extends State<SubjectSectionReviewsAll> {
 
   Widget _buildCondition() {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         RadioBar(
           radios: radios,
@@ -142,7 +143,9 @@ class _SubjectSectionReviewsAllState extends State<SubjectSectionReviewsAll> {
               _refresh();
             });
           },
+          elevation: 24,
           isDense: false,
+          iconSize: 30,
         )
       ],
     );
@@ -209,13 +212,26 @@ class _SubjectSectionReviewsAllState extends State<SubjectSectionReviewsAll> {
   }
 
   Widget _buildReview(review) {
+    var newShortContent;
+    var warning = false;
+    var index = review['shortContent'].indexOf("这篇影评可能有剧透");
+    warning = index == 0;
+    if (warning) {
+      newShortContent =
+          review['shortContent'].replaceAll(RegExp(r'这篇影评可能有剧透'), "").trim();
+    } else {
+      newShortContent = review['shortContent'];
+    }
+    newShortContent = newShortContent.replaceAll(RegExp(r'\(展开\)'), "").trim();
     return SubjectSectionReviewTemplate(
+      subject: this.widget.subject,
       rid: review['rid'],
       avator: review['avator'],
       name: review['name'],
       ratingValue: review['ratingValue'],
       title: review['title'],
-      shortContent: review['shortContent'],
+      warning: warning,
+      shortContent: newShortContent,
       up: review['up'],
       down: review['down'],
       createdAt: review['createdAt'],
