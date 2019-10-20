@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_douban2/movie/movie_category_condition_bars.dart';
+import 'package:flutter_douban2/util/log_util.dart';
 
 class MovieCategoryFilterBar extends StatefulWidget {
   final Function getSelectedInput;
@@ -96,7 +97,7 @@ class _MovieCategoryFilterBarState extends State<MovieCategoryFilterBar> {
                   child: IconButton(
                     icon: Icon(Icons.close),
                     onPressed: () {
-                      print("Navigator.of(context).pop(input)----------------");
+                      LogUtil.log("Navigator.of(context).pop(input)----------------");
                       Navigator.of(context).pop();
                     },
                   ),
@@ -105,7 +106,7 @@ class _MovieCategoryFilterBarState extends State<MovieCategoryFilterBar> {
             ),
           );
           controller.closed.whenComplete(() {
-            print("whenComplete----------------");
+            LogUtil.log("whenComplete----------------");
             var input = {};
             input['style'] = this._selectedStyle;
             input['country'] = this._selectedCountry;

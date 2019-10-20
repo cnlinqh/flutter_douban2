@@ -107,19 +107,19 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
 
           // var _progress = notification.metrics.pixels /
           //       notification.metrics.maxScrollExtent;
-          // print("${(_progress * 100).toInt()}%");
-          // print("BottomEdge: ${notification.metrics.extentAfter == 0}");
+          // LogUtil.log("${(_progress * 100).toInt()}%");
+          // LogUtil.log("BottomEdge: ${notification.metrics.extentAfter == 0}");
           if (notification.metrics.pixels - _position >= _sensitivityFactor) {
-            // print('Axis Scroll Direction : Up');
+            // LogUtil.log('Axis Scroll Direction : Up');
             _position = notification.metrics.pixels;
             if (notification.metrics.extentAfter == 0 &&
                 notification.metrics.axis == Axis.vertical) {
-              // print(notification.metrics.extentAfter);
+              // LogUtil.log(notification.metrics.extentAfter);
               reviewsSectionKey.currentState.showReviewsContent();
             }
           }
           if (_position - notification.metrics.pixels >= _sensitivityFactor) {
-            // print('Axis Scroll Direction : Down');
+            // LogUtil.log('Axis Scroll Direction : Down');
             _position = notification.metrics.pixels;
           }
           return true;

@@ -33,7 +33,6 @@ class SubjectSectionReviewsPlaceHolderState
     if (mounted)
       setState(() {
         this.total = reviews['total'];
-        print(total);
       });
   }
 

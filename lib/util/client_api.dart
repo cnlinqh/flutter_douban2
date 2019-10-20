@@ -6,6 +6,7 @@ import 'package:flutter_douban2/util/repository.dart';
 import 'package:html/dom.dart';
 // import 'package:html/dom_parsing.dart';
 import 'package:html/parser.dart';
+import 'package:flutter_douban2/util/log_util.dart';
 
 class ClientAPI {
   static ClientAPI api = new ClientAPI();
@@ -34,7 +35,7 @@ class ClientAPI {
   }
 
   Future<List> getMovieHotRecommendList() async {
-    print(">>ClientAPI: getMovieHotRecommendList()");
+    LogUtil.log(">>ClientAPI: getMovieHotRecommendList()");
     var s = new DateTime.now();
     var key = "getMovieHotRecommendList";
     if (Repository.isCached(key)) {
@@ -58,7 +59,7 @@ class ClientAPI {
     });
     Repository.setCachedList(key, hots);
     var e = new DateTime.now();
-    print(
+    LogUtil.log(
         "<<<<ClientAPI: getMovieHotRecommendList() ##########################  ${e.difference(s).inMilliseconds}");
     return hots;
   }
@@ -67,7 +68,7 @@ class ClientAPI {
     int start = 0,
     int count = 6,
   }) async {
-    print(">>ClientAPI: getMovieInTheaters($start, $count)");
+    LogUtil.log(">>ClientAPI: getMovieInTheaters($start, $count)");
     var s = new DateTime.now();
     var key = "getMovieComingSoon#$start#$count";
     if (Repository.isCached(key)) {
@@ -79,7 +80,7 @@ class ClientAPI {
         queryParameters: {"start": start, 'count': count});
     Repository.setCachedList(key, res.data['subjects']);
     var e = new DateTime.now();
-    print(
+    LogUtil.log(
         "<<<<ClientAPI: getMovieInTheaters() ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
@@ -88,7 +89,7 @@ class ClientAPI {
     int start = 0,
     int count = 6,
   }) async {
-    print(">>ClientAPI: getMovieComingSoon($start, $count)");
+    LogUtil.log(">>ClientAPI: getMovieComingSoon($start, $count)");
     var s = new DateTime.now();
     var key = "getMovieComingSoon#$start#$count";
     if (Repository.isCached(key)) {
@@ -101,13 +102,13 @@ class ClientAPI {
         queryParameters: {"start": start, 'count': count});
     Repository.setCachedList(key, res.data['subjects']);
     var e = new DateTime.now();
-    print(
+    LogUtil.log(
         "<<<<ClientAPI: getMovieComingSoon($start, $count) ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
 
   Future<List> getMovieWeekly() async {
-    print(">>ClientAPI: getMovieWeekly()");
+    LogUtil.log(">>ClientAPI: getMovieWeekly()");
     var s = new DateTime.now();
     var key = "getMovieWeekly";
     if (Repository.isCached(key)) {
@@ -118,13 +119,13 @@ class ClientAPI {
     Response<Map> res = await apiDio.get('/v2/movie/weekly');
     Repository.setCachedList(key, res.data['subjects']);
     var e = new DateTime.now();
-    print(
+    LogUtil.log(
         "<<<<ClientAPI: getMovieWeekly() ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
 
   Future<List> getMovieNew() async {
-    print(">>ClientAPI: getMovieNew()");
+    LogUtil.log(">>ClientAPI: getMovieNew()");
     var s = new DateTime.now();
     var key = "getMovieNew";
     if (Repository.isCached(key)) {
@@ -135,13 +136,13 @@ class ClientAPI {
     Response<Map> res = await apiDio.get('/v2/movie/new_movies');
     Repository.setCachedList(key, res.data['subjects']);
     var e = new DateTime.now();
-    print(
+    LogUtil.log(
         "<<<<ClientAPI: getMovieNew() ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
 
   Future<List> getMovieUSBox() async {
-    print(">>ClientAPI: getMovieUSBox()");
+    LogUtil.log(">>ClientAPI: getMovieUSBox()");
     var s = new DateTime.now();
     var key = "getMovieUSBox";
     if (Repository.isCached(key)) {
@@ -152,7 +153,7 @@ class ClientAPI {
     Response<Map> res = await apiDio.get('/v2/movie/us_box');
     Repository.setCachedList(key, res.data['subjects']);
     var e = new DateTime.now();
-    print(
+    LogUtil.log(
         "<<<<ClientAPI: getMovieUSBox() ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
@@ -161,7 +162,7 @@ class ClientAPI {
     int start = 0,
     int count = 6,
   }) async {
-    print(">>ClientAPI: getMovieTop250($start, $count)");
+    LogUtil.log(">>ClientAPI: getMovieTop250($start, $count)");
     var s = new DateTime.now();
     var key = "getMovieTop250#$start#$count";
     if (Repository.isCached(key)) {
@@ -173,13 +174,13 @@ class ClientAPI {
         queryParameters: {"start": start, 'count': count});
     Repository.setCachedList(key, res.data['subjects']);
     var e = new DateTime.now();
-    print(
+    LogUtil.log(
         "<<<<ClientAPI: getMovieTop250($start, $count) ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
 
   Future getMovieSubject(id) async {
-    print(">>ClientAPI: getMovieSubject($id)");
+    LogUtil.log(">>ClientAPI: getMovieSubject($id)");
     var s = new DateTime.now();
     var key = "getMovieSubject($id)";
     if (Repository.isCached(key)) {
@@ -190,13 +191,13 @@ class ClientAPI {
     Response<Map> res = await apiDio.get('/v2/movie/subject/' + id);
     Repository.setCachedObject(key, res.data);
     var e = new DateTime.now();
-    print(
+    LogUtil.log(
         "<<<<ClientAPI: getMovieSubject($id) ##########################  ${e.difference(s).inMilliseconds}");
     return res.data;
   }
 
   Future<List> getAllDirectorsCastsList(id) async {
-    print(">>ClientAPI: getAllDirectorsCastsList($id)");
+    LogUtil.log(">>ClientAPI: getAllDirectorsCastsList($id)");
     var s = new DateTime.now();
     var key = "getAllDirectorsCastsList($id)";
     if (Repository.isCached(key)) {
@@ -234,13 +235,13 @@ class ClientAPI {
     });
     Repository.setCachedList(key, celebrities);
     var e = new DateTime.now();
-    print(
+    LogUtil.log(
         "<<<<ClientAPI: getAllDirectorsCastsList($id) ##########################  ${e.difference(s).inMilliseconds}");
     return celebrities;
   }
 
   Future getSubjectPhotos(id) async {
-    print(">>ClientAPI: getSubjectPhotos($id)");
+    LogUtil.log(">>ClientAPI: getSubjectPhotos($id)");
     var s = new DateTime.now();
     var key = "getSubjectPhotos($id)";
     if (Repository.isCached(key)) {
@@ -251,44 +252,44 @@ class ClientAPI {
     Response<Map> res = await apiDio.get('/v2/movie/subject/$id/photos');
     Repository.setCachedList(key, res.data['photos']);
     var e = new DateTime.now();
-    print(
+    LogUtil.log(
         "<<<<ClientAPI: getSubjectPhotos($id) ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['photos'];
   }
 
   Future newSearchSubjects(search) async {
-    print(">>ClientAPI: newSearchSubjects($search)");
+    LogUtil.log(">>ClientAPI: newSearchSubjects($search)");
     var s = new DateTime.now();
     String url = '/j/new_search_subjects?$search';
     Response<Map> res = await webDio.get(url);
     var e = new DateTime.now();
-    print(
+    LogUtil.log(
         "<<<<ClientAPI: newSearchSubjects($search) ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['data'];
   }
 
   Future yearRankList({year = '2018', type = '1'}) async {
-    print(">>ClientAPI: yearRankList($year, $type)");
+    LogUtil.log(">>ClientAPI: yearRankList($year, $type)");
     var s = new DateTime.now();
     String url = '/ithil_j/activity/movie_annual$year/widget/$type';
-    print(url);
+    LogUtil.log(url);
     Response<Map> res = await webDio.get(url);
     var e = new DateTime.now();
-    print(
+    LogUtil.log(
         "<<<<ClientAPI: newSearchSubjects($year, $type) ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['res'];
   }
 
   Future searchSubjects(
       {int start = 0, int count = 20, String tag = '热门'}) async {
-    print(">>ClientAPI: searchSubjects($start, $count, $tag)");
+    LogUtil.log(">>ClientAPI: searchSubjects($start, $count, $tag)");
     var s = new DateTime.now();
     String url =
         '/j/search_subjects?type=movie&tag=$tag&page_limit=$count&page_start=$start';
-    print(url);
+    LogUtil.log(url);
     Response<Map> res = await webDio.get(url);
     var e = new DateTime.now();
-    print(
+    LogUtil.log(
         "<<<<ClientAPI: searchSubjects($start, $count, $tag) ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
@@ -300,7 +301,7 @@ class ClientAPI {
     String sort = 'new_score', //new_score 热门， time 最新
     String status = 'P', //P 看过， F 想看
   }) async {
-    print(
+    LogUtil.log(
         ">>ClientAPI: getAllComment($subjectId, $start, $count, $sort, $status)");
     var s = new DateTime.now();
     List comments = [];
@@ -327,9 +328,9 @@ class ClientAPI {
 
     List<Element> isActives = document.body.getElementsByClassName('is-active');
     var total = isActives[0].getElementsByTagName('span')[0].text;
-    print("total: " + total);
+    LogUtil.log("total: " + total);
     var e = new DateTime.now();
-    print(
+    LogUtil.log(
         "<<<<ClientAPI: getAllComment($subjectId, $start, $count, $sort, $status) ##########################  ${e.difference(s).inMilliseconds}");
     return {
       "comments": comments,
@@ -364,13 +365,13 @@ class ClientAPI {
     String sort = 'hotest', //hotest 最受欢迎， time 最新发布
     String rating = '', // 1,2,3,4,5, ,
   }) async {
-    print(
+    LogUtil.log(
         ">>ClientAPI: getAllReviews($subjectId, $start, $count, $sort, $rating)");
     var s = new DateTime.now();
     List reviews = [];
     var url =
         "/subject/$subjectId/reviews?start=$start&count=$count&sort=$sort&rating=$rating";
-    print(url);
+    LogUtil.log(url);
     Response res = await webDio.get(url);
     var document = parse(res.toString());
     List<Element> items =
@@ -418,19 +419,19 @@ class ClientAPI {
 
     List<Element> droplist = document.body.getElementsByClassName('droplist');
     var total = droplist[0].getElementsByTagName('a')[0].text.trim();
-    print("total: " + total);
+    LogUtil.log("total: " + total);
     var total5 = droplist[0].getElementsByTagName('a')[1].text.trim();
-    print("total: " + total5);
+    LogUtil.log("total: " + total5);
     var total4 = droplist[0].getElementsByTagName('a')[2].text.trim();
-    print("total: " + total4);
+    LogUtil.log("total: " + total4);
     var total3 = droplist[0].getElementsByTagName('a')[3].text.trim();
-    print("total: " + total3);
+    LogUtil.log("total: " + total3);
     var total2 = droplist[0].getElementsByTagName('a')[4].text.trim();
-    print("total: " + total2);
+    LogUtil.log("total: " + total2);
     var total1 = droplist[0].getElementsByTagName('a')[5].text.trim();
-    print("total: " + total1);
+    LogUtil.log("total: " + total1);
     var e = new DateTime.now();
-    print(
+    LogUtil.log(
         "<<<<ClientAPI: getAllReviews($subjectId, $start, $count, $sort, $rating) ##########################  ${e.difference(s).inMilliseconds}");
     return {
       "reviews": reviews,
@@ -444,7 +445,7 @@ class ClientAPI {
   }
 
   Future fetchFullReview(rid) async {
-    print(">>ClientAPI: fetchFullReview($rid)");
+    LogUtil.log(">>ClientAPI: fetchFullReview($rid)");
     var s = new DateTime.now();
     var key = "fetchFullReview($rid)";
     if (Repository.isCached(key)) {
@@ -455,13 +456,13 @@ class ClientAPI {
     Response<Map> res = await webDio.get('/j/review/$rid/full');
     Repository.setCachedObject(key, res.data);
     var e = new DateTime.now();
-    print(
+    LogUtil.log(
         "<<<<ClientAPI: fetchFullReview($rid) ##########################  ${e.difference(s).inMilliseconds}");
     return res.data;
   }
 
   Future<List> getAlsoLikeMovies(subjectId) async {
-    print(">>ClientAPI: getAlsoLikeMovies($subjectId)");
+    LogUtil.log(">>ClientAPI: getAlsoLikeMovies($subjectId)");
     var s = new DateTime.now();
     var key = "getAlsoLikeMovies($subjectId)";
     if (Repository.isCached(key)) {
@@ -490,7 +491,7 @@ class ClientAPI {
 
     Repository.setCachedObject(key, movies);
     var e = new DateTime.now();
-    print(
+    LogUtil.log(
         "<<<<ClientAPI: getAlsoLikeMovies($subjectId) ##########################  ${e.difference(s).inMilliseconds}");
     return movies;
   }

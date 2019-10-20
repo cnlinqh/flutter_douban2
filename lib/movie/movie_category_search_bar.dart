@@ -112,21 +112,21 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
   }
 
   printAllSize() {
-    // print("printAllSize start");
+    // LogUtil.log("printAllSize start");
     // for (int i = 0; i < localList['list'].length; i++) {
     //   if (this._hkeys[i].currentContext != null) {
-    //     print(localList['list'][i]);
-    //     print(this._hkeys[i].currentContext.findRenderObject().size.width);
+    //     LogUtil.log(localList['list'][i]);
+    //     LogUtil.log(this._hkeys[i].currentContext.findRenderObject().size.width);
     //   }
     // }
-    // print('----------------');
+    // LogUtil.log('----------------');
     // for (int i = 0; i < localList['list'].length; i++) {
     //   if (this._vkeys[i].currentContext != null) {
-    //     print(localList['list'][i]);
-    //     print(this._vkeys[i].currentContext.findRenderObject().size.width);
+    //     LogUtil.log(localList['list'][i]);
+    //     LogUtil.log(this._vkeys[i].currentContext.findRenderObject().size.width);
     //   }
     // }
-    // print("printAllSize  end");
+    // LogUtil.log("printAllSize  end");
   }
 
   @override
