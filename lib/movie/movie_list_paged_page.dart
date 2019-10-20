@@ -71,7 +71,7 @@ class _MovieListPagedPageState extends State<MovieListPagedPage> {
                     );
                   }
                 },
-                separatorBuilder: (context, index) => Divider(),
+                separatorBuilder: (context, index) => Divider(height: 0,),
               ),
             )
           ],

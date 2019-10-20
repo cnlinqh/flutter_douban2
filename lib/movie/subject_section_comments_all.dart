@@ -194,7 +194,7 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
             );
           }
         },
-        separatorBuilder: (context, index) => Divider(),
+        separatorBuilder: (context, index) => Divider(height: 0,),
       ),
     );
   }

@@ -21,7 +21,7 @@ class MovieListStaticPage extends StatelessWidget {
             child: _buildMovieGeneral(index),
           );
         },
-        separatorBuilder: (context, index) => Divider(),
+        separatorBuilder: (context, index) => Divider(height: 0,),
       ),
     );
   }

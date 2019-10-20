@@ -197,7 +197,7 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
             );
           }
         },
-        separatorBuilder: (context, index) => Divider(),
+        separatorBuilder: (context, index) => Divider(height: 0,),
       );
     } else {
       return Container(

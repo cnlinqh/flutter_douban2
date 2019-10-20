@@ -206,7 +206,7 @@ class _SubjectSectionReviewsAllState extends State<SubjectSectionReviewsAll> {
             );
           }
         },
-        separatorBuilder: (context, index) => Divider(),
+        separatorBuilder: (context, index) => Divider(height: 0,),
       ),
     );
   }
