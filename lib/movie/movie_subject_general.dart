@@ -30,7 +30,17 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
   @override
   Widget build(BuildContext context) {
     if (subject == null) {
-      return Container();
+      return Container(
+        padding: EdgeInsets.fromLTRB(
+          ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+          ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+        ),
+        width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_cover_width),
+        height:
+            ScreenUtil.getInstance().setHeight(ScreenSize.movie_cover_height),
+      );
     }
     return Container(
       padding: EdgeInsets.fromLTRB(

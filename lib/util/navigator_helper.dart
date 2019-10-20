@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/movie/movie_choose_page.dart';
+import 'package:flutter_douban2/movie/movie_list_group_page.dart';
 import 'package:flutter_douban2/movie/movie_list_paged_page.dart';
 import 'package:flutter_douban2/movie/movie_list_static_page.dart';
 import 'package:flutter_douban2/movie/movie_rank_page_list_static.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_douban2/movie/subject_section_media_video_set.dart';
 import 'package:flutter_douban2/movie/subject_section_review_full.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
+import 'package:flutter_douban2/util/log_util.dart';
 
 class NavigatorHelper {
   static _push(BuildContext context, Widget page) {
@@ -25,8 +27,8 @@ class NavigatorHelper {
   }
 
   static pushToPage(BuildContext context, String title, {dynamic content}) {
-    print("pushToPage $title");
-    print("content $content");
+    LogUtil.log("pushToPage $title");
+    LogUtil.log("content $content");
     switch (title) {
       case LabelConstant.MOVIE_IN_THEATERS_TITLE: //影院热映
         _push(
@@ -40,7 +42,7 @@ class NavigatorHelper {
       case LabelConstant.MOVIE_COMING_SOON_TITLE: //即将上映
         _push(
           context,
-          MovieListPagedPage(
+          MovieListGroupPage(
             title: title,
             api: ClientAPI.getInstance().getMovieComingSoon,
           ),
