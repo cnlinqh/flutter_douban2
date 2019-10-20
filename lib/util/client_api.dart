@@ -102,7 +102,7 @@ class ClientAPI {
     Repository.setCachedList(key, res.data['subjects']);
     var e = new DateTime.now();
     print(
-        "<<<<ClientAPI: getMovieComingSoon() ##########################  ${e.difference(s).inMilliseconds}");
+        "<<<<ClientAPI: getMovieComingSoon($start, $count) ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
 
