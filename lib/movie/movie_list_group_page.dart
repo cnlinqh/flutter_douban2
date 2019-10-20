@@ -214,7 +214,7 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
       child: Center(
         child: Text(
           _getPubdate(index),
-          style: TextStyle(color: Colors.red),
+          style: TextStyle(color: Colors.cyan),
         ),
       ),
     );
