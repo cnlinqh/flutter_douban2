@@ -8,8 +8,8 @@ import 'package:flutter_douban2/util/navigator_helper.dart';
 
 class MovieSubjectGeneral extends StatefulWidget {
   final id;
-  
-  MovieSubjectGeneral(this.id);
+
+  MovieSubjectGeneral(this.id, {Key key}) : super(key: key);
 
   _MovieSubjectGeneralState createState() => _MovieSubjectGeneralState();
 }
