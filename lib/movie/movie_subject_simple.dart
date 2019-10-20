@@ -84,16 +84,18 @@ class MovieSubjectSimple extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(ScreenUtil.getInstance().setWidth(5)),
       decoration: BoxDecoration(
-          border: Border.all(
-        color: Colors.red,
-        width: 2.0,
-        style: BorderStyle.solid,
-      )),
+        border: Border.all(
+          color: Colors.red,
+          width: 2.0,
+          style: BorderStyle.solid,
+        ),
+         borderRadius: BorderRadius.all(Radius.circular(7)),
+      ),
       child: Text(
         this.mainlandPubdate,
         style: TextStyle(
           color: Colors.red,
-          fontSize: 12,
+          fontSize: 10,
         ),
       ),
     );
