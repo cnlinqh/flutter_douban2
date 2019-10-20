@@ -52,7 +52,6 @@ class SubjectSectionReviewTemplate extends StatelessWidget {
   }
 
   void gotoFullReview(context) async {
-    var full = await ClientAPI.getInstance().fetchFullReview(this.rid);
     NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_FULL_REVIEW,
         content: {
           'subject': subject,
@@ -61,7 +60,7 @@ class SubjectSectionReviewTemplate extends StatelessWidget {
           'createdAt' : createdAt,
           'ratingValue': ratingValue,
           'title': title,
-          'html': full['html']
+          'rid': this.rid,
         });
   }
 
