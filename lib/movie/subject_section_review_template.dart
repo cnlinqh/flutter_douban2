@@ -5,7 +5,6 @@ import 'package:flutter_douban2/util/navigator_helper.dart';
 import 'package:flutter_douban2/widget/rate_star.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_douban2/util/client_api.dart';
 
 class SubjectSectionReviewTemplate extends StatelessWidget {
   final subject;
