@@ -5,10 +5,22 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_douban2/widget/rate_star.dart';
 
 class MovieUtil {
+  static buildSliderCover(cover) {
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: CachedNetworkImageProvider(cover),
+          fit: BoxFit.cover,
+        ),
+        borderRadius: BorderRadius.all(Radius.circular(7)),
+      ),
+    );
+  }
+
   static buildMovieCover(cover, {String heroTag = ''}) {
-    print(heroTag != ''? heroTag: cover);
+    print(heroTag != '' ? heroTag : cover);
     return Hero(
-      tag: heroTag != ''? heroTag: cover,
+      tag: heroTag != '' ? heroTag : cover,
       child: Container(
         width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_cover_width),
         height:
@@ -36,12 +48,13 @@ class MovieUtil {
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
         ),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(3)),
-            color: index == 0
-                ? Colors.red
-                : index == 1
-                    ? Colors.redAccent
-                    : index == 2 ? Colors.orange : Colors.grey),
+          borderRadius: BorderRadius.all(Radius.circular(3)),
+          color: index == 0
+              ? Colors.red
+              : index == 1
+                  ? Colors.redAccent
+                  : index == 2 ? Colors.orange : Colors.grey,
+        ),
       ),
     );
   }

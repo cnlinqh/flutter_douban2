@@ -17,26 +17,14 @@ class MovieRankTop20StaticPage extends StatefulWidget {
 
 class _MovieRankTop20StaticPageState extends State<MovieRankTop20StaticPage> {
   ScrollController _scrollController;
-  double kExpandedHeight = 0;
+  double kExpandedHeight =
+      ScreenUtil.getInstance().setHeight(ScreenSize.rank_top_image_height);
   var _subjectNo1;
   @override
   void initState() {
     super.initState();
     this._fetchBackgroudImage();
     _scrollController = ScrollController()..addListener(() => setState(() {}));
-    kExpandedHeight =
-        ScreenUtil.getInstance().setHeight(ScreenSize.rank_top_image_height);
-  }
-
-  bool get _collapsed {
-    return _scrollController.hasClients &&
-        _scrollController.offset > kExpandedHeight - kToolbarHeight;
-  }
-
-  void _fetchBackgroudImage() async {
-    this._subjectNo1 = await ClientAPI.getInstance()
-        .getMovieSubject(widget.res['subjects'][0]['id']);
-    if (mounted) setState(() {});
   }
 
   @override
@@ -53,9 +41,12 @@ class _MovieRankTop20StaticPageState extends State<MovieRankTop20StaticPage> {
           ),
           SliverList(
             delegate: SliverChildListDelegate(
-              List<Widget>.generate(widget.res['subjects'].length, (int i) {
-                return _buildSubject(i, widget.res['subjects'][i]);
-              }),
+              List<Widget>.generate(
+                widget.res['subjects'].length,
+                (int index) {
+                  return _buildSubject(index, widget.res['subjects'][index]);
+                },
+              ),
             ),
           ),
         ],
@@ -84,7 +75,10 @@ class _MovieRankTop20StaticPageState extends State<MovieRankTop20StaticPage> {
         children: <Widget>[
           Text(
             widget.res['title'],
-            style: TextStyle(color: Colors.white, fontSize: 14),
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 14,
+            ),
           ),
           Text(
             LabelConstant.MOVIE_RANK_YEAR_TOP20,
@@ -94,7 +88,7 @@ class _MovieRankTop20StaticPageState extends State<MovieRankTop20StaticPage> {
             ),
           ),
         ],
-      ),    
+      ),
       background: _buildbackground(),
     );
   }
@@ -107,20 +101,34 @@ class _MovieRankTop20StaticPageState extends State<MovieRankTop20StaticPage> {
       decoration: BoxDecoration(
         image: DecorationImage(
           image: CachedNetworkImageProvider(
-              this._subjectNo1['photos'][0]['image']),
+            this._subjectNo1['photos'][0]['image'],
+          ),
           fit: BoxFit.cover,
         ),
-        // borderRadius: BorderRadius.all(Radius.circular(7)),
       ),
     );
   }
 
-  Widget _buildSubject(i, subject) {
+  Widget _buildSubject(index, subject) {
     return Stack(
       children: <Widget>[
-        MovieSubjectGeneral(subject['id'], section: widget.res['title'],),
-        MovieUtil.buildIndexNo(i),
+        MovieSubjectGeneral(
+          subject['id'],
+          section: widget.res['title'],
+        ),
+        MovieUtil.buildIndexNo(index),
       ],
     );
+  }
+
+  bool get _collapsed {
+    return _scrollController.hasClients &&
+        _scrollController.offset > kExpandedHeight - kToolbarHeight;
+  }
+
+  void _fetchBackgroudImage() async {
+    this._subjectNo1 = await ClientAPI.getInstance()
+        .getMovieSubject(widget.res['subjects'][0]['id']);
+    if (mounted) setState(() {});
   }
 }

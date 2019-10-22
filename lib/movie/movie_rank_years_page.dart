@@ -4,71 +4,7 @@ import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_douban2/movie/movie_view_section_header.dart';
 import 'package:flutter_douban2/movie/movie_rank_section_year.dart';
 
-class MovieRankYearsPage extends StatefulWidget {
-  MovieRankYearsPage({Key key}) : super(key: key);
-
-  _MovieRankYearsPageState createState() => _MovieRankYearsPageState();
-}
-
-class _MovieRankYearsPageState extends State<MovieRankYearsPage> {
-  List<Widget> views = [];
-  @override
-  void initState() {
-    super.initState();
-    _buildListViews();
-  }
-
-  _buildListViews() {
-    views = [];
-    views.add(MovieViewSectionHeader("2018"));
-    MovieRankList.list.forEach((f) {
-      views.add(MovieRankSectionYear(
-        year: '2018',
-        type: f['type'],
-        title: f['title'],
-        subTitle: f['subTitle'],
-      ));
-    });
-
-    views.add(MovieViewSectionHeader("2017"));
-    MovieRankList.list.forEach((f) {
-      views.add(MovieRankSectionYear(
-        year: '2017',
-        type: f['type'],
-        title: f['title'],
-        subTitle: f['subTitle'],
-      ));
-    });
-
-    views.add(MovieViewSectionHeader("2016"));
-    MovieRankList.list.forEach((f) {
-      views.add(MovieRankSectionYear(
-        year: '2016',
-        type: f['type'],
-        title: f['title'],
-        subTitle: f['subTitle'],
-      ));
-    });
-
-    views.add(MovieViewSectionHeader("2015"));
-    MovieRankList.list.forEach((f) {
-      views.add(MovieRankSectionYear(
-        year: '2015',
-        type: f['type'],
-        title: f['title'],
-        subTitle: f['subTitle'],
-      ));
-    });
-
-    if (mounted) {
-      this.setState(() {});
-    }
-  }
-
-  Future<void> _refreshData() async {
-    _buildListViews();
-  }
-
+class MovieRankYearsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,17 +12,11 @@ class _MovieRankYearsPageState extends State<MovieRankYearsPage> {
         title: Text('豆瓣年度榜单'),
       ),
       body: Container(
-        padding: EdgeInsets.fromLTRB(
+        padding: EdgeInsets.all(
           ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-          ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
         ),
-        child: RefreshIndicator(
-          onRefresh: this._refreshData,
-          child: ListView(
-            children: this.views,
-          ),
+        child: ListView(
+          children: MovieRankList.buildList(),
         ),
       ),
     );
@@ -94,6 +24,50 @@ class _MovieRankYearsPageState extends State<MovieRankYearsPage> {
 }
 
 class MovieRankList {
+  static List<Widget> buildList() {
+    List<Widget> list = [];
+    list.add(MovieViewSectionHeader("2018"));
+    MovieRankList.list.forEach((f) {
+      list.add(MovieRankSectionYear(
+        year: '2018',
+        type: f['type'],
+        title: f['title'],
+        subTitle: f['subTitle'],
+      ));
+    });
+
+    list.add(MovieViewSectionHeader("2017"));
+    MovieRankList.list.forEach((f) {
+      list.add(MovieRankSectionYear(
+        year: '2017',
+        type: f['type'],
+        title: f['title'],
+        subTitle: f['subTitle'],
+      ));
+    });
+
+    list.add(MovieViewSectionHeader("2016"));
+    MovieRankList.list.forEach((f) {
+      list.add(MovieRankSectionYear(
+        year: '2016',
+        type: f['type'],
+        title: f['title'],
+        subTitle: f['subTitle'],
+      ));
+    });
+
+    list.add(MovieViewSectionHeader("2015"));
+    MovieRankList.list.forEach((f) {
+      list.add(MovieRankSectionYear(
+        year: '2015',
+        type: f['type'],
+        title: f['title'],
+        subTitle: f['subTitle'],
+      ));
+    });
+    return list;
+  }
+
   static const list = [
     {
       'type': '1',

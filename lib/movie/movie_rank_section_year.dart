@@ -25,10 +25,10 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
   @override
   void initState() {
     super.initState();
-    _getRankYear();
+    _fetchData();
   }
 
-  Future<void> _getRankYear() async {
+  Future<void> _fetchData() async {
     res = await ClientAPI.getInstance()
         .yearRankList(year: widget.year, type: widget.type);
     this.color = Color(int.parse("0xff" +
@@ -39,27 +39,12 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
   @override
   Widget build(BuildContext context) {
     if (this.res == null) {
-      return Container(
-        width: ScreenUtil.getInstance()
-            .setWidth(ScreenSize.width - 2 * ScreenSize.padding),
-        height: ScreenUtil.getInstance().setHeight(ScreenSize.year_rank_height),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(7)),
-        ),
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
+      return _buildProgressIndicator();
     }
     return Column(
       children: <Widget>[
-        Container(
-          width: ScreenUtil.getInstance()
-              .setWidth(ScreenSize.width - 2 * ScreenSize.padding),
-          height: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(7)),
-          ),
+        SizedBox(
+          height: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
         ),
         GestureDetector(
           onTap: () {
@@ -96,6 +81,20 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
     );
   }
 
+  Widget _buildProgressIndicator() {
+    return Container(
+      width: ScreenUtil.getInstance()
+          .setWidth(ScreenSize.width - 2 * ScreenSize.padding),
+      height: ScreenUtil.getInstance().setHeight(ScreenSize.year_rank_height),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(7)),
+      ),
+      child: Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+  }
+
   Widget _buildRightImage() {
     return Positioned(
       top: 0,
@@ -106,7 +105,6 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
         height:
             ScreenUtil.getInstance().setHeight(ScreenSize.rank_bg_cover_height),
         decoration: BoxDecoration(
-          color: Colors.red,
           image: DecorationImage(
             image: CachedNetworkImageProvider(res['payload']['background_img']),
             fit: BoxFit.cover,
@@ -134,7 +132,7 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
           color: Colors.transparent,
         ),
         child: CustomPaint(
-          painter: new TriangleCustomPainter(this.color),
+          painter: TriangleCustomPainter(this.color),
         ),
       ),
     );
@@ -143,11 +141,14 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
   Widget _buildYear() {
     return Positioned(
       top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
-      left: ScreenUtil.getInstance().setWidth(2 * ScreenSize.padding),
+      left: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
       child: Text(
         widget.year,
         style: TextStyle(
-            color: Colors.grey, fontSize: 24, fontWeight: FontWeight.bold),
+          color: Colors.grey,
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }

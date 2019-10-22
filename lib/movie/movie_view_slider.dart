@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/animation.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_douban2/util/client_api.dart';
+import 'package:flutter_douban2/util/movie_util.dart';
 
 class MovieViewSlider extends StatefulWidget {
-  MovieViewSlider();
-
   _MovieViewSliderState createState() => _MovieViewSliderState();
 }
 
@@ -16,14 +14,7 @@ class _MovieViewSliderState extends State<MovieViewSlider> {
   @override
   void initState() {
     super.initState();
-    _refreshData();
-  }
-
-  Future<void> _refreshData() async {
-    this._list = await ClientAPI.getInstance().getMovieHotRecommendList();
-    if (mounted) {
-      this.setState(() {});
-    }
+    _fetchData();
   }
 
   @override
@@ -51,8 +42,8 @@ class _MovieViewSliderState extends State<MovieViewSlider> {
                   child: Container(
                     child: Stack(
                       children: <Widget>[
-                        _buildCover(item),
-                        _buildOpacity(item),
+                        _buildSliderCover(item),
+                        _buildOpacity(),
                         _buildTitleSummary(item),
                       ],
                     ),
@@ -66,19 +57,11 @@ class _MovieViewSliderState extends State<MovieViewSlider> {
     }
   }
 
-  Widget _buildCover(item) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: CachedNetworkImageProvider(item['cover']),
-          fit: BoxFit.cover,
-        ),
-        borderRadius: BorderRadius.all(Radius.circular(7)),
-      ),
-    );
+  Widget _buildSliderCover(item) {
+    return MovieUtil.buildSliderCover(item['cover']);
   }
 
-  Widget _buildOpacity(item) {
+  Widget _buildOpacity() {
     return Opacity(
       opacity: 0.2,
       child: Container(
@@ -112,5 +95,12 @@ class _MovieViewSliderState extends State<MovieViewSlider> {
         ],
       ),
     );
+  }
+
+  Future<void> _fetchData() async {
+    this._list = await ClientAPI.getInstance().getMovieHotRecommendList();
+    if (mounted) {
+      this.setState(() {});
+    }
   }
 }

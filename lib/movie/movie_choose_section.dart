@@ -13,25 +13,31 @@ class MovieChooseSection extends StatelessWidget {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: _buildChildren(),
+        children: <Widget>[
+          _buildHeader(),
+          _buildGridView(),
+        ],
       ),
     );
   }
 
-  List<Widget> _buildChildren() {
-    List<Widget> re = [];
-    re.add(Container(
+  Widget _buildHeader() {
+    return Container(
       padding: EdgeInsets.only(
-          left: ScreenUtil.getInstance().setWidth(
-              (ScreenSize.width - 2 * ScreenSize.padding) / 6 -
-                  ScreenSize.choose_image_width / 2)),
+        left: ScreenUtil.getInstance().setWidth(
+          (ScreenSize.width - 2 * ScreenSize.padding) / 6 -
+              ScreenSize.choose_image_width / 2,
+        ),
+      ),
       child: Text(
         this.title,
         style: TextStyle(fontSize: 20),
       ),
-    ));
+    );
+  }
 
-    re.add(GridView.builder(
+  Widget _buildGridView() {
+    return GridView.builder(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       itemCount: list.length,
@@ -42,9 +48,11 @@ class MovieChooseSection extends StatelessWidget {
         crossAxisSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
       ),
       itemBuilder: (context, index) {
-        return MovieChooseBox(this.title, list[index]);
+        return MovieChooseBox(
+          this.title,
+          list[index],
+        );
       },
-    ));
-    return re;
+    );
   }
 }

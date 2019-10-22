@@ -8,8 +8,6 @@ import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/movie/movie_view_toplist.dart';
 
 class MovieRankPage extends StatefulWidget {
-  MovieRankPage({Key key}) : super(key: key);
-
   _MovieRankPageState createState() => _MovieRankPageState();
 }
 
@@ -109,11 +107,8 @@ class _MovieRankPageState extends State<MovieRankPage> {
         title: Text(LabelConstant.MOVIE_RANK_LIST_TITLE),
       ),
       body: Container(
-        padding: EdgeInsets.fromLTRB(
+        padding: EdgeInsets.all(
           ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-          ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
         ),
         child: RefreshIndicator(
           onRefresh: this._refreshData,

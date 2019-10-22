@@ -10,7 +10,7 @@ import 'package:flutter_douban2/movie/movie_category_search_page.dart';
 class MovieChooseBox extends StatefulWidget {
   final String title;
   final String label;
-  MovieChooseBox(this.title, this.label, {Key key}) : super(key: key);
+  MovieChooseBox(this.title, this.label);
   _MovieChooseBoxState createState() => _MovieChooseBoxState();
 }
 
@@ -26,19 +26,20 @@ class _MovieChooseBoxState extends State<MovieChooseBox> {
   Widget build(BuildContext context) {
     if (this._photoUrl == null) {
       return _buildIndicator();
-    } else {}
-    return GestureDetector(
-      onTap: () {
-        onTapGo(context);
-      },
-      child: Stack(
-        children: <Widget>[
-          _buildBackgroud(),
-          _buildOpacity(),
-          _buildLabel(),
-        ],
-      ),
-    );
+    } else {
+      return GestureDetector(
+        onTap: () {
+          onTapGo(context);
+        },
+        child: Stack(
+          children: <Widget>[
+            _buildBackgroud(),
+            _buildOpacity(),
+            _buildLabel(),
+          ],
+        ),
+      );
+    }
   }
 
   void onTapGo(context) {
@@ -87,29 +88,12 @@ class _MovieChooseBoxState extends State<MovieChooseBox> {
     );
   }
 
-  Widget _buildLabel() {
-    return Center(
-      child: Container(
-        width: ScreenUtil.getInstance().setWidth(ScreenSize.choose_image_width),
-        height:
-            ScreenUtil.getInstance().setHeight(ScreenSize.choose_image_height),
-        child: Center(
-          child: Text(
-            widget.label,
-            style: TextStyle(color: Colors.white, fontSize: 16),
-          ),
-        ),
-      ),
-    );
-  }
-
   Widget _buildBackgroud() {
     return Center(
       child: Container(
         width: ScreenUtil.getInstance().setWidth(ScreenSize.choose_image_width),
         height:
             ScreenUtil.getInstance().setHeight(ScreenSize.choose_image_height),
-        // color: Colors.green,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: CachedNetworkImageProvider(this._photoUrl),
@@ -123,17 +107,32 @@ class _MovieChooseBoxState extends State<MovieChooseBox> {
 
   Widget _buildOpacity() {
     return Opacity(
-      opacity: 0.5,
+      opacity: 0.4,
       child: Center(
         child: Container(
           width:
               ScreenUtil.getInstance().setWidth(ScreenSize.choose_image_width),
           height: ScreenUtil.getInstance()
               .setHeight(ScreenSize.choose_image_height),
-          // color: Colors.green,
           decoration: BoxDecoration(
             color: Colors.black,
             borderRadius: BorderRadius.all(Radius.circular(3)),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLabel() {
+    return Center(
+      child: Container(
+        width: ScreenUtil.getInstance().setWidth(ScreenSize.choose_image_width),
+        height:
+            ScreenUtil.getInstance().setHeight(ScreenSize.choose_image_height),
+        child: Center(
+          child: Text(
+            widget.label,
+            style: TextStyle(color: Colors.white, fontSize: 16),
           ),
         ),
       ),

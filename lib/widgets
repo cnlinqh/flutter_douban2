@@ -1,15 +1,26 @@
-MaterialApp/MaterialApp
-    home:home_page.dart/Scaffold
-        body:movie_page/Scaffold
-            RefreshIndicator
-                ListView
-                    movie_slider_view/MovieSliderView/Contaier
-                    movie_section_view/MovieSectionView/Contaier
-                    movie_top_list/MovieTopList/Container
+MoviePage -> MovieChoosePage
+                    |-> MovieListPagedPage
+                                |-> SubjectDetailsPage
+                    |-> MovieCategorySearchPage
+                                |-> SubjectDetailsPage
+          -> MovieRankPage
+                    |-> MovieListStaticPage
+                                |-> SubjectDetailsPage
+                    |-> MovieListPagedPage
+                                |-> SubjectDetailsPage
+                    |-> MovieRankYearsPage
+                                |-> SubjectDetailsPage
+                    |-> MovieRankTop20StaticPage
+                                |-> SubjectDetailsPage
+          -> MovieCategorySearchPage  
+                    |-> SubjectDetailsPage          
 
 
 
- movie_list_paged/MovieListPaged/Scaffold
- movie_list_static/MovieListStatic/Scaffold
-
- movie_subject_detail/MovieSubjectDetails/Scaffold
+SubjectDetailsPage
+       |-> SubjectVideoSet
+       |-> SubjectSectionMediaPhotosGallery
+       |-> SubjectDetailsPage
+       |-> SubjectSectionCommentsAll
+       |-> SubjectSectionReviewsAll
+                     |-> SubjectSectionReviewFull

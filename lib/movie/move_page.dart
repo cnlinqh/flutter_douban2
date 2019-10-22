@@ -9,11 +9,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 
 class MoviePage extends StatefulWidget {
-  MoviePage({
-    Key key,
-    String title,
-  }) : super(key: key);
-
   _MoviePageState createState() => _MoviePageState();
 }
 
@@ -25,7 +20,27 @@ class _MoviePageState extends State<MoviePage> {
     _buildListViews();
   }
 
-  _buildListViews() {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(LabelConstant.MOVIE_PAGE_TITLE),
+      ),
+      body: Container(
+        padding: EdgeInsets.all(
+          ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+        ),
+        child: RefreshIndicator(
+          onRefresh: this._fetchData,
+          child: ListView(
+            children: this.views,
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _buildListViews() {
     views = [];
     views.add(MovieViewSlider());
     views.add(MovieViewEntrance());
@@ -35,31 +50,8 @@ class _MoviePageState extends State<MoviePage> {
     if (mounted) this.setState(() {});
   }
 
-  Future<void> _refreshData() async {
+  Future<void> _fetchData() async {
     Repository.clearCache();
     _buildListViews();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(LabelConstant.MOVIE_PAGE_TITLE),
-      ),
-      body: Container(
-        padding: EdgeInsets.fromLTRB(
-          ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-          ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-        ),
-        child: RefreshIndicator(
-          onRefresh: this._refreshData,
-          child: ListView(
-            children: this.views,
-          ),
-        ),
-      ),
-    );
   }
 }

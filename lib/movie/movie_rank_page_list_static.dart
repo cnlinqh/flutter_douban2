@@ -3,7 +3,7 @@ import 'package:flutter_douban2/movie/movie_subject_general.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class MovieRankListStaticPage extends StatefulWidget {
@@ -70,7 +70,7 @@ class _MovieRankListStaticPageState extends State<MovieRankListStaticPage> {
       return null;
     }
     return FlexibleSpaceBar(
-      title: new Column(
+      title: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -96,10 +96,10 @@ class _MovieRankListStaticPageState extends State<MovieRankListStaticPage> {
       decoration: BoxDecoration(
         image: DecorationImage(
           image: CachedNetworkImageProvider(
-              widget.res['payload']['background_img']),
+            widget.res['payload']['background_img'],
+          ),
           fit: BoxFit.cover,
         ),
-        // borderRadius: BorderRadius.all(Radius.circular(7)),
       ),
     );
   }
@@ -108,29 +108,10 @@ class _MovieRankListStaticPageState extends State<MovieRankListStaticPage> {
     return Stack(
       children: <Widget>[
         MovieSubjectGeneral(
-          subject['id'], section: widget.res['payload']['title'],
+          subject['id'],
+          section: widget.res['payload']['title'],
         ),
-        Positioned(
-          bottom: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 4),
-          left: ScreenUtil.getInstance()
-              .setWidth(ScreenSize.movie_cover_width + ScreenSize.padding * 2),
-          child: Container(
-            child: Text(
-              "No. ${i + 1}",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14),
-            ),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(3)),
-                color: i == 0
-                    ? Colors.red
-                    : i == 1
-                        ? Colors.redAccent
-                        : i == 2 ? Colors.orange : Colors.grey),
-          ),
-        )
+        MovieUtil.buildIndexNo(i),
       ],
     );
   }
