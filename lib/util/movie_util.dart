@@ -6,15 +6,19 @@ import 'package:flutter_douban2/widget/rate_star.dart';
 
 class MovieUtil {
   static buildMovieCover(cover) {
-    return Container(
-      width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_cover_width),
-      height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_cover_height),
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: CachedNetworkImageProvider(cover),
-          fit: BoxFit.cover,
+    return Hero(
+      tag: cover,
+      child: Container(
+        width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_cover_width),
+        height:
+            ScreenUtil.getInstance().setHeight(ScreenSize.movie_cover_height),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: CachedNetworkImageProvider(cover),
+            fit: BoxFit.cover,
+          ),
+          borderRadius: BorderRadius.all(Radius.circular(7)),
         ),
-        borderRadius: BorderRadius.all(Radius.circular(7)),
       ),
     );
   }
