@@ -8,8 +8,8 @@ import 'package:flutter_douban2/util/navigator_helper.dart';
 
 class MovieSubjectGeneral extends StatefulWidget {
   final id;
-
-  MovieSubjectGeneral(this.id, {Key key}) : super(key: key);
+  final section;
+  MovieSubjectGeneral(this.id, {this.section = '', Key key}) : super(key: key);
 
   _MovieSubjectGeneralState createState() => _MovieSubjectGeneralState();
 }
@@ -71,11 +71,11 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
     return GestureDetector(
       onTap: () {
         NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_DETAILS_TITLE,
-            content: this.subject['id']);
+            content: {'id': this.subject['id'], 'section': this.widget.section});
       },
       child: Stack(
         children: <Widget>[
-          MovieUtil.buildMovieCover(this.subject['images']['small']),
+          MovieUtil.buildMovieCover(this.subject['images']['small'], heroTag:  this.widget.section + this.subject['images']['small']),
           MovieUtil.buildFavoriteIcon(),
         ],
       ),

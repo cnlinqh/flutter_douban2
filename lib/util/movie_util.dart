@@ -5,9 +5,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_douban2/widget/rate_star.dart';
 
 class MovieUtil {
-  static buildMovieCover(cover) {
+  static buildMovieCover(cover, {String heroTag = ''}) {
+    print(heroTag != ''? heroTag: cover);
     return Hero(
-      tag: cover,
+      tag: heroTag != ''? heroTag: cover,
       child: Container(
         width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_cover_width),
         height:

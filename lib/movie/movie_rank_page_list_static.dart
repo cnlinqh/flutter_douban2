@@ -108,7 +108,7 @@ class _MovieRankListStaticPageState extends State<MovieRankListStaticPage> {
     return Stack(
       children: <Widget>[
         MovieSubjectGeneral(
-          subject['id'],
+          subject['id'], section: widget.res['payload']['title'],
         ),
         Positioned(
           bottom: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 4),

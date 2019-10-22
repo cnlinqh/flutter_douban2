@@ -118,7 +118,7 @@ class _MovieRankTop20StaticPageState extends State<MovieRankTop20StaticPage> {
   Widget _buildSubject(i, subject) {
     return Stack(
       children: <Widget>[
-        MovieSubjectGeneral(subject['id']),
+        MovieSubjectGeneral(subject['id'], section: widget.res['title'],),
         MovieUtil.buildIndexNo(i),
       ],
     );

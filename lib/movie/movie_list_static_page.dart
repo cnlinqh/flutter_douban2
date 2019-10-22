@@ -30,12 +30,12 @@ class MovieListStaticPage extends StatelessWidget {
     if (this.rank) {
       return Stack(
         children: <Widget>[
-          MovieSubjectGeneral(getSubject(index)['id']),
+          MovieSubjectGeneral(getSubject(index)['id'], section: this._title,),
           MovieUtil.buildIndexNo(index),
         ],
       );
     } else {
-      return MovieSubjectGeneral(getSubject(index)['id']);
+      return MovieSubjectGeneral(getSubject(index)['id'], section: this._title,);
     }
   }
 

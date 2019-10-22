@@ -193,7 +193,7 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
             return Container();
           } else {
             return Container(
-              child: MovieSubjectGeneral(getSubject(index)['id']),
+              child: MovieSubjectGeneral(getSubject(index)['id'], section:LabelConstant.MOVIE_CATEGORY_TITLE),
             );
           }
         },

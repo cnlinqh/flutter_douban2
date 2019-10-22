@@ -67,7 +67,7 @@ class _SubjectSectionAlsoLikeState extends State<SubjectSectionAlsoLike> {
                 NavigatorHelper.pushToPage(
                   context,
                   LabelConstant.MOVIE_DETAILS_TITLE,
-                  content: like['id'],
+                  content: {'id': like['id'], 'section': ''},
                 );
               },
               child: MovieUtil.buildMovieCover(like['cover']),

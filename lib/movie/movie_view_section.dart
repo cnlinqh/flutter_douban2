@@ -93,6 +93,7 @@ class _MovieViewSectionState extends State<MovieViewSection> {
             this._subjects.sublist(0, 3),
             this.widget.rowCount > 1 ? this._subjects.sublist(3, 6) : [],
             this.coming,
+            this._title,
           ),
         ],
       ),

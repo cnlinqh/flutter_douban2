@@ -6,9 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SubjectSectionGeneral extends StatelessWidget {
   final _subject;
+  final section;
   // final _parentContext;
   // SubjectSectionGeneral(this._subject, this._parentContext);
-  SubjectSectionGeneral(this._subject);
+  SubjectSectionGeneral(this._subject, {this.section = ''});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class SubjectSectionGeneral extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          MovieUtil.buildMovieCover(this._subject['images']['small']),
+          MovieUtil.buildMovieCover(this._subject['images']['small'], heroTag: this.section + this._subject['images']['small']),
           Container(
             width: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
           ),

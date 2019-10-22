@@ -70,15 +70,15 @@ class ClientAPI {
   }) async {
     LogUtil.log(">>ClientAPI: getMovieInTheaters($start, $count)");
     var s = new DateTime.now();
-    var key = "getMovieComingSoon#$start#$count";
-    if (Repository.isCached(key)) {
-      return new Future<List>(() {
-        return Repository.getCachedList(key);
-      });
-    }
+    // var key = "getMovieComingSoon#$start#$count";
+    // if (Repository.isCached(key)) {
+    //   return new Future<List>(() {
+    //     return Repository.getCachedList(key);
+    //   });
+    // }
     Response<Map> res = await apiDio.get('/v2/movie/in_theaters',
         queryParameters: {"start": start, 'count': count});
-    Repository.setCachedList(key, res.data['subjects']);
+    // Repository.setCachedList(key, res.data['subjects']);
     var e = new DateTime.now();
     LogUtil.log(
         "<<<<ClientAPI: getMovieInTheaters() ##########################  ${e.difference(s).inMilliseconds}");
@@ -91,16 +91,16 @@ class ClientAPI {
   }) async {
     LogUtil.log(">>ClientAPI: getMovieComingSoon($start, $count)");
     var s = new DateTime.now();
-    var key = "getMovieComingSoon#$start#$count";
-    if (Repository.isCached(key)) {
-      return new Future<List>(() {
-        return Repository.getCachedList(key);
-      });
-    }
+    // var key = "getMovieComingSoon#$start#$count";
+    // if (Repository.isCached(key)) {
+    //   return new Future<List>(() {
+    //     return Repository.getCachedList(key);
+    //   });
+    // }
 
     Response<Map> res = await apiDio.get('/v2/movie/coming_soon',
         queryParameters: {"start": start, 'count': count});
-    Repository.setCachedList(key, res.data['subjects']);
+    // Repository.setCachedList(key, res.data['subjects']);
     var e = new DateTime.now();
     LogUtil.log(
         "<<<<ClientAPI: getMovieComingSoon($start, $count) ##########################  ${e.difference(s).inMilliseconds}");

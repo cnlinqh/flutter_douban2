@@ -84,12 +84,12 @@ class _MovieListPagedPageState extends State<MovieListPagedPage> {
     if (this.widget.rank) {
       return Stack(
         children: <Widget>[
-          MovieSubjectGeneral(getSubject(index)['id']),
+          MovieSubjectGeneral(getSubject(index)['id'], section: this.widget.title,),
           MovieUtil.buildIndexNo(index),
         ],
       );
     } else {
-      return MovieSubjectGeneral(getSubject(index)['id']);
+      return MovieSubjectGeneral(getSubject(index)['id'], section: this.widget.title,);
     }
   }
 

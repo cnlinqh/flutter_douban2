@@ -13,8 +13,9 @@ class MovieSubjectSimple extends StatelessWidget {
   final String id;
   final bool coming;
   final String mainlandPubdate;
+  final String section;
   MovieSubjectSimple(this.title, this.cover, this.rate, this.id,
-      {this.coming = false, this.mainlandPubdate = ''});
+      {this.coming = false, this.mainlandPubdate = '', this.section});
 
   @override
   Widget build(BuildContext context) {
@@ -44,11 +45,11 @@ class MovieSubjectSimple extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_DETAILS_TITLE,
-            content: this.id);
+            content: {'id': this.id, 'section': this.section});
       },
       child: Stack(
         children: <Widget>[
-          MovieUtil.buildMovieCover(this.cover),
+          MovieUtil.buildMovieCover(this.cover, heroTag: this.section + this.cover),
           MovieUtil.buildFavoriteIcon(),
         ],
       ),

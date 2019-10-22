@@ -16,9 +16,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class SubjectDetailsPage extends StatefulWidget {
-  final String _id;
+  final  content;
 
-  SubjectDetailsPage(this._id);
+  SubjectDetailsPage(this.content);
 
   _SubjectDetailsPageState createState() => _SubjectDetailsPageState();
 }
@@ -41,7 +41,7 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
 
   Future<void> _getSubject() async {
     this._subject =
-        await ClientAPI.getInstance().getMovieSubject(this.widget._id);
+        await ClientAPI.getInstance().getMovieSubject(this.widget.content['id']);
     if (mounted) this.setState(() {});
   }
 
@@ -138,7 +138,7 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
                 onRefresh: _getSubject,
                 child: ListView(
                   children: <Widget>[
-                    SubjectSectionGeneral(this._subject),
+                    SubjectSectionGeneral(this._subject, section: this.widget.content['section']),
                     SubjectSectionRate(this._subject),
                     SubjectSectionTags(this._subject),
                     SubjectSectionSummary(this._subject),

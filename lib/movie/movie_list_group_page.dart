@@ -262,7 +262,7 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
     }
     list.add(Stack(
       children: <Widget>[
-        MovieSubjectGeneral(getSubject(index)['id']),
+        MovieSubjectGeneral(getSubject(index)['id'], section: this.widget.title,),
         MovieUtil.buildIndexNo(index),
       ],
     ));
