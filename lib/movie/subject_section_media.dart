@@ -25,7 +25,7 @@ class _SubjectSectionMediaState extends State<SubjectSectionMedia> {
   void _refresh() async {
     this._photos =
         await ClientAPI.getInstance().getSubjectPhotos(widget._subject['id']);
-    setState(() {});
+    if (mounted) setState(() {});
   }
 
   @override
@@ -74,12 +74,13 @@ class _SubjectSectionMediaState extends State<SubjectSectionMedia> {
     List<Widget> covers = [];
     var trails = MovieUtil.getTrailers(widget._subject);
     if (trails.length > 0) {
-      covers.add(SubjectSectionMediaVideoTapped(this.widget._subject, trails[0]['medium']));
+      covers.add(SubjectSectionMediaVideoTapped(
+          this.widget._subject, trails[0]['medium']));
     } else {
       var bloopers = MovieUtil.getBloopers(widget._subject);
       if (bloopers.length > 0) {
-        covers.add(
-            SubjectSectionMediaVideoTapped(this.widget._subject, bloopers[0]['medium']));
+        covers.add(SubjectSectionMediaVideoTapped(
+            this.widget._subject, bloopers[0]['medium']));
       }
     }
     return covers;
@@ -99,13 +100,15 @@ class _SubjectSectionMediaState extends State<SubjectSectionMedia> {
 
     var i = 0;
     for (i = 0; i < first.length; i++) {
-      covers.add(SubjectSectionMediaPhotoTapped(this._photos, i, first[i]['image']));
+      covers.add(
+          SubjectSectionMediaPhotoTapped(this._photos, i, first[i]['image']));
     }
 
     for (i = 0; i < second.length ~/ 2; i = i + 1) {
       covers.add(Column(
         children: <Widget>[
-          SubjectSectionMediaPhotoTapped(this._photos, i * 2 + 2, second[i * 2]['image'],
+          SubjectSectionMediaPhotoTapped(
+              this._photos, i * 2 + 2, second[i * 2]['image'],
               scale: 0.5),
           SubjectSectionMediaPhotoTapped(
               this._photos, i * 2 + 1 + 2, second[i * 2 + 1]['image'],

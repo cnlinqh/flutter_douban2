@@ -55,16 +55,16 @@ class LabelConstant {
   static const String MOVIE_YEAR_TOP_DETAILS_TITLE = "年度最高列表";
   static const String MOVIE_RANK_YEAR_TOP20 = "豆瓣年度电影Top20";
   static const String MOVIE_RANK_YEAR_LIST = "豆瓣年度电影榜单";
-  static const String MOVIE_RANK_TOP20_LOVE = "爱情片TOP20";
-  static const String MOVIE_RANK_TOP20_COMEDY = "喜剧片TOP20";
-  static const String MOVIE_RANK_TOP20_STORY = "剧情片TOP20";
-  static const String MOVIE_RANK_TOP20_CARTOON = "动画片TOP20";
-  static const String MOVIE_RANK_TOP20_FICTION = "科幻片TOP20";
-  static const String MOVIE_RANK_TOP20_DOCUMENTARY = "记录片TOP20";
-  static const String MOVIE_RANK_TOP20_SHORT = "短片TOP20";
-  static const String MOVIE_RANK_TOP20_LGBT = "同性片TOP20";
-  static const String MOVIE_RANK_TOP20_MUSICAL = "音乐片TOP20";
-  static const String MOVIE_RANK_TOP20_DANCE = "歌舞片TOP20";
+  static const String MOVIE_RANK_TOP20_LOVE = "爱情片Top20";
+  static const String MOVIE_RANK_TOP20_COMEDY = "喜剧片Top20";
+  static const String MOVIE_RANK_TOP20_STORY = "剧情片Top20";
+  static const String MOVIE_RANK_TOP20_CARTOON = "动画片Top20";
+  static const String MOVIE_RANK_TOP20_FICTION = "科幻片Top20";
+  static const String MOVIE_RANK_TOP20_DOCUMENTARY = "记录片Top20";
+  static const String MOVIE_RANK_TOP20_SHORT = "短片Top20";
+  static const String MOVIE_RANK_TOP20_LGBT = "同性片Top20";
+  static const String MOVIE_RANK_TOP20_MUSICAL = "音乐片Top20";
+  static const String MOVIE_RANK_TOP20_DANCE = "歌舞片Top20";
 
   static const String MOVIE_CATEGORY_TITLE = "分类找电影";
   static const String MOVIE_CATEGORY_ALL = "全部";

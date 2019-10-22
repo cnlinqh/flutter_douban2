@@ -193,7 +193,7 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
             return Container();
           } else {
             return Container(
-              child: MovieSubjectGeneral(getSubject(index)['id'], section:LabelConstant.MOVIE_CATEGORY_TITLE),
+              child: MovieSubjectGeneral(getSubject(index)['id'], section:LabelConstant.MOVIE_CATEGORY_TITLE + "Grid"),
             );
           }
         },
@@ -224,6 +224,7 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
                       ? 0
                       : double.parse(getSubject(index)['rate']),
                   getSubject(index)['id'],
+                  section:LabelConstant.MOVIE_CATEGORY_TITLE + "List",
                 ),
               );
             }

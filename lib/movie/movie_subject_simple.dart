@@ -15,7 +15,7 @@ class MovieSubjectSimple extends StatelessWidget {
   final String mainlandPubdate;
   final String section;
   MovieSubjectSimple(this.title, this.cover, this.rate, this.id,
-      {this.coming = false, this.mainlandPubdate = '', this.section});
+      {this.coming = false, this.mainlandPubdate = '', this.section = ''});
 
   @override
   Widget build(BuildContext context) {
