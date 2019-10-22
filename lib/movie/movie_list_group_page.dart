@@ -314,6 +314,6 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
         break;
       default:
     }
-    return "${time.year}年${time.month}月${time.day}日 $dayÎ";
+    return "${time.year}年${time.month}月${time.day}日 $day";
   }
 }
