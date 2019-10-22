@@ -193,11 +193,16 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
             return Container();
           } else {
             return Container(
-              child: MovieSubjectGeneral(getSubject(index)['id'], section:LabelConstant.MOVIE_CATEGORY_TITLE + "Grid"),
+              child: MovieSubjectGeneral(
+                getSubject(index)['id'],
+                section: LabelConstant.MOVIE_CATEGORY_TITLE + "Grid",
+              ),
             );
           }
         },
-        separatorBuilder: (context, index) => Divider(height: 0,),
+        separatorBuilder: (context, index) => Divider(
+          height: 0,
+        ),
       );
     } else {
       return Container(
@@ -218,13 +223,8 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
             } else {
               return Container(
                 child: MovieSubjectSimple(
-                  getSubject(index)['title'],
-                  getSubject(index)['cover'],
-                  getSubject(index)['rate'] == ""
-                      ? 0
-                      : double.parse(getSubject(index)['rate']),
                   getSubject(index)['id'],
-                  section:LabelConstant.MOVIE_CATEGORY_TITLE + "List",
+                  section: LabelConstant.MOVIE_CATEGORY_TITLE + "List",
                 ),
               );
             }

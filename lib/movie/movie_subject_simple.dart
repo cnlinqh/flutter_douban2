@@ -5,20 +5,36 @@ import 'package:flutter_douban2/util/navigator_helper.dart';
 import 'package:flutter_douban2/widget/rate_star.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_douban2/util/client_api.dart';
 
-class MovieSubjectSimple extends StatelessWidget {
-  final String title;
-  final String cover;
-  final double rate;
+class MovieSubjectSimple extends StatefulWidget {
   final String id;
   final bool coming;
-  final String mainlandPubdate;
   final String section;
-  MovieSubjectSimple(this.title, this.cover, this.rate, this.id,
-      {this.coming = false, this.mainlandPubdate = '', this.section = ''});
+  MovieSubjectSimple(this.id, {this.coming = false, this.section = ''});
+
+  _MovieSubjectSimpleState createState() => _MovieSubjectSimpleState();
+}
+
+class _MovieSubjectSimpleState extends State<MovieSubjectSimple> {
+  var subject;
+
+  @override
+  void initState() {
+    super.initState();
+    _refresh();
+  }
+
+  void _refresh() async {
+    subject = await ClientAPI.getInstance().getMovieSubject(widget.id);
+    if (mounted) setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (subject == null) {
+      return Container();
+    }
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +51,7 @@ class MovieSubjectSimple extends StatelessWidget {
     );
     list.add(_buildRate());
 
-    if (this.coming) {
+    if (this.widget.coming) {
       list.add(_buildPubDate());
     }
     return list;
@@ -45,11 +61,15 @@ class MovieSubjectSimple extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_DETAILS_TITLE,
-            content: {'id': this.id, 'section': this.section});
+            content: {
+              'id': this.subject['id'],
+              'section': this.widget.section
+            });
       },
       child: Stack(
         children: <Widget>[
-          MovieUtil.buildMovieCover(this.cover, heroTag: this.section + this.cover),
+          MovieUtil.buildMovieCover(this.subject['images']['small'],
+              heroTag: this.widget.section + this.subject['images']['small']),
           MovieUtil.buildFavoriteIcon(),
         ],
       ),
@@ -60,7 +80,7 @@ class MovieSubjectSimple extends StatelessWidget {
     return Container(
       width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_cover_width),
       child: Text(
-        this.title,
+        this.subject['title'],
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
@@ -71,8 +91,9 @@ class MovieSubjectSimple extends StatelessWidget {
   }
 
   Widget _buildRate() {
-    return this.rate != 0
-        ? RateStar(this.rate)
+    var rate = double.parse(this.subject['rating']['average'].toString());
+    return rate != 0
+        ? RateStar(rate)
         : Text(
             LabelConstant.MOVIE_NO_RATE,
             style: TextStyle(
@@ -90,10 +111,10 @@ class MovieSubjectSimple extends StatelessWidget {
           width: 2.0,
           style: BorderStyle.solid,
         ),
-         borderRadius: BorderRadius.all(Radius.circular(7)),
+        borderRadius: BorderRadius.all(Radius.circular(7)),
       ),
       child: Text(
-        this.mainlandPubdate,
+        this.subject['mainland_pubdate'],
         style: TextStyle(
           color: Colors.red,
           fontSize: 10,

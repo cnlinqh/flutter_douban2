@@ -6,7 +6,12 @@ class MovieViewSectionBody extends StatelessWidget {
   final List firstRow;
   final List secondRow;
   final bool coming;
-  MovieViewSectionBody(this.firstRow, this.secondRow, this.coming, this.section);
+  MovieViewSectionBody(
+    this.firstRow,
+    this.secondRow,
+    this.coming,
+    this.section,
+  );
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,16 +36,8 @@ class MovieViewSectionBody extends StatelessWidget {
 
   MovieSubjectSimple _buildSimple(sub) {
     return MovieSubjectSimple(
-      sub['title'],
-      sub['cover'] != null ? sub['cover'] : sub['images']['small'],
-      double.parse(
-        sub['rate'] != null
-            ? sub['rate'].toString()
-            : sub['rating']['average'].toString(),
-      ),
       sub['id'],
       coming: this.coming,
-      mainlandPubdate: sub['mainland_pubdate'],
       section: this.section,
     );
   }
