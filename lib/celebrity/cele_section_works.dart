@@ -49,7 +49,7 @@ class CeleSectionWorks extends StatelessWidget {
             style: TextStyle(color: Colors.white),
           ),
           RateStar(
-            work['subject']['rating']['average'],
+            double.parse(work['subject']['rating']['average'].toString()),
             labled: false,
           ),
         ],
