@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/celebrity/cele_details_page.dart';
 import 'package:flutter_douban2/movie/movie_choose_page.dart';
 import 'package:flutter_douban2/movie/movie_list_group_page.dart';
 import 'package:flutter_douban2/movie/movie_list_paged_page.dart';
@@ -133,6 +134,10 @@ class NavigatorHelper {
           context,
           SubjectSectionReviewFull(content),
         );
+        break;
+
+      case LabelConstant.CELE_DETAILS_TITLE:
+        _push(context, CeleDetailsPage(content));
         break;
       default:
     }

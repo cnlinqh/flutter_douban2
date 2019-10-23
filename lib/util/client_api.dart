@@ -495,4 +495,57 @@ class ClientAPI {
         "<<<<ClientAPI: getAlsoLikeMovies($subjectId) ##########################  ${e.difference(s).inMilliseconds}");
     return movies;
   }
+
+  Future getCelebrityDetails(id) async {
+    LogUtil.log(">>ClientAPI: getCelebrityDetails($id)");
+    var s = new DateTime.now();
+    var key = "getCelebrityDetails($id)";
+    if (Repository.isCached(key)) {
+      return new Future(() {
+        return Repository.getCachedObject(key);
+      });
+    }
+    Response<Map> res = await apiDio.get('/v2/movie/celebrity/$id');
+    Repository.setCachedObject(key, res.data);
+    var e = new DateTime.now();
+    LogUtil.log(
+        "<<<<ClientAPI: getCelebrityDetails($id) ##########################  ${e.difference(s).inMilliseconds}");
+    return res.data;
+  }
+
+  Future<List> getCelebrityPhotos({
+    String id,
+    String sortBy = 'like', //like, 按喜欢排序； size， 按尺寸排序；time，按时间排序
+    int start = 0, //count cannot be set, always 60
+  }) async {
+    LogUtil.log(">>ClientAPI: getCelebrityPhotos($id , $sortBy, $start)");
+    var s = new DateTime.now();
+    var key = "getCelebrityPhotos($id , $sortBy, $start)";
+    if (Repository.isCached(key)) {
+      return new Future(() {
+        return Repository.getCachedList(key);
+      });
+    }
+    var url =
+        '/celebrity/$id/photos/?type=C&start=0&sortby=$sortBy&size=a&subtype=a';
+    Response res = await webDio.get(url);
+    var document = parse(res.toString());
+    List<Element> items =
+        document.body.getElementsByClassName('poster-col3 clearfix');
+    items = items[0].getElementsByTagName('li');
+    List photos = [];
+    items.forEach((item) {
+      photos.add({
+        'img': item.getElementsByTagName('img')[0].attributes['src'],
+        'prop': item.getElementsByClassName('prop')[0].text.trim(),
+        'name': item.getElementsByClassName('name')[0].firstChild.text.trim(),
+      });
+    });
+
+    Repository.setCachedList(key, photos);
+    var e = new DateTime.now();
+    LogUtil.log(
+        "<<<<ClientAPI: getCelebrityPhotos($id , $sortBy, $start) ##########################  ${e.difference(s).inMilliseconds}");
+    return photos;
+  }
 }

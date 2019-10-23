@@ -149,12 +149,9 @@ class MovieUtil {
           .setWidth(ScreenSize.director_cast_cover_width),
       height: ScreenUtil.getInstance()
           .setHeight(ScreenSize.director_cast_cover_height),
-      margin: EdgeInsets.fromLTRB(
-        ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-        ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-        ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-        ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-      ),
+      // margin: EdgeInsets.all(
+      //   ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+      // ),
       decoration: BoxDecoration(
         image: DecorationImage(
           image: CachedNetworkImageProvider(cover),

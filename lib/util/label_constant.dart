@@ -12,15 +12,13 @@ class LabelConstant {
   static const String MOVIE_ALL_TITLE = '全部>';
   static const String MOVIE_NO_RATE = "暂无评分";
   static const String MOIVE_VIEW_ALL_COMMENTS = "查看全部短评";
-  static const String MOIVE_COMMENT_HOT="热门";
-  static const String MOIVE_COMMENT_NEW="最新";
+  static const String MOIVE_COMMENT_HOT = "热门";
+  static const String MOIVE_COMMENT_NEW = "最新";
   static const String MOIVE_ALL_COMMENTS = "全部短评";
-  static const String MOIVE_COMMENT_ALREADY="看过";
-  static const String MOIVE_COMMENT_WANT="想看";
-  static const String MOIVE_COMMENT_DLG_TITLE="标记";
-  static const String MOIVE_COMMENT_DLG_CANCEL="取消";
-
-
+  static const String MOIVE_COMMENT_ALREADY = "看过";
+  static const String MOIVE_COMMENT_WANT = "想看";
+  static const String MOIVE_COMMENT_DLG_TITLE = "标记";
+  static const String MOIVE_COMMENT_DLG_CANCEL = "取消";
 
   static const String MOVIE_TOP_WEEKLY = "一周口碑电影榜";
   static const String MOVIE_TOP_WEEKLY_SUB = "每周五更新，共10部";
@@ -46,8 +44,9 @@ class LabelConstant {
   static const String MOVIE_UNFOLD = "展开";
   static const String MOVIE_VIDEO_TITLE = "预告片/花絮";
   static const String MOVIE_PHOTO_TITLE = "剧照";
-  static const String MOVIE_SHORT_COMMENTS="短评";
-  static const String MOVIE_COMMENTS_HELP ="短评区仅仅展示部分短评，由算法根据时间、热度等因素进行筛选，并随机展示。\n影片上映之前的、与影片无关的或包含人身攻击等内容的短评将被折叠，且其评分不计入豆瓣评分。";
+  static const String MOVIE_SHORT_COMMENTS = "短评";
+  static const String MOVIE_COMMENTS_HELP =
+      "短评区仅仅展示部分短评，由算法根据时间、热度等因素进行筛选，并随机展示。\n影片上映之前的、与影片无关的或包含人身攻击等内容的短评将被折叠，且其评分不计入豆瓣评分。";
   static const String MOVIE_LONG_REVIEW = "影评";
   static const String MOVIE_FULL_REVIEW = "完整影评";
 
@@ -238,4 +237,7 @@ class LabelConstant {
     "宗教",
     "励志",
   ];
+
+  //Celebrity
+  static const String CELE_DETAILS_TITLE = "个人简介";
 }

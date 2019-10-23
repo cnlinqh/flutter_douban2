@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
+import 'package:flutter_douban2/util/navigator_helper.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
@@ -20,7 +21,7 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           _buildHeader(context),
-          _buildCovers(),
+          _buildCovers(context),
         ],
       ),
     );
@@ -76,51 +77,52 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
     );
   }
 
-  Widget _buildCovers() {
+  Widget _buildCovers(context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: _buildDirectorsCastsCovers(),
+        children: _buildDirectorsCastsCovers(context),
       ),
     );
   }
 
-  List<Widget> _buildDirectorsCastsCovers() {
+  List<Widget> _buildDirectorsCastsCovers(context) {
     List<Widget> directors = [];
-    this._subject['directors'].forEach((dir) {
-      directors.add(Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          MovieUtil.buildDirectorCastCover(
-              dir['avatars'] != null ? dir['avatars']['small'] : ''),
-          Text(
-            dir['name'],
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          ),
-          Text(
-            LabelConstant.MOVIE_DIRECTOR + '/' + dir['name_en'],
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(color: Colors.white, fontSize: 10),
-          ),
-        ],
+    this._subject['directors'].forEach((obj) {
+      directors.add(_buildSingleCover(context, obj));
+      directors.add(SizedBox(
+        width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
       ));
     });
 
     List<Widget> casts = [];
-    this._subject['casts'].forEach((dir) {
-      casts.add(Column(
+    this._subject['casts'].forEach((obj) {
+      casts.add(_buildSingleCover(context, obj));
+      casts.add(SizedBox(
+        width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+      ));
+    });
+    directors.addAll(casts);
+    return directors;
+  }
+
+  Widget _buildSingleCover(context, obj) {
+    return GestureDetector(
+      onTap: () {
+        NavigatorHelper.pushToPage(
+          context,
+          LabelConstant.CELE_DETAILS_TITLE,
+          content: obj["id"],
+        );
+      },
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           MovieUtil.buildDirectorCastCover(
-              dir['avatars'] != null ? dir['avatars']['small'] : ''),
+              obj['avatars'] != null ? obj['avatars']['small'] : ''),
           Text(
-            dir['name'],
+            obj['name'],
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
@@ -128,7 +130,7 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
             ),
           ),
           Text(
-            LabelConstant.MOVIE_ACTOR + '/' + dir['name_en'],
+            LabelConstant.MOVIE_ACTOR + '/' + obj['name_en'],
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
@@ -137,10 +139,8 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
             ),
           ),
         ],
-      ));
-    });
-    directors.addAll(casts);
-    return directors;
+      ),
+    );
   }
 
   Widget _buildBottomSheetContent(celebrities) {
