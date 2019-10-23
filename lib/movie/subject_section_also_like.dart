@@ -8,7 +8,8 @@ import 'package:flutter_douban2/util/screen_size.dart';
 
 class SubjectSectionAlsoLike extends StatefulWidget {
   final subject;
-  SubjectSectionAlsoLike(this.subject, {Key key}) : super(key: key);
+  final section;
+  SubjectSectionAlsoLike(this.subject, {Key key, this.section = ''}) : super(key: key);
 
   _SubjectSectionAlsoLikeState createState() => _SubjectSectionAlsoLikeState();
 }
@@ -67,10 +68,10 @@ class _SubjectSectionAlsoLikeState extends State<SubjectSectionAlsoLike> {
                 NavigatorHelper.pushToPage(
                   context,
                   LabelConstant.MOVIE_DETAILS_TITLE,
-                  content: {'id': like['id'], 'section': ''},
+                  content: {'id': like['id'], 'section': this.widget.section},
                 );
               },
-              child: MovieUtil.buildMovieCover(like['cover']),
+              child: MovieUtil.buildMovieCover(like['cover'], heroTag: this.widget.section + like['cover']),
             ),
             Text(
               like['title'],

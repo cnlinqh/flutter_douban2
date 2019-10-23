@@ -16,6 +16,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class SubjectDetailsPage extends StatefulWidget {
+  
+  // content['id]        -> the subject id
+  // content['section']  -> the prefix of herotag
   final  content;
 
   SubjectDetailsPage(this.content);
@@ -144,7 +147,7 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
                     SubjectSectionSummary(this._subject),
                     SubjectSectionDirectorsCasts(this._subject),
                     SubjectSectionMedia(this._subject),
-                    SubjectSectionAlsoLike(this._subject),
+                    SubjectSectionAlsoLike(this._subject, section: this.widget.content['section']),
                     SubjectSectionComments(this._subject),
                     SubjectSectionReviewsPlaceHolder(
                       this._subject,
