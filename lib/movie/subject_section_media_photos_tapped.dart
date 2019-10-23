@@ -21,7 +21,10 @@ class SubjectSectionMediaPhotoTapped extends StatelessWidget {
             LabelConstant.MOVIE_PHOTO_TITLE,
             content: {"photos": this._photos, "index": this._index});
       },
-      child: MovieUtil.buildPhotoCover(this._cover, scale: this.scale),
+      child: Hero(
+        tag: this._cover,
+        child: MovieUtil.buildPhotoCover(this._cover, scale: this.scale),
+      ),
     );
   }
 }

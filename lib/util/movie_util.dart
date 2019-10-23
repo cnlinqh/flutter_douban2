@@ -18,7 +18,6 @@ class MovieUtil {
   }
 
   static buildMovieCover(cover, {String heroTag = ''}) {
-    print(heroTag != '' ? heroTag : cover);
     return Hero(
       tag: heroTag != '' ? heroTag : cover,
       child: Container(

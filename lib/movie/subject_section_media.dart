@@ -54,7 +54,7 @@ class _SubjectSectionMediaState extends State<SubjectSectionMedia> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: _buildCovers(context),
+                children: _buildMediaCovers(context),
               ),
             )
           ],
@@ -63,7 +63,7 @@ class _SubjectSectionMediaState extends State<SubjectSectionMedia> {
     }
   }
 
-  List<Widget> _buildCovers(context) {
+  List<Widget> _buildMediaCovers(context) {
     var videos = _buildVideoCovers(context);
     var photos = _buildPhotosCovers(context);
     videos.addAll(photos);

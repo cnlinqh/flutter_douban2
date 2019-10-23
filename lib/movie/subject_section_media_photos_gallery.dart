@@ -34,10 +34,11 @@ class _SubjectSectionMediaPhotosGalleryState extends State<SubjectSectionMediaPh
           scrollPhysics: const BouncingScrollPhysics(),
           builder: (BuildContext context, int index) {
             return PhotoViewGalleryPageOptions(
-              imageProvider: NetworkImage(widget._photos[index]['thumb']),
+              imageProvider: NetworkImage(widget._photos[index]['image']),
               initialScale: PhotoViewComputedScale.contained * 1,
               scaleStateController: PhotoViewScaleStateController(),
               maxScale: 10.0,
+              heroAttributes: PhotoViewHeroAttributes(tag:widget._photos[index]['image']),
             );
           },
           itemCount: widget._photos.length,
