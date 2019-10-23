@@ -38,11 +38,8 @@ class _SubjectSectionReviewFullState extends State<SubjectSectionReviewFull> {
     return Scaffold(
       appBar: _buildAppBar(),
       body: Container(
-        padding: EdgeInsets.fromLTRB(
+        padding: EdgeInsets.all(
           ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-          ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
         ),
         child: Column(
           children: <Widget>[

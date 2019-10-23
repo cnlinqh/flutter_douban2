@@ -43,7 +43,7 @@ class _SubjectSectionReviewsAllState extends State<SubjectSectionReviewsAll> {
     _start = 0;
     _done = false;
     _dataList.removeRange(0, _dataList.length - 1);
-    setState(() {});
+    if (mounted) setState(() {});
   }
 
   void _retrieveData() async {
@@ -138,10 +138,11 @@ class _SubjectSectionReviewsAllState extends State<SubjectSectionReviewsAll> {
           hint: new Text('按评星查看'),
           value: _rating,
           onChanged: (rating) {
-            setState(() {
-              _rating = rating;
-              _refresh();
-            });
+            if (mounted)
+              setState(() {
+                _rating = rating;
+                _refresh();
+              });
           },
           elevation: 24,
           isDense: false,
@@ -206,7 +207,9 @@ class _SubjectSectionReviewsAllState extends State<SubjectSectionReviewsAll> {
             );
           }
         },
-        separatorBuilder: (context, index) => Divider(height: 0,),
+        separatorBuilder: (context, index) => Divider(
+          height: 0,
+        ),
       ),
     );
   }

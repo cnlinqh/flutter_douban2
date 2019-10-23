@@ -38,7 +38,7 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
     _start = 0;
     _done = false;
     _dataList.removeRange(0, _dataList.length - 1);
-    setState(() {});
+    if (mounted) setState(() {});
   }
 
   void _retrieveData() async {
@@ -194,7 +194,9 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
             );
           }
         },
-        separatorBuilder: (context, index) => Divider(height: 0,),
+        separatorBuilder: (context, index) => Divider(
+          height: 0,
+        ),
       ),
     );
   }

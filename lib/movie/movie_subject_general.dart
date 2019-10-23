@@ -31,11 +31,8 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
   Widget build(BuildContext context) {
     if (subject == null) {
       return Container(
-        padding: EdgeInsets.fromLTRB(
+        padding: EdgeInsets.all(
           ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-          ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
         ),
         width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_cover_width),
         height:
@@ -43,11 +40,8 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
       );
     }
     return Container(
-      padding: EdgeInsets.fromLTRB(
+      padding: EdgeInsets.all(
         ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-        ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-        ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-        ScreenUtil.getInstance().setHeight(ScreenSize.padding),
       ),
       child: Row(
         children: <Widget>[
@@ -71,11 +65,15 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
     return GestureDetector(
       onTap: () {
         NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_DETAILS_TITLE,
-            content: {'id': this.subject['id'], 'section': this.widget.section});
+            content: {
+              'id': this.subject['id'],
+              'section': this.widget.section
+            });
       },
       child: Stack(
         children: <Widget>[
-          MovieUtil.buildMovieCover(this.subject['images']['small'], heroTag:  this.widget.section + this.subject['images']['small']),
+          MovieUtil.buildMovieCover(this.subject['images']['small'],
+              heroTag: this.widget.section + this.subject['images']['small']),
           MovieUtil.buildFavoriteIcon(),
         ],
       ),

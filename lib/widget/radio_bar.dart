@@ -37,8 +37,9 @@ class _RadioBarState extends State<RadioBar> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin:
-          EdgeInsets.all(ScreenUtil.getInstance().setWidth(ScreenSize.padding)),
+      margin: EdgeInsets.all(
+        ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+      ),
       child: Stack(
         children: <Widget>[
           _buildRadioButtons(),
@@ -114,7 +115,8 @@ class _RadioBarState extends State<RadioBar> with TickerProviderStateMixin {
         child: Center(
           child: Text(
             widget.radios[this.selectedIndex]["label"],
-            style: TextStyle(color: this.labelVisible? Colors.black: Colors.black),
+            style: TextStyle(
+                color: this.labelVisible ? Colors.black : Colors.black),
           ),
         ),
       ),

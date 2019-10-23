@@ -16,10 +16,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class SubjectDetailsPage extends StatefulWidget {
-  
   // content['id]        -> the subject id
   // content['section']  -> the prefix of herotag
-  final  content;
+  final content;
 
   SubjectDetailsPage(this.content);
 
@@ -43,8 +42,8 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
   }
 
   Future<void> _getSubject() async {
-    this._subject =
-        await ClientAPI.getInstance().getMovieSubject(this.widget.content['id']);
+    this._subject = await ClientAPI.getInstance()
+        .getMovieSubject(this.widget.content['id']);
     if (mounted) this.setState(() {});
   }
 
@@ -103,9 +102,10 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
       return NotificationListener<ScrollNotification>(
         onNotification: (ScrollNotification notification) {
           if (notification.metrics.axis == Axis.vertical) {
-            setState(() {
-              isTitleShow = notification.metrics.pixels > 20;
-            });
+            if (mounted)
+              setState(() {
+                isTitleShow = notification.metrics.pixels > 20;
+              });
           }
 
           // var _progress = notification.metrics.pixels /
@@ -131,23 +131,22 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
           children: <Widget>[
             Container(
               color: Colors.blueGrey,
-              padding: EdgeInsets.fromLTRB(
+              padding: EdgeInsets.all(
                 ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-                ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-                ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-                ScreenUtil.getInstance().setHeight(ScreenSize.padding),
               ),
               child: RefreshIndicator(
                 onRefresh: _getSubject,
                 child: ListView(
                   children: <Widget>[
-                    SubjectSectionGeneral(this._subject, section: this.widget.content['section']),
+                    SubjectSectionGeneral(this._subject,
+                        section: this.widget.content['section']),
                     SubjectSectionRate(this._subject),
                     SubjectSectionTags(this._subject),
                     SubjectSectionSummary(this._subject),
                     SubjectSectionDirectorsCasts(this._subject),
                     SubjectSectionMedia(this._subject),
-                    SubjectSectionAlsoLike(this._subject, section: this.widget.content['section']),
+                    SubjectSectionAlsoLike(this._subject,
+                        section: this.widget.content['section']),
                     SubjectSectionComments(this._subject),
                     SubjectSectionReviewsPlaceHolder(
                       this._subject,

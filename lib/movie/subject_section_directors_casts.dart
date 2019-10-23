@@ -173,11 +173,8 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
                   .setWidth(ScreenSize.celebrities_width),
               height: ScreenUtil.getInstance()
                   .setHeight(ScreenSize.director_cast_cover_height),
-              margin: EdgeInsets.fromLTRB(
+              margin: EdgeInsets.all(
                 ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-                ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-                ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-                ScreenUtil.getInstance().setHeight(ScreenSize.padding),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,

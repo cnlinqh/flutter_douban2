@@ -44,8 +44,8 @@ class _MoviePageState extends State<MoviePage> {
     views = [];
     views.add(MovieViewSlider());
     views.add(MovieViewEntrance());
-    views.add(MovieViewSection(LabelConstant.MOVIE_COMING_SOON_TITLE));
     views.add(MovieViewSection(LabelConstant.MOVIE_IN_THEATERS_TITLE));
+    views.add(MovieViewSection(LabelConstant.MOVIE_COMING_SOON_TITLE));
     views.add(MovieViewTopList(LabelConstant.MOVIE_RANK_LIST_TITLE));
     if (mounted) this.setState(() {});
   }

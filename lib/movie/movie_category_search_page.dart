@@ -255,7 +255,7 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
       final snackBar = new SnackBar(content: new Text('No Result!'));
       Scaffold.of(context).showSnackBar(snackBar);
     }
-    setState(() {});
+    if (mounted) setState(() {});
   }
 
   void _refresh() {

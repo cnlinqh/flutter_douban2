@@ -37,11 +37,8 @@ class SubjectSectionReviewTemplate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(
+      padding: EdgeInsets.all(
         ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
-        ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
-        ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
-        ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

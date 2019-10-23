@@ -50,9 +50,10 @@ class _HomePageState extends State<HomePage> {
         type: BottomNavigationBarType.fixed,
         currentIndex: this._tabIndex,
         onTap: (index) {
-          setState(() {
-            this._tabIndex = index;
-          });
+          if (mounted)
+            setState(() {
+              this._tabIndex = index;
+            });
         },
       ),
     );
