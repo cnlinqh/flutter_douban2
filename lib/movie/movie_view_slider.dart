@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MovieViewSlider extends StatefulWidget {
   _MovieViewSliderState createState() => _MovieViewSliderState();
@@ -38,7 +39,9 @@ class _MovieViewSliderState extends State<MovieViewSlider> {
             return Builder(
               builder: (context) {
                 return GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    _launchURL(item['link']);
+                  },
                   child: Container(
                     child: Stack(
                       children: <Widget>[
@@ -101,6 +104,14 @@ class _MovieViewSliderState extends State<MovieViewSlider> {
     this._list = await ClientAPI.getInstance().getMovieHotRecommendList();
     if (mounted) {
       this.setState(() {});
+    }
+  }
+
+  void _launchURL(url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
     }
   }
 }
