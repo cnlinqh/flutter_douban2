@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
+import 'package:flutter_douban2/util/navigator_helper.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
-import 'package:flutter_douban2/widget/rate_star.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CeleSectionPhotos extends StatelessWidget {
@@ -30,7 +31,16 @@ class CeleSectionPhotos extends StatelessWidget {
               Expanded(
                 child: Text(''),
               ),
-              Text("全部>"),
+              GestureDetector(
+                onTap: () {
+                  NavigatorHelper.pushToPage(
+                    context,
+                    LabelConstant.CELE_GALLERY_TITLE,
+                    content: this._cele['id'],
+                  );
+                },
+                child: Text("全部>"),
+              ),
             ],
           ),
           SingleChildScrollView(

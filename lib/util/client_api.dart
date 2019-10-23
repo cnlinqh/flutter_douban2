@@ -516,7 +516,7 @@ class ClientAPI {
   Future<List> getCelebrityPhotos({
     String id,
     String sortBy = 'like', //like, 按喜欢排序； size， 按尺寸排序；time，按时间排序
-    int start = 0, //count cannot be set, always 60
+    int start = 0, //count cannot be set, always 30
   }) async {
     LogUtil.log(">>ClientAPI: getCelebrityPhotos($id , $sortBy, $start)");
     var s = new DateTime.now();
@@ -527,7 +527,7 @@ class ClientAPI {
       });
     }
     var url =
-        '/celebrity/$id/photos/?type=C&start=0&sortby=$sortBy&size=a&subtype=a';
+        '/celebrity/$id/photos/?type=C&start=$start&sortby=$sortBy&size=a&subtype=a';
     Response res = await webDio.get(url);
     var document = parse(res.toString());
     List<Element> items =

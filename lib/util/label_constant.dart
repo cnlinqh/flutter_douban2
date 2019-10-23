@@ -240,4 +240,6 @@ class LabelConstant {
 
   //Celebrity
   static const String CELE_DETAILS_TITLE = "个人简介";
+  static const String CELE_GALLERY_TITLE = "个人相册";
+  static const String CELE_POHTOVIEW_TITLE = "相片";
 }
