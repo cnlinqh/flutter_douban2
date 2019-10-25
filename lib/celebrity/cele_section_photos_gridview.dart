@@ -27,7 +27,7 @@ class _CeleSectionPhotosGridViewState extends State<CeleSectionPhotosGridView> {
     return AppBar(
       title: Consumer<CelePhotosInfo>(
         builder: (context, info, widget) {
-          return Text('${this.widget._cele['name']}的照片 ${info.total}');
+          return Text('${this.widget._cele['name']}的照片 (${info.total})');
         },
       ),
     );

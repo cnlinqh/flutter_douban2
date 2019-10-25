@@ -341,6 +341,12 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
         search = search + "&year_range=2019,2019";
       } else if (this._selectedYear == "2018") {
         search = search + "&year_range=2018,2018";
+      } else if (this._selectedYear == "2017") {
+        search = search + "&year_range=2017,2017";
+      } else if (this._selectedYear == "2016") {
+        search = search + "&year_range=2016,2016";
+      } else if (this._selectedYear == "2015") {
+        search = search + "&year_range=2015,2015";
       } else if (this._selectedYear == "2010年代") {
         search = search + "&year_range=2010,2017";
       } else if (this._selectedYear == "2000年代") {

@@ -3,6 +3,7 @@ import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/navigator_helper.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_douban2/movie/movie_category_search_page.dart';
 
 class MovieViewEntrance extends StatelessWidget {
   const MovieViewEntrance({Key key}) : super(key: key);
@@ -19,42 +20,27 @@ class MovieViewEntrance extends StatelessWidget {
         children: <Widget>[
           _buildEntrance(
             () {
-              NavigatorHelper.pushToPage(
-                context,
-                LabelConstant.MOVIE_ENTRANCE_SELECT_ICON,
-              );
+              NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_ENTRANCE_SELECT_ICON);
             },
-            Icon(
-              Icons.find_in_page,
-              color: Colors.white,
-            ),
+            Icon(Icons.find_in_page, color: Colors.white),
             LabelConstant.MOVIE_ENTRANCE_SELECT_ICON,
           ),
           _buildEntrance(
             () {
-              NavigatorHelper.pushToPage(
-                context,
-                LabelConstant.MOVIE_RANK_LIST_TITLE,
-              );
+              NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_RANK_LIST_TITLE);
             },
-            Icon(
-              Icons.assessment,
-              color: Colors.white,
-            ),
+            Icon(Icons.assessment, color: Colors.white),
             LabelConstant.MOVIE_ENTRANCE_RANK_ICON,
           ),
           _buildEntrance(
             () {
               LabelConstant.resetSpecialList();
-              NavigatorHelper.pushToPage(
-                context,
-                LabelConstant.MOVIE_CATEGORY_TITLE,
-              );
+              NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_CATEGORY_TITLE,
+                  content: MovieCategorySearchPage(
+                    tag: '电影',
+                  ));
             },
-            Icon(
-              Icons.category,
-              color: Colors.white,
-            ),
+            Icon(Icons.category, color: Colors.white),
             LabelConstant.MOVIE_ENTRANCE_CATEGORY_ICON,
           ),
         ],
