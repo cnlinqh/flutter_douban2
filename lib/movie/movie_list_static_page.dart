@@ -21,7 +21,9 @@ class MovieListStaticPage extends StatelessWidget {
             child: _buildMovieGeneral(index),
           );
         },
-        separatorBuilder: (context, index) => Divider(height: 0,),
+        separatorBuilder: (context, index) => Divider(
+          height: 0,
+        ),
       ),
     );
   }
@@ -30,18 +32,22 @@ class MovieListStaticPage extends StatelessWidget {
     if (this.rank) {
       return Stack(
         children: <Widget>[
-          MovieSubjectGeneral(getSubject(index)['id'], section: this._title,),
+          MovieSubjectGeneral(
+            getSubject(index)['id'],
+            section: this._title,
+          ),
           MovieUtil.buildIndexNo(index),
         ],
       );
     } else {
-      return MovieSubjectGeneral(getSubject(index)['id'], section: this._title,);
+      return MovieSubjectGeneral(
+        getSubject(index)['id'],
+        section: this._title,
+      );
     }
   }
 
   dynamic getSubject(index) {
-    return _subjects[index]['subject'] != null
-        ? _subjects[index]['subject']
-        : _subjects[index];
+    return _subjects[index]['subject'] != null ? _subjects[index]['subject'] : _subjects[index];
   }
 }

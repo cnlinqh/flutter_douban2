@@ -10,8 +10,7 @@ class MovieRankListStaticPage extends StatefulWidget {
   final res;
   MovieRankListStaticPage(this.res, {Key key}) : super(key: key);
 
-  _MovieRankListStaticPageState createState() =>
-      _MovieRankListStaticPageState();
+  _MovieRankListStaticPageState createState() => _MovieRankListStaticPageState();
 }
 
 class _MovieRankListStaticPageState extends State<MovieRankListStaticPage> {
@@ -22,13 +21,11 @@ class _MovieRankListStaticPageState extends State<MovieRankListStaticPage> {
   void initState() {
     super.initState();
     _scrollController = ScrollController()..addListener(() => setState(() {}));
-    kExpandedHeight =
-        ScreenUtil.getInstance().setHeight(ScreenSize.rank_top_image_height);
+    kExpandedHeight = ScreenUtil.getInstance().setHeight(ScreenSize.rank_top_image_height);
   }
 
   bool get _collapsed {
-    return _scrollController.hasClients &&
-        _scrollController.offset > kExpandedHeight - kToolbarHeight;
+    return _scrollController.hasClients && _scrollController.offset > kExpandedHeight - kToolbarHeight;
   }
 
   @override

@@ -25,8 +25,7 @@ class MovieChooseSection extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(
         left: ScreenUtil.getInstance().setWidth(
-          (ScreenSize.width - 2 * ScreenSize.padding) / 6 -
-              ScreenSize.choose_image_width / 2,
+          (ScreenSize.width - 2 * ScreenSize.padding) / 6 - ScreenSize.choose_image_width / 2,
         ),
       ),
       child: Text(

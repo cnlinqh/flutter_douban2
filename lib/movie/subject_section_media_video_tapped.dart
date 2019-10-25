@@ -12,8 +12,7 @@ class SubjectSectionMediaVideoTapped extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_VIDEO_TITLE,
-            content: this._subject);
+        NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_VIDEO_TITLE, content: this._subject);
       },
       child: MovieUtil.buildVideoCover(this._cover),
     );

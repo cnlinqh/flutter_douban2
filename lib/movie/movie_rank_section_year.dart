@@ -12,9 +12,7 @@ class MovieRankSectionYear extends StatefulWidget {
   final String title;
   final String subTitle;
 
-  MovieRankSectionYear(
-      {Key key, this.year, this.type, this.title, this.subTitle})
-      : super(key: key);
+  MovieRankSectionYear({Key key, this.year, this.type, this.title, this.subTitle}) : super(key: key);
 
   _MovieRankSectionYearState createState() => _MovieRankSectionYearState();
 }
@@ -29,10 +27,8 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
   }
 
   Future<void> _fetchData() async {
-    res = await ClientAPI.getInstance()
-        .yearRankList(year: widget.year, type: widget.type);
-    this.color = Color(int.parse("0xff" +
-        res['subject']['color_scheme']['primary_color_light'].toString()));
+    res = await ClientAPI.getInstance().yearRankList(year: widget.year, type: widget.type);
+    this.color = Color(int.parse("0xff" + res['subject']['color_scheme']['primary_color_light'].toString()));
     if (mounted) this.setState(() {});
   }
 
@@ -55,10 +51,8 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
             );
           },
           child: Container(
-            width: ScreenUtil.getInstance()
-                .setWidth(ScreenSize.width - 2 * ScreenSize.padding),
-            height:
-                ScreenUtil.getInstance().setHeight(ScreenSize.year_rank_height),
+            width: ScreenUtil.getInstance().setWidth(ScreenSize.width - 2 * ScreenSize.padding),
+            height: ScreenUtil.getInstance().setHeight(ScreenSize.year_rank_height),
             decoration: BoxDecoration(
               color: this.color,
               borderRadius: BorderRadius.all(Radius.circular(7)),
@@ -83,8 +77,7 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
 
   Widget _buildProgressIndicator() {
     return Container(
-      width: ScreenUtil.getInstance()
-          .setWidth(ScreenSize.width - 2 * ScreenSize.padding),
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.width - 2 * ScreenSize.padding),
       height: ScreenUtil.getInstance().setHeight(ScreenSize.year_rank_height),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(7)),
@@ -100,10 +93,8 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
       top: 0,
       right: 0,
       child: Container(
-        width:
-            ScreenUtil.getInstance().setWidth(ScreenSize.rank_bg_cover_width),
-        height:
-            ScreenUtil.getInstance().setHeight(ScreenSize.rank_bg_cover_height),
+        width: ScreenUtil.getInstance().setWidth(ScreenSize.rank_bg_cover_width),
+        height: ScreenUtil.getInstance().setHeight(ScreenSize.rank_bg_cover_height),
         decoration: BoxDecoration(
           image: DecorationImage(
             image: CachedNetworkImageProvider(res['payload']['background_img']),
@@ -121,13 +112,11 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
   Widget _buildTriangle() {
     return Positioned(
       top: 0,
-      left: ScreenUtil.getInstance().setWidth(ScreenSize.width -
-          2 * ScreenSize.padding -
-          ScreenSize.rank_bg_cover_width),
+      left:
+          ScreenUtil.getInstance().setWidth(ScreenSize.width - 2 * ScreenSize.padding - ScreenSize.rank_bg_cover_width),
       child: Container(
         width: ScreenUtil.getInstance().setWidth(ScreenSize.triangle_top_width),
-        height:
-            ScreenUtil.getInstance().setHeight(ScreenSize.rank_bg_cover_height),
+        height: ScreenUtil.getInstance().setHeight(ScreenSize.rank_bg_cover_height),
         decoration: BoxDecoration(
           color: Colors.transparent,
         ),
@@ -157,8 +146,7 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
     return Opacity(
       opacity: 0.3,
       child: Container(
-        width: ScreenUtil.getInstance()
-            .setWidth(ScreenSize.width - 2 * ScreenSize.padding),
+        width: ScreenUtil.getInstance().setWidth(ScreenSize.width - 2 * ScreenSize.padding),
         height: ScreenUtil.getInstance().setHeight(ScreenSize.year_rank_height),
         decoration: BoxDecoration(
           color: this.color,
@@ -170,8 +158,7 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
 
   Widget _buildTitle() {
     return Positioned(
-      top: ScreenUtil.getInstance()
-          .setHeight(ScreenSize.year_rank_height / 2 - 24),
+      top: ScreenUtil.getInstance().setHeight(ScreenSize.year_rank_height / 2 - 24),
       left: ScreenUtil.getInstance().setWidth(2 * ScreenSize.padding),
       child: Text(
         widget.title,

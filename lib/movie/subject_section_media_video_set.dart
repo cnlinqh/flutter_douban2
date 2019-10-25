@@ -26,8 +26,7 @@ class _SubjectVideoSetState extends State<SubjectVideoSet> {
     this.videoList = trailers;
     var i = 0;
     for (i = 0; i < this.videoList.length; i++) {
-      vControllerList.add(
-          VideoPlayerController.network(this.videoList[i]['resource_url']));
+      vControllerList.add(VideoPlayerController.network(this.videoList[i]['resource_url']));
     }
     this.selectedIndex = 0;
     cController = chewieController;
@@ -51,10 +50,8 @@ class _SubjectVideoSetState extends State<SubjectVideoSet> {
           child: Column(
             children: <Widget>[
               Container(
-                width:
-                    ScreenUtil.getInstance().setWidth(ScreenSize.video_width),
-                height:
-                    ScreenUtil.getInstance().setHeight(ScreenSize.video_height),
+                width: ScreenUtil.getInstance().setWidth(ScreenSize.video_width),
+                height: ScreenUtil.getInstance().setHeight(ScreenSize.video_height),
                 child: Chewie(
                   controller: cController,
                 ),
@@ -142,11 +139,7 @@ class _SubjectVideoSetState extends State<SubjectVideoSet> {
   }
 
   String _buildTitle(i) {
-    return this.videoList[i]['title'] +
-        " " +
-        (i + 1).toString() +
-        "/" +
-        this.videoList.length.toString();
+    return this.videoList[i]['title'] + " " + (i + 1).toString() + "/" + this.videoList.length.toString();
   }
 }
 
@@ -162,8 +155,7 @@ class VideoPlaceHolder extends StatelessWidget {
         onTap: () {
           this.onVideoSelected(this.index);
         },
-        child: MovieUtil.buildVideoCover(this.videoList[index]['medium'],
-            scale: 0.5),
+        child: MovieUtil.buildVideoCover(this.videoList[index]['medium'], scale: 0.5),
       ),
     );
   }

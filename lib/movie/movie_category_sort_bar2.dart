@@ -32,8 +32,7 @@ class _MovieCategorySortBar2State extends State<MovieCategorySortBar2> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: ScreenUtil.getInstance()
-          .setWidth(ScreenSize.width - 2 * ScreenSize.padding),
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.width - 2 * ScreenSize.padding),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
@@ -56,13 +55,11 @@ class MovieCategoryRadioBar extends StatefulWidget {
   final List radios;
   final int defaultIndex;
   final Function onSelectionChange;
-  MovieCategoryRadioBar(
-      {this.radios, this.defaultIndex = 0, this.onSelectionChange});
+  MovieCategoryRadioBar({this.radios, this.defaultIndex = 0, this.onSelectionChange});
   _MovieCategoryRadioBarState createState() => _MovieCategoryRadioBarState();
 }
 
-class _MovieCategoryRadioBarState extends State<MovieCategoryRadioBar>
-    with TickerProviderStateMixin {
+class _MovieCategoryRadioBarState extends State<MovieCategoryRadioBar> with TickerProviderStateMixin {
   Animation<double> animation;
   AnimationController controller;
   int index;
@@ -84,8 +81,7 @@ class _MovieCategoryRadioBarState extends State<MovieCategoryRadioBar>
       child: Stack(
         children: <Widget>[
           Container(
-              height: ScreenUtil.getInstance()
-                  .setHeight(ScreenSize.movie_cate_search_radio_height),
+              height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_cate_search_radio_height),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: _buildRadios(),
@@ -97,8 +93,7 @@ class _MovieCategoryRadioBarState extends State<MovieCategoryRadioBar>
             top: 0,
             left: animation != null ? animation.value : 0,
             child: Container(
-              height: ScreenUtil.getInstance()
-                  .setHeight(ScreenSize.movie_cate_search_radio_height),
+              height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_cate_search_radio_height),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
@@ -107,8 +102,7 @@ class _MovieCategoryRadioBarState extends State<MovieCategoryRadioBar>
                       margin: EdgeInsets.all(
                         ScreenUtil.getInstance().setWidth(ScreenSize.padding),
                       ),
-                      padding: EdgeInsets.all(ScreenUtil.getInstance()
-                          .setWidth(ScreenSize.padding / 2)),
+                      padding: EdgeInsets.all(ScreenUtil.getInstance().setWidth(ScreenSize.padding / 2)),
                       decoration: BoxDecoration(
                         color: Colors.cyan,
                         borderRadius: BorderRadius.all(Radius.circular(3)),
@@ -181,15 +175,13 @@ class _MovieCategoryRadioBarState extends State<MovieCategoryRadioBar>
   double _getNewLeft(index) {
     double newLeft = 0;
     for (int i = 0; i < index; i++) {
-      newLeft = newLeft +
-          this.radioKeys[i].currentContext.findRenderObject().size.width;
+      newLeft = newLeft + this.radioKeys[i].currentContext.findRenderObject().size.width;
     }
     return newLeft;
   }
 
   void _runAnimation(double newLeft) {
-    controller = new AnimationController(
-        duration: const Duration(milliseconds: 500), vsync: this);
+    controller = new AnimationController(duration: const Duration(milliseconds: 500), vsync: this);
     animation = new Tween(begin: this.left, end: newLeft).animate(controller);
     animation.addListener(() {
       if (mounted) setState(() {});
@@ -209,12 +201,9 @@ class MovieCategoryRadioButton extends StatefulWidget {
   final String id;
   final String label;
   final Function onSelection;
-  MovieCategoryRadioButton(
-      {Key key, this.index, this.length, this.id, this.label, this.onSelection})
-      : super(key: key);
+  MovieCategoryRadioButton({Key key, this.index, this.length, this.id, this.label, this.onSelection}) : super(key: key);
 
-  _MovieCategoryRadioButtonState createState() =>
-      _MovieCategoryRadioButtonState();
+  _MovieCategoryRadioButtonState createState() => _MovieCategoryRadioButtonState();
 }
 
 class _MovieCategoryRadioButtonState extends State<MovieCategoryRadioButton> {
@@ -228,22 +217,17 @@ class _MovieCategoryRadioButtonState extends State<MovieCategoryRadioButton> {
         margin: EdgeInsets.all(
           ScreenUtil.getInstance().setWidth(ScreenSize.padding),
         ),
-        padding: EdgeInsets.all(
-            ScreenUtil.getInstance().setWidth(ScreenSize.padding / 2)),
-        height: ScreenUtil.getInstance()
-            .setHeight(ScreenSize.movie_cate_search_radio_height),
+        padding: EdgeInsets.all(ScreenUtil.getInstance().setWidth(ScreenSize.padding / 2)),
+        height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_cate_search_radio_height),
         child: Center(
           child: Text(widget.label),
         ),
         decoration: BoxDecoration(
           color: Colors.white70,
           borderRadius: widget.index == 0
-              ? BorderRadius.only(
-                  topLeft: Radius.circular(3), bottomLeft: Radius.circular(3))
+              ? BorderRadius.only(topLeft: Radius.circular(3), bottomLeft: Radius.circular(3))
               : widget.index == widget.length - 1
-                  ? BorderRadius.only(
-                      topRight: Radius.circular(3),
-                      bottomRight: Radius.circular(3))
+                  ? BorderRadius.only(topRight: Radius.circular(3), bottomRight: Radius.circular(3))
                   : null,
         ),
       ),

@@ -85,10 +85,7 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
             top2Text = _getPubdate(visibleItem['index']);
             LogUtil.log("topText $topText");
             LogUtil.log("top2Text $top2Text");
-            if (tmp <
-                0 -
-                    ScreenUtil.getInstance()
-                        .setHeight(ScreenSize.movie_divider_height)) {
+            if (tmp < 0 - ScreenUtil.getInstance().setHeight(ScreenSize.movie_divider_height)) {
               this.top = 0;
               topText = top2Text;
             } else {
@@ -146,8 +143,7 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
     for (int i = 0; i < keyItems.length; i++) {
       if (keyItems[i].currentContext != null) {
         RenderBox boxItem = keyItems[i].currentContext.findRenderObject();
-        if (boxItem.localToGlobal(Offset.zero).dy + boxItem.size.height >
-            dyListView) {
+        if (boxItem.localToGlobal(Offset.zero).dy + boxItem.size.height > dyListView) {
           LogUtil.log("first visible item $i");
           firstVisibleItem['index'] = i;
           firstVisibleItem['dy'] = boxItem.localToGlobal(Offset.zero).dy;
@@ -160,20 +156,16 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
 
   Widget _buildTopBar() {
     return Container(
-      width: ScreenUtil.getInstance()
-          .setWidth(ScreenSize.width - ScreenSize.padding * 2),
-      height:
-          ScreenUtil.getInstance().setHeight(ScreenSize.movie_divider_height),
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.width - ScreenSize.padding * 2),
+      height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_divider_height),
       child: Stack(
         children: <Widget>[
           Positioned(
             left: 0,
             top: top,
             child: Container(
-              width: ScreenUtil.getInstance()
-                  .setWidth(ScreenSize.width - ScreenSize.padding * 2),
-              height: ScreenUtil.getInstance()
-                  .setHeight(ScreenSize.movie_divider_height),
+              width: ScreenUtil.getInstance().setWidth(ScreenSize.width - ScreenSize.padding * 2),
+              height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_divider_height),
               child: Center(
                 child: Text(
                   topText,
@@ -184,14 +176,10 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
           ),
           Positioned(
             left: 0,
-            top: top +
-                ScreenUtil.getInstance()
-                    .setHeight(ScreenSize.movie_divider_height),
+            top: top + ScreenUtil.getInstance().setHeight(ScreenSize.movie_divider_height),
             child: Container(
-              width: ScreenUtil.getInstance()
-                  .setWidth(ScreenSize.width - ScreenSize.padding * 2),
-              height: ScreenUtil.getInstance()
-                  .setHeight(ScreenSize.movie_divider_height),
+              width: ScreenUtil.getInstance().setWidth(ScreenSize.width - ScreenSize.padding * 2),
+              height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_divider_height),
               child: Center(
                 child: Text(
                   top2Text,
@@ -207,10 +195,8 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
 
   _buildIntervalBar({int index = 0}) {
     return Container(
-      width: ScreenUtil.getInstance()
-          .setWidth(ScreenSize.width - ScreenSize.padding * 2),
-      height:
-          ScreenUtil.getInstance().setHeight(ScreenSize.movie_divider_height),
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.width - ScreenSize.padding * 2),
+      height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_divider_height),
       child: Center(
         child: Text(
           _getPubdate(index),
@@ -222,8 +208,7 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
 
   printInfo() {
     LogUtil.log('printInfo start');
-    var sectionHeight = ScreenUtil.getInstance()
-        .setHeight(ScreenSize.movie_cover_height + ScreenSize.padding * 2);
+    var sectionHeight = ScreenUtil.getInstance().setHeight(ScreenSize.movie_cover_height + ScreenSize.padding * 2);
     LogUtil.log('section height $sectionHeight');
     LogUtil.log('keyListView');
     RenderBox box = keyListView.currentContext.findRenderObject();
@@ -262,7 +247,10 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
     }
     list.add(Stack(
       children: <Widget>[
-        MovieSubjectGeneral(getSubject(index)['id'], section: this.widget.title,),
+        MovieSubjectGeneral(
+          getSubject(index)['id'],
+          section: this.widget.title,
+        ),
         MovieUtil.buildIndexNo(index),
       ],
     ));
@@ -270,9 +258,7 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
   }
 
   dynamic getSubject(index) {
-    return _dataList[index]['subject'] != null
-        ? _dataList[index]['subject']
-        : _dataList[index];
+    return _dataList[index]['subject'] != null ? _dataList[index]['subject'] : _dataList[index];
   }
 
   String _getPubdate(index) {

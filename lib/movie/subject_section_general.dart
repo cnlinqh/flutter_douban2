@@ -25,15 +25,14 @@ class SubjectSectionGeneral extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          MovieUtil.buildMovieCover(this._subject['images']['small'], heroTag: this.section + this._subject['images']['small']),
+          MovieUtil.buildMovieCover(this._subject['images']['small'],
+              heroTag: this.section + this._subject['images']['small']),
           Container(
             width: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
           ),
           Container(
-            width: ScreenUtil.getInstance()
-                .setWidth(ScreenSize.subject_description_width),
-            height: ScreenUtil.getInstance()
-                .setHeight(ScreenSize.movie_cover_height),
+            width: ScreenUtil.getInstance().setWidth(ScreenSize.subject_description_width),
+            height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_cover_height),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -60,10 +59,8 @@ class SubjectSectionGeneral extends StatelessWidget {
                         children: <Widget>[
                           _buildBottomSheetContent(),
                           Positioned(
-                            top: ScreenUtil.getInstance()
-                                .setWidth(ScreenSize.padding),
-                            right: ScreenUtil.getInstance()
-                                .setHeight(ScreenSize.padding),
+                            top: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+                            right: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
                             child: IconButton(
                               icon: Icon(Icons.close),
                               onPressed: () {
@@ -92,8 +89,7 @@ class SubjectSectionGeneral extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: ScreenUtil.getInstance()
-                      .setWidth(ScreenSize.subject_description_width),
+                  width: ScreenUtil.getInstance().setWidth(ScreenSize.subject_description_width),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[

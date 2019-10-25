@@ -9,15 +9,16 @@ class MovieCategoryRangeBar extends StatelessWidget {
   final int defaultLowerValue;
   final int defaultUpperValue;
   MovieCategoryRangeBar(
-      this.onSelectionChange, this.defaultLowerValue, this.defaultUpperValue);
+    this.onSelectionChange,
+    this.defaultLowerValue,
+    this.defaultUpperValue,
+  );
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: ScreenUtil.getInstance()
-          .setWidth(ScreenSize.width - 2 * ScreenSize.padding),
-      height: ScreenUtil.getInstance()
-          .setHeight(ScreenSize.movie_cate_search_bar_hight),
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.width - 2 * ScreenSize.padding),
+      height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_cate_search_bar_hight),
       child: Row(
         children: <Widget>[
           Text(
@@ -35,8 +36,7 @@ class MovieCategoryRangeBar extends StatelessWidget {
             onChanged: (double newLowerValue, double newUpperValue) {},
             onChangeStart: (double startLowerValue, double startUpperValue) {},
             onChangeEnd: (double newLowerValue, double newUpperValue) {
-              this.onSelectionChange(
-                  newLowerValue.toInt(), newUpperValue.toInt());
+              this.onSelectionChange(newLowerValue.toInt(), newUpperValue.toInt());
             },
           ),
         ],

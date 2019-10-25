@@ -9,16 +9,12 @@ class SubjectSectionReviewsPlaceHolder extends StatefulWidget {
   final _subject;
   final double height;
   final bool visible;
-  SubjectSectionReviewsPlaceHolder(this._subject,
-      {this.height = 200, Key key, this.visible = false})
-      : super(key: key);
+  SubjectSectionReviewsPlaceHolder(this._subject, {this.height = 200, Key key, this.visible = false}) : super(key: key);
 
-  SubjectSectionReviewsPlaceHolderState createState() =>
-      SubjectSectionReviewsPlaceHolderState();
+  SubjectSectionReviewsPlaceHolderState createState() => SubjectSectionReviewsPlaceHolderState();
 }
 
-class SubjectSectionReviewsPlaceHolderState
-    extends State<SubjectSectionReviewsPlaceHolder> {
+class SubjectSectionReviewsPlaceHolderState extends State<SubjectSectionReviewsPlaceHolder> {
   String total = "";
   @override
   void initState() {
@@ -27,8 +23,7 @@ class SubjectSectionReviewsPlaceHolderState
   }
 
   void _fetchData() async {
-    var reviews = await ClientAPI.getInstance()
-        .getAllReviews(subjectId: this.widget._subject['id']);
+    var reviews = await ClientAPI.getInstance().getAllReviews(subjectId: this.widget._subject['id']);
 
     if (mounted)
       setState(() {
@@ -47,8 +42,7 @@ class SubjectSectionReviewsPlaceHolderState
     return GestureDetector(
       onTap: showReviewsContent,
       child: Container(
-        width: ScreenUtil.getInstance()
-            .setWidth(ScreenSize.width - ScreenSize.padding * 2),
+        width: ScreenUtil.getInstance().setWidth(ScreenSize.width - ScreenSize.padding * 2),
         height: ScreenUtil.getInstance().setHeight(this.widget.height),
         decoration: BoxDecoration(
           color: Colors.cyan,
@@ -64,10 +58,8 @@ class SubjectSectionReviewsPlaceHolderState
                   margin: EdgeInsets.only(
                     top: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
                   ),
-                  width: ScreenUtil.getInstance()
-                      .setWidth(ScreenSize.close_bar_width),
-                  height: ScreenUtil.getInstance()
-                      .setHeight(ScreenSize.close_bar_height),
+                  width: ScreenUtil.getInstance().setWidth(ScreenSize.close_bar_width),
+                  height: ScreenUtil.getInstance().setHeight(ScreenSize.close_bar_height),
                   decoration: BoxDecoration(
                     color: Colors.grey,
                     borderRadius: BorderRadius.all(Radius.circular(7)),

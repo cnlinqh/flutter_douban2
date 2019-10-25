@@ -22,10 +22,8 @@ class _MovieCategorySortBarState extends State<MovieCategorySortBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: ScreenUtil.getInstance()
-          .setWidth(ScreenSize.width - 2 * ScreenSize.padding),
-      height: ScreenUtil.getInstance()
-          .setHeight(ScreenSize.movie_cate_search_bar_hight),
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.width - 2 * ScreenSize.padding),
+      height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_cate_search_bar_hight),
       child: Row(
         children: <Widget>[
           Text(

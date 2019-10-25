@@ -32,8 +32,7 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
   double _position = 0.0;
   double _sensitivityFactor = 20.0;
 
-  GlobalKey<SubjectSectionReviewsPlaceHolderState> reviewsSectionKey =
-      GlobalKey();
+  GlobalKey<SubjectSectionReviewsPlaceHolderState> reviewsSectionKey = GlobalKey();
 
   @override
   void initState() {
@@ -42,8 +41,7 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
   }
 
   Future<void> _getSubject() async {
-    this._subject = await ClientAPI.getInstance()
-        .getMovieSubject(this.widget.content['id']);
+    this._subject = await ClientAPI.getInstance().getMovieSubject(this.widget.content['id']);
     if (mounted) this.setState(() {});
   }
 
@@ -115,8 +113,7 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
           if (notification.metrics.pixels - _position >= _sensitivityFactor) {
             // LogUtil.log('Axis Scroll Direction : Up');
             _position = notification.metrics.pixels;
-            if (notification.metrics.extentAfter == 0 &&
-                notification.metrics.axis == Axis.vertical) {
+            if (notification.metrics.extentAfter == 0 && notification.metrics.axis == Axis.vertical) {
               // LogUtil.log(notification.metrics.extentAfter);
               reviewsSectionKey.currentState.showReviewsContent();
             }
@@ -138,21 +135,18 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
                 onRefresh: _getSubject,
                 child: ListView(
                   children: <Widget>[
-                    SubjectSectionGeneral(this._subject,
-                        section: this.widget.content['section']),
+                    SubjectSectionGeneral(this._subject, section: this.widget.content['section']),
                     SubjectSectionRate(this._subject),
                     SubjectSectionTags(this._subject),
                     SubjectSectionSummary(this._subject),
                     SubjectSectionDirectorsCasts(this._subject),
                     SubjectSectionMedia(this._subject),
-                    SubjectSectionAlsoLike(this._subject,
-                        section: this.widget.content['section']),
+                    SubjectSectionAlsoLike(this._subject, section: this.widget.content['section']),
                     SubjectSectionComments(this._subject),
                     SubjectSectionReviewsPlaceHolder(
                       this._subject,
                       visible: false,
-                      height: ScreenUtil.getInstance().setHeight(
-                          ScreenSize.movie_review_place_holder_height),
+                      height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_review_place_holder_height),
                     ),
                   ],
                 ),
@@ -166,9 +160,8 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
                 this._subject,
                 key: reviewsSectionKey,
                 visible: true,
-                height: ScreenUtil.getInstance().setHeight(
-                    ScreenSize.movie_review_place_holder_height +
-                        ScreenSize.padding * 2),
+                height: ScreenUtil.getInstance()
+                    .setHeight(ScreenSize.movie_review_place_holder_height + ScreenSize.padding * 2),
               ),
             )
           ],

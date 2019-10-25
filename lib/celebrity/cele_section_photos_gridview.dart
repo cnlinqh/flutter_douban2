@@ -11,8 +11,7 @@ class CeleSectionPhotosGridView extends StatefulWidget {
   final _cele;
   CeleSectionPhotosGridView(this._cele, {Key key}) : super(key: key);
 
-  _CeleSectionPhotosGridViewState createState() =>
-      _CeleSectionPhotosGridViewState();
+  _CeleSectionPhotosGridViewState createState() => _CeleSectionPhotosGridViewState();
 }
 
 class _CeleSectionPhotosGridViewState extends State<CeleSectionPhotosGridView> {
@@ -36,18 +35,15 @@ class _CeleSectionPhotosGridViewState extends State<CeleSectionPhotosGridView> {
 
   Widget _buildBody() {
     return Container(
-      padding:
-          EdgeInsets.all(ScreenUtil.getInstance().setWidth(ScreenSize.padding)),
+      padding: EdgeInsets.all(ScreenUtil.getInstance().setWidth(ScreenSize.padding)),
       child: Consumer<CelePhotosInfo>(
         builder: (context, info, widget) {
           return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
               childAspectRatio: 1,
-              crossAxisSpacing:
-                  ScreenUtil.getInstance().setWidth(ScreenSize.padding / 10),
-              mainAxisSpacing:
-                  ScreenUtil.getInstance().setWidth(ScreenSize.padding / 10),
+              crossAxisSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding / 10),
+              mainAxisSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding / 10),
             ),
             itemCount: info.photos.length,
             itemBuilder: (context, index) {
@@ -63,8 +59,7 @@ class _CeleSectionPhotosGridViewState extends State<CeleSectionPhotosGridView> {
                       LabelConstant.CELE_GALLERY_VIEW_TITLE,
                     );
                   },
-                  child: MovieUtil.buildDirectorCastCover(
-                      info.photos[index]['img']),
+                  child: MovieUtil.buildDirectorCastCover(info.photos[index]['img']),
                 );
               }
             },

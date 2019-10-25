@@ -54,11 +54,9 @@ class SubjectSectionRate extends StatelessWidget {
       child: Opacity(
         opacity: 0.6,
         child: Container(
-          width: ScreenUtil.getInstance().setWidth(ScreenSize.point_width +
-              ScreenSize.graph_width -
-              ScreenSize.padding * 4),
-          height: ScreenUtil.getInstance()
-              .setHeight(ScreenSize.rate_height - ScreenSize.padding * 2),
+          width: ScreenUtil.getInstance()
+              .setWidth(ScreenSize.point_width + ScreenSize.graph_width - ScreenSize.padding * 4),
+          height: ScreenUtil.getInstance().setHeight(ScreenSize.rate_height - ScreenSize.padding * 2),
           decoration: BoxDecoration(
             color: Colors.white10,
             borderRadius: BorderRadius.all(
@@ -98,8 +96,7 @@ class SubjectSectionRate extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: ScreenUtil.getInstance()
-                .setHeight(ScreenSize.rate_height / 2 + 24),
+            top: ScreenUtil.getInstance().setHeight(ScreenSize.rate_height / 2 + 24),
             child: Container(
               width: ScreenUtil.getInstance().setWidth(ScreenSize.point_width),
               child: Center(
@@ -147,8 +144,7 @@ class SubjectSectionRate extends StatelessWidget {
   Row _buildRatingDetailsRow(int level) {
     var details = this._subject['rating']['details'];
     double sum = _getRateTotal();
-    var percent =
-        double.parse(details[level.toString()].toString()) / sum * 100;
+    var percent = double.parse(details[level.toString()].toString()) / sum * 100;
     List<Widget> stars = [];
     var i = 0;
     for (i = 0; i < level; i++) {
@@ -180,10 +176,8 @@ class SubjectSectionRate extends StatelessWidget {
             Stack(
               children: <Widget>[
                 Container(
-                  width: ScreenUtil.getInstance().setWidth(
-                      ScreenSize.bar_width + ScreenSize.percent_width),
-                  height: ScreenUtil.getInstance()
-                      .setHeight(ScreenSize.star_height),
+                  width: ScreenUtil.getInstance().setWidth(ScreenSize.bar_width + ScreenSize.percent_width),
+                  height: ScreenUtil.getInstance().setHeight(ScreenSize.star_height),
                   child: Row(
                     children: <Widget>[
                       Container(
@@ -193,10 +187,8 @@ class SubjectSectionRate extends StatelessWidget {
                             Radius.circular(7),
                           ),
                         ),
-                        width: ScreenUtil.getInstance()
-                            .setWidth(ScreenSize.bar_width),
-                        height: ScreenUtil.getInstance()
-                            .setHeight(ScreenSize.bar_height),
+                        width: ScreenUtil.getInstance().setWidth(ScreenSize.bar_width),
+                        height: ScreenUtil.getInstance().setHeight(ScreenSize.bar_height),
                       ),
                       Expanded(
                         child: Text(
@@ -204,7 +196,6 @@ class SubjectSectionRate extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 10,
                             color: Colors.white,
-                            
                           ),
                         ),
                       )
@@ -212,10 +203,8 @@ class SubjectSectionRate extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width:
-                      ScreenUtil.getInstance().setWidth(ScreenSize.bar_width),
-                  height: ScreenUtil.getInstance()
-                      .setHeight(ScreenSize.star_height),
+                  width: ScreenUtil.getInstance().setWidth(ScreenSize.bar_width),
+                  height: ScreenUtil.getInstance().setHeight(ScreenSize.star_height),
                   child: Row(
                     children: <Widget>[
                       Container(
@@ -225,10 +214,8 @@ class SubjectSectionRate extends StatelessWidget {
                             Radius.circular(7),
                           ),
                         ),
-                        width: ScreenUtil.getInstance()
-                            .setWidth(ScreenSize.bar_width / 100 * percent),
-                        height: ScreenUtil.getInstance()
-                            .setHeight(ScreenSize.bar_height),
+                        width: ScreenUtil.getInstance().setWidth(ScreenSize.bar_width / 100 * percent),
+                        height: ScreenUtil.getInstance().setHeight(ScreenSize.bar_height),
                       ),
                     ],
                   ),
@@ -244,17 +231,15 @@ class SubjectSectionRate extends StatelessWidget {
   Container _buildDividerPart() {
     return Container(
       color: Colors.white,
-      width: ScreenUtil.getInstance().setWidth(ScreenSize.point_width +
-          ScreenSize.graph_width -
-          ScreenSize.padding * 4),
+      width:
+          ScreenUtil.getInstance().setWidth(ScreenSize.point_width + ScreenSize.graph_width - ScreenSize.padding * 4),
       height: ScreenUtil.getInstance().setHeight(1),
     );
   }
 
   Container _buildSummaryPart() {
     return Container(
-      width: ScreenUtil.getInstance()
-          .setWidth(ScreenSize.width - 5 * ScreenSize.padding),
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.width - 5 * ScreenSize.padding),
       height: ScreenUtil.getInstance().setHeight(ScreenSize.summary_height),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -262,9 +247,7 @@ class SubjectSectionRate extends StatelessWidget {
           Text(
             this._subject['rating']['average'] == 0
                 ? LabelConstant.MOVIE_NO_RATE
-                : LabelConstant.MOVIE_TOTAL_RATE +
-                    " :" +
-                    _getRateTotal().toStringAsFixed(0),
+                : LabelConstant.MOVIE_TOTAL_RATE + " :" + _getRateTotal().toStringAsFixed(0),
             style: TextStyle(color: Colors.white),
           )
         ],

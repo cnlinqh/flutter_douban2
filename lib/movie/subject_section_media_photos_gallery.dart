@@ -7,12 +7,10 @@ class SubjectSectionMediaPhotosGallery extends StatefulWidget {
   final int _index;
   SubjectSectionMediaPhotosGallery(this._photos, this._index);
 
-  _SubjectSectionMediaPhotosGalleryState createState() =>
-      _SubjectSectionMediaPhotosGalleryState();
+  _SubjectSectionMediaPhotosGalleryState createState() => _SubjectSectionMediaPhotosGalleryState();
 }
 
-class _SubjectSectionMediaPhotosGalleryState
-    extends State<SubjectSectionMediaPhotosGallery> {
+class _SubjectSectionMediaPhotosGalleryState extends State<SubjectSectionMediaPhotosGallery> {
   int _initialIndex;
   int _length;
   int _title;
@@ -40,8 +38,7 @@ class _SubjectSectionMediaPhotosGalleryState
               initialScale: PhotoViewComputedScale.contained * 1,
               scaleStateController: PhotoViewScaleStateController(),
               maxScale: 10.0,
-              heroAttributes:
-                  PhotoViewHeroAttributes(tag: widget._photos[index]['image']),
+              heroAttributes: PhotoViewHeroAttributes(tag: widget._photos[index]['image']),
             );
           },
           itemCount: widget._photos.length,

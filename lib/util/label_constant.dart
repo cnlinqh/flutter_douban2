@@ -132,51 +132,16 @@ class LabelConstant {
   };
   static var sYearList = {
     "label": "年代",
-    "list": [
-      "全部",
-      "2019",
-      "2018",
-      "2010年代",
-      "2000年代",
-      "90年代",
-      "80年代",
-      "70年代",
-      "60年代",
-      "更早"
-    ],
+    "list": ["全部", "2019", "2018", "2010年代", "2000年代", "90年代", "80年代", "70年代", "60年代", "更早"],
   };
   static var sSpecialList = {
     "label": "特色",
-    "list": [
-      "全部",
-      "经典",
-      "青春",
-      "文艺",
-      "搞笑",
-      "励志",
-      "魔幻",
-      "感人",
-      "女性",
-      "黑帮",
-      MOVIE_SPECIAL_SELF_DEFINE
-    ],
+    "list": ["全部", "经典", "青春", "文艺", "搞笑", "励志", "魔幻", "感人", "女性", "黑帮", MOVIE_SPECIAL_SELF_DEFINE],
   };
   static void resetSpecialList() {
     sSpecialList = {
       "label": "特色",
-      "list": [
-        "全部",
-        "经典",
-        "青春",
-        "文艺",
-        "搞笑",
-        "励志",
-        "魔幻",
-        "感人",
-        "女性",
-        "黑帮",
-        MOVIE_SPECIAL_SELF_DEFINE
-      ],
+      "list": ["全部", "经典", "青春", "文艺", "搞笑", "励志", "魔幻", "感人", "女性", "黑帮", MOVIE_SPECIAL_SELF_DEFINE],
     };
   }
 

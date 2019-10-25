@@ -9,8 +9,7 @@ class SubjectSectionReviewsAll extends StatefulWidget {
   final subject;
   SubjectSectionReviewsAll(this.subject, {Key key}) : super(key: key);
 
-  _SubjectSectionReviewsAllState createState() =>
-      _SubjectSectionReviewsAllState();
+  _SubjectSectionReviewsAllState createState() => _SubjectSectionReviewsAllState();
 }
 
 class _SubjectSectionReviewsAllState extends State<SubjectSectionReviewsAll> {
@@ -96,10 +95,8 @@ class _SubjectSectionReviewsAllState extends State<SubjectSectionReviewsAll> {
         Expanded(
           child: Center(
             child: Container(
-              width:
-                  ScreenUtil.getInstance().setWidth(ScreenSize.close_bar_width),
-              height: ScreenUtil.getInstance()
-                  .setHeight(ScreenSize.close_bar_height),
+              width: ScreenUtil.getInstance().setWidth(ScreenSize.close_bar_width),
+              height: ScreenUtil.getInstance().setHeight(ScreenSize.close_bar_height),
               decoration: BoxDecoration(
                 color: Colors.grey,
                 borderRadius: BorderRadius.all(Radius.circular(7)),
@@ -220,8 +217,7 @@ class _SubjectSectionReviewsAllState extends State<SubjectSectionReviewsAll> {
     var index = review['shortContent'].indexOf("这篇影评可能有剧透");
     warning = index == 0;
     if (warning) {
-      newShortContent =
-          review['shortContent'].replaceAll(RegExp(r'这篇影评可能有剧透'), "").trim();
+      newShortContent = review['shortContent'].replaceAll(RegExp(r'这篇影评可能有剧透'), "").trim();
     } else {
       newShortContent = review['shortContent'];
     }

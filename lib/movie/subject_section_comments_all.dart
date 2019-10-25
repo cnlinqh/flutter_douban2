@@ -11,8 +11,7 @@ class SubjectSectionCommentsAll extends StatefulWidget {
   final subjectId;
   SubjectSectionCommentsAll(this.subjectId, {Key key}) : super(key: key);
 
-  _SubjectSectionCommentsAllState createState() =>
-      _SubjectSectionCommentsAllState();
+  _SubjectSectionCommentsAllState createState() => _SubjectSectionCommentsAllState();
 }
 
 class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
@@ -83,10 +82,8 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
         Expanded(
           child: Center(
             child: Container(
-              width:
-                  ScreenUtil.getInstance().setWidth(ScreenSize.close_bar_width),
-              height: ScreenUtil.getInstance()
-                  .setHeight(ScreenSize.close_bar_height),
+              width: ScreenUtil.getInstance().setWidth(ScreenSize.close_bar_width),
+              height: ScreenUtil.getInstance().setHeight(ScreenSize.close_bar_height),
               decoration: BoxDecoration(
                 color: Colors.grey,
                 borderRadius: BorderRadius.all(Radius.circular(7)),
@@ -151,8 +148,7 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
               left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
               right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
             ),
-            margin: EdgeInsets.all(
-                ScreenUtil.getInstance().setWidth(ScreenSize.padding)),
+            margin: EdgeInsets.all(ScreenUtil.getInstance().setWidth(ScreenSize.padding)),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.all(
@@ -166,9 +162,7 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
               child: Row(
                 children: <Widget>[
                   Text(
-                    this._status == "P"
-                        ? LabelConstant.MOIVE_COMMENT_ALREADY
-                        : LabelConstant.MOIVE_COMMENT_WANT,
+                    this._status == "P" ? LabelConstant.MOIVE_COMMENT_ALREADY : LabelConstant.MOIVE_COMMENT_WANT,
                   ),
                   Icon(Icons.keyboard_arrow_down),
                 ],

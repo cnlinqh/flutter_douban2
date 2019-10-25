@@ -44,8 +44,7 @@ class _MovieChooseBoxState extends State<MovieChooseBox> {
 
   void onTapGo(context) {
     if (widget.title == LabelConstant.MOVIE_CHOOSE_TOPIC) {
-      NavigatorHelper.pushToPage(context, widget.label,
-          content: this._mapToTag(widget.label));
+      NavigatorHelper.pushToPage(context, widget.label, content: this._mapToTag(widget.label));
     } else if (widget.title == LabelConstant.MOVIE_CHOOSE_TYPE) {
       NavigatorHelper.pushToPage(
         context,
@@ -79,8 +78,7 @@ class _MovieChooseBoxState extends State<MovieChooseBox> {
     return Center(
       child: Container(
         width: ScreenUtil.getInstance().setWidth(ScreenSize.choose_image_width),
-        height:
-            ScreenUtil.getInstance().setHeight(ScreenSize.choose_image_height),
+        height: ScreenUtil.getInstance().setHeight(ScreenSize.choose_image_height),
         child: Center(
           child: CircularProgressIndicator(),
         ),
@@ -92,8 +90,7 @@ class _MovieChooseBoxState extends State<MovieChooseBox> {
     return Center(
       child: Container(
         width: ScreenUtil.getInstance().setWidth(ScreenSize.choose_image_width),
-        height:
-            ScreenUtil.getInstance().setHeight(ScreenSize.choose_image_height),
+        height: ScreenUtil.getInstance().setHeight(ScreenSize.choose_image_height),
         decoration: BoxDecoration(
           image: DecorationImage(
             image: CachedNetworkImageProvider(this._photoUrl),
@@ -110,10 +107,8 @@ class _MovieChooseBoxState extends State<MovieChooseBox> {
       opacity: 0.4,
       child: Center(
         child: Container(
-          width:
-              ScreenUtil.getInstance().setWidth(ScreenSize.choose_image_width),
-          height: ScreenUtil.getInstance()
-              .setHeight(ScreenSize.choose_image_height),
+          width: ScreenUtil.getInstance().setWidth(ScreenSize.choose_image_width),
+          height: ScreenUtil.getInstance().setHeight(ScreenSize.choose_image_height),
           decoration: BoxDecoration(
             color: Colors.black,
             borderRadius: BorderRadius.all(Radius.circular(3)),
@@ -127,8 +122,7 @@ class _MovieChooseBoxState extends State<MovieChooseBox> {
     return Center(
       child: Container(
         width: ScreenUtil.getInstance().setWidth(ScreenSize.choose_image_width),
-        height:
-            ScreenUtil.getInstance().setHeight(ScreenSize.choose_image_height),
+        height: ScreenUtil.getInstance().setHeight(ScreenSize.choose_image_height),
         child: Center(
           child: Text(
             widget.label,

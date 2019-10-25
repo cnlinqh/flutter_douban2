@@ -49,8 +49,7 @@ class ClientAPI {
     List<Element> items = document.body.getElementsByClassName('gallery-frame');
     items.forEach((item) {
       var hot = {
-        'cover':
-            item.getElementsByTagName('img')[0].attributes['src'].toString(),
+        'cover': item.getElementsByTagName('img')[0].attributes['src'].toString(),
         'link': item.getElementsByTagName('a')[0].attributes['href'].toString(),
         'title': item.getElementsByTagName('h3')[0].text.toString().trim(),
         'summary': item.getElementsByTagName('p')[0].text.toString().trim(),
@@ -76,12 +75,10 @@ class ClientAPI {
     //     return Repository.getCachedList(key);
     //   });
     // }
-    Response<Map> res = await apiDio.get('/v2/movie/in_theaters',
-        queryParameters: {"start": start, 'count': count});
+    Response<Map> res = await apiDio.get('/v2/movie/in_theaters', queryParameters: {"start": start, 'count': count});
     // Repository.setCachedList(key, res.data['subjects']);
     var e = new DateTime.now();
-    LogUtil.log(
-        "<<<<ClientAPI: getMovieInTheaters() ##########################  ${e.difference(s).inMilliseconds}");
+    LogUtil.log("<<<<ClientAPI: getMovieInTheaters() ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
 
@@ -98,8 +95,7 @@ class ClientAPI {
     //   });
     // }
 
-    Response<Map> res = await apiDio.get('/v2/movie/coming_soon',
-        queryParameters: {"start": start, 'count': count});
+    Response<Map> res = await apiDio.get('/v2/movie/coming_soon', queryParameters: {"start": start, 'count': count});
     // Repository.setCachedList(key, res.data['subjects']);
     var e = new DateTime.now();
     LogUtil.log(
@@ -119,8 +115,7 @@ class ClientAPI {
     Response<Map> res = await apiDio.get('/v2/movie/weekly');
     Repository.setCachedList(key, res.data['subjects']);
     var e = new DateTime.now();
-    LogUtil.log(
-        "<<<<ClientAPI: getMovieWeekly() ##########################  ${e.difference(s).inMilliseconds}");
+    LogUtil.log("<<<<ClientAPI: getMovieWeekly() ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
 
@@ -136,8 +131,7 @@ class ClientAPI {
     Response<Map> res = await apiDio.get('/v2/movie/new_movies');
     Repository.setCachedList(key, res.data['subjects']);
     var e = new DateTime.now();
-    LogUtil.log(
-        "<<<<ClientAPI: getMovieNew() ##########################  ${e.difference(s).inMilliseconds}");
+    LogUtil.log("<<<<ClientAPI: getMovieNew() ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
 
@@ -153,8 +147,7 @@ class ClientAPI {
     Response<Map> res = await apiDio.get('/v2/movie/us_box');
     Repository.setCachedList(key, res.data['subjects']);
     var e = new DateTime.now();
-    LogUtil.log(
-        "<<<<ClientAPI: getMovieUSBox() ##########################  ${e.difference(s).inMilliseconds}");
+    LogUtil.log("<<<<ClientAPI: getMovieUSBox() ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
 
@@ -170,8 +163,7 @@ class ClientAPI {
         return Repository.getCachedList(key);
       });
     }
-    Response<Map> res = await apiDio.get('/v2/movie/top250',
-        queryParameters: {"start": start, 'count': count});
+    Response<Map> res = await apiDio.get('/v2/movie/top250', queryParameters: {"start": start, 'count': count});
     Repository.setCachedList(key, res.data['subjects']);
     var e = new DateTime.now();
     LogUtil.log(
@@ -191,8 +183,7 @@ class ClientAPI {
     Response<Map> res = await apiDio.get('/v2/movie/subject/' + id);
     Repository.setCachedObject(key, res.data);
     var e = new DateTime.now();
-    LogUtil.log(
-        "<<<<ClientAPI: getMovieSubject($id) ##########################  ${e.difference(s).inMilliseconds}");
+    LogUtil.log("<<<<ClientAPI: getMovieSubject($id) ##########################  ${e.difference(s).inMilliseconds}");
     return res.data;
   }
 
@@ -211,19 +202,13 @@ class ClientAPI {
     List<Element> items = document.body.getElementsByClassName('celebrity');
     items.forEach((item) {
       String title = item.getElementsByClassName('role').length > 0
-          ? item
-              .getElementsByClassName('role')[0]
-              .attributes['title']
-              .toString()
+          ? item.getElementsByClassName('role')[0].attributes['title'].toString()
           : '';
       String name = item.getElementsByTagName('a').length > 0
           ? item.getElementsByTagName('a')[0].attributes['title'].toString()
           : '';
       String avatar = item.getElementsByClassName('avatar').length > 0
-          ? item
-              .getElementsByClassName('avatar')[0]
-              .attributes['style']
-              .toString()
+          ? item.getElementsByClassName('avatar')[0].attributes['style'].toString()
           : '';
       var celebrity = {
         'title': title,
@@ -252,8 +237,7 @@ class ClientAPI {
     Response<Map> res = await apiDio.get('/v2/movie/subject/$id/photos');
     Repository.setCachedList(key, res.data['photos']);
     var e = new DateTime.now();
-    LogUtil.log(
-        "<<<<ClientAPI: getSubjectPhotos($id) ##########################  ${e.difference(s).inMilliseconds}");
+    LogUtil.log("<<<<ClientAPI: getSubjectPhotos($id) ##########################  ${e.difference(s).inMilliseconds}");
     return res.data['photos'];
   }
 
@@ -280,12 +264,10 @@ class ClientAPI {
     return res.data['res'];
   }
 
-  Future searchSubjects(
-      {int start = 0, int count = 20, String tag = '热门'}) async {
+  Future searchSubjects({int start = 0, int count = 20, String tag = '热门'}) async {
     LogUtil.log(">>ClientAPI: searchSubjects($start, $count, $tag)");
     var s = new DateTime.now();
-    String url =
-        '/j/search_subjects?type=movie&tag=$tag&page_limit=$count&page_start=$start';
+    String url = '/j/search_subjects?type=movie&tag=$tag&page_limit=$count&page_start=$start';
     LogUtil.log(url);
     Response<Map> res = await webDio.get(url);
     var e = new DateTime.now();
@@ -301,12 +283,10 @@ class ClientAPI {
     String sort = 'new_score', //new_score 热门， time 最新
     String status = 'P', //P 看过， F 想看
   }) async {
-    LogUtil.log(
-        ">>ClientAPI: getAllComment($subjectId, $start, $count, $sort, $status)");
+    LogUtil.log(">>ClientAPI: getAllComment($subjectId, $start, $count, $sort, $status)");
     var s = new DateTime.now();
     List comments = [];
-    var url =
-        "/subject/$subjectId/comments?start=$start&limit=$count&sort=$sort&status=$status";
+    var url = "/subject/$subjectId/comments?start=$start&limit=$count&sort=$sort&status=$status";
     Response res = await webDio.get(url);
     var document = parse(res.toString());
     List<Element> items = document.body.getElementsByClassName('comment-item');
@@ -314,12 +294,10 @@ class ClientAPI {
       var comment = {
         'authorAvatar': item.getElementsByTagName('img')[0].attributes['src'],
         'authorName': item.getElementsByTagName('a')[0].attributes['title'],
-        'ratingValue': convertToStar(
-            item.getElementsByClassName('rating').length > 0
-                ? item.getElementsByClassName('rating')[0].classes.toString()
-                : ""),
-        'createdAt':
-            item.getElementsByClassName('comment-time ')[0].attributes['title'],
+        'ratingValue': convertToStar(item.getElementsByClassName('rating').length > 0
+            ? item.getElementsByClassName('rating')[0].classes.toString()
+            : ""),
+        'createdAt': item.getElementsByClassName('comment-time ')[0].attributes['title'],
         'content': item.getElementsByClassName('short')[0].text,
         'usefufCount': item.getElementsByClassName('votes')[0].text,
       };
@@ -341,17 +319,13 @@ class ClientAPI {
   static String convertToStar(star) {
     if (star == "allstar50 rating" || star == "allstar50 main-title-rating") {
       return "5";
-    } else if (star == "allstar40 rating" ||
-        star == "allstar40 main-title-rating") {
+    } else if (star == "allstar40 rating" || star == "allstar40 main-title-rating") {
       return "4";
-    } else if (star == "allstar30 rating" ||
-        star == "allstar30 main-title-rating") {
+    } else if (star == "allstar30 rating" || star == "allstar30 main-title-rating") {
       return "3";
-    } else if (star == "allstar20 rating" ||
-        star == "allstar20 main-title-rating") {
+    } else if (star == "allstar20 rating" || star == "allstar20 main-title-rating") {
       return "2";
-    } else if (star == "allstar10 rating" ||
-        star == "allstar10 main-title-rating") {
+    } else if (star == "allstar10 rating" || star == "allstar10 main-title-rating") {
       return "1";
     } else {
       return "0";
@@ -365,42 +339,25 @@ class ClientAPI {
     String sort = 'hotest', //hotest 最受欢迎， time 最新发布
     String rating = '', // 1,2,3,4,5, ,
   }) async {
-    LogUtil.log(
-        ">>ClientAPI: getAllReviews($subjectId, $start, $count, $sort, $rating)");
+    LogUtil.log(">>ClientAPI: getAllReviews($subjectId, $start, $count, $sort, $rating)");
     var s = new DateTime.now();
     List reviews = [];
-    var url =
-        "/subject/$subjectId/reviews?start=$start&count=$count&sort=$sort&rating=$rating";
+    var url = "/subject/$subjectId/reviews?start=$start&count=$count&sort=$sort&rating=$rating";
     LogUtil.log(url);
     Response res = await webDio.get(url);
     var document = parse(res.toString());
-    List<Element> items =
-        document.body.getElementsByClassName('main review-item');
+    List<Element> items = document.body.getElementsByClassName('main review-item');
     items.forEach((item) {
-      var rid =
-          item.getElementsByClassName('review-short')[0].attributes['data-rid'];
+      var rid = item.getElementsByClassName('review-short')[0].attributes['data-rid'];
       var avator = item.getElementsByTagName('img')[0].attributes['src'];
       var name = item.getElementsByClassName('name')[0].text.trim();
-      var ratingValue = convertToStar(
-          item.getElementsByClassName('main-title-rating').length > 0
-              ? item
-                  .getElementsByClassName('main-title-rating')[0]
-                  .classes
-                  .toString()
-              : "");
+      var ratingValue = convertToStar(item.getElementsByClassName('main-title-rating').length > 0
+          ? item.getElementsByClassName('main-title-rating')[0].classes.toString()
+          : "");
       var title = item.getElementsByTagName('h2')[0].firstChild.text.trim();
-      var shortContent =
-          item.getElementsByClassName('short-content')[0].text.trim();
-      var up = item
-          .getElementsByClassName('action-btn up')[0]
-          .getElementsByTagName('span')[0]
-          .text
-          .trim();
-      var down = item
-          .getElementsByClassName('action-btn down')[0]
-          .getElementsByTagName('span')[0]
-          .text
-          .trim();
+      var shortContent = item.getElementsByClassName('short-content')[0].text.trim();
+      var up = item.getElementsByClassName('action-btn up')[0].getElementsByTagName('span')[0].text.trim();
+      var down = item.getElementsByClassName('action-btn down')[0].getElementsByTagName('span')[0].text.trim();
       var createdAt = item.getElementsByClassName('main-meta')[0].text.trim();
 
       var review = {
@@ -456,8 +413,7 @@ class ClientAPI {
     Response<Map> res = await webDio.get('/j/review/$rid/full');
     Repository.setCachedObject(key, res.data);
     var e = new DateTime.now();
-    LogUtil.log(
-        "<<<<ClientAPI: fetchFullReview($rid) ##########################  ${e.difference(s).inMilliseconds}");
+    LogUtil.log("<<<<ClientAPI: fetchFullReview($rid) ##########################  ${e.difference(s).inMilliseconds}");
     return res.data;
   }
 
@@ -474,8 +430,7 @@ class ClientAPI {
     var url = '/subject/$subjectId/?from=showing';
     Response res = await webDio.get(url);
     var document = parse(res.toString());
-    List<Element> items =
-        document.body.getElementsByClassName('recommendations-bd');
+    List<Element> items = document.body.getElementsByClassName('recommendations-bd');
     items = items[0].getElementsByTagName('dl');
     items.forEach((item) {
       var movie = {
@@ -526,12 +481,10 @@ class ClientAPI {
         return Repository.getCachedObject(key);
       });
     }
-    var url =
-        '/celebrity/$id/photos/?type=C&start=$start&sortby=$sortBy&size=a&subtype=a';
+    var url = '/celebrity/$id/photos/?type=C&start=$start&sortby=$sortBy&size=a&subtype=a';
     Response res = await webDio.get(url);
     var document = parse(res.toString());
-    List<Element> items =
-        document.body.getElementsByClassName('poster-col3 clearfix');
+    List<Element> items = document.body.getElementsByClassName('poster-col3 clearfix');
     items = items[0].getElementsByTagName('li');
     List photos = [];
     items.forEach((item) {
@@ -543,7 +496,7 @@ class ClientAPI {
     });
     var counts = document.body.getElementsByClassName('count');
     int total = photos.length;
-    if(counts.length > 0){
+    if (counts.length > 0) {
       total = _getTotalNum(counts[0].text);
     }
     var result = {

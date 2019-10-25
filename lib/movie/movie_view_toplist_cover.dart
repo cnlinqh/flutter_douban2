@@ -57,8 +57,7 @@ class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
       future: this._future,
       // initialData: InitialData,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.connectionState == ConnectionState.active ||
-            snapshot.connectionState == ConnectionState.waiting) {
+        if (snapshot.connectionState == ConnectionState.active || snapshot.connectionState == ConnectionState.waiting) {
           return _buildProcessIndicator();
         }
         if (snapshot.connectionState == ConnectionState.done) {
@@ -74,8 +73,7 @@ class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
               ),
               child: GestureDetector(
                 onTap: () {
-                  NavigatorHelper.pushToPage(context, widget.title,
-                      content: this._movieTop);
+                  NavigatorHelper.pushToPage(context, widget.title, content: this._movieTop);
                 },
                 child: Stack(
                   children: <Widget>[
@@ -151,8 +149,7 @@ class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
       top: ScreenUtil.getInstance().setHeight(ScreenSize.top_cover_height / 2),
       child: Container(
         width: ScreenUtil.getInstance().setWidth(ScreenSize.top_cover_width),
-        height:
-            ScreenUtil.getInstance().setHeight(ScreenSize.top_cover_height / 2),
+        height: ScreenUtil.getInstance().setHeight(ScreenSize.top_cover_height / 2),
         decoration: BoxDecoration(
           color: this._color,
           borderRadius: BorderRadius.all(
@@ -190,12 +187,10 @@ class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
 
   Widget _buildTop5Movies() {
     return Positioned(
-      top: ScreenUtil.getInstance()
-          .setHeight(ScreenSize.top_cover_height / 2 + ScreenSize.padding),
+      top: ScreenUtil.getInstance().setHeight(ScreenSize.top_cover_height / 2 + ScreenSize.padding),
       left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
       child: Container(
-        width: ScreenUtil.getInstance()
-            .setWidth(ScreenSize.top_cover_width - ScreenSize.padding * 2),
+        width: ScreenUtil.getInstance().setWidth(ScreenSize.top_cover_width - ScreenSize.padding * 2),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: this._buildTitleList(),
@@ -221,8 +216,7 @@ class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
 
   Widget _buildTitleRow(subject, i) {
     return Container(
-      width: ScreenUtil.getInstance()
-          .setWidth(ScreenSize.top_cover_width - ScreenSize.padding * 2),
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.top_cover_width - ScreenSize.padding * 2),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
@@ -258,9 +252,7 @@ class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
   Widget _buildDeltaArrow(subject) {
     if (subject['delta'] != null) {
       return Icon(
-        double.parse(subject['delta'].toString()) >= 0
-            ? Icons.arrow_upward
-            : Icons.arrow_downward,
+        double.parse(subject['delta'].toString()) >= 0 ? Icons.arrow_upward : Icons.arrow_downward,
         size: 14,
       );
     } else {

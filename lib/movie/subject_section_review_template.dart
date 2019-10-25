@@ -48,16 +48,15 @@ class SubjectSectionReviewTemplate extends StatelessWidget {
   }
 
   void gotoFullReview(context) async {
-    NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_FULL_REVIEW,
-        content: {
-          'subject': subject,
-          'avator': avator,
-          'name': name,
-          'createdAt' : createdAt,
-          'ratingValue': ratingValue,
-          'title': title,
-          'rid': this.rid,
-        });
+    NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_FULL_REVIEW, content: {
+      'subject': subject,
+      'avator': avator,
+      'name': name,
+      'createdAt': createdAt,
+      'ratingValue': ratingValue,
+      'title': title,
+      'rid': this.rid,
+    });
   }
 
   List<Widget> _buildChildren(context) {
@@ -87,8 +86,7 @@ class SubjectSectionReviewTemplate extends StatelessWidget {
                     labled: false,
                   ),
                   SizedBox(
-                    width:
-                        ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+                    width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
                   ),
                   Text(this._formatDate(this.createdAt)),
                 ],
@@ -159,8 +157,7 @@ class SubjectSectionReviewTemplate extends StatelessWidget {
         ],
       ),
       Container(
-        width: ScreenUtil.getInstance()
-            .setWidth(ScreenSize.width - ScreenSize.padding * 10),
+        width: ScreenUtil.getInstance().setWidth(ScreenSize.width - ScreenSize.padding * 10),
         height: 1,
         color: Colors.grey,
       )

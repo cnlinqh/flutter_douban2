@@ -11,14 +11,12 @@ class MovieRankTop20StaticPage extends StatefulWidget {
   final res;
   MovieRankTop20StaticPage(this.res, {Key key}) : super(key: key);
 
-  _MovieRankTop20StaticPageState createState() =>
-      _MovieRankTop20StaticPageState();
+  _MovieRankTop20StaticPageState createState() => _MovieRankTop20StaticPageState();
 }
 
 class _MovieRankTop20StaticPageState extends State<MovieRankTop20StaticPage> {
   ScrollController _scrollController;
-  double kExpandedHeight =
-      ScreenUtil.getInstance().setHeight(ScreenSize.rank_top_image_height);
+  double kExpandedHeight = ScreenUtil.getInstance().setHeight(ScreenSize.rank_top_image_height);
   var _subjectNo1;
   @override
   void initState() {
@@ -122,13 +120,11 @@ class _MovieRankTop20StaticPageState extends State<MovieRankTop20StaticPage> {
   }
 
   bool get _collapsed {
-    return _scrollController.hasClients &&
-        _scrollController.offset > kExpandedHeight - kToolbarHeight;
+    return _scrollController.hasClients && _scrollController.offset > kExpandedHeight - kToolbarHeight;
   }
 
   void _fetchBackgroudImage() async {
-    this._subjectNo1 = await ClientAPI.getInstance()
-        .getMovieSubject(widget.res['subjects'][0]['id']);
+    this._subjectNo1 = await ClientAPI.getInstance().getMovieSubject(widget.res['subjects'][0]['id']);
     if (mounted) setState(() {});
   }
 }

@@ -13,8 +13,7 @@ class SubjectSectionReviewFull extends StatefulWidget {
 
   SubjectSectionReviewFull(this.content, {Key key}) : super(key: key);
 
-  _SubjectSectionReviewFullState createState() =>
-      _SubjectSectionReviewFullState();
+  _SubjectSectionReviewFullState createState() => _SubjectSectionReviewFullState();
 }
 
 class _SubjectSectionReviewFullState extends State<SubjectSectionReviewFull> {
@@ -26,8 +25,7 @@ class _SubjectSectionReviewFullState extends State<SubjectSectionReviewFull> {
   }
 
   void fetchData() async {
-    var full = await ClientAPI.getInstance()
-        .fetchFullReview(this.widget.content['rid']);
+    var full = await ClientAPI.getInstance().fetchFullReview(this.widget.content['rid']);
     if (mounted)
       setState(() {
         html = full['html'];
@@ -82,10 +80,7 @@ class _SubjectSectionReviewFullState extends State<SubjectSectionReviewFull> {
             children: <Widget>[
               Text(this.widget.content['subject']['title']),
               RateStar(
-                double.parse(this
-                    .widget
-                    .content['subject']['rating']['average']
-                    .toString()),
+                double.parse(this.widget.content['subject']['rating']['average'].toString()),
               )
             ],
           )
@@ -96,8 +91,7 @@ class _SubjectSectionReviewFullState extends State<SubjectSectionReviewFull> {
 
   Widget _buildTitle() {
     return Container(
-      width: ScreenUtil.getInstance()
-          .setWidth(ScreenSize.width - ScreenSize.padding * 2),
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.width - ScreenSize.padding * 2),
       child: Text(
         this.widget.content['title'],
         style: TextStyle(

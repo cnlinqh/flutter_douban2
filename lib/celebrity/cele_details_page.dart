@@ -63,8 +63,7 @@ class _CeleDetailsPageState extends State<CeleDetailsPage> {
   }
 
   Future<void> _getCelebrityDetails() async {
-    this._cele =
-        await ClientAPI.getInstance().getCelebrityDetails(this.widget.celeId);
+    this._cele = await ClientAPI.getInstance().getCelebrityDetails(this.widget.celeId);
     if (mounted) this.setState(() {});
   }
 }

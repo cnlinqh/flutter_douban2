@@ -35,8 +35,7 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
           ScreenUtil.getInstance().setWidth(ScreenSize.padding),
         ),
         width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_cover_width),
-        height:
-            ScreenUtil.getInstance().setHeight(ScreenSize.movie_cover_height),
+        height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_cover_height),
       );
     }
     return Container(
@@ -65,10 +64,7 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
     return GestureDetector(
       onTap: () {
         NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_DETAILS_TITLE,
-            content: {
-              'id': this.subject['id'],
-              'section': this.widget.section
-            });
+            content: {'id': this.subject['id'], 'section': this.widget.section});
       },
       child: Stack(
         children: <Widget>[
@@ -89,8 +85,7 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
 
   Widget _buildDescription() {
     return Container(
-      width:
-          ScreenUtil.getInstance().setWidth(ScreenSize.movie_description_width),
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_description_width),
       height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_cover_height),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

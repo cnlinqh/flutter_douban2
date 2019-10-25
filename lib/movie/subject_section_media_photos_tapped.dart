@@ -8,8 +8,7 @@ class SubjectSectionMediaPhotoTapped extends StatelessWidget {
   final int _index;
   final String _cover;
   final double scale;
-  SubjectSectionMediaPhotoTapped(this._photos, this._index, this._cover,
-      {this.scale = 1});
+  SubjectSectionMediaPhotoTapped(this._photos, this._index, this._cover, {this.scale = 1});
 
   @override
   Widget build(BuildContext context) {

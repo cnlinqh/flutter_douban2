@@ -68,10 +68,8 @@ class MovieViewEntrance extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Container(
-            width: ScreenUtil.getInstance()
-                .setWidth(ScreenSize.movie_entrance_width),
-            height: ScreenUtil.getInstance()
-                .setWidth(ScreenSize.movie_entrance_width),
+            width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_entrance_width),
+            height: ScreenUtil.getInstance().setWidth(ScreenSize.movie_entrance_width),
             decoration: BoxDecoration(
               color: Colors.cyan,
               borderRadius: BorderRadius.all(Radius.circular(60)),

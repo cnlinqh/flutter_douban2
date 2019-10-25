@@ -76,10 +76,7 @@ class NavigatorHelper {
         _push(context, SubjectDetailsPage(content));
         break;
       case LabelConstant.MOVIE_PHOTO_TITLE: // 剧照
-        _push(
-            context,
-            SubjectSectionMediaPhotosGallery(
-                content['photos'], content['index']));
+        _push(context, SubjectSectionMediaPhotosGallery(content['photos'], content['index']));
         break;
       case LabelConstant.MOVIE_VIDEO_TITLE: //预告片/花絮
         _push(context, SubjectVideoSet(content));
@@ -114,8 +111,7 @@ class NavigatorHelper {
       case LabelConstant.MOVIE_RANK_TOP20_LGBT:
       case LabelConstant.MOVIE_RANK_TOP20_MUSICAL:
       case LabelConstant.MOVIE_RANK_TOP20_DANCE:
-        _push(context,
-            MovieRankTop20StaticPage({'title': title, 'subjects': content}));
+        _push(context, MovieRankTop20StaticPage({'title': title, 'subjects': content}));
         break;
       case LabelConstant.MOVIE_CHOOSE_TOPIC_HOT:
       case LabelConstant.MOVIE_CHOOSE_TOPIC_NEW:

@@ -22,8 +22,7 @@ class MovieUtil {
       tag: heroTag != '' ? heroTag : cover,
       child: Container(
         width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_cover_width),
-        height:
-            ScreenUtil.getInstance().setHeight(ScreenSize.movie_cover_height),
+        height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_cover_height),
         decoration: BoxDecoration(
           image: DecorationImage(
             image: CachedNetworkImageProvider(cover),
@@ -38,21 +37,15 @@ class MovieUtil {
   static buildIndexNo(index) {
     return Positioned(
       bottom: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 4),
-      left: ScreenUtil.getInstance()
-          .setWidth(ScreenSize.movie_cover_width + ScreenSize.padding * 2),
+      left: ScreenUtil.getInstance().setWidth(ScreenSize.movie_cover_width + ScreenSize.padding * 2),
       child: Container(
         child: Text(
           "No. ${index + 1}",
-          style: TextStyle(
-              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(3)),
-          color: index == 0
-              ? Colors.red
-              : index == 1
-                  ? Colors.redAccent
-                  : index == 2 ? Colors.orange : Colors.grey,
+          color: index == 0 ? Colors.red : index == 1 ? Colors.redAccent : index == 2 ? Colors.orange : Colors.grey,
         ),
       ),
     );
@@ -147,10 +140,8 @@ class MovieUtil {
     return Hero(
       tag: cover,
       child: Container(
-        width: ScreenUtil.getInstance()
-            .setWidth(ScreenSize.director_cast_cover_width),
-        height: ScreenUtil.getInstance()
-            .setHeight(ScreenSize.director_cast_cover_height),
+        width: ScreenUtil.getInstance().setWidth(ScreenSize.director_cast_cover_width),
+        height: ScreenUtil.getInstance().setHeight(ScreenSize.director_cast_cover_height),
         decoration: BoxDecoration(
           image: DecorationImage(
             image: CachedNetworkImageProvider(cover),
@@ -164,10 +155,8 @@ class MovieUtil {
 
   static buildPhotoCover(cover, {double scale = 1}) {
     return Container(
-      width: ScreenUtil.getInstance()
-          .setWidth(ScreenSize.photo_cover_width * scale),
-      height: ScreenUtil.getInstance()
-          .setHeight(ScreenSize.photo_cover_height * scale),
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.photo_cover_width * scale),
+      height: ScreenUtil.getInstance().setHeight(ScreenSize.photo_cover_height * scale),
       margin: EdgeInsets.all(1),
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -191,10 +180,8 @@ class MovieUtil {
     return Stack(
       children: <Widget>[
         Container(
-          width: ScreenUtil.getInstance()
-              .setWidth(ScreenSize.photo_cover_width * scale),
-          height: ScreenUtil.getInstance()
-              .setHeight(ScreenSize.photo_cover_height * scale),
+          width: ScreenUtil.getInstance().setWidth(ScreenSize.photo_cover_width * scale),
+          height: ScreenUtil.getInstance().setHeight(ScreenSize.photo_cover_height * scale),
           margin: EdgeInsets.all(1),
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -205,23 +192,18 @@ class MovieUtil {
           ),
         ),
         Container(
-          width: ScreenUtil.getInstance()
-              .setWidth(ScreenSize.photo_cover_width * scale),
-          height: ScreenUtil.getInstance()
-              .setHeight(ScreenSize.photo_cover_height * scale),
+          width: ScreenUtil.getInstance().setWidth(ScreenSize.photo_cover_width * scale),
+          height: ScreenUtil.getInstance().setHeight(ScreenSize.photo_cover_height * scale),
           margin: EdgeInsets.all(1),
           child: Center(
             child: Opacity(
               opacity: 0.8,
               child: Container(
-                height:
-                    ScreenUtil.getInstance().setWidth(ScreenSize.padding * 8),
-                width:
-                    ScreenUtil.getInstance().setWidth(ScreenSize.padding * 8),
+                height: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 8),
+                width: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 8),
                 decoration: BoxDecoration(
                   color: Colors.black,
-                  borderRadius: BorderRadius.circular(ScreenUtil.getInstance()
-                      .setWidth(ScreenSize.padding * 6)),
+                  borderRadius: BorderRadius.circular(ScreenUtil.getInstance().setWidth(ScreenSize.padding * 6)),
                 ),
                 child: Center(
                   child: Icon(
@@ -243,8 +225,7 @@ class MovieUtil {
     );
   }
 
-  static showAlerDialog(
-      BuildContext context, String titleStr, String conentStr) {
+  static showAlerDialog(BuildContext context, String titleStr, String conentStr) {
     showDialog(
         context: context,
         builder: (context) {

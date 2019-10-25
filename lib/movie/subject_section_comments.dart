@@ -44,8 +44,7 @@ class SubjectSectionComments extends StatelessWidget {
 
   Widget _buildHeader(context) {
     return Container(
-      width: ScreenUtil.getInstance()
-          .setWidth(ScreenSize.width - ScreenSize.padding * 10),
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.width - ScreenSize.padding * 10),
       child: Row(
         children: <Widget>[
           Text(
@@ -57,10 +56,7 @@ class SubjectSectionComments extends StatelessWidget {
               Icons.help_outline,
             ),
             onPressed: () {
-              MovieUtil.showAlerDialog(
-                  context,
-                  LabelConstant.MOVIE_SHORT_COMMENTS,
-                  LabelConstant.MOVIE_COMMENTS_HELP);
+              MovieUtil.showAlerDialog(context, LabelConstant.MOVIE_SHORT_COMMENTS, LabelConstant.MOVIE_COMMENTS_HELP);
             },
           ),
           Container(
@@ -130,8 +126,7 @@ class SubjectSectionComments extends StatelessWidget {
 
   Widget _buildFooter(context) {
     return Container(
-      width: ScreenUtil.getInstance()
-          .setWidth(ScreenSize.width - ScreenSize.padding * 10),
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.width - ScreenSize.padding * 10),
       child: GestureDetector(
         onTap: () {
           showBottomSheet(

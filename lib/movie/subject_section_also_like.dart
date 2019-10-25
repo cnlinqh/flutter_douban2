@@ -23,8 +23,7 @@ class _SubjectSectionAlsoLikeState extends State<SubjectSectionAlsoLike> {
   }
 
   void _fetchData() async {
-    alsoLikes = await ClientAPI.getInstance()
-        .getAlsoLikeMovies(this.widget.subject['id']);
+    alsoLikes = await ClientAPI.getInstance().getAlsoLikeMovies(this.widget.subject['id']);
     if (mounted) setState(() {});
   }
 

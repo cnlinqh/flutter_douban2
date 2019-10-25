@@ -41,19 +41,15 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            ClientAPI.getInstance()
-                .getAllDirectorsCastsList(this._subject['id'])
-                .then((celebrities) {
+            ClientAPI.getInstance().getAllDirectorsCastsList(this._subject['id']).then((celebrities) {
               showBottomSheet(
                 context: context,
                 builder: (_) => Stack(
                   children: <Widget>[
                     _buildBottomSheetContent(celebrities),
                     Positioned(
-                      top:
-                          ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-                      right: ScreenUtil.getInstance()
-                          .setHeight(ScreenSize.padding),
+                      top: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+                      right: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
                       child: IconButton(
                         icon: Icon(Icons.close),
                         onPressed: () {
@@ -119,8 +115,7 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          MovieUtil.buildDirectorCastCover(
-              obj['avatars'] != null ? obj['avatars']['small'] : ''),
+          MovieUtil.buildDirectorCastCover(obj['avatars'] != null ? obj['avatars']['small'] : ''),
           Text(
             obj['name'],
             maxLines: 1,
@@ -169,10 +164,8 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
           children: <Widget>[
             MovieUtil.buildDirectorCastCover(cele['avatar']),
             Container(
-              width: ScreenUtil.getInstance()
-                  .setWidth(ScreenSize.celebrities_width),
-              height: ScreenUtil.getInstance()
-                  .setHeight(ScreenSize.director_cast_cover_height),
+              width: ScreenUtil.getInstance().setWidth(ScreenSize.celebrities_width),
+              height: ScreenUtil.getInstance().setHeight(ScreenSize.director_cast_cover_height),
               margin: EdgeInsets.all(
                 ScreenUtil.getInstance().setWidth(ScreenSize.padding),
               ),

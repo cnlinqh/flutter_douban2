@@ -58,8 +58,7 @@ class CelePhotosInfo extends ChangeNotifier {
       return;
     }
     _calling = true;
-    var more = await ClientAPI.getInstance()
-        .getCelebrityPhotos(id: this._celebrityId, start: _start);
+    var more = await ClientAPI.getInstance().getCelebrityPhotos(id: this._celebrityId, start: _start);
     _photos.insertAll(_photos.length - 1, more['list']);
     _start = _start + more['list'].length;
     _total = more['total'];

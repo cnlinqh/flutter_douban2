@@ -71,7 +71,9 @@ class _MovieListPagedPageState extends State<MovieListPagedPage> {
                     );
                   }
                 },
-                separatorBuilder: (context, index) => Divider(height: 0,),
+                separatorBuilder: (context, index) => Divider(
+                  height: 0,
+                ),
               ),
             )
           ],
@@ -84,18 +86,22 @@ class _MovieListPagedPageState extends State<MovieListPagedPage> {
     if (this.widget.rank) {
       return Stack(
         children: <Widget>[
-          MovieSubjectGeneral(getSubject(index)['id'], section: this.widget.title,),
+          MovieSubjectGeneral(
+            getSubject(index)['id'],
+            section: this.widget.title,
+          ),
           MovieUtil.buildIndexNo(index),
         ],
       );
     } else {
-      return MovieSubjectGeneral(getSubject(index)['id'], section: this.widget.title,);
+      return MovieSubjectGeneral(
+        getSubject(index)['id'],
+        section: this.widget.title,
+      );
     }
   }
 
   dynamic getSubject(index) {
-    return _dataList[index]['subject'] != null
-        ? _dataList[index]['subject']
-        : _dataList[index];
+    return _dataList[index]['subject'] != null ? _dataList[index]['subject'] : _dataList[index];
   }
 }

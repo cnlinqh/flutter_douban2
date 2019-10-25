@@ -1,4 +1,5 @@
 import 'package:flutter_douban2/util/log_util.dart';
+
 class Repository {
   static var _caches = new Map();
   static void clearCache() {
@@ -27,8 +28,7 @@ class Repository {
   }
 
   static bool isCached(String key) {
-    LogUtil.log('=======Repository.isCached($key): ' +
-        _caches.containsKey(key).toString());
+    LogUtil.log('=======Repository.isCached($key): ' + _caches.containsKey(key).toString());
     return _caches.containsKey(key);
   }
 }

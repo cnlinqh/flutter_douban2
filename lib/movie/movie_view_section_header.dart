@@ -9,8 +9,7 @@ class MovieViewSectionHeader extends StatelessWidget {
   final bool navigatable;
   final double fontSize;
   final List subjects;
-  MovieViewSectionHeader(this._title,
-      {this.navigatable = true, this.fontSize = 24, this.subjects});
+  MovieViewSectionHeader(this._title, {this.navigatable = true, this.fontSize = 24, this.subjects});
 
   @override
   Widget build(BuildContext context) {

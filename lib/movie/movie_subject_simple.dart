@@ -61,10 +61,7 @@ class _MovieSubjectSimpleState extends State<MovieSubjectSimple> {
     return GestureDetector(
       onTap: () {
         NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_DETAILS_TITLE,
-            content: {
-              'id': this.subject['id'],
-              'section': this.widget.section
-            });
+            content: {'id': this.subject['id'], 'section': this.widget.section});
       },
       child: Stack(
         children: <Widget>[

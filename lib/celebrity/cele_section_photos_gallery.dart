@@ -8,18 +8,10 @@ class CeleSectionPhotosGallery extends StatefulWidget {
   final celebrityId;
   CeleSectionPhotosGallery(this.celebrityId, {Key key}) : super(key: key);
 
-  _CeleSectionPhotosGalleryState createState() =>
-      _CeleSectionPhotosGalleryState();
+  _CeleSectionPhotosGalleryState createState() => _CeleSectionPhotosGalleryState();
 }
 
 class _CeleSectionPhotosGalleryState extends State<CeleSectionPhotosGallery> {
-  @override
-  void initState() {
-    super.initState();
-    // Provider.of<CelePhotosInfo>(context, listen: false)
-    //     .initPhotos(this.widget.celebrityId);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,8 +41,8 @@ class _CeleSectionPhotosGalleryState extends State<CeleSectionPhotosGallery> {
               ImageProvider<dynamic> imageProvider;
               var heroTag;
               if (info.isLoading(index)) {
-                imageProvider = AssetImage('lib/assets/loading.jpg');
                 heroTag = 'lib/assets/loading.jpg';
+                imageProvider = AssetImage(heroTag);
                 info.morePhotos();
               } else {
                 heroTag = info.photos[index]['img'];
@@ -73,6 +65,4 @@ class _CeleSectionPhotosGalleryState extends State<CeleSectionPhotosGallery> {
       ),
     );
   }
-
-  void onPageChanged(int index) {}
 }

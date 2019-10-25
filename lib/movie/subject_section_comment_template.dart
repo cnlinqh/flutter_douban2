@@ -26,12 +26,10 @@ class SubjectSectionCommentTemplate extends StatefulWidget {
     @required this.usefulCount,
   }) : super(key: key);
 
-  _SubjectSectionCommentTemplateState createState() =>
-      _SubjectSectionCommentTemplateState();
+  _SubjectSectionCommentTemplateState createState() => _SubjectSectionCommentTemplateState();
 }
 
-class _SubjectSectionCommentTemplateState
-    extends State<SubjectSectionCommentTemplate> {
+class _SubjectSectionCommentTemplateState extends State<SubjectSectionCommentTemplate> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -75,8 +73,7 @@ class _SubjectSectionCommentTemplateState
                     labled: false,
                   ),
                   SizedBox(
-                    width:
-                        ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+                    width: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
                   ),
                   Text(this._formatDate(widget.createdAt)),
                 ],
@@ -117,8 +114,7 @@ class _SubjectSectionCommentTemplateState
         height: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
       ),
       Container(
-        width: ScreenUtil.getInstance()
-            .setWidth(ScreenSize.width - ScreenSize.padding * 10),
+        width: ScreenUtil.getInstance().setWidth(ScreenSize.width - ScreenSize.padding * 10),
         height: 1,
         color: Colors.grey,
       )

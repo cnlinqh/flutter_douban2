@@ -14,7 +14,6 @@ class MovieViewSection extends StatefulWidget {
 }
 
 class _MovieViewSectionState extends State<MovieViewSection> {
-
   String _title;
   List _subjects = [];
   double _fontSize;
@@ -36,29 +35,21 @@ class _MovieViewSectionState extends State<MovieViewSection> {
       this.coming = true;
       this._subjects = await client.getMovieComingSoon();
     } else if (this._title == LabelConstant.MOVIE_RANK_TOP20_LOVE) {
-      this._subjects = await client
-          .newSearchSubjects('?start=0&sort=S&range=0,10&genres=爱情&tags=电影');
+      this._subjects = await client.newSearchSubjects('?start=0&sort=S&range=0,10&genres=爱情&tags=电影');
     } else if (this._title == LabelConstant.MOVIE_RANK_TOP20_COMEDY) {
-      this._subjects = await client
-          .newSearchSubjects('?start=0&sort=S&range=0,10&genres=喜剧&tags=电影');
+      this._subjects = await client.newSearchSubjects('?start=0&sort=S&range=0,10&genres=喜剧&tags=电影');
     } else if (this._title == LabelConstant.MOVIE_RANK_TOP20_STORY) {
-      this._subjects = await client
-          .newSearchSubjects('?start=0&sort=S&range=0,10&genres=剧情&tags=电影');
+      this._subjects = await client.newSearchSubjects('?start=0&sort=S&range=0,10&genres=剧情&tags=电影');
     } else if (this._title == LabelConstant.MOVIE_RANK_TOP20_CARTOON) {
-      this._subjects = await client
-          .newSearchSubjects('?start=0&sort=S&range=0,10&genres=动画&tags=电影');
+      this._subjects = await client.newSearchSubjects('?start=0&sort=S&range=0,10&genres=动画&tags=电影');
     } else if (this._title == LabelConstant.MOVIE_RANK_TOP20_SHORT) {
-      this._subjects = await client
-          .newSearchSubjects('?start=0&sort=S&range=0,10&genres=爱情&tags=电影');
+      this._subjects = await client.newSearchSubjects('?start=0&sort=S&range=0,10&genres=爱情&tags=电影');
     } else if (this._title == LabelConstant.MOVIE_RANK_TOP20_LGBT) {
-      this._subjects = await client
-          .newSearchSubjects('?start=0&sort=S&range=0,10&genres=同性&tags=电影');
+      this._subjects = await client.newSearchSubjects('?start=0&sort=S&range=0,10&genres=同性&tags=电影');
     } else if (this._title == LabelConstant.MOVIE_RANK_TOP20_MUSICAL) {
-      this._subjects = await client
-          .newSearchSubjects('?start=0&sort=S&range=0,10&genres=音乐&tags=电影');
+      this._subjects = await client.newSearchSubjects('?start=0&sort=S&range=0,10&genres=音乐&tags=电影');
     } else if (this._title == LabelConstant.MOVIE_RANK_TOP20_DANCE) {
-      this._subjects = await client
-          .newSearchSubjects('?start=0&sort=S&range=0,10&genres=歌舞&tags=电影');
+      this._subjects = await client.newSearchSubjects('?start=0&sort=S&range=0,10&genres=歌舞&tags=电影');
     }
 
     if (mounted) {
