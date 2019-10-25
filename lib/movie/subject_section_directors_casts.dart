@@ -87,7 +87,7 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
   List<Widget> _buildDirectorsCastsCovers(context) {
     List<Widget> directors = [];
     this._subject['directors'].forEach((obj) {
-      directors.add(_buildSingleCover(context, obj));
+      directors.add(_buildSingleCover(context, obj, isDir: true));
       directors.add(SizedBox(
         width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
       ));
@@ -104,7 +104,7 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
     return directors;
   }
 
-  Widget _buildSingleCover(context, obj) {
+  Widget _buildSingleCover(context, obj, {bool isDir = false}) {
     return GestureDetector(
       onTap: () {
         NavigatorHelper.pushToPage(
@@ -116,7 +116,7 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          MovieUtil.buildDirectorCastCover(obj['avatars'] != null ? obj['avatars']['small'] : ''),
+          MovieUtil.buildDirectorCastCover(obj['avatars'] != null ? obj['avatars']['small'] : '', isDir: isDir),
           Container(
             width: ScreenUtil.getInstance().setWidth(ScreenSize.director_cast_cover_width),
             child: Text(
@@ -167,7 +167,7 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
           children: <Widget>[
             GestureDetector(
               onTap: () {
-                NavigatorHelper.pushToPage(context, LabelConstant.CELE_DETAILS_TITLE, content:cele['id']);
+                NavigatorHelper.pushToPage(context, LabelConstant.CELE_DETAILS_TITLE, content: cele['id']);
               },
               child: MovieUtil.buildDirectorCastCover(cele['avatar']),
             ),

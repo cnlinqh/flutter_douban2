@@ -5,6 +5,7 @@ import 'package:flutter_douban2/movie/movie_category_sort_bar2.dart';
 import 'package:flutter_douban2/movie/movie_category_range_bar.dart';
 
 class MovieCategoryConditionBars extends StatelessWidget {
+  final String tag;
   final String style;
   final String country;
   final String year;
@@ -12,6 +13,7 @@ class MovieCategoryConditionBars extends StatelessWidget {
   final String sortBy;
   final int rangeMin;
   final int rangeMax;
+  final Function onTagChange;
   final Function onStyleChange;
   final Function onCountryChange;
   final Function onYearChange;
@@ -21,6 +23,7 @@ class MovieCategoryConditionBars extends StatelessWidget {
 
   MovieCategoryConditionBars({
     Key key,
+    this.tag = LabelConstant.MOVIE_CATEGORY_ALL,
     this.style = LabelConstant.MOVIE_CATEGORY_ALL,
     this.country = LabelConstant.MOVIE_CATEGORY_ALL,
     this.year = LabelConstant.MOVIE_CATEGORY_ALL,
@@ -28,6 +31,7 @@ class MovieCategoryConditionBars extends StatelessWidget {
     this.sortBy = "U",
     this.rangeMin = 0,
     this.rangeMax = 10,
+    this.onTagChange,
     this.onStyleChange,
     this.onCountryChange,
     this.onYearChange,
@@ -45,6 +49,11 @@ class MovieCategoryConditionBars extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
+                  MovieCategorySearchBar(
+                    LabelConstant.sTags,
+                    this.tag,
+                    this.onTagChange,
+                  ),
                   MovieCategorySearchBar(
                     LabelConstant.sStyleList,
                     this.style,

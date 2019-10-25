@@ -65,7 +65,7 @@ class LabelConstant {
   static const String MOVIE_RANK_TOP20_MUSICAL = "音乐片Top20";
   static const String MOVIE_RANK_TOP20_DANCE = "歌舞片Top20";
 
-  static const String MOVIE_CATEGORY_TITLE = "分类找电影";
+  static const String MOVIE_CATEGORY_TITLE = "分类找影视";
   static const String MOVIE_CATEGORY_ALL = "全部";
 
   static const String MOVIE_SPECIAL_SELF_DEFINE = "+自定义标签";
@@ -75,6 +75,18 @@ class LabelConstant {
   static const String MOVIE_CATEGORY_SORTBY_RATE = "评分";
   static const String MOVIE_CATEGORY_SORTBY_TIME = "时间";
   static const String MOVIE_CATEGORY_RANGE_RATE = "评分";
+  static var sTags = {
+    "label": "形式",
+    "list": [
+      "全部",
+      "电影",
+      "电视剧",
+      "综艺",
+      "动漫",
+      "纪录片",
+      "短片",
+    ]
+  };
   static var sStyleList = {
     "label": "类型",
     "list": [

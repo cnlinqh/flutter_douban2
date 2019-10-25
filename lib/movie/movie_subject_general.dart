@@ -136,7 +136,11 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
         " / " +
         MovieUtil.getCasts(this.subject);
 
-    return Text(details);
+    return Text(
+      details,
+      maxLines: 6,
+      overflow: TextOverflow.ellipsis,
+    );
   }
 
   Widget buildDivider() {

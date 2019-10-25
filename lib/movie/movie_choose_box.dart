@@ -51,6 +51,7 @@ class _MovieChooseBoxState extends State<MovieChooseBox> {
         LabelConstant.MOVIE_CATEGORY_TITLE,
         content: MovieCategorySearchPage(
           style: widget.label,
+          tag: '电影',
         ),
       );
     } else if (widget.title == LabelConstant.MOVIE_CHOOSE_PLACE) {
@@ -59,6 +60,7 @@ class _MovieChooseBoxState extends State<MovieChooseBox> {
         LabelConstant.MOVIE_CATEGORY_TITLE,
         content: MovieCategorySearchPage(
           country: widget.label,
+          tag: '电影',
         ),
       );
     } else if (widget.title == LabelConstant.MOVIE_CHOOSE_SPEICAL) {
@@ -69,6 +71,7 @@ class _MovieChooseBoxState extends State<MovieChooseBox> {
         LabelConstant.MOVIE_CATEGORY_TITLE,
         content: MovieCategorySearchPage(
           special: widget.label,
+          tag: '电影',
         ),
       );
     }

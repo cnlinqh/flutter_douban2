@@ -8,6 +8,7 @@ import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_douban2/movie/movie_subject_simple.dart';
 
 class MovieCategorySearchPage extends StatefulWidget {
+  final String tag;
   final String style;
   final String country;
   final String year;
@@ -17,6 +18,7 @@ class MovieCategorySearchPage extends StatefulWidget {
   final int rangeMax;
   MovieCategorySearchPage({
     Key key,
+    this.tag = LabelConstant.MOVIE_CATEGORY_ALL,
     this.style = LabelConstant.MOVIE_CATEGORY_ALL,
     this.country = LabelConstant.MOVIE_CATEGORY_ALL,
     this.year = LabelConstant.MOVIE_CATEGORY_ALL,
@@ -26,14 +28,14 @@ class MovieCategorySearchPage extends StatefulWidget {
     this.rangeMax = 10,
   }) : super(key: key);
 
-  _MovieCategorySearchPageState createState() =>
-      _MovieCategorySearchPageState();
+  _MovieCategorySearchPageState createState() => _MovieCategorySearchPageState();
 }
 
 class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
   bool _isListView = true; //ListView or GridView
   bool _isFilterShow = true;
 
+  String _selectedTag;
   String _selectedStyle;
   String _selectedCountry;
   String _selectedYear;
@@ -55,6 +57,7 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
   @override
   void initState() {
     super.initState();
+    this._selectedTag = widget.tag;
     this._selectedStyle = widget.style;
     this._selectedCountry = widget.country;
     this._selectedYear = widget.year;
@@ -154,6 +157,7 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
       return Stack(
         children: <Widget>[
           MovieCategoryConditionBars(
+            tag: this._selectedTag,
             style: this._selectedStyle,
             country: this._selectedCountry,
             year: this._selectedYear,
@@ -161,6 +165,7 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
             sortBy: this._selectedSortBy,
             rangeMin: this._selectedRangeMin,
             rangeMax: this._selectedRangeMax,
+            onTagChange: this.onTagChange,
             onStyleChange: this.onStyleChange,
             onCountryChange: this.onCountryChange,
             onYearChange: this.onYearChange,
@@ -206,14 +211,12 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
       );
     } else {
       return Container(
-        padding: EdgeInsets.all(
-            ScreenUtil.getInstance().setWidth(ScreenSize.padding)),
+        padding: EdgeInsets.all(ScreenUtil.getInstance().setWidth(ScreenSize.padding)),
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
             childAspectRatio: 0.55,
-            crossAxisSpacing:
-                ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+            crossAxisSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
           ),
           itemCount: _dataList.length,
           itemBuilder: (context, index) {
@@ -235,9 +238,7 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
   }
 
   dynamic getSubject(index) {
-    return _dataList[index]['subject'] != null
-        ? _dataList[index]['subject']
-        : _dataList[index];
+    return _dataList[index]['subject'] != null ? _dataList[index]['subject'] : _dataList[index];
   }
 
   void _retrieveData(context) async {
@@ -263,6 +264,11 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
     _done = false;
     _dataList.removeRange(0, _dataList.length - 1);
     setState(() {});
+  }
+
+  void onTagChange(tag) {
+    this._selectedTag = tag;
+    _refresh();
   }
 
   void onStyleChange(style) {
@@ -298,6 +304,7 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
 
   dynamic getSelectedInput() {
     return {
+      "tab": this._selectedTag,
       "style": this._selectedStyle,
       "country": this._selectedCountry,
       "year": this._selectedYear,
@@ -309,6 +316,7 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
   }
 
   void setSelectedOutput(output) {
+    this._selectedTag = output['tag'];
     this._selectedStyle = output['style'];
     this._selectedCountry = output['country'];
     this._selectedYear = output['year'];
@@ -349,10 +357,17 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
         search = search + "&year_range=1900,1959";
       }
     }
-    var tags = this._selectedSpecial == LabelConstant.MOVIE_CATEGORY_ALL
-        ? "电影"
-        : "电影,${this._selectedSpecial}";
+    var tags = '';
+    if (this._selectedTag != LabelConstant.MOVIE_CATEGORY_ALL &&
+        this._selectedSpecial != LabelConstant.MOVIE_CATEGORY_ALL) {
+      tags = "${this._selectedTag},${this._selectedSpecial}";
+    } else if (this._selectedTag != LabelConstant.MOVIE_CATEGORY_ALL) {
+      tags = "${this._selectedTag}";
+    } else if (this._selectedSpecial != LabelConstant.MOVIE_CATEGORY_ALL) {
+      tags = "${this._selectedSpecial}";
+    }
     search = search + "&tags=$tags";
+    print(search);
     return search;
   }
 }

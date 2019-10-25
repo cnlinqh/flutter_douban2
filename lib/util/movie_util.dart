@@ -136,9 +136,9 @@ class MovieUtil {
           );
   }
 
-  static buildDirectorCastCover(cover) {
+  static buildDirectorCastCover(cover, {bool isDir = false}) {
     return Hero(
-      tag: cover,
+      tag: isDir ? "Dir:$cover" : cover,
       child: Container(
         width: ScreenUtil.getInstance().setWidth(ScreenSize.director_cast_cover_width),
         height: ScreenUtil.getInstance().setHeight(ScreenSize.director_cast_cover_height),
