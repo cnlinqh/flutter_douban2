@@ -144,20 +144,20 @@ class MovieUtil {
   }
 
   static buildDirectorCastCover(cover) {
-    return Container(
-      width: ScreenUtil.getInstance()
-          .setWidth(ScreenSize.director_cast_cover_width),
-      height: ScreenUtil.getInstance()
-          .setHeight(ScreenSize.director_cast_cover_height),
-      // margin: EdgeInsets.all(
-      //   ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-      // ),
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: CachedNetworkImageProvider(cover),
-          fit: BoxFit.cover,
+    return Hero(
+      tag: cover,
+      child: Container(
+        width: ScreenUtil.getInstance()
+            .setWidth(ScreenSize.director_cast_cover_width),
+        height: ScreenUtil.getInstance()
+            .setHeight(ScreenSize.director_cast_cover_height),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: CachedNetworkImageProvider(cover),
+            fit: BoxFit.cover,
+          ),
+          borderRadius: BorderRadius.all(Radius.circular(7)),
         ),
-        borderRadius: BorderRadius.all(Radius.circular(7)),
       ),
     );
   }

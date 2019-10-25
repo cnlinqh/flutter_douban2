@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/home/home_page.dart';
+import 'package:flutter_douban2/model/cele_photos_info.dart';
+import 'package:provider/provider.dart';
 
-void main() => runApp(DoubanApp());
+void main() {
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          builder: (context) => CelePhotosInfo(),
+        ),
+      ],
+      child: DoubanApp(),
+    ),
+  );
+}
 
 class DoubanApp extends StatelessWidget {
   // This widget is the root of your application.

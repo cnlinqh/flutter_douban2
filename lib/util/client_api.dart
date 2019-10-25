@@ -513,7 +513,7 @@ class ClientAPI {
     return res.data;
   }
 
-  Future<List> getCelebrityPhotos({
+  Future getCelebrityPhotos({
     String id,
     String sortBy = 'like', //like, 按喜欢排序； size， 按尺寸排序；time，按时间排序
     int start = 0, //count cannot be set, always 30
@@ -523,7 +523,7 @@ class ClientAPI {
     var key = "getCelebrityPhotos($id , $sortBy, $start)";
     if (Repository.isCached(key)) {
       return new Future(() {
-        return Repository.getCachedList(key);
+        return Repository.getCachedObject(key);
       });
     }
     var url =
@@ -541,11 +541,25 @@ class ClientAPI {
         'name': item.getElementsByClassName('name')[0].firstChild.text.trim(),
       });
     });
-
-    Repository.setCachedList(key, photos);
+    var counts = document.body.getElementsByClassName('count');
+    int total = photos.length;
+    if(counts.length > 0){
+      total = _getTotalNum(counts[0].text);
+    }
+    var result = {
+      'total': total,
+      'list': photos,
+    };
+    Repository.setCachedObject(key, result);
     var e = new DateTime.now();
     LogUtil.log(
         "<<<<ClientAPI: getCelebrityPhotos($id , $sortBy, $start) ##########################  ${e.difference(s).inMilliseconds}");
-    return photos;
+    return result;
+  }
+
+  int _getTotalNum(String total) {
+    RegExp reg = new RegExp(r'\d+');
+    RegExpMatch match = reg.firstMatch(total);
+    return int.parse(match.group(0));
   }
 }

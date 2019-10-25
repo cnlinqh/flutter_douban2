@@ -30,6 +30,7 @@ dependencies:
   flutter_range_slider: ^1.4.0 #https://pub.dev/packages/flutter_range_slider#-readme-tab-
   flutter_html: ^0.11.0 # https://pub.dev/packages/flutter_html#-readme-tab-
   url_launcher: ^5.2.1 #https://pub.dev/packages/url_launcher#-readme-tab-
+  provider: ^3.1.0+1 #https://pub.dev/packages/provider#-readme-tab-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
@@ -48,8 +49,8 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #  - images/a_dot_burr.jpeg
+  assets:
+    - lib/assets/loading.jpg
   #  - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
