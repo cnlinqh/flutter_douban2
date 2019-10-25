@@ -244,7 +244,7 @@ class ClientAPI {
   Future newSearchSubjects(search) async {
     LogUtil.log(">>ClientAPI: newSearchSubjects($search)");
     var s = new DateTime.now();
-    String url = '/j/new_search_subjects?$search';
+    String url = '/j/new_search_subjects$search';
     Response<Map> res = await webDio.get(url);
     var e = new DateTime.now();
     LogUtil.log("<<<<ClientAPI: newSearchSubjects($search) -----------  ${e.difference(s).inMilliseconds}");
