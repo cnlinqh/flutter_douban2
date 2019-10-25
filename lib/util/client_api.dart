@@ -58,8 +58,7 @@ class ClientAPI {
     });
     Repository.setCachedList(key, hots);
     var e = new DateTime.now();
-    LogUtil.log(
-        "<<<<ClientAPI: getMovieHotRecommendList() ##########################  ${e.difference(s).inMilliseconds}");
+    LogUtil.log("<<<<ClientAPI: getMovieHotRecommendList() -----------  ${e.difference(s).inMilliseconds}");
     return hots;
   }
 
@@ -78,7 +77,7 @@ class ClientAPI {
     Response<Map> res = await apiDio.get('/v2/movie/in_theaters', queryParameters: {"start": start, 'count': count});
     // Repository.setCachedList(key, res.data['subjects']);
     var e = new DateTime.now();
-    LogUtil.log("<<<<ClientAPI: getMovieInTheaters() ##########################  ${e.difference(s).inMilliseconds}");
+    LogUtil.log("<<<<ClientAPI: getMovieInTheaters() -----------  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
 
@@ -98,8 +97,7 @@ class ClientAPI {
     Response<Map> res = await apiDio.get('/v2/movie/coming_soon', queryParameters: {"start": start, 'count': count});
     // Repository.setCachedList(key, res.data['subjects']);
     var e = new DateTime.now();
-    LogUtil.log(
-        "<<<<ClientAPI: getMovieComingSoon($start, $count) ##########################  ${e.difference(s).inMilliseconds}");
+    LogUtil.log("<<<<ClientAPI: getMovieComingSoon($start, $count) -----------  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
 
@@ -115,7 +113,7 @@ class ClientAPI {
     Response<Map> res = await apiDio.get('/v2/movie/weekly');
     Repository.setCachedList(key, res.data['subjects']);
     var e = new DateTime.now();
-    LogUtil.log("<<<<ClientAPI: getMovieWeekly() ##########################  ${e.difference(s).inMilliseconds}");
+    LogUtil.log("<<<<ClientAPI: getMovieWeekly() -----------  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
 
@@ -131,7 +129,7 @@ class ClientAPI {
     Response<Map> res = await apiDio.get('/v2/movie/new_movies');
     Repository.setCachedList(key, res.data['subjects']);
     var e = new DateTime.now();
-    LogUtil.log("<<<<ClientAPI: getMovieNew() ##########################  ${e.difference(s).inMilliseconds}");
+    LogUtil.log("<<<<ClientAPI: getMovieNew() -----------  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
 
@@ -147,7 +145,7 @@ class ClientAPI {
     Response<Map> res = await apiDio.get('/v2/movie/us_box');
     Repository.setCachedList(key, res.data['subjects']);
     var e = new DateTime.now();
-    LogUtil.log("<<<<ClientAPI: getMovieUSBox() ##########################  ${e.difference(s).inMilliseconds}");
+    LogUtil.log("<<<<ClientAPI: getMovieUSBox() -----------  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
 
@@ -166,8 +164,7 @@ class ClientAPI {
     Response<Map> res = await apiDio.get('/v2/movie/top250', queryParameters: {"start": start, 'count': count});
     Repository.setCachedList(key, res.data['subjects']);
     var e = new DateTime.now();
-    LogUtil.log(
-        "<<<<ClientAPI: getMovieTop250($start, $count) ##########################  ${e.difference(s).inMilliseconds}");
+    LogUtil.log("<<<<ClientAPI: getMovieTop250($start, $count) -----------  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
 
@@ -183,7 +180,7 @@ class ClientAPI {
     Response<Map> res = await apiDio.get('/v2/movie/subject/' + id);
     Repository.setCachedObject(key, res.data);
     var e = new DateTime.now();
-    LogUtil.log("<<<<ClientAPI: getMovieSubject($id) ##########################  ${e.difference(s).inMilliseconds}");
+    LogUtil.log("<<<<ClientAPI: getMovieSubject($id) -----------  ${e.difference(s).inMilliseconds}");
     return res.data;
   }
 
@@ -204,6 +201,9 @@ class ClientAPI {
       String title = item.getElementsByClassName('role').length > 0
           ? item.getElementsByClassName('role')[0].attributes['title'].toString()
           : '';
+      String id = item.getElementsByTagName('a').length > 0
+          ? _getNum(item.getElementsByTagName('a')[0].attributes['href'].toString()).toString()
+          : '';
       String name = item.getElementsByTagName('a').length > 0
           ? item.getElementsByTagName('a')[0].attributes['title'].toString()
           : '';
@@ -211,6 +211,7 @@ class ClientAPI {
           ? item.getElementsByClassName('avatar')[0].attributes['style'].toString()
           : '';
       var celebrity = {
+        'id': id,
         'title': title,
         'name': name.split(" ")[0],
         "name_en": name.substring(name.split(" ")[0].length + 1),
@@ -220,8 +221,7 @@ class ClientAPI {
     });
     Repository.setCachedList(key, celebrities);
     var e = new DateTime.now();
-    LogUtil.log(
-        "<<<<ClientAPI: getAllDirectorsCastsList($id) ##########################  ${e.difference(s).inMilliseconds}");
+    LogUtil.log("<<<<ClientAPI: getAllDirectorsCastsList($id) -----------  ${e.difference(s).inMilliseconds}");
     return celebrities;
   }
 
@@ -237,7 +237,7 @@ class ClientAPI {
     Response<Map> res = await apiDio.get('/v2/movie/subject/$id/photos');
     Repository.setCachedList(key, res.data['photos']);
     var e = new DateTime.now();
-    LogUtil.log("<<<<ClientAPI: getSubjectPhotos($id) ##########################  ${e.difference(s).inMilliseconds}");
+    LogUtil.log("<<<<ClientAPI: getSubjectPhotos($id) -----------  ${e.difference(s).inMilliseconds}");
     return res.data['photos'];
   }
 
@@ -247,8 +247,7 @@ class ClientAPI {
     String url = '/j/new_search_subjects?$search';
     Response<Map> res = await webDio.get(url);
     var e = new DateTime.now();
-    LogUtil.log(
-        "<<<<ClientAPI: newSearchSubjects($search) ##########################  ${e.difference(s).inMilliseconds}");
+    LogUtil.log("<<<<ClientAPI: newSearchSubjects($search) -----------  ${e.difference(s).inMilliseconds}");
     return res.data['data'];
   }
 
@@ -259,8 +258,7 @@ class ClientAPI {
     LogUtil.log(url);
     Response<Map> res = await webDio.get(url);
     var e = new DateTime.now();
-    LogUtil.log(
-        "<<<<ClientAPI: newSearchSubjects($year, $type) ##########################  ${e.difference(s).inMilliseconds}");
+    LogUtil.log("<<<<ClientAPI: newSearchSubjects($year, $type) -----------  ${e.difference(s).inMilliseconds}");
     return res.data['res'];
   }
 
@@ -271,8 +269,7 @@ class ClientAPI {
     LogUtil.log(url);
     Response<Map> res = await webDio.get(url);
     var e = new DateTime.now();
-    LogUtil.log(
-        "<<<<ClientAPI: searchSubjects($start, $count, $tag) ##########################  ${e.difference(s).inMilliseconds}");
+    LogUtil.log("<<<<ClientAPI: searchSubjects($start, $count, $tag) -----------  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
 
@@ -309,7 +306,7 @@ class ClientAPI {
     LogUtil.log("total: " + total);
     var e = new DateTime.now();
     LogUtil.log(
-        "<<<<ClientAPI: getAllComment($subjectId, $start, $count, $sort, $status) ##########################  ${e.difference(s).inMilliseconds}");
+        "<<<<ClientAPI: getAllComment($subjectId, $start, $count, $sort, $status) -----------  ${e.difference(s).inMilliseconds}");
     return {
       "comments": comments,
       "total": total,
@@ -389,7 +386,7 @@ class ClientAPI {
     LogUtil.log("total: " + total1);
     var e = new DateTime.now();
     LogUtil.log(
-        "<<<<ClientAPI: getAllReviews($subjectId, $start, $count, $sort, $rating) ##########################  ${e.difference(s).inMilliseconds}");
+        "<<<<ClientAPI: getAllReviews($subjectId, $start, $count, $sort, $rating) -----------  ${e.difference(s).inMilliseconds}");
     return {
       "reviews": reviews,
       "total": total,
@@ -413,7 +410,7 @@ class ClientAPI {
     Response<Map> res = await webDio.get('/j/review/$rid/full');
     Repository.setCachedObject(key, res.data);
     var e = new DateTime.now();
-    LogUtil.log("<<<<ClientAPI: fetchFullReview($rid) ##########################  ${e.difference(s).inMilliseconds}");
+    LogUtil.log("<<<<ClientAPI: fetchFullReview($rid) -----------  ${e.difference(s).inMilliseconds}");
     return res.data;
   }
 
@@ -446,8 +443,7 @@ class ClientAPI {
 
     Repository.setCachedObject(key, movies);
     var e = new DateTime.now();
-    LogUtil.log(
-        "<<<<ClientAPI: getAlsoLikeMovies($subjectId) ##########################  ${e.difference(s).inMilliseconds}");
+    LogUtil.log("<<<<ClientAPI: getAlsoLikeMovies($subjectId) -----------  ${e.difference(s).inMilliseconds}");
     return movies;
   }
 
@@ -463,8 +459,7 @@ class ClientAPI {
     Response<Map> res = await apiDio.get('/v2/movie/celebrity/$id');
     Repository.setCachedObject(key, res.data);
     var e = new DateTime.now();
-    LogUtil.log(
-        "<<<<ClientAPI: getCelebrityDetails($id) ##########################  ${e.difference(s).inMilliseconds}");
+    LogUtil.log("<<<<ClientAPI: getCelebrityDetails($id) -----------  ${e.difference(s).inMilliseconds}");
     return res.data;
   }
 
@@ -497,7 +492,7 @@ class ClientAPI {
     var counts = document.body.getElementsByClassName('count');
     int total = photos.length;
     if (counts.length > 0) {
-      total = _getTotalNum(counts[0].text);
+      total = _getNum(counts[0].text);
     }
     var result = {
       'total': total,
@@ -506,11 +501,11 @@ class ClientAPI {
     Repository.setCachedObject(key, result);
     var e = new DateTime.now();
     LogUtil.log(
-        "<<<<ClientAPI: getCelebrityPhotos($id , $sortBy, $start) ##########################  ${e.difference(s).inMilliseconds}");
+        "<<<<ClientAPI: getCelebrityPhotos($id , $sortBy, $start) -----------  ${e.difference(s).inMilliseconds}");
     return result;
   }
 
-  int _getTotalNum(String total) {
+  int _getNum(String total) {
     RegExp reg = new RegExp(r'\d+');
     RegExpMatch match = reg.firstMatch(total);
     return int.parse(match.group(0));

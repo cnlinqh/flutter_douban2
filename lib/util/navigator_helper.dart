@@ -36,41 +36,25 @@ class NavigatorHelper {
       case LabelConstant.MOVIE_IN_THEATERS_TITLE: //影院热映
         _push(
           context,
-          MovieListPagedPage(
-            title: title,
-            api: ClientAPI.getInstance().getMovieInTheaters,
-          ),
+          MovieListPagedPage(title: title, api: ClientAPI.getInstance().getMovieInTheaters),
         );
         break;
       case LabelConstant.MOVIE_COMING_SOON_TITLE: //即将上映
         _push(
           context,
-          MovieListGroupPage(
-            title: title,
-            api: ClientAPI.getInstance().getMovieComingSoon,
-          ),
+          MovieListGroupPage(title: title, api: ClientAPI.getInstance().getMovieComingSoon),
         );
         break;
       case LabelConstant.MOVIE_TOP_TOP250: //豆瓣电影Top250
         _push(
           context,
-          MovieListPagedPage(
-            title: title,
-            api: ClientAPI.getInstance().getMovieTop250,
-            rank: true,
-          ),
+          MovieListPagedPage(title: title, api: ClientAPI.getInstance().getMovieTop250, rank: true),
         );
         break;
       case LabelConstant.MOVIE_TOP_WEEKLY: //一周口碑电影榜
       case LabelConstant.MOVIE_TOP_NEW: //豆瓣电影新片榜
       case LabelConstant.MOVIE_TOP_US: //豆瓣电影北美票房榜
-        _push(
-            context,
-            MovieListStaticPage(
-              title,
-              content,
-              rank: true,
-            ));
+        _push(context, MovieListStaticPage(title, content, rank: true));
         break;
       case LabelConstant.MOVIE_DETAILS_TITLE: //电影详情
         _push(context, SubjectDetailsPage(content));
@@ -120,18 +104,11 @@ class NavigatorHelper {
       case LabelConstant.MOVIE_CHOOSE_TOPIC_CLASSIC:
         _push(
           context,
-          MovieListPagedPage(
-            title: title,
-            api: ClientAPI.getInstance().searchSubjects,
-            tag: content,
-          ),
+          MovieListPagedPage(title: title, api: ClientAPI.getInstance().searchSubjects, tag: content),
         );
         break;
       case LabelConstant.MOVIE_FULL_REVIEW:
-        _push(
-          context,
-          SubjectSectionReviewFull(content),
-        );
+        _push(context, SubjectSectionReviewFull(content));
         break;
       case LabelConstant.CELE_DETAILS_TITLE:
         _push(context, CeleDetailsPage(content));

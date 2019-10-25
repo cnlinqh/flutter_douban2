@@ -29,6 +29,7 @@ class CeleSectionWorks extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: _buildWorks(),
             ),
           )
@@ -41,12 +42,16 @@ class CeleSectionWorks extends StatelessWidget {
     List<Widget> works = [];
     this._cele['works'].forEach((work) {
       works.add(Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           MovieUtil.buildMovieCover(work['subject']['images']['small']),
-          Text(
-            work['subject']['title'],
-            style: TextStyle(color: Colors.white),
+          Container(
+            width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_cover_width),
+            child: Text(
+              work['subject']['title'],
+              style: TextStyle(color: Colors.white),
+            ),
           ),
           RateStar(
             double.parse(work['subject']['rating']['average'].toString()),

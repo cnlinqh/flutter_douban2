@@ -21,19 +21,42 @@ class CeleSectionGeneral extends StatelessWidget {
           SizedBox(
             width: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                this.cele['name'],
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              Text(this.cele['name_en']),
-              Text(this.cele['aka'].join(", ")),
-              Text(this.cele['born_place']),
-              Text(this.cele['birthday'] + " / " + this.cele['constellation'] + " / " + this.cele['gender']),
-            ],
+          Container(
+            width: ScreenUtil.getInstance().setWidth(
+              ScreenSize.width - ScreenSize.padding * 4 - ScreenSize.director_cast_cover_width,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  this.cele['name'],
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                Text(
+                  this.cele['name_en'],
+                  style: TextStyle(color: Colors.white),
+                ),
+                Text(
+                  this.cele['aka'].join(", "),
+                  style: TextStyle(color: Colors.white),
+                ),
+                Text(
+                  this.cele['born_place'],
+                  style: TextStyle(color: Colors.white),
+                ),
+                Text(
+                  this.cele['birthday'] + " / " + this.cele['constellation'] + " / " + this.cele['gender'],
+                  style: TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
           )
         ],
       ),

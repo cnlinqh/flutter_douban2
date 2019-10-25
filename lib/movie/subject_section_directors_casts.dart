@@ -46,7 +46,7 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
                 context: context,
                 builder: (_) => Stack(
                   children: <Widget>[
-                    _buildBottomSheetContent(celebrities),
+                    _buildBottomSheetContent(celebrities, context),
                     Positioned(
                       top: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
                       right: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
@@ -78,6 +78,7 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: _buildDirectorsCastsCovers(context),
       ),
     );
@@ -116,21 +117,23 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           MovieUtil.buildDirectorCastCover(obj['avatars'] != null ? obj['avatars']['small'] : ''),
-          Text(
-            obj['name'],
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              color: Colors.white,
+          Container(
+            width: ScreenUtil.getInstance().setWidth(ScreenSize.director_cast_cover_width),
+            child: Text(
+              obj['name'],
+              style: TextStyle(
+                color: Colors.white,
+              ),
             ),
           ),
-          Text(
-            LabelConstant.MOVIE_ACTOR + '/' + obj['name_en'],
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 10,
+          Container(
+            width: ScreenUtil.getInstance().setWidth(ScreenSize.director_cast_cover_width),
+            child: Text(
+              LabelConstant.MOVIE_ACTOR + '/' + obj['name_en'],
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 10,
+              ),
             ),
           ),
         ],
@@ -138,7 +141,7 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
     );
   }
 
-  Widget _buildBottomSheetContent(celebrities) {
+  Widget _buildBottomSheetContent(celebrities, context) {
     return Container(
         height: ScreenUtil.screenHeight,
         color: Colors.white,
@@ -151,18 +154,23 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: _buildCelebrities(celebrities),
+            children: _buildCelebrities(celebrities, context),
           ),
         ));
   }
 
-  List<Widget> _buildCelebrities(celebrities) {
+  List<Widget> _buildCelebrities(celebrities, context) {
     List<Widget> list = List<Widget>.from(celebrities.map((cele) {
       return Container(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            MovieUtil.buildDirectorCastCover(cele['avatar']),
+            GestureDetector(
+              onTap: () {
+                NavigatorHelper.pushToPage(context, LabelConstant.CELE_DETAILS_TITLE, content:cele['id']);
+              },
+              child: MovieUtil.buildDirectorCastCover(cele['avatar']),
+            ),
             Container(
               width: ScreenUtil.getInstance().setWidth(ScreenSize.celebrities_width),
               height: ScreenUtil.getInstance().setHeight(ScreenSize.director_cast_cover_height),
