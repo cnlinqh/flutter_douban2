@@ -40,11 +40,11 @@ class _HomePageState extends State<HomePage> {
     )..init(context);
 
     return Scaffold(
-      // body: IndexedStack(
-      //   index: this._tabIndex,
-      //   children: this._tabWidgets,
-      // ),
-      body: this._tabWidgets[this._tabIndex],
+      body: IndexedStack(
+        index: this._tabIndex,
+        children: this._tabWidgets,
+      ),
+      // body: this._tabWidgets[this._tabIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: _buildBottomNavigationItems(),
         type: BottomNavigationBarType.fixed,
