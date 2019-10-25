@@ -219,4 +219,8 @@ class LabelConstant {
   static const String CELE_DETAILS_TITLE = "个人简介";
   static const String CELE_GALLERY_GRID_TITLE = "GridView";
   static const String CELE_GALLERY_VIEW_TITLE = "Gallery";
+
+
+
+  static const String TV_PAGE_TITLE = '豆瓣电视剧';
 }

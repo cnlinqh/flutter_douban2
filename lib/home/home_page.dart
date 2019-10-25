@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/tv/tv_page.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/movie/move_page.dart';
@@ -12,11 +13,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _tabIndex = 0;
-  var _tabWidgets = [MoviePage(), MinePage()];
+  var _tabWidgets = [MoviePage(), TVPage(), MinePage()];
   var _tabItems = [
     {
       "title": "Movie",
       "icon": Icons.movie,
+    },
+    {
+      "title": "TV",
+      "icon": Icons.tv,
     },
     {
       "title": "Mine",

@@ -111,7 +111,7 @@ class SubjectSectionReviewTemplate extends StatelessWidget {
     if (this.warning) {
       return [
         Text(
-          '这篇影评可能有剧透',
+          '这篇影/剧评可能有剧透',
           style: TextStyle(color: Colors.red),
         ),
         Text(this.shortContent),

@@ -510,4 +510,17 @@ class ClientAPI {
     RegExpMatch match = reg.firstMatch(total);
     return int.parse(match.group(0));
   }
+
+  Future searchTvs({int start = 0, int count = 20, String tag = '热门', String sort = 'recommend'}) async {
+    //tags: ["热门", "美剧", "英剧", "韩剧", "日剧", "国产剧", "港剧", "日本动画", "综艺", "纪录片"]
+    //sort :recommend, time, rank
+    LogUtil.log(">>ClientAPI: searchTvs($start, $count, $tag, $sort)");
+    var s = new DateTime.now();
+    String url = '/j/search_subjects?type=tv&tag=$tag&sort=$sort&page_limit=$count&page_start=$start';
+    LogUtil.log(url);
+    Response<Map> res = await webDio.get(url);
+    var e = new DateTime.now();
+    LogUtil.log("<<<<ClientAPI: searchTvs($start, $count, $tag, $sort) -----------  ${e.difference(s).inMilliseconds}");
+    return res.data['subjects'];
+  }
 }
