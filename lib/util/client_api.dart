@@ -511,7 +511,7 @@ class ClientAPI {
     return int.parse(match.group(0));
   }
 
-  Future searchTvs({int start = 0, int count = 20, String tag = '热门', String sort = 'recommend'}) async {
+  Future<List> searchTvs({int start = 0, int count = 20, String tag = '热门', String sort = 'recommend'}) async {
     //tags: ["热门", "美剧", "英剧", "韩剧", "日剧", "国产剧", "港剧", "日本动画", "综艺", "纪录片"]
     //sort :recommend, time, rank
     LogUtil.log(">>ClientAPI: searchTvs($start, $count, $tag, $sort)");

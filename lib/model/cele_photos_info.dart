@@ -42,7 +42,7 @@ class CelePhotosInfo extends ChangeNotifier {
     return this._photos[index]['title'] == _LOADING;
   }
 
-  void initPhotos(id) async {
+  void initPhotos(id) {
     _celebrityId = id;
     _start = 0;
     _total = 0;

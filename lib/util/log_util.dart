@@ -1,5 +1,5 @@
 class LogUtil {
-  static bool enable = false;
+  static bool enable = true;
   static log(msg) {
     if (enable) print(msg);
   }
