@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/model/tv_list_model.dart';
 import 'package:flutter_douban2/tv/tv_list_view.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_douban2/util/screen_size.dart';
+import 'package:provider/provider.dart';
 
 class TVPage extends StatefulWidget {
   _TVPageState createState() => _TVPageState();
@@ -54,6 +58,7 @@ class _TVPageState extends State<TVPage> with SingleTickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         title: Text("豆瓣电视剧"),
+        actions: _buildActions(),
         bottom: new TabBar(
           tabs: this.tabs,
           controller: controller,
@@ -65,6 +70,86 @@ class _TVPageState extends State<TVPage> with SingleTickerProviderStateMixin {
         children: _buildViews(),
       ),
     );
+  }
+
+  List<Widget> _buildActions() {
+    List<Widget> actions = [
+      Consumer<TVListModel>(
+        builder: (context, model, widget) {
+          return GestureDetector(
+            child: Container(
+              padding: EdgeInsets.only(
+                left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+                right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+              ),
+              child: Container(
+                child: Icon(
+                  Icons.chrome_reader_mode,
+                  color: model.mode == "ListView" ? Colors.orange : null,
+                ),
+              ),
+            ),
+            onTap: () {
+              model.mode = "ListView";
+            },
+          );
+        },
+      ),
+      Consumer<TVListModel>(
+        builder: (context, model, widget) {
+          return GestureDetector(
+            child: Container(
+              padding: EdgeInsets.only(
+                left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+                right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+              ),
+              child: Container(
+                child: Icon(
+                  Icons.apps,
+                  color: model.mode == "GridView" ? Colors.orange : null,
+                ),
+              ),
+            ),
+            onTap: () {
+              model.mode = "GridView";
+            },
+          );
+        },
+      ),
+      Consumer<TVListModel>(
+        builder: (context, model, widget) {
+          return Center(
+            child: DropdownButton(
+              iconEnabledColor: Colors.white,
+              iconDisabledColor: Colors.white,
+              
+              items: [
+                DropdownMenuItem(
+                  child: Text("推荐"),
+                  value: 'recommend',
+                ),
+                DropdownMenuItem(
+                  child: Text("时间"),
+                  value: 'time',
+                ),
+                DropdownMenuItem(
+                  child: Text("评分"),
+                  value: 'rank',
+                ),
+              ],
+              value: model.sort,
+              onChanged: (sort) {
+                model.sort = sort;
+              },
+              elevation: 24,
+              isDense: false,
+              iconSize: 30,
+            ),
+          );
+        },
+      ),
+    ];
+    return actions;
   }
 
   List<Widget> _buildViews() {

@@ -4,9 +4,35 @@ import 'package:flutter_douban2/util/client_api.dart';
 class TVListModel extends ChangeNotifier {
   Map map = Map();
 
+  String _mode = "ListView"; //ListView or GridView
+
+  String get mode => _mode;
+
+  set mode(value) {
+    this._mode = value;
+    // map.keys.forEach((key){
+    //   TVListInstance instance  = map[key];
+    //   instance.refresh();
+    // });
+    notifyListeners();
+  }
+
+  String _sort = 'recommend';
+
+  String get sort => _sort;
+
+  set sort(value) {
+    this._sort = value;
+    map.keys.forEach((key) {
+      TVListInstance instance = map[key];
+      instance.refresh(sort);
+    });
+    notifyListeners();
+  }
+
   init(tag) {
-    TVListInstance instance = new TVListInstance();
-    instance.init(tag);
+    TVListInstance instance = TVListInstance();
+    instance.init(tag, sort);
     map[tag] = instance;
   }
 
@@ -34,6 +60,7 @@ class TVListInstance {
   bool _done;
   int _start;
   int _count;
+  String _sort;
 
   List _list = [
     {
@@ -49,8 +76,17 @@ class TVListInstance {
     return this._list[index]['title'] == _LOADING;
   }
 
-  void init(tag) {
+  void refresh(sort) {
+    _start = 0;
+    _count = 20;
+    _sort = sort;
+    _done = false;
+    _list.removeRange(0, _list.length - 1);
+  }
+
+  void init(tag, sort) {
     _tag = tag;
+    _sort = sort;
     _start = 0;
     _count = 20;
     _done = false;
@@ -65,7 +101,7 @@ class TVListInstance {
       return;
     }
     _calling = true;
-    var more = await ClientAPI.getInstance().searchTvs(start: _start, count: _count, tag: _tag);
+    var more = await ClientAPI.getInstance().searchTvs(start: _start, count: _count, tag: _tag, sort: _sort);
     _list.insertAll(_list.length - 1, more);
     _start = _start + more.length;
     if (more.length < _count) {

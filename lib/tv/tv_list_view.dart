@@ -20,21 +20,20 @@ class _TVListViewState extends State<TVListView> with AutomaticKeepAliveClientMi
     Provider.of<TVListModel>(context, listen: false).init(this.widget.tag);
   }
 
+  //AutomaticKeepAliveClientMixin.wantKeepAlive to keep view state during tab index change
   @override
   bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    // return _buildGridView();
-    return _buildListView();
+    return _buildView();
   }
 
-  Widget _buildListView() {
-    return Container(
-      padding: EdgeInsets.all(ScreenUtil.getInstance().setWidth(ScreenSize.padding)),
-      child: Consumer<TVListModel>(
-        builder: (context, model, widget) {
+  Widget _buildView() {
+    return Consumer<TVListModel>(
+      builder: (context, model, widget) {
+        if (model.mode == 'ListView') {
           return ListView.builder(
             itemCount: model.tvs(this.widget.tag).length,
             itemBuilder: (context, index) {
@@ -42,34 +41,15 @@ class _TVListViewState extends State<TVListView> with AutomaticKeepAliveClientMi
                 model.more(this.widget.tag);
                 return Container();
               } else {
-                return GestureDetector(
-                  onTap: () {
-                    // info.setSelectedIndex(index);
-                    // NavigatorHelper.pushToPage(
-                    //   context,
-                    //   LabelConstant.CELE_GALLERY_VIEW_TITLE,
-                    // );
-                  },
-                  // child: MovieUtil.buildMovieCover(model.tvs(this.widget.tag)[index]['cover']),
-                  child: MovieSubjectGeneral(model.tvs(this.widget.tag)[index]['id'], section: this.widget.tag),
-                );
+                return MovieSubjectGeneral(model.tvs(this.widget.tag)[index]['id'], section: this.widget.tag);
               }
             },
           );
-        },
-      ),
-    );
-  }
-
-  Widget _buildGridView() {
-    return Container(
-      padding: EdgeInsets.all(ScreenUtil.getInstance().setWidth(ScreenSize.padding)),
-      child: Consumer<TVListModel>(
-        builder: (context, model, widget) {
+        } else {
           return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
-              childAspectRatio: 1,
+              childAspectRatio: 0.6,
               crossAxisSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding / 10),
               mainAxisSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding / 10),
             ),
@@ -79,23 +59,12 @@ class _TVListViewState extends State<TVListView> with AutomaticKeepAliveClientMi
                 model.more(this.widget.tag);
                 return Container();
               } else {
-                return GestureDetector(
-                  onTap: () {
-                    // info.setSelectedIndex(index);
-                    // NavigatorHelper.pushToPage(
-                    //   context,
-                    //   LabelConstant.CELE_GALLERY_VIEW_TITLE,
-                    // );
-                  },
-                  // child: MovieUtil.buildDirectorCastCover(model.tvs(this.widget.tag)[index]['cover']),
-
-                  child: MovieSubjectSimple(model.tvs(this.widget.tag)[index]['id'], section: this.widget.tag),
-                );
+                return MovieSubjectSimple(model.tvs(this.widget.tag)[index]['id'], section: this.widget.tag);
               }
             },
           );
-        },
-      ),
+        }
+      },
     );
   }
 }
