@@ -9,7 +9,7 @@ class LabelConstant {
   static const String MOVIE_COMING_SOON_TITLE = '即将上映';
   static const String MOVIE_RANK_LIST_TITLE = '豆瓣榜单';
 
-  static const String MOVIE_ALL_TITLE = '全部>';
+  static const String MOVIE_ALL_TITLE = '全部';
   static const String MOVIE_NO_RATE = "暂无评分";
   static const String MOIVE_VIEW_ALL_COMMENTS = "查看全部短评";
   static const String MOIVE_COMMENT_HOT = "热门";

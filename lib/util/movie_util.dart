@@ -63,6 +63,20 @@ class MovieUtil {
     );
   }
 
+  static buildSubType(String subtype) {
+    return Positioned(
+      bottom: 0,
+      child: Stack(
+        children: <Widget>[
+          Icon(
+            subtype == 'movie' ? Icons.movie : Icons.tv,
+            color: Colors.cyan,
+          ),
+        ],
+      ),
+    );
+  }
+
   static String getTitle(_subject) {
     return _subject["title"].toString();
   }

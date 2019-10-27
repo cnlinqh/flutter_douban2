@@ -59,8 +59,8 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
         title: Row(
           children: <Widget>[
             Container(
-              width: kToolbarHeight,
-              height: kToolbarHeight,
+              width: kToolbarHeight - 10,
+              height: kToolbarHeight - 10,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: CachedNetworkImageProvider(
@@ -75,7 +75,7 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(this._subject['title']),
+                Text(this._subject['title'],maxLines: 1, overflow: TextOverflow.ellipsis,),
                 RateStar(
                   double.parse(this._subject['rating']['average'].toString()),
                 )

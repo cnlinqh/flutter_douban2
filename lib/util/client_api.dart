@@ -373,17 +373,11 @@ class ClientAPI {
 
     List<Element> droplist = document.body.getElementsByClassName('droplist');
     var total = droplist[0].getElementsByTagName('a')[0].text.trim();
-    LogUtil.log("total: " + total);
     var total5 = droplist[0].getElementsByTagName('a')[1].text.trim();
-    LogUtil.log("total: " + total5);
     var total4 = droplist[0].getElementsByTagName('a')[2].text.trim();
-    LogUtil.log("total: " + total4);
     var total3 = droplist[0].getElementsByTagName('a')[3].text.trim();
-    LogUtil.log("total: " + total3);
     var total2 = droplist[0].getElementsByTagName('a')[4].text.trim();
-    LogUtil.log("total: " + total2);
     var total1 = droplist[0].getElementsByTagName('a')[5].text.trim();
-    LogUtil.log("total: " + total1);
     var e = new DateTime.now();
     LogUtil.log(
         "<<<<ClientAPI: getAllReviews($subjectId, $start, $count, $sort, $rating) -----------  ${e.difference(s).inMilliseconds}");

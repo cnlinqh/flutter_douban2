@@ -75,7 +75,7 @@ class SubjectSectionComments extends StatelessWidget {
                 ),
               );
             },
-            child: Text(LabelConstant.MOVIE_ALL_TITLE),
+            child: Text(LabelConstant.MOVIE_ALL_TITLE + this.subject['comments_count'].toString() + ">"),
           )
         ],
       ),

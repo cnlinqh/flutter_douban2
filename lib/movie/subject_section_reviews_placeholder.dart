@@ -68,6 +68,7 @@ class SubjectSectionReviewsPlaceHolderState extends State<SubjectSectionReviewsP
               ],
             ),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
                 Text(
                   LabelConstant.MOVIE_LONG_REVIEW,
@@ -75,6 +76,9 @@ class SubjectSectionReviewsPlaceHolderState extends State<SubjectSectionReviewsP
                     fontSize: 24,
                     color: Colors.black,
                   ),
+                ),
+                SizedBox(
+                  width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
                 ),
                 Text(this.total)
               ],

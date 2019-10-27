@@ -68,6 +68,7 @@ class _MovieSubjectSimpleState extends State<MovieSubjectSimple> {
           MovieUtil.buildMovieCover(this.subject['images']['small'],
               heroTag: this.widget.section + this.subject['images']['small']),
           MovieUtil.buildFavoriteIcon(),
+          MovieUtil.buildSubType(this.subject['subtype']),
         ],
       ),
     );
