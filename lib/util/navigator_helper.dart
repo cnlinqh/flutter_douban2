@@ -15,6 +15,7 @@ import 'package:flutter_douban2/movie/movie_category_search_page.dart';
 import 'package:flutter_douban2/movie/subject_section_media_photos_gallery.dart';
 import 'package:flutter_douban2/movie/subject_section_media_video_set.dart';
 import 'package:flutter_douban2/movie/subject_section_review_full.dart';
+import 'package:flutter_douban2/tv/tv_choose_page.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/log_util.dart';
@@ -56,7 +57,7 @@ class NavigatorHelper {
       case LabelConstant.MOVIE_TOP_US: //豆瓣电影北美票房榜
         _push(context, MovieListStaticPage(title, content, rank: true));
         break;
-      case LabelConstant.MOVIE_DETAILS_TITLE: //电影详情
+      case LabelConstant.MOVIE_DETAILS_TITLE: //电影/电视详情
         _push(context, SubjectDetailsPage(content));
         break;
       case LabelConstant.MOVIE_PHOTO_TITLE: // 剧照
@@ -68,7 +69,6 @@ class NavigatorHelper {
       case LabelConstant.MOVIE_RANK_LIST_TITLE: //豆瓣榜单
         _push(context, MovieRankPage());
         break;
-
       case LabelConstant.MOVIE_TOP_LIST_YEAR_TITLE: //豆瓣榜单
         _push(context, MovieRankYearsPage());
         break;
@@ -82,7 +82,6 @@ class NavigatorHelper {
           _push(context, MovieCategorySearchPage());
         }
         break;
-
       case LabelConstant.MOVIE_YEAR_TOP_DETAILS_TITLE:
         _push(context, MovieRankListStaticPage(content));
         break;
@@ -118,6 +117,9 @@ class NavigatorHelper {
         break;
       case LabelConstant.CELE_GALLERY_VIEW_TITLE:
         _push(context, CeleSectionPhotosGallery(content));
+        break;
+      case LabelConstant.TV_ENTRANCE_SELECT_ICON:
+        _push(context, TVChoosePage());
         break;
       default:
     }

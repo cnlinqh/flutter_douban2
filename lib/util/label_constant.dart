@@ -30,6 +30,7 @@ class LabelConstant {
   static const String MOVIE_TOP_US_SUB = "北美票房";
 
   static const String MOVIE_DETAILS_TITLE = "电影详情";
+
   static const String MOVIE_WANTED_TITLE = '想看';
   static const String MOVIE_WATCHED_TITLE = '看过';
   static const String MOVIE_ALL_PEOPLE = "演职员";
@@ -144,16 +145,50 @@ class LabelConstant {
   };
   static var sYearList = {
     "label": "年代",
-    "list": ["全部", "2019", "2018","2017","2016","2015", "2010年代", "2000年代", "90年代", "80年代", "70年代", "60年代", "更早"],
+    "list": ["全部", "2019", "2018", "2017", "2016", "2015", "2010年代", "2000年代", "90年代", "80年代", "70年代", "60年代", "更早"],
   };
   static var sSpecialList = {
     "label": "特色",
-    "list": ["全部", "经典", "青春", "文艺", "搞笑", "励志", "魔幻", "感人", "女性", "黑帮", MOVIE_SPECIAL_SELF_DEFINE],
+    "list": [
+      "全部",
+      "青春",
+      "古装",
+      "治愈",
+      "文艺",
+      "女性",
+      "小说改编",
+      "超级英雄",
+      "美食",
+      "宗教",
+      "励志",
+      "探案",
+      "律政",
+      "医疗",
+      "政治",
+      MOVIE_SPECIAL_SELF_DEFINE
+    ],
   };
   static void resetSpecialList() {
     sSpecialList = {
       "label": "特色",
-      "list": ["全部", "经典", "青春", "文艺", "搞笑", "励志", "魔幻", "感人", "女性", "黑帮", MOVIE_SPECIAL_SELF_DEFINE],
+      "list": [
+        "全部",
+        "青春",
+        "古装",
+        "治愈",
+        "文艺",
+        "女性",
+        "小说改编",
+        "超级英雄",
+        "美食",
+        "宗教",
+        "励志",
+        "探案",
+        "律政",
+        "医疗",
+        "政治",
+        MOVIE_SPECIAL_SELF_DEFINE
+      ],
     };
   }
 
@@ -205,6 +240,7 @@ class LabelConstant {
   static const String MOVIE_CHOOSE_SPEICAL = "特色";
   static const List MOVIE_CHOOSE_SPEICAL_LIST = [
     "青春",
+    "古装",
     "治愈",
     "文艺",
     "女性",
@@ -213,6 +249,10 @@ class LabelConstant {
     "美食",
     "宗教",
     "励志",
+    "探案",
+    "律政",
+    "医疗",
+    "政治",
   ];
 
   //Celebrity
@@ -220,7 +260,58 @@ class LabelConstant {
   static const String CELE_GALLERY_GRID_TITLE = "GridView";
   static const String CELE_GALLERY_VIEW_TITLE = "Gallery";
 
-
-
   static const String TV_PAGE_TITLE = '豆瓣电视剧';
+  static const String TV_ENTRANCE_SELECT_ICON = "选电视剧";
+  static const String TV_DETAILS_TITLE = "电视详情";
+
+  static const String TV_CHOOSE_TOPIC = "专题";
+  static const String TV_CHOOSE_TOPIC_PLACE = "地区";
+  static const String TV_CHOOSE_TOPIC_TYPE = "类型";
+  static const String TV_CHOOSE_TOPIC_CHANNEL = "播出平台";
+  static const List TV_CHOOSE_TOPIC_LIST = [
+    TV_CHOOSE_TOPIC_PLACE,
+    TV_CHOOSE_TOPIC_TYPE,
+    TV_CHOOSE_TOPIC_CHANNEL,
+  ];
+
+  static const String TV_CHOOSE_PLACE = "地区";
+  static const List TV_CHOOSE_PLACE_LIST = [
+    "中国大陆",
+    "美国",
+    "英国",
+    "日本",
+    "韩国",
+    "泰国",
+    "中国香港",
+    "中国台湾",
+  ];
+
+  static const String TV_CHOOSE_TYPE = "类型";
+  static const List TV_CHOOSE_TYPE_LIST = [
+    "动漫",
+    "喜剧",
+    "科幻",
+    "青春",
+    "古装",
+    "武侠",
+    "历史",
+    "探案",
+    "律政",
+    "医疗",
+    "政治",
+    "纪录片",
+  ];
+
+  static const String TV_CHOOSE_CHANNEL = "播出平台";
+  static const List TV_CHOOSE_CHANNEL_LIST = [
+    "湖南卫视",
+    "HBO",
+    "Netflix",
+    "BBC",
+    "NHK",
+    "tvN",
+    "腾讯",
+    "优酷",
+    "爱奇艺",
+  ];
 }

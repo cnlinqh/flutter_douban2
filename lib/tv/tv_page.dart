@@ -4,6 +4,9 @@ import 'package:flutter_douban2/tv/tv_list_view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_douban2/util/label_constant.dart';
+import 'package:flutter_douban2/util/navigator_helper.dart';
+import 'package:flutter_douban2/movie/movie_category_search_page.dart';
 
 class TVPage extends StatefulWidget {
   _TVPageState createState() => _TVPageState();
@@ -122,7 +125,6 @@ class _TVPageState extends State<TVPage> with SingleTickerProviderStateMixin {
             child: DropdownButton(
               iconEnabledColor: Colors.white,
               iconDisabledColor: Colors.white,
-              
               items: [
                 DropdownMenuItem(
                   child: Text("推荐"),
@@ -139,7 +141,9 @@ class _TVPageState extends State<TVPage> with SingleTickerProviderStateMixin {
               ],
               value: model.sort,
               onChanged: (sort) {
-                model.sort = sort;
+                if (model.sort != sort) {
+                  model.sort = sort;
+                }
               },
               elevation: 24,
               isDense: false,
@@ -148,6 +152,27 @@ class _TVPageState extends State<TVPage> with SingleTickerProviderStateMixin {
           );
         },
       ),
+      IconButton(
+        icon: Icon(Icons.category),
+        onPressed: () {
+          NavigatorHelper.pushToPage(
+            context,
+            LabelConstant.MOVIE_CATEGORY_TITLE,
+            content: MovieCategorySearchPage(
+              tag: '电视剧',
+            ),
+          );
+        },
+      ),
+      IconButton(
+        icon: Icon(Icons.sort),
+        onPressed: () {
+          NavigatorHelper.pushToPage(
+            context,
+            LabelConstant.TV_ENTRANCE_SELECT_ICON,
+          );
+        },
+      )
     ];
     return actions;
   }
