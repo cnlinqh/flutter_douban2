@@ -37,7 +37,7 @@ class _SubjectSectionAlsoLikeState extends State<SubjectSectionAlsoLike> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            '喜欢这部电影的人也喜欢',
+            this.widget.subject['subtype'] == 'movie' ? '喜欢这部电影的人也喜欢' : '喜欢这部电视的人也喜欢',
             style: TextStyle(
               color: Colors.white,
               fontSize: 24,

@@ -75,9 +75,14 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(this._subject['title'],maxLines: 1, overflow: TextOverflow.ellipsis,),
+                Text(
+                  this._subject['title'],
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
                 RateStar(
                   double.parse(this._subject['rating']['average'].toString()),
+                  labled: false,
                 )
               ],
             )
@@ -86,7 +91,8 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
       );
     } else {
       return AppBar(
-        title: Text(LabelConstant.MOVIE_DETAILS_TITLE),
+        title: Text(
+            this._subject['subtype'] == 'movie' ? LabelConstant.MOVIE_DETAILS_TITLE : LabelConstant.TV_DETAILS_TITLE),
       );
     }
   }

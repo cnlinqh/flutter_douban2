@@ -62,8 +62,8 @@ class _SubjectSectionReviewFullState extends State<SubjectSectionReviewFull> {
       title: Row(
         children: <Widget>[
           Container(
-            width: kToolbarHeight,
-            height: kToolbarHeight,
+            width: kToolbarHeight - 10,
+            height: kToolbarHeight - 10,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: CachedNetworkImageProvider(
@@ -81,6 +81,7 @@ class _SubjectSectionReviewFullState extends State<SubjectSectionReviewFull> {
               Text(this.widget.content['subject']['title']),
               RateStar(
                 double.parse(this.widget.content['subject']['rating']['average'].toString()),
+                labled: false,
               )
             ],
           )
