@@ -97,7 +97,9 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
         height: ScreenUtil.getInstance().setHeight(ScreenSize.rank_bg_cover_height),
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: CachedNetworkImageProvider(res['payload']['background_img']),
+            image: CachedNetworkImageProvider(
+              res['payload']['background_img'] != null ? res['payload']['background_img'] : res['subjects'][0]['cover'],
+            ),
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.only(

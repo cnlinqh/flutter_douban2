@@ -93,7 +93,9 @@ class _MovieRankListStaticPageState extends State<MovieRankListStaticPage> {
       decoration: BoxDecoration(
         image: DecorationImage(
           image: CachedNetworkImageProvider(
-            widget.res['payload']['background_img'],
+            widget.res['payload']['background_img'] != null
+                ? widget.res['payload']['background_img']
+                : widget.res['subjects'][0]['cover'],
           ),
           fit: BoxFit.cover,
         ),

@@ -83,7 +83,7 @@ class _MovieChooseBoxState extends State<MovieChooseBox> {
         width: ScreenUtil.getInstance().setWidth(ScreenSize.choose_image_width),
         height: ScreenUtil.getInstance().setHeight(ScreenSize.choose_image_height),
         child: Center(
-          child: CircularProgressIndicator(),
+          // child: CircularProgressIndicator(),
         ),
       ),
     );

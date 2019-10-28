@@ -159,11 +159,11 @@ class MovieRankList {
       'title': '年度电影原声',
       'subTitle': '年度电影',
     },
-    // {
-    //   'type': '51',
-    //   'title': '每月最热门电影',
-    //   'subTitle': '最热门',
-    // },
+    {
+      'type': '51',
+      'title': '每月最热门电影',
+      'subTitle': '最热门',
+    },
     {
       'type': '53',
       'title': '上映10周年的电影',
@@ -199,11 +199,11 @@ class MovieRankList {
       'title': '2019最值得期待的华语电影',
       'subTitle': '最值得期待',
     },
-    // {
-    //   'type': '66',
-    //   'title': '2018你可能错过的好片',
-    //   'subTitle': '可能错过',
-    // },
+    {
+      'type': '66',
+      'title': '2018你可能错过的好片',
+      'subTitle': '可能错过',
+    },
   ];
 
   static const list2017 = [
@@ -407,11 +407,11 @@ class MovieRankList {
       'title': '2017-2018北美颁奖季最期待获奖佳片',
       'subTitle': '北美颁奖季',
     },
-    // {
-    //   'type': '89',
-    //   'title': '2017你可能错过的好片',
-    //   'subTitle': '最热门',
-    // },
+    {
+      'type': '89',
+      'title': '2017你可能错过的好片',
+      'subTitle': '最热门',
+    },
   ];
   static const list2016 = [
     {

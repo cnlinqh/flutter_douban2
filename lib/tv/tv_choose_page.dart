@@ -293,11 +293,11 @@ class TVChoosePage extends StatelessWidget {
   ];
 
   static const list2015 = [
-    // {
-    //   'type': '22',
-    //   'title': '评分最高的|大陆剧',
-    //   'subTitle': '评分最高',
-    // },
+    {
+      'type': '22',
+      'title': '评分最高的|大陆剧',
+      'subTitle': '评分最高',
+    },
     {
       'type': '23',
       'title': '评分最高的|韩剧',
