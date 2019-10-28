@@ -59,6 +59,16 @@ class TVChoosePage extends StatelessWidget {
         subTitle: f['subTitle'],
       ));
     });
+
+    views.add(MovieViewSectionHeader("2016", navigatable: false));
+    list2016.forEach((f) {
+      views.add(MovieRankSectionYear(
+        year: '2016',
+        type: f['type'],
+        title: f['title'],
+        subTitle: f['subTitle'],
+      ));
+    });
     return views;
   }
 
@@ -204,6 +214,69 @@ class TVChoosePage extends StatelessWidget {
     {
       'type': '80',
       'title': '开播30周年的剧集',
+      'subTitle': '30周年',
+    },
+  ];
+
+  static const list2016 = [
+    {
+      'type': '24',
+      'title': '评分最高的|大陆电视剧',
+      'subTitle': '评分最高',
+    },
+    {
+      'type': '25',
+      'title': '评分最高的|英美剧(新剧)',
+      'subTitle': '评分最高',
+    },
+    {
+      'type': '26',
+      'title': '评分最高的|英美剧(非新剧)',
+      'subTitle': '评分最高',
+    },
+    {
+      'type': '28',
+      'title': '评分最高的|韩剧',
+      'subTitle': '评分最高',
+    },
+    {
+      'type': '29',
+      'title': '评分最高的|日剧',
+      'subTitle': '评分最高',
+    },
+    {
+      'type': '30',
+      'title': '评分最高的|其它地区剧集',
+      'subTitle': '评分最高',
+    },
+    {
+      'type': '32',
+      'title': '最受关注的|大陆电视综艺',
+      'subTitle': '最受关注',
+    },
+    {
+      'type': '33',
+      'title': '最受关注的|大陆网络综艺',
+      'subTitle': '最受关注',
+    },
+    {
+      'type': '35',
+      'title': '评分最高的|纪录剧集',
+      'subTitle': '评分最高',
+    },
+    {
+      'type': '64',
+      'title': '开播|10周年的剧集',
+      'subTitle': '10周年',
+    },
+    {
+      'type': '65',
+      'title': '开播|20周年的剧集',
+      'subTitle': '20周年',
+    },
+    {
+      'type': '66',
+      'title': '开播|30周年的剧集',
       'subTitle': '30周年',
     },
   ];
