@@ -69,6 +69,17 @@ class TVChoosePage extends StatelessWidget {
         subTitle: f['subTitle'],
       ));
     });
+
+    views.add(MovieViewSectionHeader("2015", navigatable: false));
+    list2015.forEach((f) {
+      views.add(MovieRankSectionYear(
+        year: '2015',
+        type: f['type'],
+        title: f['title'],
+        subTitle: f['subTitle'],
+      ));
+    });
+
     return views;
   }
 
@@ -279,5 +290,33 @@ class TVChoosePage extends StatelessWidget {
       'title': '开播|30周年的剧集',
       'subTitle': '30周年',
     },
+  ];
+
+  static const list2015 = [
+    // {
+    //   'type': '22',
+    //   'title': '评分最高的|大陆剧',
+    //   'subTitle': '评分最高',
+    // },
+    {
+      'type': '23',
+      'title': '评分最高的|韩剧',
+      'subTitle': '评分最高',
+    },
+    {
+      'type': '24',
+      'title': '评分最高的|日剧',
+      'subTitle': '评分最高',
+    },
+    {
+      'type': '25',
+      'title': '最受关注的|大陆综艺',
+      'subTitle': '最受关注',
+    },
+    {
+      'type': '26',
+      'title': '评分最高的|动画剧集',
+      'subTitle': '评分最高',
+    }
   ];
 }

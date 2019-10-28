@@ -56,15 +56,15 @@ class MovieRankList {
       ));
     });
 
-    // list.add(MovieViewSectionHeader("2015"));
-    // MovieRankList.list.forEach((f) {
-    //   list.add(MovieRankSectionYear(
-    //     year: '2015',
-    //     type: f['type'],
-    //     title: f['title'],
-    //     subTitle: f['subTitle'],
-    //   ));
-    // });
+    list.add(MovieViewSectionHeader("2015"));
+    MovieRankList.list2015.forEach((f) {
+      list.add(MovieRankSectionYear(
+        year: '2015',
+        type: f['type'],
+        title: f['title'],
+        subTitle: f['subTitle'],
+      ));
+    });
     return list;
   }
 
@@ -603,6 +603,194 @@ class MovieRankList {
       'type': '70',
       'title': '2016-2017北美|颁奖季热门佳片',
       'subTitle': '颁奖季',
+    },
+  ];
+
+  static const list2015 = [
+    {
+      'type': '1',
+      'title': '评分最高的|外语电影',
+      'subTitle': '评分最高',
+    },
+    {
+      'type': '2',
+      'title': '评分最高的|华语电影',
+      'subTitle': '评分最高',
+    },
+    {
+      'type': '4',
+      'title': '最受关注的|院线电影',
+      'subTitle': '最受关注',
+    },
+    {
+      'type': '5',
+      'title': '最受关注的|非院线电影',
+      'subTitle': '最受关注',
+    },
+    {
+      'type': '6',
+      'title': '2015-2016贺岁档|电影推荐',
+      'subTitle': '贺岁档',
+    },
+    {
+      'type': '8',
+      'title': '年度|冷门佳片',
+      'subTitle': '年度佳片',
+    },
+    {
+      'type': '9',
+      'title': '评分最高的|韩国电影',
+      'subTitle': '评分最高',
+    },
+    {
+      'type': '10',
+      'title': '评分最高的|日本电影',
+      'subTitle': '评分最高',
+    },
+    {
+      'type': '11',
+      'title': '评分最高的|欧洲电影',
+      'subTitle': '评分最高',
+    },
+    {
+      'type': '13',
+      'title': '评分最高的|动画片',
+      'subTitle': '评分最高',
+    },
+    {
+      'type': '14',
+      'title': '评分最高的|纪录片',
+      'subTitle': '评分最高',
+    },
+    {
+      'type': '15',
+      'title': '评分最高的|短片',
+      'subTitle': '评分最高',
+    },
+    {
+      'type': '16',
+      'title': '年度LGBT电影',
+      'subTitle': '年度电影',
+    },
+    {
+      'type': '18',
+      'title': '评分最高的|英美剧(新剧)',
+      'subTitle': '评分最高',
+    },
+    {
+      'type': '19',
+      'title': '评分最高的|英美剧(非新剧)',
+      'subTitle': '评分最高',
+    },
+    {
+      'type': '20',
+      'title': '告别我们的|英美剧(最终季)',
+      'subTitle': '最终季',
+    },
+    {
+      'type': '32',
+      'title': '1月最受关注的|电影',
+      'subTitle': '最受关注',
+    },
+    {
+      'type': '33',
+      'title': '2月最受关注|电影',
+      'subTitle': '最受关注',
+    },
+    {
+      'type': '34',
+      'title': '3月最受关注的|电影',
+      'subTitle': '最受关注',
+    },
+    {
+      'type': '35',
+      'title': '4月最受关注的|电影',
+      'subTitle': '最受关注',
+    },
+    {
+      'type': '36',
+      'title': '5月最受关注的|电影',
+      'subTitle': '最受关注',
+    },
+    {
+      'type': '37',
+      'title': '6月最受关注的|电影',
+      'subTitle': '最受关注',
+    },
+    {
+      'type': '39',
+      'title': '7月最受关注的|电影',
+      'subTitle': '最受关注',
+    },
+    {
+      'type': '40',
+      'title': '8月最受关注的|电影',
+      'subTitle': '最受关注',
+    },
+    {
+      'type': '41',
+      'title': '9月最受关注的|电影',
+      'subTitle': '最受关注',
+    },
+    {
+      'type': '42',
+      'title': '10月最受关注的|电影',
+      'subTitle': '最受关注',
+    },
+    {
+      'type': '43',
+      'title': '11月最受关注的|电影',
+      'subTitle': '最受关注',
+    },
+    {
+      'type': '44',
+      'title': '12月最受关注的|电影',
+      'subTitle': '最受关注',
+    },
+    {
+      'type': '46',
+      'title': '上映10周年的|电影',
+      'subTitle': '10周年',
+    },
+    {
+      'type': '47',
+      'title': '上映20周年的|电影',
+      'subTitle': '20周年',
+    },
+    {
+      'type': '48',
+      'title': '上映30周年的|电影',
+      'subTitle': '30周年',
+    },
+    {
+      'type': '49',
+      'title': '上映40周年的|电影',
+      'subTitle': '40周年',
+    },
+    {
+      'type': '50',
+      'title': '上映50周年的|电影',
+      'subTitle': '50周年',
+    },
+    {
+      'type': '52',
+      'title': '评分最低的|外语电影',
+      'subTitle': '评分最低',
+    },
+    {
+      'type': '53',
+      'title': '评分最低的|华语电影',
+      'subTitle': '评分最低',
+    },
+    {
+      'type': '55',
+      'title': '2016最值得期待的|外语电影',
+      'subTitle': '最值得期待',
+    },
+    {
+      'type': '56',
+      'title': '2016最值得期待的|华语电影',
+      'subTitle': '最值得期待',
     },
   ];
 }
