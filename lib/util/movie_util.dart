@@ -3,6 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_douban2/widget/rate_star.dart';
+import 'package:share/share.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
+import 'package:fluttertoast/fluttertoast.dart';
+import 'dart:io';
+import 'package:image_picker_saver/image_picker_saver.dart';
 
 class MovieUtil {
   static buildSliderCover(cover) {
@@ -256,5 +262,60 @@ class MovieUtil {
             ],
           );
         });
+  }
+
+  static shareImage(url) {
+    Share.share(url);
+  }
+
+  static saveImage(url) async {
+    Fluttertoast.showToast(
+      msg: '正在保存...',
+      backgroundColor: Colors.cyan,
+      textColor: Colors.white,
+    );
+    var response = await http.get(url);
+    var filePath = await ImagePickerSaver.saveFile(fileData: response.bodyBytes);
+    var savedFile = File.fromUri(Uri.file(filePath));
+    Future<File>.sync(() => savedFile);
+    Fluttertoast.showToast(
+      msg: '保存成功',
+      backgroundColor: Colors.cyan,
+      textColor: Colors.white,
+    );
+  }
+
+  static buildImageActions(getImageUrl) {
+    List<Widget> actions = [
+      GestureDetector(
+        child: Container(
+          padding: EdgeInsets.only(
+            left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+            right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+          ),
+          child: Icon(
+            Icons.share,
+          ),
+        ),
+        onTap: () {
+          MovieUtil.shareImage(getImageUrl());
+        },
+      ),
+      GestureDetector(
+        child: Container(
+          padding: EdgeInsets.only(
+            left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+            right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+          ),
+          child: Icon(
+            Icons.save,
+          ),
+        ),
+        onTap: () {
+          MovieUtil.saveImage(getImageUrl());
+        },
+      ),
+    ];
+    return actions;
   }
 }

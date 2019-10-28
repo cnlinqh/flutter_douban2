@@ -3,6 +3,7 @@ import 'package:flutter_douban2/model/cele_photos_info.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_douban2/util/movie_util.dart';
 
 class CeleSectionPhotosGallery extends StatefulWidget {
   final celebrityId;
@@ -15,19 +16,26 @@ class _CeleSectionPhotosGalleryState extends State<CeleSectionPhotosGallery> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar(context),
       body: _buildBody(),
     );
   }
 
-  Widget _buildAppBar() {
+  Widget _buildAppBar(context) {
     return AppBar(
       title: Consumer<CelePhotosInfo>(
         builder: (context, info, widget) {
           return Text('${info.selectedIndex + 1} / ${info.total}');
         },
       ),
+      actions: MovieUtil.buildImageActions(getImageUrl),
     );
+  }
+
+  String getImageUrl() {
+    var index = Provider.of<CelePhotosInfo>(context, listen: false).selectedIndex;
+    var url = Provider.of<CelePhotosInfo>(context, listen: false).photos[index]['img'];
+    return url;
   }
 
   Widget _buildBody() {

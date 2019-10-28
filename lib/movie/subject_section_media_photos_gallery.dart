@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
@@ -11,14 +12,14 @@ class SubjectSectionMediaPhotosGallery extends StatefulWidget {
 }
 
 class _SubjectSectionMediaPhotosGalleryState extends State<SubjectSectionMediaPhotosGallery> {
-  int _initialIndex;
+  int _selectedIndex;
   int _length;
   int _title;
 
   void initState() {
-    _initialIndex = widget._index;
+    _selectedIndex = widget._index;
     _length = widget._photos.length;
-    _title = _initialIndex + 1;
+    _title = _selectedIndex + 1;
     super.initState();
   }
 
@@ -27,6 +28,7 @@ class _SubjectSectionMediaPhotosGalleryState extends State<SubjectSectionMediaPh
     return Scaffold(
       appBar: AppBar(
         title: Text('$_title / $_length'),
+        actions: MovieUtil.buildImageActions(getImageUrl),
       ),
       body: Container(
         child: PhotoViewGallery.builder(
@@ -43,7 +45,7 @@ class _SubjectSectionMediaPhotosGalleryState extends State<SubjectSectionMediaPh
           },
           itemCount: widget._photos.length,
           onPageChanged: onPageChanged,
-          pageController: PageController(initialPage: _initialIndex),
+          pageController: PageController(initialPage: _selectedIndex),
           // enableRotation: true,
         ),
       ),
@@ -54,6 +56,11 @@ class _SubjectSectionMediaPhotosGalleryState extends State<SubjectSectionMediaPh
     if (mounted)
       setState(() {
         _title = index + 1;
+        _selectedIndex = index;
       });
+  }
+
+  String getImageUrl() {
+    return widget._photos[_selectedIndex]['image'];
   }
 }

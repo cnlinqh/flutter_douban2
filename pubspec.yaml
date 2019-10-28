@@ -31,6 +31,9 @@ dependencies:
   flutter_html: ^0.11.0 # https://pub.dev/packages/flutter_html#-readme-tab-
   url_launcher: ^5.2.1 #https://pub.dev/packages/url_launcher#-readme-tab-
   provider: ^3.1.0+1 #https://pub.dev/packages/provider#-readme-tab-
+  share: ^0.6.3+1 #Îhttps://pub.dev/packages/share#-readme-tab-
+  image_picker_saver: ^0.3.0 #https://pub.dev/packages/image_picker_saver#-readme-tab-
+  fluttertoast: ^3.1.3 #https://pub.dev/packages/fluttertoast#-readme-tab-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
