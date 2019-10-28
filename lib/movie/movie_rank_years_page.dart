@@ -530,11 +530,6 @@ class MovieRankList {
       'subTitle': '热门电影',
     },
     {
-      'type': '47',
-      'title': '6月最热门电影',
-      'subTitle': '热门电影',
-    },
-    {
       'type': '49',
       'title': '7月最热门电影',
       'subTitle': '热门电影',
