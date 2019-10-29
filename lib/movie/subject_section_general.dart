@@ -99,7 +99,7 @@ class SubjectSectionGeneral extends StatelessWidget {
                       ),
                       RaisedButton(
                         onPressed: () {},
-                        child: Text("看过"),
+                        child: Text(LabelConstant.MOVIE_WATCHED_TITLE),
                       )
                     ],
                   ),
@@ -190,6 +190,18 @@ class SubjectSectionGeneral extends StatelessWidget {
               _buildGeneralRow(
                 "语言",
                 MovieUtil.getLanguagess(_subject, join: ' / '),
+              ),
+              _buildGeneralRow(
+                "评分",
+                this._subject['ratings_count'].toString() + "人",
+              ),
+              _buildGeneralRow(
+                "想看",
+                this._subject['wish_count'].toString() + "人",
+              ),
+              _buildGeneralRow(
+                "看过",
+                this._subject['collect_count'].toString() + "人",
               ),
             ],
           ),
