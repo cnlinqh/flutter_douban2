@@ -167,12 +167,13 @@ class MovieUtil {
           );
   }
 
-  static buildDirectorCastCover(cover, {String title = 'no'}) {
+  static buildDirectorCastCover(cover, {String title = ''}) {
+    //make title defaut value empty, not sure why other default value not works in cele section grid/gallery
     if (cover == '') {
       cover =
           'http://img3.doubanio.com/f/movie/ca527386eb8c4e325611e22dfcb04cc116d6b423/pics/movie/celebrity-default-small.png';
     }
-    var tag = '$title:$cover';
+    var tag = '$title$cover';
     if (cover.toString().indexOf('celebrity-default-small.png') != -1 ||
         cover.toString().indexOf('celebrity-default-medium.png') != -1) {
       tag = tag + Random().nextDouble().toString();

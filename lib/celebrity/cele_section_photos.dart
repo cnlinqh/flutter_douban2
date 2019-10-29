@@ -94,6 +94,7 @@ class _CeleSectionPhotosState extends State<CeleSectionPhotos> {
       var photo = info.photos[i];
       if (photo['img'] != null) {
         works.add(GestureDetector(
+          key: GlobalKey(), //add global key to make sure photos will be updated after navigating back
           onTap: () {
             info.setSelectedIndex(i);
             NavigatorHelper.pushToPage(
