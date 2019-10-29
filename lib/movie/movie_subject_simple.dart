@@ -11,7 +11,8 @@ class MovieSubjectSimple extends StatefulWidget {
   final String id;
   final bool coming;
   final String section;
-  MovieSubjectSimple(this.id, {this.coming = false, this.section = ''});
+  final bool isNew;
+  MovieSubjectSimple(this.id, {this.coming = false, this.section = '', this.isNew = false});
 
   _MovieSubjectSimpleState createState() => _MovieSubjectSimpleState();
 }
@@ -69,6 +70,7 @@ class _MovieSubjectSimpleState extends State<MovieSubjectSimple> {
               heroTag: this.widget.section + this.subject['images']['small']),
           MovieUtil.buildFavoriteIcon(),
           MovieUtil.buildSubType(this.subject['subtype']),
+          MovieUtil.buildIsNew(this.widget.isNew),
         ],
       ),
     );
@@ -77,14 +79,37 @@ class _MovieSubjectSimpleState extends State<MovieSubjectSimple> {
   Widget _buildTitle() {
     return Container(
       width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_cover_width),
-      child: Text(
-        this.subject['title'],
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-        ),
-      ),
+      child: this.widget.isNew
+          ? RichText(
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              text: TextSpan(
+                children: <TextSpan>[
+                  TextSpan(
+                    text: '新',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green,
+                    ),
+                  ),
+                  TextSpan(
+                    text: ' ' + this.subject['title'],
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            )
+          : Text(
+              this.subject['title'],
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
     );
   }
 

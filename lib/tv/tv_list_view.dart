@@ -41,7 +41,11 @@ class _TVListViewState extends State<TVListView> with AutomaticKeepAliveClientMi
                 model.more(this.widget.tag);
                 return Container();
               } else {
-                return MovieSubjectGeneral(model.tvs(this.widget.tag)[index]['id'], section: this.widget.tag);
+                return MovieSubjectGeneral(
+                  model.tvs(this.widget.tag)[index]['id'],
+                  section: this.widget.tag,
+                  isNew: model.tvs(this.widget.tag)[index]['is_new'],
+                );
               }
             },
           );
@@ -59,7 +63,11 @@ class _TVListViewState extends State<TVListView> with AutomaticKeepAliveClientMi
                 model.more(this.widget.tag);
                 return Container();
               } else {
-                return MovieSubjectSimple(model.tvs(this.widget.tag)[index]['id'], section: this.widget.tag);
+                return MovieSubjectSimple(
+                  model.tvs(this.widget.tag)[index]['id'],
+                  section: this.widget.tag,
+                  isNew: model.tvs(this.widget.tag)[index]['is_new'],
+                );
               }
             },
           );

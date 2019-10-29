@@ -73,15 +73,25 @@ class MovieUtil {
   static buildSubType(String subtype) {
     return Positioned(
       bottom: 0,
-      child: Stack(
-        children: <Widget>[
-          Icon(
-            subtype == 'movie' ? Icons.movie : Icons.tv,
-            color: Colors.cyan,
-          ),
-        ],
+      child: Icon(
+        subtype == 'movie' ? Icons.movie : Icons.tv,
+        color: Colors.cyan,
       ),
     );
+  }
+
+  static buildIsNew(bool isNew) {
+    if (isNew) {
+      return Positioned(
+        right: 0,
+        child: Icon(
+          Icons.fiber_new,
+          color: Colors.green,
+        ),
+      );
+    } else {
+      return Container();
+    }
   }
 
   static String getTitle(_subject) {

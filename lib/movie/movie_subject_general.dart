@@ -9,7 +9,8 @@ import 'package:flutter_douban2/util/navigator_helper.dart';
 class MovieSubjectGeneral extends StatefulWidget {
   final id;
   final section;
-  MovieSubjectGeneral(this.id, {this.section = '', Key key}) : super(key: key);
+  final bool isNew;
+  MovieSubjectGeneral(this.id, {this.section = '', this.isNew = false, Key key}) : super(key: key);
 
   _MovieSubjectGeneralState createState() => _MovieSubjectGeneralState();
 }
@@ -72,6 +73,7 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
               heroTag: this.widget.section + this.subject['images']['small']),
           MovieUtil.buildFavoriteIcon(),
           MovieUtil.buildSubType(this.subject['subtype']),
+          MovieUtil.buildIsNew(this.widget.isNew),
         ],
       ),
     );
@@ -100,28 +102,61 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
   }
 
   Widget _buildTitle() {
-    return RichText(
-      maxLines: 1,
-      overflow: TextOverflow.ellipsis,
-      text: TextSpan(
-        children: <TextSpan>[
-          TextSpan(
-            text: this.subject['title'],
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
+    if (this.widget.isNew) {
+      return RichText(
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        text: TextSpan(
+          children: <TextSpan>[
+            TextSpan(
+              text: '新',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.green,
+                // backgroundColor: Colors.green,
+              ),
             ),
-          ),
-          TextSpan(
-            text: " (${this.subject['year']})",
-            style: TextStyle(
-              color: Colors.grey,
-              fontWeight: FontWeight.bold,
+            TextSpan(
+              text: ' ' + this.subject['title'],
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
             ),
-          ),
-        ],
-      ),
-    );
+            TextSpan(
+              text: " (${this.subject['year']})",
+              style: TextStyle(
+                color: Colors.grey,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      );
+    } else {
+      return RichText(
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        text: TextSpan(
+          children: <TextSpan>[
+            TextSpan(
+              text: this.subject['title'],
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            TextSpan(
+              text: " (${this.subject['year']})",
+              style: TextStyle(
+                color: Colors.grey,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   Widget _buildDetails() {
