@@ -25,15 +25,25 @@ class CeleSectionWorks extends StatelessWidget {
               fontSize: 20,
             ),
           ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: _buildWorks(),
-            ),
-          )
+          _buildBody(),
         ],
+      ),
+    );
+  }
+
+  Widget _buildBody() {
+    if (this._cele['works'].length == 0) {
+      return Text(
+        '暂无',
+        style: TextStyle(color: Colors.white),
+      );
+    }
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: _buildWorks(),
       ),
     );
   }

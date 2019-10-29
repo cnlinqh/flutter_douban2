@@ -373,7 +373,6 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
       tags = "${this._selectedSpecial}";
     }
     search = search + "&tags=$tags";
-    print(search);
     return search;
   }
 }

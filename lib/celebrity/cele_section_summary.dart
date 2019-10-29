@@ -25,7 +25,7 @@ class CeleSectionSummary extends StatelessWidget {
             ),
           ),
           MaxLinesText(
-            text: this._cele['summary'],
+            text: this._cele['summary'] == '' ? '暂无' : this._cele['summary'],
             maxLines: 5,
             style: TextStyle(
               color: Colors.white,

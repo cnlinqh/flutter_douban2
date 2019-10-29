@@ -42,6 +42,9 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
         GestureDetector(
           onTap: () {
             ClientAPI.getInstance().getAllDirectorsCastsList(this._subject['id']).then((celebrities) {
+              if (celebrities.length == 0) {
+                return;
+              }
               showBottomSheet(
                 context: context,
                 builder: (_) => Stack(
@@ -87,7 +90,7 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
   List<Widget> _buildDirectorsCastsCovers(context) {
     List<Widget> directors = [];
     this._subject['directors'].forEach((obj) {
-      directors.add(_buildSingleCover(context, obj, isDir: true));
+      directors.add(_buildSingleCover(context, obj, title: 'director'));
       directors.add(SizedBox(
         width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
       ));
@@ -95,7 +98,7 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
 
     List<Widget> casts = [];
     this._subject['casts'].forEach((obj) {
-      casts.add(_buildSingleCover(context, obj));
+      casts.add(_buildSingleCover(context, obj, title: 'cast'));
       casts.add(SizedBox(
         width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
       ));
@@ -104,7 +107,7 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
     return directors;
   }
 
-  Widget _buildSingleCover(context, obj, {bool isDir = false}) {
+  Widget _buildSingleCover(context, obj, {String title = 'director'}) {
     return GestureDetector(
       onTap: () {
         NavigatorHelper.pushToPage(
@@ -116,7 +119,7 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          MovieUtil.buildDirectorCastCover(obj['avatars'] != null ? obj['avatars']['small'] : '', isDir: isDir),
+          MovieUtil.buildDirectorCastCover(obj['avatars'] != null ? obj['avatars']['small'] : '', title: title),
           Container(
             width: ScreenUtil.getInstance().setWidth(ScreenSize.director_cast_cover_width),
             child: Text(
@@ -129,7 +132,9 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
           Container(
             width: ScreenUtil.getInstance().setWidth(ScreenSize.director_cast_cover_width),
             child: Text(
-              LabelConstant.MOVIE_ACTOR + '/' + obj['name_en'],
+              title == 'director'
+                  ? LabelConstant.MOVIE_DIRECTOR + '/' + obj['name_en']
+                  : LabelConstant.MOVIE_ACTOR + '/' + obj['name_en'],
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 10,
@@ -169,7 +174,7 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
               onTap: () {
                 NavigatorHelper.pushToPage(context, LabelConstant.CELE_DETAILS_TITLE, content: cele['id']);
               },
-              child: MovieUtil.buildDirectorCastCover(cele['avatar']),
+              child: MovieUtil.buildDirectorCastCover(cele['avatar'], title: cele['title']),
             ),
             Container(
               width: ScreenUtil.getInstance().setWidth(ScreenSize.celebrities_width),

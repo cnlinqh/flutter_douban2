@@ -18,8 +18,7 @@ class _CeleSectionPhotosState extends State<CeleSectionPhotos> {
   @override
   void initState() {
     super.initState();
-    Provider.of<CelePhotosInfo>(context, listen: false)
-        .initPhotos(this.widget._cele['id']);
+    Provider.of<CelePhotosInfo>(context, listen: false).initPhotos(this.widget._cele['id']);
     Provider.of<CelePhotosInfo>(context, listen: false).morePhotos();
   }
 
@@ -33,44 +32,59 @@ class _CeleSectionPhotosState extends State<CeleSectionPhotos> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Row(
-            children: <Widget>[
-              Text(
-                "相册",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                ),
-              ),
-              Expanded(
-                child: Text(''),
-              ),
-              GestureDetector(
-                onTap: () {
-                  NavigatorHelper.pushToPage(
-                      context, LabelConstant.CELE_GALLERY_GRID_TITLE,
-                      content: this.widget._cele);
-                },
-                child: Text(
-                  "全部>",
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            ],
+          _buildHeader(),
+          _buildBody(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildHeader() {
+    return Consumer<CelePhotosInfo>(
+      builder: (context, info, widget) {
+        if (info.total == 0) {
+          return Container();
+        } else {
+          return widget;
+        }
+      },
+      child: Row(
+        children: <Widget>[
+          Text(
+            "相册",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+            ),
           ),
-          Consumer<CelePhotosInfo>(
-            builder: (context, info, widget) {
-              return SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: _buildPhotos(info),
-                ),
-              );
+          Expanded(
+            child: Text(''),
+          ),
+          GestureDetector(
+            onTap: () {
+              NavigatorHelper.pushToPage(context, LabelConstant.CELE_GALLERY_GRID_TITLE, content: this.widget._cele);
             },
+            child: Text(
+              "全部>",
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildBody() {
+    return Consumer<CelePhotosInfo>(
+      builder: (context, info, widget) {
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: _buildPhotos(info),
+          ),
+        );
+      },
     );
   }
 

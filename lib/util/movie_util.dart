@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
@@ -156,9 +157,18 @@ class MovieUtil {
           );
   }
 
-  static buildDirectorCastCover(cover, {bool isDir = false}) {
+  static buildDirectorCastCover(cover, {String title = 'no'}) {
+    if (cover == '') {
+      cover =
+          'http://img3.doubanio.com/f/movie/ca527386eb8c4e325611e22dfcb04cc116d6b423/pics/movie/celebrity-default-small.png';
+    }
+    var tag = '$title:$cover';
+    if (cover.toString().indexOf('celebrity-default-small.png') != -1 ||
+        cover.toString().indexOf('celebrity-default-medium.png') != -1) {
+      tag = tag + Random().nextDouble().toString();
+    }
     return Hero(
-      tag: isDir ? "Dir:$cover" : cover,
+      tag: tag,
       child: Container(
         width: ScreenUtil.getInstance().setWidth(ScreenSize.director_cast_cover_width),
         height: ScreenUtil.getInstance().setHeight(ScreenSize.director_cast_cover_height),

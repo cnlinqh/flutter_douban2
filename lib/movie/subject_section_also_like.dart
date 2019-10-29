@@ -47,6 +47,7 @@ class _SubjectSectionAlsoLikeState extends State<SubjectSectionAlsoLike> {
             scrollDirection: Axis.horizontal,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: _buildChildren(context),
             ),
           )
@@ -72,10 +73,13 @@ class _SubjectSectionAlsoLikeState extends State<SubjectSectionAlsoLike> {
               },
               child: MovieUtil.buildMovieCover(like['cover'], heroTag: this.widget.section + like['cover']),
             ),
-            Text(
-              like['title'],
-              style: TextStyle(
-                color: Colors.white,
+            Container(
+              width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_cover_width),
+              child: Text(
+                like['title'],
+                style: TextStyle(
+                  color: Colors.white,
+                ),
               ),
             ),
           ],
