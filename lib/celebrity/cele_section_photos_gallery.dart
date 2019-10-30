@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/model/cele_photos_info.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
+import 'package:flutter_douban2/util/screen_size.dart';
 
 class CeleSectionPhotosGallery extends StatefulWidget {
   final celebrityId;
@@ -42,32 +44,44 @@ class _CeleSectionPhotosGalleryState extends State<CeleSectionPhotosGallery> {
     return Container(
       child: Consumer<CelePhotosInfo>(
         builder: (context, info, widget) {
-          return PhotoViewGallery.builder(
-            scrollDirection: Axis.horizontal,
-            scrollPhysics: BouncingScrollPhysics(),
-            builder: (BuildContext context, int index) {
-              ImageProvider<dynamic> imageProvider;
-              var heroTag;
-              if (info.isLoading(index)) {
-                heroTag = 'lib/assets/loading.jpg';
-                imageProvider = AssetImage(heroTag);
-                info.morePhotos();
-              } else {
-                heroTag = info.photos[index]['img'];
-                imageProvider = NetworkImage(info.photos[index]['img']);
-              }
-              return PhotoViewGalleryPageOptions(
-                imageProvider: imageProvider,
-                initialScale: PhotoViewComputedScale.contained * 1,
-                scaleStateController: PhotoViewScaleStateController(),
-                maxScale: 10.0,
-                heroAttributes: PhotoViewHeroAttributes(tag: heroTag),
-              );
-            },
-            itemCount: info.photos.length,
-            onPageChanged: info.setSelectedIndex,
-            pageController: PageController(initialPage: info.selectedIndex),
-            // enableRotation: true,
+          return Stack(
+            children: <Widget>[
+              PhotoViewGallery.builder(
+                scrollDirection: Axis.horizontal,
+                scrollPhysics: BouncingScrollPhysics(),
+                builder: (BuildContext context, int index) {
+                  ImageProvider<dynamic> imageProvider;
+                  var heroTag;
+                  if (info.isLoading(index)) {
+                    heroTag = 'lib/assets/loading.jpg';
+                    imageProvider = AssetImage(heroTag);
+                    info.morePhotos();
+                  } else {
+                    heroTag = info.photos[index]['img'];
+                    imageProvider = NetworkImage(info.photos[index]['img']);
+                  }
+                  return PhotoViewGalleryPageOptions(
+                    imageProvider: imageProvider,
+                    initialScale: PhotoViewComputedScale.contained * 1,
+                    scaleStateController: PhotoViewScaleStateController(),
+                    maxScale: 10.0,
+                    heroAttributes: PhotoViewHeroAttributes(tag: heroTag),
+                  );
+                },
+                itemCount: info.photos.length,
+                onPageChanged: info.setSelectedIndex,
+                pageController: PageController(initialPage: info.selectedIndex),
+                // enableRotation: true,
+              ),
+              Positioned(
+                left: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 10),
+                bottom: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 10),
+                child: Text(
+                  info.photos[info.selectedIndex]['comment'] != null ? info.photos[info.selectedIndex]['comment'] : '',
+                  style: TextStyle(color: Colors.white),
+                ),
+              )
+            ],
           );
         },
       ),

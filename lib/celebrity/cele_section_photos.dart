@@ -102,7 +102,7 @@ class _CeleSectionPhotosState extends State<CeleSectionPhotos> {
               LabelConstant.CELE_GALLERY_VIEW_TITLE,
             );
           },
-          child: MovieUtil.buildDirectorCastCover(photo['img']),
+          child: MovieUtil.buildDirectorCastCover(photo['img'], size: photo['size']),
         ));
         works.add(SizedBox(
           width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),

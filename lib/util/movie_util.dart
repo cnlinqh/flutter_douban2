@@ -167,7 +167,7 @@ class MovieUtil {
           );
   }
 
-  static buildDirectorCastCover(cover, {String title = ''}) {
+  static buildDirectorCastCover(cover, {String title = '', String size = ''}) {
     //make title defaut value empty, not sure why other default value not works in cele section grid/gallery
     if (cover == '') {
       cover =
@@ -178,10 +178,19 @@ class MovieUtil {
         cover.toString().indexOf('celebrity-default-medium.png') != -1) {
       tag = tag + Random().nextDouble().toString();
     }
+    var width = ScreenUtil.getInstance().setWidth(ScreenSize.director_cast_cover_width);
+    if (size != '') {
+      List<String> list = size.split('x');
+      if (list.length == 2) {
+        width = double.parse(list[0]) /
+            double.parse(list[1]) *
+            ScreenUtil.getInstance().setHeight(ScreenSize.director_cast_cover_height);
+      }
+    }
     return Hero(
       tag: tag,
       child: Container(
-        width: ScreenUtil.getInstance().setWidth(ScreenSize.director_cast_cover_width),
+        width: width,
         height: ScreenUtil.getInstance().setHeight(ScreenSize.director_cast_cover_height),
         decoration: BoxDecoration(
           image: DecorationImage(

@@ -479,9 +479,9 @@ class ClientAPI {
     items.forEach((item) {
       photos.add({
         'img': item.getElementsByTagName('img')[0].attributes['src'],
-        'prop': item.getElementsByClassName('prop')[0].text.trim(),
-        'name': item.getElementsByClassName('name')[0].firstChild.text.trim(),
-      });
+        'size': item.getElementsByClassName('prop')[0].text.trim(),
+        'comment': item.getElementsByClassName('name')[0].firstChild.text.trim(),
+      });   
     });
     var counts = document.body.getElementsByClassName('count');
     int total = photos.length;
