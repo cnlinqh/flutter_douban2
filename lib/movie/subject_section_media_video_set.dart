@@ -14,9 +14,8 @@ class SubjectVideoSet extends StatefulWidget {
 class _SubjectVideoSetState extends State<SubjectVideoSet> {
   int selectedIndex = 0;
   var videoList = [];
-  List<VideoPlayerController> vControllerList = [];
-  ChewieController cController;
-
+  List<VideoPlayerController> videoPlayerControllerList = [];
+  ChewieController chewieController;
   @override
   void initState() {
     super.initState();
@@ -26,10 +25,10 @@ class _SubjectVideoSetState extends State<SubjectVideoSet> {
     this.videoList = trailers;
     var i = 0;
     for (i = 0; i < this.videoList.length; i++) {
-      vControllerList.add(VideoPlayerController.network(this.videoList[i]['resource_url']));
+      videoPlayerControllerList.add(VideoPlayerController.network(this.videoList[i]['resource_url']));
     }
     this.selectedIndex = 0;
-    cController = chewieController;
+    chewieController = this.getChewieController();
   }
 
   @override
@@ -40,11 +39,8 @@ class _SubjectVideoSetState extends State<SubjectVideoSet> {
       ),
       body: Container(
         width: ScreenUtil.getInstance().setWidth(ScreenSize.width),
-        padding: EdgeInsets.fromLTRB(
+        padding: EdgeInsets.all(
           ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-          ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-          ScreenUtil.getInstance().setHeight(ScreenSize.padding),
         ),
         child: Container(
           child: Column(
@@ -53,7 +49,7 @@ class _SubjectVideoSetState extends State<SubjectVideoSet> {
                 width: ScreenUtil.getInstance().setWidth(ScreenSize.video_width),
                 height: ScreenUtil.getInstance().setHeight(ScreenSize.video_height),
                 child: Chewie(
-                  controller: cController,
+                  controller: chewieController,
                 ),
               ),
               Expanded(
@@ -70,10 +66,10 @@ class _SubjectVideoSetState extends State<SubjectVideoSet> {
 
   @override
   void dispose() {
-    vControllerList.forEach((v) {
+    videoPlayerControllerList.forEach((v) {
       v.dispose();
     });
-    cController.dispose();
+    chewieController.dispose();
     super.dispose();
   }
 
@@ -81,11 +77,11 @@ class _SubjectVideoSetState extends State<SubjectVideoSet> {
     if (this.selectedIndex != index) {
       if (mounted) {
         setState(() {
-          cController.dispose();
-          vControllerList[selectedIndex].pause();
-          vControllerList[selectedIndex].seekTo(Duration(seconds: 0));
+          chewieController.dispose();
+          videoPlayerControllerList[selectedIndex].pause();
+          videoPlayerControllerList[selectedIndex].seekTo(Duration(seconds: 0));
           this.selectedIndex = index;
-          cController = chewieController;
+          chewieController = chewieController;
         });
       }
     }
@@ -117,9 +113,9 @@ class _SubjectVideoSetState extends State<SubjectVideoSet> {
     return list;
   }
 
-  ChewieController get chewieController {
+  ChewieController getChewieController() {
     return ChewieController(
-      videoPlayerController: vControllerList[this.selectedIndex],
+      videoPlayerController: videoPlayerControllerList[this.selectedIndex],
       aspectRatio: 3 / 2,
       autoPlay: true,
       looping: true,
