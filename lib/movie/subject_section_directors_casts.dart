@@ -110,6 +110,9 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
   Widget _buildSingleCover(context, obj, {String title = 'director'}) {
     return GestureDetector(
       onTap: () {
+        if (obj["id"] == null) {
+          return;
+        }
         NavigatorHelper.pushToPage(
           context,
           LabelConstant.CELE_DETAILS_TITLE,
@@ -172,6 +175,9 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
           children: <Widget>[
             GestureDetector(
               onTap: () {
+                if (cele['id'] == null) {
+                  return;
+                }
                 NavigatorHelper.pushToPage(context, LabelConstant.CELE_DETAILS_TITLE, content: cele['id']);
               },
               child: MovieUtil.buildDirectorCastCover(cele['avatar'], title: cele['title']),

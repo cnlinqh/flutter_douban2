@@ -162,13 +162,13 @@ class _MovieChooseBoxState extends State<MovieChooseBox> {
         count: 1,
       );
     } else if (widget.title == LabelConstant.MOVIE_CHOOSE_TYPE) {
-      url = 'start=0&sort=U&range=0,10&genres=${widget.label}&tags=电影';
+      url = '?start=0&sort=U&range=0,10&genres=${widget.label}&tags=电影';
       subjects = await ClientAPI.getInstance().newSearchSubjects(url);
     } else if (widget.title == LabelConstant.MOVIE_CHOOSE_PLACE) {
-      url = 'start=0&sort=U&range=0,10&countries=${widget.label}&tags=电影';
+      url = '?start=0&sort=U&range=0,10&countries=${widget.label}&tags=电影';
       subjects = await ClientAPI.getInstance().newSearchSubjects(url);
     } else if (widget.title == LabelConstant.MOVIE_CHOOSE_SPEICAL) {
-      url = "start=0&sort=U&range=0,10&tags=电影,${widget.label}";
+      url = "?start=0&sort=U&range=0,10&tags=电影,${widget.label}";
       subjects = await ClientAPI.getInstance().newSearchSubjects(url);
     }
     if (subjects.length > 0) {

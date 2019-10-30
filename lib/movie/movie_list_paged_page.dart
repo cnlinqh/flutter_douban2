@@ -89,6 +89,7 @@ class _MovieListPagedPageState extends State<MovieListPagedPage> {
           MovieSubjectGeneral(
             getSubject(index)['id'],
             section: this.widget.title,
+            isNew: getSubject(index)['is_new'],
           ),
           MovieUtil.buildIndexNo(index),
         ],
@@ -97,6 +98,7 @@ class _MovieListPagedPageState extends State<MovieListPagedPage> {
       return MovieSubjectGeneral(
         getSubject(index)['id'],
         section: this.widget.title,
+        isNew: getSubject(index)['is_new'],
       );
     }
   }

@@ -77,7 +77,7 @@ class _CeleSectionPhotosGalleryState extends State<CeleSectionPhotosGallery> {
                 left: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 10),
                 bottom: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 10),
                 child: Text(
-                  info.photos[info.selectedIndex]['comment'] != null ? info.photos[info.selectedIndex]['comment'] : '',
+                  info.photos[info.selectedIndex]['comment'] != null ? info.photos[info.selectedIndex]['comment'] : 'loading',
                   style: TextStyle(color: Colors.white),
                 ),
               )
