@@ -3,6 +3,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MovieViewSlider extends StatefulWidget {
@@ -61,13 +63,19 @@ class _MovieViewSliderState extends State<MovieViewSlider> {
   }
 
   Widget _buildSliderCover(item) {
-    return MovieUtil.buildSliderCover(item['cover']);
+    return Container(
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_slider_width),
+      height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_slider_height),
+      child: MovieUtil.buildSliderCover(item['cover']),
+    );
   }
 
   Widget _buildOpacity() {
     return Opacity(
       opacity: 0.2,
       child: Container(
+        width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_slider_width),
+        height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_slider_height),
         decoration: BoxDecoration(
           color: Colors.black,
           borderRadius: BorderRadius.all(Radius.circular(7)),
@@ -78,6 +86,8 @@ class _MovieViewSliderState extends State<MovieViewSlider> {
 
   Widget _buildTitleSummary(item) {
     return Container(
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_slider_width),
+      height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_slider_height),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,

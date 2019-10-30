@@ -7,6 +7,9 @@ class ScreenSize {
   //fixed padding
   static const double padding = 10;
 
+  static const double movie_slider_width = 730;
+  static const double movie_slider_height = 280;
+
   //the width of movie entrance
   static const double movie_entrance_width = 100;
 

@@ -12,7 +12,7 @@ class MovieViewEntrance extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-        top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 4),
+        top: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
