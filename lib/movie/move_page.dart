@@ -24,7 +24,12 @@ class _MoviePageState extends State<MoviePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(LabelConstant.MOVIE_PAGE_TITLE),
+        title: GestureDetector(
+          onTap: () {
+            ScreenSize.printSizeInfo(context);
+          },
+          child: Text(LabelConstant.MOVIE_PAGE_TITLE),
+        ),
       ),
       body: Container(
         padding: EdgeInsets.all(

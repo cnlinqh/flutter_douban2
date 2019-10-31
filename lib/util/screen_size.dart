@@ -1,4 +1,36 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class ScreenSize {
+  static printSizeInfo(BuildContext context) {
+    print('MediaQuery.of(context).orientation ${MediaQuery.of(context).orientation}');
+    print('px = dp * pixelRatio');
+    print('ScreenUtil.getInstance().width ${ScreenUtil.getInstance().width}px');
+    print('ScreenUtil.getInstance().height ${ScreenUtil.getInstance().height}px');
+    print('ScreenUtil.screenWidth ${ScreenUtil.screenWidth}px');
+    print('ScreenUtil.screenHeight ${ScreenUtil.screenHeight}px');
+    print('ScreenUtil.screenWidthDp ${ScreenUtil.screenWidthDp}dp');
+    print('ScreenUtil.screenHeightDp ${ScreenUtil.screenHeightDp}dp');
+    print('ScreenUtil.getInstance().scaleWidth ${ScreenUtil.getInstance().scaleWidth}');
+    print('ScreenUtil.getInstance().scaleHeight ${ScreenUtil.getInstance().scaleHeight}');
+    print('ScreenUtil.pixelRatio ${ScreenUtil.pixelRatio}');
+    print('ScreenUtil.getInstance().setWidth(750) ${ScreenUtil.getInstance().setWidth(750)}dp');
+    print('ScreenUtil.getInstance().setHeight(1334) ${ScreenUtil.getInstance().setHeight(1334)}dp');
+    print('ScreenUtil.statusBarHeight ${ScreenUtil.statusBarHeight}dp');
+    print('ScreenUtil.bottomBarHeight ${ScreenUtil.bottomBarHeight}dp');
+
+    print('MediaQuery.of(context).size.width ${MediaQuery.of(context).size.width}dp');
+    print('MediaQuery.of(context).size.height ${MediaQuery.of(context).size.height}dp');
+    print('MediaQuery.of(context).padding.top ${MediaQuery.of(context).padding.top}dp');
+    print('MediaQuery.of(context).padding.bottom ${MediaQuery.of(context).padding.bottom}dp');
+    print('MediaQuery.of(context).devicePixelRatio ${MediaQuery.of(context).devicePixelRatio}');
+
+    print('kToolbarHeight $kToolbarHeight');
+    print('TabBar._kTabHeight 46.0');
+    print('TabBar.indicatorWeight 2.0');
+    print('kBottomNavigationBarHeight $kBottomNavigationBarHeight');
+  }
+
   //iPhone 6 resolution
   //full screen width and height
   static const double width = 750;
