@@ -19,6 +19,7 @@ class MovieViewEntrance extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           _buildEntrance(
+            context,
             () {
               NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_ENTRANCE_SELECT_ICON);
             },
@@ -26,6 +27,7 @@ class MovieViewEntrance extends StatelessWidget {
             LabelConstant.MOVIE_ENTRANCE_SELECT_ICON,
           ),
           _buildEntrance(
+            context,
             () {
               NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_RANK_LIST_TITLE);
             },
@@ -33,6 +35,7 @@ class MovieViewEntrance extends StatelessWidget {
             LabelConstant.MOVIE_ENTRANCE_RANK_ICON,
           ),
           _buildEntrance(
+            context,
             () {
               LabelConstant.resetSpecialList();
               NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_CATEGORY_TITLE,
@@ -48,14 +51,19 @@ class MovieViewEntrance extends StatelessWidget {
     );
   }
 
-  Widget _buildEntrance(Function toPage, Icon icon, String label) {
+  Widget _buildEntrance(BuildContext context, Function toPage, Icon icon, String label) {
+    var size = ScreenSize.calculateSize(
+      context: context,
+      width1: ScreenSize.movie_entrance_width,
+      width2: ScreenSize.movie_entrance_width2,
+    );
     return GestureDetector(
       onTap: () {},
       child: Column(
         children: <Widget>[
           Container(
-            width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_entrance_width),
-            height: ScreenUtil.getInstance().setWidth(ScreenSize.movie_entrance_width),
+            width: ScreenUtil.getInstance().setWidth(size['width']),
+            height: ScreenUtil.getInstance().setWidth(size['width']),
             decoration: BoxDecoration(
               color: Colors.cyan,
               borderRadius: BorderRadius.all(Radius.circular(60)),

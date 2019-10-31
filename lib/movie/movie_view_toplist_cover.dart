@@ -46,16 +46,24 @@ class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
   }
 
   FutureBuilder get topMoviesFutureBuilder {
+    var size = ScreenSize.calculateSize(
+      context: context,
+      width1: ScreenSize.top_cover_width,
+      height1: ScreenSize.top_cover_height,
+      width2: ScreenSize.top_cover_width2,
+      height2: ScreenSize.top_cover_height2,
+    );
+
     return new FutureBuilder(
       future: this._future,
       // initialData: InitialData,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.active || snapshot.connectionState == ConnectionState.waiting) {
-          return _buildProcessIndicator();
+          return _buildProcessIndicator(size);
         }
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
-            return _buildErrorIndicator(snapshot.error.toString());
+            return _buildErrorIndicator(snapshot.error.toString(), size);
           } else if (snapshot.hasData) {
             this._movieTop = snapshot.data;
             return Container(
@@ -65,12 +73,12 @@ class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
                 },
                 child: Stack(
                   children: <Widget>[
-                    _buildBackgroupImage(),
-                    _buildWholeOpacity(),
-                    _buildHalfContainer(),
-                    _buildSubTitle(),
-                    _buildMainTitle(),
-                    _buildTop5Movies(),
+                    _buildBackgroupImage(size),
+                    _buildWholeOpacity(size),
+                    _buildHalfContainer(size),
+                    _buildSubTitle(size),
+                    _buildMainTitle(size),
+                    _buildTop5Movies(size),
                   ],
                 ),
               ),
@@ -82,30 +90,30 @@ class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
     );
   }
 
-  Widget _buildProcessIndicator() {
+  Widget _buildProcessIndicator(size) {
     return Container(
-      width: ScreenUtil.getInstance().setWidth(ScreenSize.top_cover_width),
-      height: ScreenUtil.getInstance().setHeight(ScreenSize.top_cover_height),
+      width: ScreenUtil.getInstance().setWidth(size['width']),
+      height: ScreenUtil.getInstance().setHeight(size['height']),
       child: new Center(
         child: new CircularProgressIndicator(),
       ),
     );
   }
 
-  Widget _buildErrorIndicator(String error) {
+  Widget _buildErrorIndicator(String error, size) {
     return Container(
-      width: ScreenUtil.getInstance().setWidth(ScreenSize.top_cover_width),
-      height: ScreenUtil.getInstance().setHeight(ScreenSize.top_cover_height),
+      width: ScreenUtil.getInstance().setWidth(size['width']),
+      height: ScreenUtil.getInstance().setHeight(size['height']),
       child: new Center(
         child: Text(error),
       ),
     );
   }
 
-  Widget _buildBackgroupImage() {
+  Widget _buildBackgroupImage(size) {
     return Container(
-      width: ScreenUtil.getInstance().setWidth(ScreenSize.top_cover_width),
-      height: ScreenUtil.getInstance().setHeight(ScreenSize.top_cover_height),
+      width: ScreenUtil.getInstance().setWidth(size['width']),
+      height: ScreenUtil.getInstance().setHeight(size['height']),
       decoration: BoxDecoration(
         image: DecorationImage(
           image: CachedNetworkImageProvider(_getCoverUrl()),
@@ -116,12 +124,12 @@ class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
     );
   }
 
-  Widget _buildWholeOpacity() {
+  Widget _buildWholeOpacity(size) {
     return Opacity(
       opacity: 0.1,
       child: Container(
-        width: ScreenUtil.getInstance().setWidth(ScreenSize.top_cover_width),
-        height: ScreenUtil.getInstance().setHeight(ScreenSize.top_cover_height),
+        width: ScreenUtil.getInstance().setWidth(size['width']),
+        height: ScreenUtil.getInstance().setHeight(size['height']),
         decoration: BoxDecoration(
           color: this._color,
           borderRadius: BorderRadius.all(
@@ -132,12 +140,12 @@ class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
     );
   }
 
-  Widget _buildHalfContainer() {
+  Widget _buildHalfContainer(size) {
     return Positioned(
-      top: ScreenUtil.getInstance().setHeight(ScreenSize.top_cover_height / 2),
+      top: ScreenUtil.getInstance().setHeight(size['height'] / 2),
       child: Container(
-        width: ScreenUtil.getInstance().setWidth(ScreenSize.top_cover_width),
-        height: ScreenUtil.getInstance().setHeight(ScreenSize.top_cover_height / 2),
+        width: ScreenUtil.getInstance().setWidth(size['width']),
+        height: ScreenUtil.getInstance().setHeight(size['height'] / 2),
         decoration: BoxDecoration(
           color: this._color,
           borderRadius: BorderRadius.all(
@@ -148,7 +156,7 @@ class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
     );
   }
 
-  Widget _buildSubTitle() {
+  Widget _buildSubTitle(size) {
     return Positioned(
       top: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
       right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
@@ -159,9 +167,9 @@ class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
     );
   }
 
-  Widget _buildMainTitle() {
+  Widget _buildMainTitle(size) {
     return Positioned(
-      top: ScreenUtil.getInstance().setHeight(ScreenSize.top_cover_height / 4),
+      top: ScreenUtil.getInstance().setHeight(size['height'] / 4),
       left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
       child: Text(
         widget.title,
@@ -173,21 +181,21 @@ class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
     );
   }
 
-  Widget _buildTop5Movies() {
+  Widget _buildTop5Movies(size) {
     return Positioned(
-      top: ScreenUtil.getInstance().setHeight(ScreenSize.top_cover_height / 2 + ScreenSize.padding),
+      top: ScreenUtil.getInstance().setHeight(size['height'] / 2 + ScreenSize.padding),
       left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
       child: Container(
-        width: ScreenUtil.getInstance().setWidth(ScreenSize.top_cover_width - ScreenSize.padding * 2),
+        width: ScreenUtil.getInstance().setWidth(size['width'] - ScreenSize.padding * 2),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: this._buildTitleList(),
+          children: this._buildTitleList(size),
         ),
       ),
     );
   }
 
-  List _buildTitleList() {
+  List _buildTitleList(size) {
     // int i = 0;
     // return this._movieTop.sublist(0, 5).map((sub) {
     //   i++;
@@ -197,14 +205,14 @@ class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
         ._movieTop
         .sublist(0, 5)
         .asMap()
-        .map((index, sub) => MapEntry(index, _buildTitleRow(sub, index + 1)))
+        .map((index, sub) => MapEntry(index, _buildTitleRow(sub, index + 1, size)))
         .values
         .toList();
   }
 
-  Widget _buildTitleRow(subject, i) {
+  Widget _buildTitleRow(subject, i, size) {
     return Container(
-      width: ScreenUtil.getInstance().setWidth(ScreenSize.top_cover_width - ScreenSize.padding * 2),
+      width: ScreenUtil.getInstance().setWidth(size['width'] - ScreenSize.padding * 2),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[

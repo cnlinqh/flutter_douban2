@@ -37,6 +37,7 @@ class MovieViewSectionBody extends StatelessWidget {
   MovieSubjectSimple _buildSimple(sub) {
     return MovieSubjectSimple(
       sub['id'],
+      key: GlobalKey(),
       coming: this.coming,
       section: this.section,
     );

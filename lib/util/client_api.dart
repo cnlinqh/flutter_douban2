@@ -64,7 +64,7 @@ class ClientAPI {
 
   Future<List> getMovieInTheaters({
     int start = 0,
-    int count = 6,
+    int count = 12,
   }) async {
     LogUtil.log(">>ClientAPI: getMovieInTheaters($start, $count)");
     var s = new DateTime.now();
@@ -83,7 +83,7 @@ class ClientAPI {
 
   Future<List> getMovieComingSoon({
     int start = 0,
-    int count = 6,
+    int count = 12,
   }) async {
     LogUtil.log(">>ClientAPI: getMovieComingSoon($start, $count)");
     var s = new DateTime.now();

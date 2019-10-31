@@ -22,18 +22,25 @@ class _MovieViewSliderState extends State<MovieViewSlider> {
 
   @override
   Widget build(BuildContext context) {
+    var size = ScreenSize.calculateSize(
+      context: context,
+      width1: ScreenSize.movie_slider_width,
+      height1: ScreenSize.movie_slider_height,
+      width2: ScreenSize.movie_slider_width2,
+      height2: ScreenSize.movie_slider_height2,
+    );
     if (this._list.length == 0) {
       return Container(
-        width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_slider_width),
-        height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_slider_height),
+        width: ScreenUtil.getInstance().setWidth(size['width']),
+        height: ScreenUtil.getInstance().setHeight(size['height']),
         child: new Center(
           child: new CircularProgressIndicator(),
         ),
       );
     } else {
       return Container(
-        width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_slider_width),
-        height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_slider_height),
+        width: ScreenUtil.getInstance().setWidth(size['width']),
+        height: ScreenUtil.getInstance().setHeight(size['height']),
         child: CarouselSlider(
           aspectRatio: 2,
           enlargeCenterPage: true,
@@ -69,7 +76,14 @@ class _MovieViewSliderState extends State<MovieViewSlider> {
   }
 
   Widget _buildSliderCover(item) {
-    return MovieUtil.buildSliderCover(item['cover']);
+    var size = ScreenSize.calculateSize(
+      context: context,
+      width1: ScreenSize.movie_slider_width,
+      height1: ScreenSize.movie_slider_height,
+      width2: ScreenSize.movie_slider_width2,
+      height2: ScreenSize.movie_slider_height2,
+    );
+    return MovieUtil.buildSliderCover(item['cover'], widthPx: size['width'], heightPx: size['height']);
   }
 
   Widget _buildOpacity() {

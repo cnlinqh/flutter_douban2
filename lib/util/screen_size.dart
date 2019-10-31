@@ -16,6 +16,8 @@ class ScreenSize {
     print('ScreenUtil.pixelRatio ${ScreenUtil.pixelRatio}');
     print('ScreenUtil.getInstance().setWidth(750) ${ScreenUtil.getInstance().setWidth(750)}dp');
     print('ScreenUtil.getInstance().setHeight(1334) ${ScreenUtil.getInstance().setHeight(1334)}dp');
+    print('ScreenUtil.getInstance().setWidth(100) ${ScreenUtil.getInstance().setWidth(100)}dp');
+    print('ScreenUtil.getInstance().setHeight(100) ${ScreenUtil.getInstance().setHeight(100)}dp');
     print('ScreenUtil.statusBarHeight ${ScreenUtil.statusBarHeight}dp');
     print('ScreenUtil.bottomBarHeight ${ScreenUtil.bottomBarHeight}dp');
 
@@ -31,6 +33,28 @@ class ScreenSize {
     print('kBottomNavigationBarHeight $kBottomNavigationBarHeight');
   }
 
+  static dynamic calculateSize({
+    BuildContext context,
+    double width1 = 0,
+    double height1 = 0,
+    double width2 = 0,
+    double height2 = 0,
+  }) {
+    if (MediaQuery.of(context).orientation == Orientation.portrait) {
+      return {
+        'width': width1,
+        'height': height1,
+        'orientation': Orientation.portrait.toString(),
+      };
+    } else {
+      return {
+        'width': width2,
+        'height': height2,
+        'orientation': Orientation.landscape.toString(),
+      };
+    }
+  }
+
   //iPhone 6 resolution
   //full screen width and height
   static const double width = 750;
@@ -42,16 +66,25 @@ class ScreenSize {
   static const double movie_slider_width = 730;
   static const double movie_slider_height = 370;
 
+  static const double movie_slider_width2 = 730;
+  static const double movie_slider_height2 = 1080;
+
   //the width of movie entrance
   static const double movie_entrance_width = 100;
+  static const double movie_entrance_width2 = 40;
 
   //the width & height of movie cover
-  static const double movie_cover_width = 236.7; //(width - padding * 4) / 3;
+  static const double movie_cover_width = 236.66; //(width - padding * 4) / 3;
   static const double movie_cover_height = 280;
+
+  static const double movie_cover_width2 = 113.33; //(width - padding * 7) / 6;
+  static const double movie_cover_height2 = 500;
 
   //the width & height of top movie list cover
   static const double top_cover_width = 400;
   static const double top_cover_height = 380;
+  static const double top_cover_width2 = 300;
+  static const double top_cover_height2 = 800;
 
   static const double movie_divider_height = 80;
 

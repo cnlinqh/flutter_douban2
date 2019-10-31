@@ -12,7 +12,13 @@ class MovieSubjectSimple extends StatefulWidget {
   final bool coming;
   final String section;
   final bool isNew;
-  MovieSubjectSimple(this.id, {this.coming = false, this.section = '', this.isNew = false});
+  MovieSubjectSimple(
+    this.id, {
+    Key key,
+    this.coming = false,
+    this.section = '',
+    this.isNew = false,
+  }) : super(key: key);
 
   _MovieSubjectSimpleState createState() => _MovieSubjectSimpleState();
 }
@@ -45,9 +51,16 @@ class _MovieSubjectSimpleState extends State<MovieSubjectSimple> {
   }
 
   List<Widget> _buildChildren(context) {
+    var size = ScreenSize.calculateSize(
+      context: context,
+      width1: ScreenSize.movie_cover_width,
+      height1: ScreenSize.movie_cover_height,
+      width2: ScreenSize.movie_cover_width2,
+      height2: ScreenSize.movie_cover_height2,
+    );
     List<Widget> list = [];
-    list.add(_buildCoverImage(context));
-    list.add(_buildTitle());
+    list.add(_buildCoverImage(context, size));
+    list.add(_buildTitle(size));
     list.add(_buildRate());
     if (this.widget.coming) {
       list.add(_buildPubDate());
@@ -55,7 +68,7 @@ class _MovieSubjectSimpleState extends State<MovieSubjectSimple> {
     return list;
   }
 
-  Widget _buildCoverImage(BuildContext context) {
+  Widget _buildCoverImage(BuildContext context, size) {
     return GestureDetector(
       onTap: () {
         NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_DETAILS_TITLE,
@@ -63,8 +76,12 @@ class _MovieSubjectSimpleState extends State<MovieSubjectSimple> {
       },
       child: Stack(
         children: <Widget>[
-          MovieUtil.buildMovieCover(this.subject['images']['small'],
-              heroTag: this.widget.section + this.subject['images']['small']),
+          MovieUtil.buildMovieCover(
+            this.subject['images']['small'],
+            heroTag: this.widget.section + size['orientation'] + this.subject['images']['small'],
+            widthPx: size['width'],
+            heightPx: size['height'],
+          ),
           MovieUtil.buildFavoriteIcon(),
           MovieUtil.buildSubType(this.subject['subtype']),
           MovieUtil.buildIsNew(this.widget.isNew),
@@ -73,9 +90,9 @@ class _MovieSubjectSimpleState extends State<MovieSubjectSimple> {
     );
   }
 
-  Widget _buildTitle() {
+  Widget _buildTitle(size) {
     return Container(
-      width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_cover_width),
+      width: ScreenUtil.getInstance().setWidth(size['width']),
       child: this.widget.isNew
           ? RichText(
               maxLines: 1,

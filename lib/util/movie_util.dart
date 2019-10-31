@@ -12,10 +12,14 @@ import 'dart:io';
 import 'package:image_picker_saver/image_picker_saver.dart';
 
 class MovieUtil {
-  static buildSliderCover(cover) {
+  static buildSliderCover(
+    cover, {
+    double widthPx = ScreenSize.movie_slider_width,
+    double heightPx = ScreenSize.movie_slider_height,
+  }) {
     return Container(
-      width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_slider_width),
-      height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_slider_height),
+      width: ScreenUtil.getInstance().setWidth(widthPx),
+      height: ScreenUtil.getInstance().setHeight(heightPx),
       decoration: BoxDecoration(
         image: DecorationImage(
           image: CachedNetworkImageProvider(cover),
@@ -26,12 +30,17 @@ class MovieUtil {
     );
   }
 
-  static buildMovieCover(cover, {String heroTag = ''}) {
+  static buildMovieCover(
+    cover, {
+    String heroTag = '',
+    double widthPx = ScreenSize.movie_cover_width,
+    double heightPx = ScreenSize.movie_cover_height,
+  }) {
     return Hero(
       tag: heroTag != '' ? heroTag : cover,
       child: Container(
-        width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_cover_width),
-        height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_cover_height),
+        width: ScreenUtil.getInstance().setWidth(widthPx),
+        height: ScreenUtil.getInstance().setHeight(heightPx),
         decoration: BoxDecoration(
           image: DecorationImage(
             image: CachedNetworkImageProvider(cover),
