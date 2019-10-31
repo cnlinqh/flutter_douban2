@@ -40,13 +40,13 @@ class ScreenSize {
   static const double padding = 10;
 
   static const double movie_slider_width = 730;
-  static const double movie_slider_height = 280;
+  static const double movie_slider_height = 370;
 
   //the width of movie entrance
   static const double movie_entrance_width = 100;
 
   //the width & height of movie cover
-  static const double movie_cover_width = 230; //(width - padding * 6) / 3;
+  static const double movie_cover_width = 236.7; //(width - padding * 4) / 3;
   static const double movie_cover_height = 280;
 
   //the width & height of top movie list cover

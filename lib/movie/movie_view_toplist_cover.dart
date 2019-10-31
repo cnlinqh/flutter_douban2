@@ -42,14 +42,7 @@ class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(
-        right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-        top: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-        bottom: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-      ),
-      child: this.topMoviesFutureBuilder,
-    );
+    return this.topMoviesFutureBuilder;
   }
 
   FutureBuilder get topMoviesFutureBuilder {
@@ -66,11 +59,6 @@ class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
           } else if (snapshot.hasData) {
             this._movieTop = snapshot.data;
             return Container(
-              padding: EdgeInsets.only(
-                right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-                top: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-                bottom: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-              ),
               child: GestureDetector(
                 onTap: () {
                   NavigatorHelper.pushToPage(context, widget.title, content: this._movieTop);

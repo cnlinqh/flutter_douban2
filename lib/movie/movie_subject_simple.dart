@@ -47,11 +47,8 @@ class _MovieSubjectSimpleState extends State<MovieSubjectSimple> {
   List<Widget> _buildChildren(context) {
     List<Widget> list = [];
     list.add(_buildCoverImage(context));
-    list.add(
-      _buildTitle(),
-    );
+    list.add(_buildTitle());
     list.add(_buildRate());
-
     if (this.widget.coming) {
       list.add(_buildPubDate());
     }

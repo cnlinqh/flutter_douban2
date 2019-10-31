@@ -23,11 +23,17 @@ class _MovieViewSliderState extends State<MovieViewSlider> {
   @override
   Widget build(BuildContext context) {
     if (this._list.length == 0) {
-      return new Center(
-        child: new CircularProgressIndicator(),
+      return Container(
+        width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_slider_width),
+        height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_slider_height),
+        child: new Center(
+          child: new CircularProgressIndicator(),
+        ),
       );
     } else {
       return Container(
+        width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_slider_width),
+        height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_slider_height),
         child: CarouselSlider(
           aspectRatio: 2,
           enlargeCenterPage: true,
@@ -63,19 +69,13 @@ class _MovieViewSliderState extends State<MovieViewSlider> {
   }
 
   Widget _buildSliderCover(item) {
-    return Container(
-      width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_slider_width),
-      height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_slider_height),
-      child: MovieUtil.buildSliderCover(item['cover']),
-    );
+    return MovieUtil.buildSliderCover(item['cover']);
   }
 
   Widget _buildOpacity() {
     return Opacity(
       opacity: 0.2,
       child: Container(
-        width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_slider_width),
-        height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_slider_height),
         decoration: BoxDecoration(
           color: Colors.black,
           borderRadius: BorderRadius.all(Radius.circular(7)),
@@ -85,28 +85,24 @@ class _MovieViewSliderState extends State<MovieViewSlider> {
   }
 
   Widget _buildTitleSummary(item) {
-    return Container(
-      width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_slider_width),
-      height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_slider_height),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            item['title'],
-            style: TextStyle(
-              color: Colors.blue,
-              fontWeight: FontWeight.bold,
-            ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          item['title'],
+          style: TextStyle(
+            color: Colors.blue,
+            fontWeight: FontWeight.bold,
           ),
-          Text(
-            item['summary'],
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            style: TextStyle(color: Colors.white),
-          ),
-        ],
-      ),
+        ),
+        Text(
+          item['summary'],
+          overflow: TextOverflow.ellipsis,
+          maxLines: 2,
+          style: TextStyle(color: Colors.white),
+        ),
+      ],
     );
   }
 

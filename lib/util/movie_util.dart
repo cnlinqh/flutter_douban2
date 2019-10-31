@@ -14,6 +14,8 @@ import 'package:image_picker_saver/image_picker_saver.dart';
 class MovieUtil {
   static buildSliderCover(cover) {
     return Container(
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_slider_width),
+      height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_slider_height),
       decoration: BoxDecoration(
         image: DecorationImage(
           image: CachedNetworkImageProvider(cover),

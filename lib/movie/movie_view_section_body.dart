@@ -21,13 +21,13 @@ class MovieViewSectionBody extends StatelessWidget {
             children: firstRow.map((sub) {
               return _buildSimple(sub);
             }).toList(),
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
           ),
           Row(
             children: secondRow.map((sub) {
               return _buildSimple(sub);
             }).toList(),
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
           ),
         ],
       ),

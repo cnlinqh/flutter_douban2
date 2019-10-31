@@ -5,11 +5,11 @@ import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 
 class MovieViewSectionHeader extends StatelessWidget {
-  final String _title;
+  final String title;
   final bool navigatable;
   final double fontSize;
   final List subjects;
-  MovieViewSectionHeader(this._title, {this.navigatable = true, this.fontSize = 24, this.subjects});
+  MovieViewSectionHeader(this.title, {this.navigatable = true, this.fontSize = 24, this.subjects});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class MovieViewSectionHeader extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: Text(
-              this._title,
+              this.title,
               style: TextStyle(
                 color: Colors.black,
                 fontSize: this.fontSize,
@@ -32,7 +32,7 @@ class MovieViewSectionHeader extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              if (this.navigatable) NavigatorHelper.pushToPage(context, _title, content: this.subjects);
+              if (this.navigatable) NavigatorHelper.pushToPage(context, title, content: this.subjects);
             },
             child: Text(
               this.navigatable ? LabelConstant.MOVIE_ALL_TITLE : '',
