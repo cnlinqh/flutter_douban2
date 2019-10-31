@@ -23,14 +23,7 @@ class _MoviePageState extends State<MoviePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: GestureDetector(
-          onTap: () {
-            ScreenSize.printSizeInfo(context);
-          },
-          child: Text(LabelConstant.MOVIE_PAGE_TITLE),
-        ),
-      ),
+      appBar: _buildAppBar(),
       body: Container(
         padding: EdgeInsets.all(
           ScreenUtil.getInstance().setWidth(ScreenSize.padding),
@@ -41,6 +34,23 @@ class _MoviePageState extends State<MoviePage> {
             children: this.views,
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildAppBar() {
+    var text;
+    if (MediaQuery.of(context).orientation == Orientation.portrait) {
+      text = LabelConstant.MOVIE_PAGE_TITLE + 'Portrait';
+    } else {
+      text = LabelConstant.MOVIE_PAGE_TITLE + 'Landscape';
+    }
+    return AppBar(
+      title: GestureDetector(
+        onTap: () {
+          ScreenSize.printSizeInfo(context);
+        },
+        child: Text(text),
       ),
     );
   }
