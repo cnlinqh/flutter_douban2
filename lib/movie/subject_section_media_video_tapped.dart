@@ -6,7 +6,8 @@ import 'package:flutter_douban2/util/movie_util.dart';
 class SubjectSectionMediaVideoTapped extends StatelessWidget {
   final _subject;
   final String _cover;
-  SubjectSectionMediaVideoTapped(this._subject, this._cover);
+  final size;
+  SubjectSectionMediaVideoTapped(this._subject, this._cover, this.size,{Key key}): super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,11 @@ class SubjectSectionMediaVideoTapped extends StatelessWidget {
       onTap: () {
         NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_VIDEO_TITLE, content: this._subject);
       },
-      child: MovieUtil.buildVideoCover(this._cover),
+      child: MovieUtil.buildVideoCover(
+        this._cover,
+        widthPx: size['width'],
+        heightPx: size['height'],
+      ),
     );
   }
 }

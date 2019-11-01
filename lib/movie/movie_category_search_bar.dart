@@ -30,11 +30,16 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
 
   @override
   Widget build(BuildContext context) {
+    var size = ScreenSize.calculateSize(
+      context: context,
+      height1: ScreenSize.movie_cate_search_bar_height,
+      height2: ScreenSize.movie_cate_search_bar_height2,
+    );
     return Container(
       width: ScreenUtil.getInstance()
           .setWidth(ScreenSize.width - 2 * ScreenSize.padding),
       height: ScreenUtil.getInstance()
-          .setHeight(ScreenSize.movie_cate_search_bar_hight),
+          .setHeight(size['height']),
       child: Stack(
         children: <Widget>[
           _buildHiddenChild(),

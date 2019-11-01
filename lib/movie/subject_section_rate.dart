@@ -6,10 +6,35 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SubjectSectionRate extends StatelessWidget {
   final _subject;
-  SubjectSectionRate(this._subject);
+  SubjectSectionRate(this._subject, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var size = ScreenSize.calculateSize2(
+      context: context,
+      size: {
+        'point_width': ScreenSize.point_width,
+        'graph_width': ScreenSize.graph_width,
+        'rate_height': ScreenSize.rate_height,
+        'summary_height': ScreenSize.summary_height,
+        'star_width': ScreenSize.star_width,
+        'star_height': ScreenSize.star_height,
+        'bar_width': ScreenSize.bar_width,
+        'bar_height': ScreenSize.bar_height,
+        'percent_width': ScreenSize.percent_width,
+      },
+      size2: {
+        'point_width': ScreenSize.point_width2,
+        'graph_width': ScreenSize.graph_width2,
+        'rate_height': ScreenSize.rate_height2,
+        'summary_height': ScreenSize.summary_height2,
+        'star_width': ScreenSize.star_width2,
+        'star_height': ScreenSize.star_height2,
+        'bar_width': ScreenSize.bar_width2,
+        'bar_height': ScreenSize.bar_height2,
+        'percent_width': ScreenSize.percent_width2,
+      },
+    );
     return Container(
       padding: EdgeInsets.only(
         top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
@@ -17,15 +42,16 @@ class SubjectSectionRate extends StatelessWidget {
       ),
       child: Stack(
         children: <Widget>[
-          _buildContentLayer(),
-          _buildOpacityLayer(),
+          _buildContentLayer(size),
+          _buildOpacityLayer(size),
         ],
       ),
     );
   }
 
-  Widget _buildContentLayer() {
+  Widget _buildContentLayer(size) {
     return Container(
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.width - ScreenSize.padding * 2),
       decoration: BoxDecoration(
         color: Colors.grey,
         borderRadius: BorderRadius.all(
@@ -36,18 +62,18 @@ class SubjectSectionRate extends StatelessWidget {
         children: <Widget>[
           Row(
             children: <Widget>[
-              _buildPointPart(),
-              _buildGraphPart(),
+              _buildPointPart(size),
+              _buildGraphPart(size),
             ],
           ),
-          _buildDividerPart(),
-          _buildSummaryPart(),
+          _buildDividerPart(size),
+          _buildSummaryPart(size),
         ],
       ),
     );
   }
 
-  Widget _buildOpacityLayer() {
+  Widget _buildOpacityLayer(size) {
     return Positioned(
       left: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
       top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
@@ -55,8 +81,8 @@ class SubjectSectionRate extends StatelessWidget {
         opacity: 0.6,
         child: Container(
           width: ScreenUtil.getInstance()
-              .setWidth(ScreenSize.point_width + ScreenSize.graph_width - ScreenSize.padding * 4),
-          height: ScreenUtil.getInstance().setHeight(ScreenSize.rate_height - ScreenSize.padding * 2),
+              .setWidth(size['size']['point_width'] + size['size']['graph_width'] - ScreenSize.padding * 4),
+          height: ScreenUtil.getInstance().setHeight(size['size']['rate_height'] - ScreenSize.padding * 2),
           decoration: BoxDecoration(
             color: Colors.white10,
             borderRadius: BorderRadius.all(
@@ -68,10 +94,10 @@ class SubjectSectionRate extends StatelessWidget {
     );
   }
 
-  Container _buildPointPart() {
+  Container _buildPointPart(size) {
     return Container(
-      width: ScreenUtil.getInstance().setWidth(ScreenSize.point_width),
-      height: ScreenUtil.getInstance().setHeight(ScreenSize.rate_height),
+      width: ScreenUtil.getInstance().setWidth(size['size']['point_width']),
+      height: ScreenUtil.getInstance().setHeight(size['size']['rate_height']),
       child: Stack(
         children: <Widget>[
           Positioned(
@@ -96,9 +122,9 @@ class SubjectSectionRate extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: ScreenUtil.getInstance().setHeight(ScreenSize.rate_height / 2 + 24),
+            top: ScreenUtil.getInstance().setHeight(size['size']['rate_height'] / 2 + 24),
             child: Container(
-              width: ScreenUtil.getInstance().setWidth(ScreenSize.point_width),
+              width: ScreenUtil.getInstance().setWidth(size['size']['point_width']),
               child: Center(
                 child: RateStar(
                   double.parse(this._subject['rating']['average'].toString()),
@@ -113,25 +139,25 @@ class SubjectSectionRate extends StatelessWidget {
     );
   }
 
-  Container _buildGraphPart() {
+  Container _buildGraphPart(size) {
     return Container(
-      width: ScreenUtil.getInstance().setWidth(ScreenSize.graph_width),
-      height: ScreenUtil.getInstance().setHeight(ScreenSize.rate_height),
+      width: ScreenUtil.getInstance().setWidth(size['size']['graph_width']),
+      height: ScreenUtil.getInstance().setHeight(size['size']['rate_height']),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          _buildRatingDetailsRow(5),
-          _buildRatingDetailsRow(4),
-          _buildRatingDetailsRow(3),
-          _buildRatingDetailsRow(2),
-          _buildRatingDetailsRow(1),
+          _buildRatingDetailsRow(5, size),
+          _buildRatingDetailsRow(4, size),
+          _buildRatingDetailsRow(3, size),
+          _buildRatingDetailsRow(2, size),
+          _buildRatingDetailsRow(1, size),
         ],
       ),
     );
   }
 
-  double _getRateTotal() {
+  double _getRateTotal(size) {
     var details = this._subject['rating']['details'];
     double sum = 0;
     var i;
@@ -141,9 +167,9 @@ class SubjectSectionRate extends StatelessWidget {
     return sum == 0 ? 1 : sum;
   }
 
-  Row _buildRatingDetailsRow(int level) {
+  Row _buildRatingDetailsRow(int level, size) {
     var details = this._subject['rating']['details'];
-    double sum = _getRateTotal();
+    double sum = _getRateTotal(size);
     var percent = double.parse(details[level.toString()].toString()) / sum * 100;
     List<Widget> stars = [];
     var i = 0;
@@ -157,8 +183,8 @@ class SubjectSectionRate extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Container(
-          width: ScreenUtil.getInstance().setWidth(ScreenSize.star_width),
-          height: ScreenUtil.getInstance().setHeight(ScreenSize.star_height),
+          width: ScreenUtil.getInstance().setWidth(size['size']['star_width']),
+          height: ScreenUtil.getInstance().setHeight(size['size']['star_height']),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -167,7 +193,7 @@ class SubjectSectionRate extends StatelessWidget {
         ),
         Container(
           width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-          height: ScreenUtil.getInstance().setHeight(ScreenSize.star_height),
+          height: ScreenUtil.getInstance().setHeight(size['size']['star_height']),
         ),
         Container(
             child: Row(
@@ -176,8 +202,8 @@ class SubjectSectionRate extends StatelessWidget {
             Stack(
               children: <Widget>[
                 Container(
-                  width: ScreenUtil.getInstance().setWidth(ScreenSize.bar_width + ScreenSize.percent_width),
-                  height: ScreenUtil.getInstance().setHeight(ScreenSize.star_height),
+                  width: ScreenUtil.getInstance().setWidth(size['size']['bar_width'] + size['size']['percent_width']),
+                  height: ScreenUtil.getInstance().setHeight(size['size']['star_height']),
                   child: Row(
                     children: <Widget>[
                       Container(
@@ -187,8 +213,8 @@ class SubjectSectionRate extends StatelessWidget {
                             Radius.circular(7),
                           ),
                         ),
-                        width: ScreenUtil.getInstance().setWidth(ScreenSize.bar_width),
-                        height: ScreenUtil.getInstance().setHeight(ScreenSize.bar_height),
+                        width: ScreenUtil.getInstance().setWidth(size['size']['bar_width']),
+                        height: ScreenUtil.getInstance().setHeight(size['size']['bar_height']),
                       ),
                       Expanded(
                         child: Text(
@@ -203,8 +229,8 @@ class SubjectSectionRate extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: ScreenUtil.getInstance().setWidth(ScreenSize.bar_width),
-                  height: ScreenUtil.getInstance().setHeight(ScreenSize.star_height),
+                  width: ScreenUtil.getInstance().setWidth(size['size']['bar_width']),
+                  height: ScreenUtil.getInstance().setHeight(size['size']['star_height']),
                   child: Row(
                     children: <Widget>[
                       Container(
@@ -214,8 +240,8 @@ class SubjectSectionRate extends StatelessWidget {
                             Radius.circular(7),
                           ),
                         ),
-                        width: ScreenUtil.getInstance().setWidth(ScreenSize.bar_width / 100 * percent),
-                        height: ScreenUtil.getInstance().setHeight(ScreenSize.bar_height),
+                        width: ScreenUtil.getInstance().setWidth(size['size']['bar_width'] / 100 * percent),
+                        height: ScreenUtil.getInstance().setHeight(size['size']['bar_height']),
                       ),
                     ],
                   ),
@@ -228,26 +254,26 @@ class SubjectSectionRate extends StatelessWidget {
     );
   }
 
-  Container _buildDividerPart() {
+  Container _buildDividerPart(size) {
     return Container(
       color: Colors.white,
-      width:
-          ScreenUtil.getInstance().setWidth(ScreenSize.point_width + ScreenSize.graph_width - ScreenSize.padding * 4),
+      width: ScreenUtil.getInstance()
+          .setWidth(size['size']['point_width'] + size['size']['graph_width'] - ScreenSize.padding * 4),
       height: ScreenUtil.getInstance().setHeight(1),
     );
   }
 
-  Container _buildSummaryPart() {
+  Container _buildSummaryPart(size) {
     return Container(
       width: ScreenUtil.getInstance().setWidth(ScreenSize.width - 5 * ScreenSize.padding),
-      height: ScreenUtil.getInstance().setHeight(ScreenSize.summary_height),
+      height: ScreenUtil.getInstance().setHeight(size['size']['summary_height']),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           Text(
             this._subject['rating']['average'] == 0
                 ? LabelConstant.MOVIE_NO_RATE
-                : LabelConstant.MOVIE_TOTAL_RATE + " :" + _getRateTotal().toStringAsFixed(0),
+                : LabelConstant.MOVIE_TOTAL_RATE + " :" + _getRateTotal(size).toStringAsFixed(0),
             style: TextStyle(color: Colors.white),
           )
         ],

@@ -37,6 +37,7 @@ class MovieUtil {
     double heightPx = ScreenSize.movie_cover_height,
   }) {
     return Hero(
+      key: GlobalKey(),
       tag: heroTag != '' ? heroTag : cover,
       child: Container(
         width: ScreenUtil.getInstance().setWidth(widthPx),
@@ -182,7 +183,13 @@ class MovieUtil {
           );
   }
 
-  static buildDirectorCastCover(cover, {String title = '', String size = ''}) {
+  static buildDirectorCastCover(
+    cover, {
+    double widthPx = ScreenSize.director_cast_cover_width,
+    double heightPx = ScreenSize.director_cast_cover_height,
+    String title = '',
+    String size = '',
+  }) {
     //make title defaut value empty, not sure why other default value not works in cele section grid/gallery
     if (cover == '') {
       cover =
@@ -193,20 +200,18 @@ class MovieUtil {
         cover.toString().indexOf('celebrity-default-medium.png') != -1) {
       tag = tag + Random().nextDouble().toString();
     }
-    var width = ScreenUtil.getInstance().setWidth(ScreenSize.director_cast_cover_width);
+    var width = ScreenUtil.getInstance().setWidth(widthPx);
     if (size != '') {
       List<String> list = size.split('x');
       if (list.length == 2) {
-        width = double.parse(list[0]) /
-            double.parse(list[1]) *
-            ScreenUtil.getInstance().setHeight(ScreenSize.director_cast_cover_height);
+        width = double.parse(list[0]) / double.parse(list[1]) * ScreenUtil.getInstance().setHeight(heightPx);
       }
     }
     return Hero(
       tag: tag,
       child: Container(
         width: width,
-        height: ScreenUtil.getInstance().setHeight(ScreenSize.director_cast_cover_height),
+        height: ScreenUtil.getInstance().setHeight(heightPx),
         decoration: BoxDecoration(
           image: DecorationImage(
             image: CachedNetworkImageProvider(cover),
@@ -218,10 +223,15 @@ class MovieUtil {
     );
   }
 
-  static buildPhotoCover(cover, {double scale = 1}) {
+  static buildPhotoCover(
+    cover, {
+    double widthPx = ScreenSize.photo_cover_width,
+    double heightPx = ScreenSize.photo_cover_height,
+    double scale = 1,
+  }) {
     return Container(
-      width: ScreenUtil.getInstance().setWidth(ScreenSize.photo_cover_width * scale),
-      height: ScreenUtil.getInstance().setHeight(ScreenSize.photo_cover_height * scale),
+      width: ScreenUtil.getInstance().setWidth(widthPx * scale),
+      height: ScreenUtil.getInstance().setHeight(heightPx * scale),
       margin: EdgeInsets.all(1),
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -241,12 +251,17 @@ class MovieUtil {
     return _subject['trailers'] != null ? _subject['bloopers'] : [];
   }
 
-  static buildVideoCover(cover, {double scale = 1}) {
+  static buildVideoCover(
+    cover, {
+    double widthPx = ScreenSize.photo_cover_width,
+    double heightPx = ScreenSize.photo_cover_height,
+    double scale = 1,
+  }) {
     return Stack(
       children: <Widget>[
         Container(
-          width: ScreenUtil.getInstance().setWidth(ScreenSize.photo_cover_width * scale),
-          height: ScreenUtil.getInstance().setHeight(ScreenSize.photo_cover_height * scale),
+          width: ScreenUtil.getInstance().setWidth(widthPx * scale),
+          height: ScreenUtil.getInstance().setHeight(heightPx * scale),
           margin: EdgeInsets.all(1),
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -257,8 +272,8 @@ class MovieUtil {
           ),
         ),
         Container(
-          width: ScreenUtil.getInstance().setWidth(ScreenSize.photo_cover_width * scale),
-          height: ScreenUtil.getInstance().setHeight(ScreenSize.photo_cover_height * scale),
+          width: ScreenUtil.getInstance().setWidth(widthPx * scale),
+          height: ScreenUtil.getInstance().setHeight(heightPx * scale),
           margin: EdgeInsets.all(1),
           child: Center(
             child: Opacity(

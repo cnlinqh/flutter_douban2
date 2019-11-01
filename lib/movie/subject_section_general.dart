@@ -9,100 +9,118 @@ class SubjectSectionGeneral extends StatelessWidget {
   final section;
   // final _parentContext;
   // SubjectSectionGeneral(this._subject, this._parentContext);
-  SubjectSectionGeneral(this._subject, {this.section = ''});
+  SubjectSectionGeneral(this._subject, {Key key, this.section = ''}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return _buildGeneralSection(context);
+    var size = ScreenSize.calculateSize(
+      context: context,
+      width1: ScreenSize.movie_cover_width,
+      height1: ScreenSize.movie_cover_height,
+      width2: ScreenSize.movie_cover_width2,
+      height2: ScreenSize.movie_cover_height2,
+    );
+    return _buildGeneralSection(context, size);
   }
 
-  Widget _buildGeneralSection(context) {
+  Widget _buildGeneralSection(context, size) {
     return Container(
       padding: EdgeInsets.only(
         top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
         bottom: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
       ),
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.width - ScreenSize.padding * 2),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          MovieUtil.buildMovieCover(this._subject['images']['small'],
-              heroTag: this.section + this._subject['images']['small']),
-          Container(
-            width: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
+          _buildCover(size),
+          SizedBox(
+            width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+          ),
+          _buildDescription(context, size),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCover(size) {
+    return MovieUtil.buildMovieCover(
+      this._subject['images']['small'],
+      heroTag: this.section + this._subject['images']['small'],
+      widthPx: size['width'],
+      heightPx: size['height'],
+    );
+  }
+
+  Widget _buildDescription(context, size) {
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Text(
+            MovieUtil.getTitle(_subject),
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+            ),
+          ),
+          Text(
+            "(" + MovieUtil.getYear(_subject) + ")",
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          GestureDetector(
+            // onTap: _showGeneralModelSheet,
+            onTap: () {
+              showBottomSheet(
+                context: context,
+                builder: (_) => Stack(
+                  children: <Widget>[
+                    _buildBottomSheetContent(),
+                    Positioned(
+                      top: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+                      right: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+                      child: IconButton(
+                        icon: Icon(Icons.close),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    )
+                  ],
+                ),
+              );
+            },
+            child: Text(
+              MovieUtil.getPubPlace(_subject) +
+                  " / " +
+                  MovieUtil.getGenres(_subject) +
+                  " / " +
+                  MovieUtil.getPubDates(_subject) +
+                  " / " +
+                  MovieUtil.getDurations(_subject) +
+                  " >",
+              style: TextStyle(
+                color: Colors.white,
+              ),
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
           Container(
-            width: ScreenUtil.getInstance().setWidth(ScreenSize.subject_description_width),
-            height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_cover_height),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            width: ScreenUtil.getInstance().setWidth(ScreenSize.width - ScreenSize.padding * 4 - size['width']),
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Text(
-                  MovieUtil.getTitle(_subject),
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                  ),
+                RaisedButton(
+                  onPressed: () {},
+                  child: Text(LabelConstant.MOVIE_WANTED_TITLE),
                 ),
-                Text(
-                  "(" + MovieUtil.getYear(_subject) + ")",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-                GestureDetector(
-                  // onTap: _showGeneralModelSheet,
-                  onTap: () {
-                    showBottomSheet(
-                      context: context,
-                      builder: (_) => Stack(
-                        children: <Widget>[
-                          _buildBottomSheetContent(),
-                          Positioned(
-                            top: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-                            right: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-                            child: IconButton(
-                              icon: Icon(Icons.close),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          )
-                        ],
-                      ),
-                    );
-                  },
-                  child: Text(
-                    MovieUtil.getPubPlace(_subject) +
-                        " / " +
-                        MovieUtil.getGenres(_subject) +
-                        " / " +
-                        MovieUtil.getPubDates(_subject) +
-                        " / " +
-                        MovieUtil.getDurations(_subject) +
-                        " >",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                Container(
-                  width: ScreenUtil.getInstance().setWidth(ScreenSize.subject_description_width),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      RaisedButton(
-                        onPressed: () {},
-                        child: Text(LabelConstant.MOVIE_WANTED_TITLE),
-                      ),
-                      RaisedButton(
-                        onPressed: () {},
-                        child: Text(LabelConstant.MOVIE_WATCHED_TITLE),
-                      )
-                    ],
-                  ),
+                RaisedButton(
+                  onPressed: () {},
+                  child: Text(LabelConstant.MOVIE_WATCHED_TITLE),
                 )
               ],
             ),
@@ -111,7 +129,6 @@ class SubjectSectionGeneral extends StatelessWidget {
       ),
     );
   }
-
   // void _showGeneralModelSheet() {
   //   showModalBottomSheet(
   //       context: _parentContext,

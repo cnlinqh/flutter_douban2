@@ -12,6 +12,13 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = ScreenSize.calculateSize(
+      context: context,
+      width1: ScreenSize.director_cast_cover_width,
+      height1: ScreenSize.director_cast_cover_height,
+      width2: ScreenSize.director_cast_cover_width2,
+      height2: ScreenSize.director_cast_cover_height2,
+    );
     return Container(
       padding: EdgeInsets.only(
         top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
@@ -20,14 +27,14 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          _buildHeader(context),
-          _buildCovers(context),
+          _buildHeader(context, size),
+          _buildCovers(context, size),
         ],
       ),
     );
   }
 
-  Widget _buildHeader(context) {
+  Widget _buildHeader(context, size) {
     return Row(
       children: <Widget>[
         Expanded(
@@ -49,7 +56,7 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
                 context: context,
                 builder: (_) => Stack(
                   children: <Widget>[
-                    _buildBottomSheetContent(celebrities, context),
+                    _buildBottomSheetContent(celebrities, context, size),
                     Positioned(
                       top: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
                       right: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
@@ -76,21 +83,21 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
     );
   }
 
-  Widget _buildCovers(context) {
+  Widget _buildCovers(context, size) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: _buildDirectorsCastsCovers(context),
+        children: _buildDirectorsCastsCovers(context, size),
       ),
     );
   }
 
-  List<Widget> _buildDirectorsCastsCovers(context) {
+  List<Widget> _buildDirectorsCastsCovers(context, size) {
     List<Widget> directors = [];
     this._subject['directors'].forEach((obj) {
-      directors.add(_buildSingleCover(context, obj, title: 'director'));
+      directors.add(_buildSingleCover(context, size, obj, title: 'director'));
       directors.add(SizedBox(
         width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
       ));
@@ -98,7 +105,7 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
 
     List<Widget> casts = [];
     this._subject['casts'].forEach((obj) {
-      casts.add(_buildSingleCover(context, obj, title: 'cast'));
+      casts.add(_buildSingleCover(context, size, obj, title: 'cast'));
       casts.add(SizedBox(
         width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
       ));
@@ -107,7 +114,7 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
     return directors;
   }
 
-  Widget _buildSingleCover(context, obj, {String title = 'director'}) {
+  Widget _buildSingleCover(context, size, obj, {String title = 'director'}) {
     return GestureDetector(
       onTap: () {
         if (obj["id"] == null) {
@@ -122,9 +129,14 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          MovieUtil.buildDirectorCastCover(obj['avatars'] != null ? obj['avatars']['small'] : '', title: title),
+          MovieUtil.buildDirectorCastCover(
+            obj['avatars'] != null ? obj['avatars']['small'] : '',
+            title: title,
+            widthPx: size['width'],
+            heightPx: size['height'],
+          ),
           Container(
-            width: ScreenUtil.getInstance().setWidth(ScreenSize.director_cast_cover_width),
+            width: ScreenUtil.getInstance().setWidth(size['width']),
             child: Text(
               obj['name'],
               style: TextStyle(
@@ -133,7 +145,7 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
             ),
           ),
           Container(
-            width: ScreenUtil.getInstance().setWidth(ScreenSize.director_cast_cover_width),
+            width: ScreenUtil.getInstance().setWidth(size['width']),
             child: Text(
               title == 'director'
                   ? LabelConstant.MOVIE_DIRECTOR + '/' + obj['name_en']
@@ -149,7 +161,7 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
     );
   }
 
-  Widget _buildBottomSheetContent(celebrities, context) {
+  Widget _buildBottomSheetContent(celebrities, context, size) {
     return Container(
         height: ScreenUtil.screenHeight,
         color: Colors.white,
@@ -162,12 +174,12 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: _buildCelebrities(celebrities, context),
+            children: _buildCelebrities(celebrities, context, size),
           ),
         ));
   }
 
-  List<Widget> _buildCelebrities(celebrities, context) {
+  List<Widget> _buildCelebrities(celebrities, context, size) {
     List<Widget> list = List<Widget>.from(celebrities.map((cele) {
       return Container(
         child: Row(
@@ -180,11 +192,16 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
                 }
                 NavigatorHelper.pushToPage(context, LabelConstant.CELE_DETAILS_TITLE, content: cele['id']);
               },
-              child: MovieUtil.buildDirectorCastCover(cele['avatar'], title: cele['title']),
+              child: MovieUtil.buildDirectorCastCover(
+                cele['avatar'],
+                title: cele['title'],
+                widthPx: size['width'],
+                heightPx: size['height'],
+              ),
             ),
             Container(
-              width: ScreenUtil.getInstance().setWidth(ScreenSize.celebrities_width),
-              height: ScreenUtil.getInstance().setHeight(ScreenSize.director_cast_cover_height),
+              width: ScreenUtil.getInstance().setWidth(ScreenSize.width - size['width'] - ScreenSize.padding * 6),
+              height: ScreenUtil.getInstance().setHeight(size['height']),
               margin: EdgeInsets.all(
                 ScreenUtil.getInstance().setWidth(ScreenSize.padding),
               ),

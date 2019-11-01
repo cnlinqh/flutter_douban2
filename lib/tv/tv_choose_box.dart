@@ -24,8 +24,15 @@ class _TVChooseBoxState extends State<TVChooseBox> {
 
   @override
   Widget build(BuildContext context) {
+    var size = ScreenSize.calculateSize(
+      context: context,
+      width1: ScreenSize.choose_image_width,
+      height1: ScreenSize.choose_image_height,
+      width2: ScreenSize.choose_image_width2,
+      height2: ScreenSize.choose_image_height2,
+    );
     if (this._photoUrl == null) {
-      return _buildIndicator();
+      return _buildIndicator(size);
     } else {
       return GestureDetector(
         onTap: () {
@@ -33,9 +40,9 @@ class _TVChooseBoxState extends State<TVChooseBox> {
         },
         child: Stack(
           children: <Widget>[
-            _buildBackgroud(),
-            _buildOpacity(),
-            _buildLabel(),
+            _buildBackgroud(size),
+            _buildOpacity(size),
+            _buildLabel(size),
           ],
         ),
       );
@@ -102,23 +109,23 @@ class _TVChooseBoxState extends State<TVChooseBox> {
     }
   }
 
-  Widget _buildIndicator() {
+  Widget _buildIndicator(size) {
     return Center(
       child: Container(
-        width: ScreenUtil.getInstance().setWidth(ScreenSize.choose_image_width),
-        height: ScreenUtil.getInstance().setHeight(ScreenSize.choose_image_height),
+        width: ScreenUtil.getInstance().setWidth(size['width']),
+        height: ScreenUtil.getInstance().setHeight(size['height']),
         child: Center(
-          // child: CircularProgressIndicator(),
-        ),
+            // child: CircularProgressIndicator(),
+            ),
       ),
     );
   }
 
-  Widget _buildBackgroud() {
+  Widget _buildBackgroud(size) {
     return Center(
       child: Container(
-        width: ScreenUtil.getInstance().setWidth(ScreenSize.choose_image_width),
-        height: ScreenUtil.getInstance().setHeight(ScreenSize.choose_image_height),
+        width: ScreenUtil.getInstance().setWidth(size['width']),
+        height: ScreenUtil.getInstance().setHeight(size['height']),
         decoration: BoxDecoration(
           image: DecorationImage(
             image: CachedNetworkImageProvider(this._photoUrl),
@@ -130,13 +137,13 @@ class _TVChooseBoxState extends State<TVChooseBox> {
     );
   }
 
-  Widget _buildOpacity() {
+  Widget _buildOpacity(size) {
     return Opacity(
       opacity: 0.4,
       child: Center(
         child: Container(
-          width: ScreenUtil.getInstance().setWidth(ScreenSize.choose_image_width),
-          height: ScreenUtil.getInstance().setHeight(ScreenSize.choose_image_height),
+          width: ScreenUtil.getInstance().setWidth(size['width']),
+          height: ScreenUtil.getInstance().setHeight(size['height']),
           decoration: BoxDecoration(
             color: Colors.black,
             borderRadius: BorderRadius.all(Radius.circular(3)),
@@ -146,11 +153,11 @@ class _TVChooseBoxState extends State<TVChooseBox> {
     );
   }
 
-  Widget _buildLabel() {
+  Widget _buildLabel(size) {
     return Center(
       child: Container(
-        width: ScreenUtil.getInstance().setWidth(ScreenSize.choose_image_width),
-        height: ScreenUtil.getInstance().setHeight(ScreenSize.choose_image_height),
+        width: ScreenUtil.getInstance().setWidth(size['width']),
+        height: ScreenUtil.getInstance().setHeight(size['height']),
         child: Center(
           child: Text(
             widget.label,

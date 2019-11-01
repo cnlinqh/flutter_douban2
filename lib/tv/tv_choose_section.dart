@@ -10,23 +10,32 @@ class TVChooseSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = ScreenSize.calculateSize(
+      context: context,
+      width1: ScreenSize.choose_image_width,
+      height1: ScreenSize.choose_image_height,
+      width2: ScreenSize.choose_image_width2,
+      height2: ScreenSize.choose_image_height2,
+    );
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          _buildHeader(),
-          _buildGridView(),
+          _buildHeader(size),
+          _buildGridView(size),
         ],
       ),
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(size) {
+    var left = (ScreenSize.width - 2 * ScreenSize.padding) / 6 - size['width'] / 2;
+    if (size['orientation'] == Orientation.landscape.toString()) {
+      left = (ScreenSize.width - 2 * ScreenSize.padding) / 12 - size['width'] / 2;
+    }
     return Container(
       padding: EdgeInsets.only(
-        left: ScreenUtil.getInstance().setWidth(
-          (ScreenSize.width - 2 * ScreenSize.padding) / 6 - ScreenSize.choose_image_width / 2,
-        ),
+        left: left,
       ),
       child: Text(
         this.title,
@@ -35,13 +44,17 @@ class TVChooseSection extends StatelessWidget {
     );
   }
 
-  Widget _buildGridView() {
+  Widget _buildGridView(size) {
+    var crossAxisCount = 3;
+    if (size['orientation'] == Orientation.landscape.toString()) {
+      crossAxisCount = 6;
+    }
     return GridView.builder(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       itemCount: list.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
+        crossAxisCount: crossAxisCount,
         childAspectRatio: 1.8,
         mainAxisSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
         crossAxisSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding),

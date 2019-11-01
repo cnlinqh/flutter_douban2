@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/navigator_helper.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
+import 'package:flutter_douban2/util/screen_size.dart';
 
 class SubjectSectionMediaPhotoTapped extends StatelessWidget {
   final List _photos;
   final int _index;
   final String _cover;
   final double scale;
-  SubjectSectionMediaPhotoTapped(this._photos, this._index, this._cover, {this.scale = 1});
+  final size;
+  SubjectSectionMediaPhotoTapped(this._photos, this._index, this._cover, this.size, {Key key, this.scale = 1})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +25,12 @@ class SubjectSectionMediaPhotoTapped extends StatelessWidget {
       },
       child: Hero(
         tag: this._cover,
-        child: MovieUtil.buildPhotoCover(this._cover, scale: this.scale),
+        child: MovieUtil.buildPhotoCover(
+          this._cover,
+          scale: this.scale,
+          widthPx: size['width'],
+          heightPx: size['height'],
+        ),
       ),
     );
   }

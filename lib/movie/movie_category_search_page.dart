@@ -74,16 +74,46 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
         title: Text(LabelConstant.MOVIE_CATEGORY_TITLE),
         actions: _buildActions(),
       ),
-      body: Container(
-        child: Column(
-          children: <Widget>[
-            _buildConditionBars(),
-            Expanded(
-              child: _buildScrollView(),
-            )
-          ],
-        ),
-      ),
+      body: _buildBody(),
+    );
+  }
+
+  Widget _buildBody() {
+    return OrientationBuilder(
+      builder: (context, orientation) {
+        if (orientation == Orientation.portrait) {
+          return Container(
+            child: Column(
+              children: <Widget>[
+                this._isFilterShow ? _buildConditionBars() : Container(),
+                Expanded(
+                  child: _buildScrollView(),
+                )
+              ],
+            ),
+          );
+        } else {
+          return Container(
+            child: Column(
+              children: <Widget>[
+                this._isFilterShow
+                    ? Container(
+                        height: ScreenUtil.getInstance().setHeight(
+                          ScreenSize.movie_cate_search_conditions_height2,
+                        ),
+                        child: SingleChildScrollView(
+                          child: _buildConditionBars(),
+                        ),
+                      )
+                    : Container(),
+                Expanded(
+                  child: _buildScrollView(),
+                )
+              ],
+            ),
+          );
+        }
+      },
     );
   }
 
@@ -151,41 +181,37 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
   }
 
   Widget _buildConditionBars() {
-    if (!this._isFilterShow) {
-      return Container();
-    } else {
-      return Stack(
-        children: <Widget>[
-          MovieCategoryConditionBars(
-            tag: this._selectedTag,
-            style: this._selectedStyle,
-            country: this._selectedCountry,
-            year: this._selectedYear,
-            special: this._selectedSpecial,
-            sortBy: this._selectedSortBy,
-            rangeMin: this._selectedRangeMin,
-            rangeMax: this._selectedRangeMax,
-            onTagChange: this.onTagChange,
-            onStyleChange: this.onStyleChange,
-            onCountryChange: this.onCountryChange,
-            onYearChange: this.onYearChange,
-            onSpecialChange: this.onSpecialChange,
-            onSortByChange: this.onSortByChange,
-            onRangeChange: this.onRangeChange,
-          ),
-          // Positioned(
-          //   bottom: ScreenUtil.getInstance()
-          //       .setHeight(ScreenSize.movie_cate_search_bar_hight),
-          //   right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-          //   child: Center(
-          //     child: MovieCategoryFilterBar(
-          //         getSelectedInput: getSelectedInput,
-          //         setSelectedOutput: setSelectedOutput),
-          //   ),
-          // )
-        ],
-      );
-    }
+    return Stack(
+      children: <Widget>[
+        MovieCategoryConditionBars(
+          tag: this._selectedTag,
+          style: this._selectedStyle,
+          country: this._selectedCountry,
+          year: this._selectedYear,
+          special: this._selectedSpecial,
+          sortBy: this._selectedSortBy,
+          rangeMin: this._selectedRangeMin,
+          rangeMax: this._selectedRangeMax,
+          onTagChange: this.onTagChange,
+          onStyleChange: this.onStyleChange,
+          onCountryChange: this.onCountryChange,
+          onYearChange: this.onYearChange,
+          onSpecialChange: this.onSpecialChange,
+          onSortByChange: this.onSortByChange,
+          onRangeChange: this.onRangeChange,
+        ),
+        // Positioned(
+        //   bottom: ScreenUtil.getInstance()
+        //       .setHeight(ScreenSize.movie_cate_search_bar_height),
+        //   right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+        //   child: Center(
+        //     child: MovieCategoryFilterBar(
+        //         getSelectedInput: getSelectedInput,
+        //         setSelectedOutput: setSelectedOutput),
+        //   ),
+        // )
+      ],
+    );
   }
 
   Widget _buildScrollView() {
@@ -214,7 +240,7 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
         padding: EdgeInsets.all(ScreenUtil.getInstance().setWidth(ScreenSize.padding)),
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
+            crossAxisCount: MediaQuery.of(context).orientation == Orientation.portrait ? 3 : 6,
             childAspectRatio: 0.55,
             crossAxisSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
           ),

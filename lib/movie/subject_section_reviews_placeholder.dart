@@ -7,9 +7,8 @@ import 'package:flutter_douban2/movie/subject_section_reviews_all.dart';
 
 class SubjectSectionReviewsPlaceHolder extends StatefulWidget {
   final _subject;
-  final double height;
   final bool visible;
-  SubjectSectionReviewsPlaceHolder(this._subject, {this.height = 200, Key key, this.visible = false}) : super(key: key);
+  SubjectSectionReviewsPlaceHolder(this._subject, {Key key, this.visible = false}) : super(key: key);
 
   SubjectSectionReviewsPlaceHolderState createState() => SubjectSectionReviewsPlaceHolderState();
 }
@@ -33,17 +32,23 @@ class SubjectSectionReviewsPlaceHolderState extends State<SubjectSectionReviewsP
 
   @override
   Widget build(BuildContext context) {
+    var size = ScreenSize.calculateSize(
+      context: context,
+      height1: ScreenSize.movie_review_place_holder_height,
+      height2: ScreenSize.movie_review_place_holder_height2,
+    );
     if (widget.visible == false) {
       return Container(
         width: ScreenUtil.getInstance().setWidth(ScreenSize.width),
-        height: ScreenUtil.getInstance().setHeight(this.widget.height),
+        height: ScreenUtil.getInstance().setHeight(size['height']),
       );
     }
+
     return GestureDetector(
       onTap: showReviewsContent,
       child: Container(
         width: ScreenUtil.getInstance().setWidth(ScreenSize.width - ScreenSize.padding * 2),
-        height: ScreenUtil.getInstance().setHeight(this.widget.height),
+        height: ScreenUtil.getInstance().setHeight(size['height'] + ScreenSize.padding * 2),
         decoration: BoxDecoration(
           color: Colors.cyan,
           borderRadius: BorderRadius.all(Radius.circular(7)),

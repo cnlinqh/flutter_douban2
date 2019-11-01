@@ -7,7 +7,7 @@ import 'package:flutter_douban2/movie/movie_category_search_page.dart';
 
 class SubjectSectionTags extends StatelessWidget {
   final _subject;
-  const SubjectSectionTags(this._subject);
+  const SubjectSectionTags(this._subject, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class SubjectSectionTags extends StatelessWidget {
         },
         child: Container(
           padding: EdgeInsets.all(
-            ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
+            ScreenUtil.getInstance().setWidth(ScreenSize.padding ),
           ),
           decoration: BoxDecoration(
             color: Colors.grey,

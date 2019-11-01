@@ -55,6 +55,20 @@ class ScreenSize {
     }
   }
 
+  static dynamic calculateSize2({BuildContext context, size, size2}) {
+    if (MediaQuery.of(context).orientation == Orientation.portrait) {
+      return {
+        'size': size,
+        'orientation': Orientation.portrait.toString(),
+      };
+    } else {
+      return {
+        'size': size2,
+        'orientation': Orientation.landscape.toString(),
+      };
+    }
+  }
+
   //iPhone 6 resolution
   //full screen width and height
   static const double width = 750;
@@ -89,12 +103,28 @@ class ScreenSize {
   static const double movie_divider_height = 80;
   static const double movie_divider_height2 = 140;
 
-  static const double movie_cate_search_bar_hight = 75;
-  // static const double radio_width = 100;
-  static const double movie_cate_search_radio_height = 75;
+  static const double choose_image_width = 180;
+  static const double choose_image_height = 80;
 
-  //the width of subject details
-  static const double subject_description_width = 470;
+  static const double choose_image_width2 = 90;
+  static const double choose_image_height2 = 160;
+
+  //the height of year rank
+  static const double year_rank_height = 160;
+  static const double rank_bg_cover_width = 365;
+  static const double rank_bg_cover_height = 160;
+  static const double triangle_top_width = 120;
+
+  static const double year_rank_height2 = 380;
+  static const double rank_bg_cover_width2 = 365;
+  static const double rank_bg_cover_height2 = 380;
+  static const double triangle_top_width2 = 120;
+
+  static const double rank_top_image_height = 300;
+
+  static const double movie_cate_search_bar_height = 75;
+  static const double movie_cate_search_bar_height2 = 185;
+  static const double movie_cate_search_conditions_height2 = 320;
 
   //the width of general sheet
   static const double key_width = 80;
@@ -112,15 +142,28 @@ class ScreenSize {
   static const double bar_height = 14;
   static const double percent_width = 50;
 
+  static const double point_width2 = 280;
+  static const double graph_width2 = 450;
+  static const double rate_height2 = 280;
+  static const double summary_height2 = 100;
+
+  static const double star_width2 = 150;
+  static const double star_height2 = 46;
+  static const double bar_width2 = 220;
+  static const double bar_height2 = 30;
+  static const double percent_width2 = 50;
+
   //the width & height of movie cover
   static const double director_cast_cover_width = 200;
   static const double director_cast_cover_height = 220;
-
-  static const double celebrities_width = 460;
+  static const double director_cast_cover_width2 = 160;
+  static const double director_cast_cover_height2 = 600;
 
   //the width & height of photo
   static const double photo_cover_width = 650;
   static const double photo_cover_height = 400;
+  static const double photo_cover_width2 = 300;
+  static const double photo_cover_height2 = 800;
 
   //the width & height of video
   static const double video_width = 750;
@@ -130,20 +173,9 @@ class ScreenSize {
   static const double self_define_dlg_width = 400;
   static const double self_define_dlg_height = 200;
 
-  //the height of year rank
-  static const double year_rank_height = 160;
-  static const double rank_bg_cover_width = 365;
-  static const double rank_bg_cover_height = 160;
-  static const double triangle_top_width = 120;
-
-  static const double rank_top_image_width = 750;
-  static const double rank_top_image_height = 300;
-
-  static const double choose_image_width = 180;
-  static const double choose_image_height = 80;
-
   static const double close_bar_width = 100;
   static const double close_bar_height = 10;
 
-  static const double movie_review_place_holder_height = 200;
+  static const double movie_review_place_holder_height = 100;
+  static const double movie_review_place_holder_height2 = 260;
 }

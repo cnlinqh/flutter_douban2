@@ -29,9 +29,20 @@ class _SubjectSectionAlsoLikeState extends State<SubjectSectionAlsoLike> {
 
   @override
   Widget build(BuildContext context) {
+    var size = ScreenSize.calculateSize(
+      context: context,
+      width1: ScreenSize.movie_cover_width,
+      height1: ScreenSize.movie_cover_height,
+      width2: ScreenSize.movie_cover_width2,
+      height2: ScreenSize.movie_cover_height2,
+    );
     if (alsoLikes == null) {
-      return Container();
+      return Container(
+        width: ScreenUtil.getInstance().setWidth(size['width']),
+        height: ScreenUtil.getInstance().setHeight(size['height']),
+      );
     }
+    
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +59,7 @@ class _SubjectSectionAlsoLikeState extends State<SubjectSectionAlsoLike> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: _buildChildren(context),
+              children: _buildChildren(context, size),
             ),
           )
         ],
@@ -56,7 +67,7 @@ class _SubjectSectionAlsoLikeState extends State<SubjectSectionAlsoLike> {
     );
   }
 
-  List<Widget> _buildChildren(context) {
+  List<Widget> _buildChildren(context, size) {
     List<Widget> list = [];
     this.alsoLikes.forEach((like) {
       list.add(
@@ -71,10 +82,15 @@ class _SubjectSectionAlsoLikeState extends State<SubjectSectionAlsoLike> {
                   content: {'id': like['id'], 'section': this.widget.section},
                 );
               },
-              child: MovieUtil.buildMovieCover(like['cover'], heroTag: this.widget.section + like['cover']),
+              child: MovieUtil.buildMovieCover(
+                like['cover'],
+                heroTag: this.widget.section + like['cover'],
+                widthPx: size['width'],
+                heightPx: size['height'],
+              ),
             ),
             Container(
-              width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_cover_width),
+              width: ScreenUtil.getInstance().setWidth(size['width']),
               child: Text(
                 like['title'],
                 style: TextStyle(

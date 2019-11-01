@@ -77,11 +77,16 @@ class _MovieCategoryRadioBarState extends State<MovieCategoryRadioBar> with Tick
 
   @override
   Widget build(BuildContext context) {
+    var size = ScreenSize.calculateSize(
+      context: context,
+      height1: ScreenSize.movie_cate_search_bar_height,
+      height2: ScreenSize.movie_cate_search_bar_height2,
+    );
     return Container(
       child: Stack(
         children: <Widget>[
           Container(
-              height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_cate_search_radio_height),
+              height: ScreenUtil.getInstance().setHeight(size['height']),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: _buildRadios(),
@@ -93,7 +98,7 @@ class _MovieCategoryRadioBarState extends State<MovieCategoryRadioBar> with Tick
             top: 0,
             left: animation != null ? animation.value : 0,
             child: Container(
-              height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_cate_search_radio_height),
+              height: ScreenUtil.getInstance().setHeight(size['height']),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
@@ -209,6 +214,11 @@ class MovieCategoryRadioButton extends StatefulWidget {
 class _MovieCategoryRadioButtonState extends State<MovieCategoryRadioButton> {
   @override
   Widget build(BuildContext context) {
+    var size = ScreenSize.calculateSize(
+      context: context,
+      height1: ScreenSize.movie_cate_search_bar_height,
+      height2: ScreenSize.movie_cate_search_bar_height2,
+    );
     return GestureDetector(
       onTap: () {
         widget.onSelection(widget.index);
@@ -218,7 +228,7 @@ class _MovieCategoryRadioButtonState extends State<MovieCategoryRadioButton> {
           ScreenUtil.getInstance().setWidth(ScreenSize.padding),
         ),
         padding: EdgeInsets.all(ScreenUtil.getInstance().setWidth(ScreenSize.padding / 2)),
-        height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_cate_search_radio_height),
+        height: ScreenUtil.getInstance().setHeight(size['height']),
         child: Center(
           child: Text(widget.label),
         ),

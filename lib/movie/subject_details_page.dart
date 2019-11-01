@@ -49,7 +49,7 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: _buildAppBar(),
-      body: _buildBody(),
+      body: _buildBody(context),
     );
   }
 
@@ -100,81 +100,82 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
     }
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(context) {
     if (_subject == null) {
       return new Center(
         child: new CircularProgressIndicator(),
       );
     } else {
-      return NotificationListener<ScrollNotification>(
-        onNotification: (ScrollNotification notification) {
-          if (notification.metrics.axis == Axis.vertical) {
-            if (mounted)
-              setState(() {
-                isTitleShow = notification.metrics.pixels > 20;
-              });
-          }
+      return OrientationBuilder(
+        builder: (context, orientation) {
+          return NotificationListener<ScrollNotification>(
+            onNotification: (ScrollNotification notification) {
+              if (notification.metrics.axis == Axis.vertical) {
+                if (mounted)
+                  setState(() {
+                    isTitleShow = notification.metrics.pixels > 20;
+                  });
+              }
 
-          // var _progress = notification.metrics.pixels /
-          //       notification.metrics.maxScrollExtent;
-          // LogUtil.log("${(_progress * 100).toInt()}%");
-          // LogUtil.log("BottomEdge: ${notification.metrics.extentAfter == 0}");
-          if (notification.metrics.pixels - _position >= _sensitivityFactor) {
-            // LogUtil.log('Axis Scroll Direction : Up');
-            _position = notification.metrics.pixels;
-            if (notification.metrics.extentAfter == 0 && notification.metrics.axis == Axis.vertical) {
-              // LogUtil.log(notification.metrics.extentAfter);
-              reviewsSectionKey.currentState.showReviewsContent();
-            }
-          }
-          if (_position - notification.metrics.pixels >= _sensitivityFactor) {
-            // LogUtil.log('Axis Scroll Direction : Down');
-            _position = notification.metrics.pixels;
-          }
-          return true;
-        },
-        child: Stack(
-          children: <Widget>[
-            Container(
-              color: Colors.blueGrey,
-              padding: EdgeInsets.all(
-                ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-              ),
-              child: RefreshIndicator(
-                onRefresh: _getSubject,
-                child: ListView(
-                  children: <Widget>[
-                    SubjectSectionGeneral(this._subject, section: this.widget.content['section']),
-                    SubjectSectionRate(this._subject),
-                    SubjectSectionTags(this._subject),
-                    SubjectSectionSummary(this._subject),
-                    SubjectSectionDirectorsCasts(this._subject),
-                    SubjectSectionMedia(this._subject),
-                    SubjectSectionAlsoLike(this._subject, section: this.widget.content['section']),
-                    SubjectSectionComments(this._subject),
-                    SubjectSectionReviewsPlaceHolder(
-                      this._subject,
-                      visible: false,
-                      height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_review_place_holder_height),
+              // var _progress = notification.metrics.pixels /
+              //       notification.metrics.maxScrollExtent;
+              // LogUtil.log("${(_progress * 100).toInt()}%");
+              // LogUtil.log("BottomEdge: ${notification.metrics.extentAfter == 0}");
+              if (notification.metrics.pixels - _position >= _sensitivityFactor) {
+                // LogUtil.log('Axis Scroll Direction : Up');
+                _position = notification.metrics.pixels;
+                if (notification.metrics.extentAfter == 0 && notification.metrics.axis == Axis.vertical) {
+                  // LogUtil.log(notification.metrics.extentAfter);
+                  reviewsSectionKey.currentState.showReviewsContent();
+                }
+              }
+              if (_position - notification.metrics.pixels >= _sensitivityFactor) {
+                // LogUtil.log('Axis Scroll Direction : Down');
+                _position = notification.metrics.pixels;
+              }
+              return true;
+            },
+            child: Stack(
+              children: <Widget>[
+                Container(
+                  color: Colors.blueGrey,
+                  padding: EdgeInsets.all(
+                    ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+                  ),
+                  child: RefreshIndicator(
+                    onRefresh: _getSubject,
+                    child: ListView(
+                      children: <Widget>[
+                        SubjectSectionGeneral(this._subject, key: GlobalKey(), section: this.widget.content['section']),
+                        SubjectSectionRate(this._subject, key: GlobalKey()),
+                        SubjectSectionTags(this._subject, key: GlobalKey()),
+                        SubjectSectionSummary(this._subject, key: GlobalKey()),
+                        SubjectSectionDirectorsCasts(this._subject, key: GlobalKey()),
+                        SubjectSectionMedia(this._subject),
+                        SubjectSectionAlsoLike(this._subject, section: this.widget.content['section']),
+                        SubjectSectionComments(this._subject),
+                        SubjectSectionReviewsPlaceHolder(
+                          this._subject,
+                          visible: false,
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
+                Positioned(
+                  left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+                  // bottom: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+                  bottom: 0,
+                  child: SubjectSectionReviewsPlaceHolder(
+                    this._subject,
+                    key: reviewsSectionKey,
+                    visible: true,
+                  ),
+                )
+              ],
             ),
-            Positioned(
-              left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-              // bottom: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-              bottom: 0,
-              child: SubjectSectionReviewsPlaceHolder(
-                this._subject,
-                key: reviewsSectionKey,
-                visible: true,
-                height: ScreenUtil.getInstance()
-                    .setHeight(ScreenSize.movie_review_place_holder_height + ScreenSize.padding * 2),
-              ),
-            )
-          ],
-        ),
+          );
+        },
       );
     }
   }

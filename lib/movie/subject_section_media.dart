@@ -9,7 +9,7 @@ import 'package:flutter_douban2/movie/subject_section_media_video_tapped.dart';
 
 class SubjectSectionMedia extends StatefulWidget {
   final _subject;
-  SubjectSectionMedia(this._subject);
+  SubjectSectionMedia(this._subject, {Key key}) : super(key: key);
   _SubjectSectionMediaState createState() => _SubjectSectionMediaState();
 }
 
@@ -34,6 +34,13 @@ class _SubjectSectionMediaState extends State<SubjectSectionMedia> {
         child: new CircularProgressIndicator(),
       );
     } else {
+      var size = ScreenSize.calculateSize(
+        context: context,
+        width1: ScreenSize.photo_cover_width,
+        height1: ScreenSize.photo_cover_height,
+        width2: ScreenSize.photo_cover_width2,
+        height2: ScreenSize.photo_cover_height2,
+      );
       return Container(
         padding: EdgeInsets.only(
           top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
@@ -53,7 +60,7 @@ class _SubjectSectionMediaState extends State<SubjectSectionMedia> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: _buildMediaCovers(context),
+                children: _buildMediaCovers(context, size),
               ),
             )
           ],
@@ -62,28 +69,28 @@ class _SubjectSectionMediaState extends State<SubjectSectionMedia> {
     }
   }
 
-  List<Widget> _buildMediaCovers(context) {
-    var videos = _buildVideoCovers(context);
-    var photos = _buildPhotosCovers(context);
+  List<Widget> _buildMediaCovers(context, size) {
+    var videos = _buildVideoCovers(context, size);
+    var photos = _buildPhotosCovers(context, size);
     videos.addAll(photos);
     return videos;
   }
 
-  List<Widget> _buildVideoCovers(context) {
+  List<Widget> _buildVideoCovers(context, size) {
     List<Widget> covers = [];
     var trails = MovieUtil.getTrailers(widget._subject);
     if (trails.length > 0) {
-      covers.add(SubjectSectionMediaVideoTapped(this.widget._subject, trails[0]['medium']));
+      covers.add(SubjectSectionMediaVideoTapped(this.widget._subject, trails[0]['medium'], size, key: GlobalKey()));
     } else {
       var bloopers = MovieUtil.getBloopers(widget._subject);
       if (bloopers.length > 0) {
-        covers.add(SubjectSectionMediaVideoTapped(this.widget._subject, bloopers[0]['medium']));
+        covers.add(SubjectSectionMediaVideoTapped(this.widget._subject, bloopers[0]['medium'], size, key: GlobalKey()));
       }
     }
     return covers;
   }
 
-  List<Widget> _buildPhotosCovers(context) {
+  List<Widget> _buildPhotosCovers(context, size) {
     List<Widget> covers = [];
 
     List first = [];
@@ -97,14 +104,34 @@ class _SubjectSectionMediaState extends State<SubjectSectionMedia> {
 
     var i = 0;
     for (i = 0; i < first.length; i++) {
-      covers.add(SubjectSectionMediaPhotoTapped(this._photos, i, first[i]['image']));
+      covers.add(SubjectSectionMediaPhotoTapped(
+        this._photos,
+        i,
+        first[i]['image'],
+        size,
+        key: GlobalKey(),
+      ));
     }
 
     for (i = 0; i < second.length ~/ 2; i = i + 1) {
       covers.add(Column(
         children: <Widget>[
-          SubjectSectionMediaPhotoTapped(this._photos, i * 2 + 2, second[i * 2]['image'], scale: 0.5),
-          SubjectSectionMediaPhotoTapped(this._photos, i * 2 + 1 + 2, second[i * 2 + 1]['image'], scale: 0.5),
+          SubjectSectionMediaPhotoTapped(
+            this._photos,
+            i * 2 + 2,
+            second[i * 2]['image'],
+            size,
+            scale: 0.5,
+            key: GlobalKey(),
+          ),
+          SubjectSectionMediaPhotoTapped(
+            this._photos,
+            i * 2 + 1 + 2,
+            second[i * 2 + 1]['image'],
+            size,
+            scale: 0.5,
+            key: GlobalKey(),
+          ),
         ],
       ));
     }
@@ -112,8 +139,14 @@ class _SubjectSectionMediaState extends State<SubjectSectionMedia> {
       covers.add(Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          SubjectSectionMediaPhotoTapped(this._photos, this._photos.length - 1, second[second.length - 1]['image'],
-              scale: 1),
+          SubjectSectionMediaPhotoTapped(
+            this._photos,
+            this._photos.length - 1,
+            second[second.length - 1]['image'],
+            size,
+            scale: 1,
+            key: GlobalKey(),
+          ),
         ],
       ));
     }

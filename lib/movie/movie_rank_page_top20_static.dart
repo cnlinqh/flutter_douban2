@@ -108,13 +108,14 @@ class _MovieRankTop20StaticPageState extends State<MovieRankTop20StaticPage> {
   }
 
   Widget _buildSubject(index, subject) {
+    var size = ScreenSize.calculateSize(context: context);
     return Stack(
       children: <Widget>[
         MovieSubjectGeneral(
           subject['id'],
           section: widget.res['title'],
         ),
-        MovieUtil.buildIndexNo(index),
+        MovieUtil.buildIndexNo(index, orientation: size['orientation']),
       ],
     );
   }

@@ -43,7 +43,7 @@ class _MovieRankListStaticPageState extends State<MovieRankListStaticPage> {
           SliverList(
             delegate: SliverChildListDelegate(
               List<Widget>.generate(widget.res['subjects'].length, (int i) {
-                return _buildSubject(i, widget.res['subjects'][i]);
+                return _buildSubject(context, i, widget.res['subjects'][i]);
               }),
             ),
           ),
@@ -103,14 +103,15 @@ class _MovieRankListStaticPageState extends State<MovieRankListStaticPage> {
     );
   }
 
-  Widget _buildSubject(i, subject) {
+  Widget _buildSubject(context, i, subject) {
+    var size = ScreenSize.calculateSize(context: context);
     return Stack(
       children: <Widget>[
         MovieSubjectGeneral(
           subject['id'],
           section: widget.res['payload']['title'],
         ),
-        MovieUtil.buildIndexNo(i),
+        MovieUtil.buildIndexNo(i, orientation: size['orientation']),
       ],
     );
   }

@@ -34,8 +34,24 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
 
   @override
   Widget build(BuildContext context) {
+    var size = ScreenSize.calculateSize2(
+      context: context,
+      size: {
+        'year_rank_height': ScreenSize.year_rank_height,
+        'rank_bg_cover_width': ScreenSize.rank_bg_cover_width,
+        'rank_bg_cover_height': ScreenSize.rank_bg_cover_height,
+        'triangle_top_width': ScreenSize.triangle_top_width,
+      },
+      size2: {
+        'year_rank_height': ScreenSize.year_rank_height2,
+        'rank_bg_cover_width': ScreenSize.rank_bg_cover_width2,
+        'rank_bg_cover_height': ScreenSize.rank_bg_cover_height2,
+        'triangle_top_width': ScreenSize.triangle_top_width2,
+      },
+    );
+
     if (this.res == null) {
-      return _buildProgressIndicator();
+      return _buildProgressIndicator(size);
     }
     return Column(
       children: <Widget>[
@@ -52,7 +68,7 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
           },
           child: Container(
             width: ScreenUtil.getInstance().setWidth(ScreenSize.width - 2 * ScreenSize.padding),
-            height: ScreenUtil.getInstance().setHeight(ScreenSize.year_rank_height),
+            height: ScreenUtil.getInstance().setHeight(size['size']['year_rank_height']),
             decoration: BoxDecoration(
               color: this.color,
               borderRadius: BorderRadius.all(Radius.circular(7)),
@@ -60,12 +76,12 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
             child: Center(
               child: Stack(
                 children: <Widget>[
-                  _buildRightImage(),
-                  _buildTriangle(),
-                  _buildYear(),
-                  _buildOpacity(),
-                  _buildTitle(),
-                  _buildSubtitle(),
+                  _buildRightImage(size),
+                  _buildTriangle(size),
+                  _buildYear(size),
+                  _buildOpacity(size),
+                  _buildTitle(size),
+                  _buildSubtitle(size),
                 ],
               ),
             ),
@@ -75,10 +91,10 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
     );
   }
 
-  Widget _buildProgressIndicator() {
+  Widget _buildProgressIndicator(size) {
     return Container(
       width: ScreenUtil.getInstance().setWidth(ScreenSize.width - 2 * ScreenSize.padding),
-      height: ScreenUtil.getInstance().setHeight(ScreenSize.year_rank_height),
+      height: ScreenUtil.getInstance().setHeight(size['size']['year_rank_height']),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(7)),
       ),
@@ -88,13 +104,13 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
     );
   }
 
-  Widget _buildRightImage() {
+  Widget _buildRightImage(size) {
     return Positioned(
       top: 0,
       right: 0,
       child: Container(
-        width: ScreenUtil.getInstance().setWidth(ScreenSize.rank_bg_cover_width),
-        height: ScreenUtil.getInstance().setHeight(ScreenSize.rank_bg_cover_height),
+        width: ScreenUtil.getInstance().setWidth(size['size']['rank_bg_cover_width']),
+        height: ScreenUtil.getInstance().setHeight(size['size']['rank_bg_cover_height']),
         decoration: BoxDecoration(
           image: DecorationImage(
             image: CachedNetworkImageProvider(
@@ -111,14 +127,14 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
     );
   }
 
-  Widget _buildTriangle() {
+  Widget _buildTriangle(size) {
     return Positioned(
       top: 0,
-      left:
-          ScreenUtil.getInstance().setWidth(ScreenSize.width - 2 * ScreenSize.padding - ScreenSize.rank_bg_cover_width),
+      left: ScreenUtil.getInstance()
+          .setWidth(ScreenSize.width - 2 * ScreenSize.padding - size['size']['rank_bg_cover_width']),
       child: Container(
-        width: ScreenUtil.getInstance().setWidth(ScreenSize.triangle_top_width),
-        height: ScreenUtil.getInstance().setHeight(ScreenSize.rank_bg_cover_height),
+        width: ScreenUtil.getInstance().setWidth(size['size']['triangle_top_width']),
+        height: ScreenUtil.getInstance().setHeight(size['size']['rank_bg_cover_height']),
         decoration: BoxDecoration(
           color: Colors.transparent,
         ),
@@ -129,7 +145,7 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
     );
   }
 
-  Widget _buildYear() {
+  Widget _buildYear(size) {
     return Positioned(
       top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
       left: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
@@ -144,12 +160,12 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
     );
   }
 
-  Widget _buildOpacity() {
+  Widget _buildOpacity(size) {
     return Opacity(
       opacity: 0.3,
       child: Container(
         width: ScreenUtil.getInstance().setWidth(ScreenSize.width - 2 * ScreenSize.padding),
-        height: ScreenUtil.getInstance().setHeight(ScreenSize.year_rank_height),
+        height: ScreenUtil.getInstance().setHeight(size['size']['year_rank_height']),
         decoration: BoxDecoration(
           color: this.color,
           borderRadius: BorderRadius.all(Radius.circular(7)),
@@ -158,9 +174,9 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
     );
   }
 
-  Widget _buildTitle() {
+  Widget _buildTitle(size) {
     return Positioned(
-      top: ScreenUtil.getInstance().setHeight(ScreenSize.year_rank_height / 2 - 24),
+      top: ScreenUtil.getInstance().setHeight(size['size']['year_rank_height'] / 2 - 24),
       left: ScreenUtil.getInstance().setWidth(2 * ScreenSize.padding),
       child: Text(
         widget.title,
@@ -173,7 +189,7 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
     );
   }
 
-  Widget _buildSubtitle() {
+  Widget _buildSubtitle(size) {
     return Positioned(
       top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2.8),
       left: ScreenUtil.getInstance().setWidth(2 * ScreenSize.padding),

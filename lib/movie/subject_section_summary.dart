@@ -7,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SubjectSectionSummary extends StatelessWidget {
   final _subject;
-  SubjectSectionSummary(this._subject);
+  SubjectSectionSummary(this._subject, {Key key}): super(key: key);
 
   @override
   Widget build(BuildContext context) {
