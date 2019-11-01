@@ -30,13 +30,20 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
 
   @override
   Widget build(BuildContext context) {
+    var size = ScreenSize.calculateSize(
+      context: context,
+      width1: ScreenSize.movie_cover_width,
+      height1: ScreenSize.movie_cover_height,
+      width2: ScreenSize.movie_cover_width2,
+      height2: ScreenSize.movie_cover_height2,
+    );
     if (subject == null) {
       return Container(
         padding: EdgeInsets.all(
           ScreenUtil.getInstance().setWidth(ScreenSize.padding),
         ),
-        width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_cover_width),
-        height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_cover_height),
+        width: ScreenUtil.getInstance().setWidth(size['width']),
+        height: ScreenUtil.getInstance().setHeight(size['height']),
       );
     }
     return Container(
@@ -44,24 +51,19 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
         ScreenUtil.getInstance().setWidth(ScreenSize.padding),
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              _buildCoverImage(context),
-              _buildSpace(),
-              _buildDescription(),
-              buildDivider(),
-            ],
-          ),
+          _buildCoverImage(context, size),
+          _buildSpace(),
+          _buildDescription(),
+          buildDivider(size),
           _buildWanted(context)
         ],
       ),
     );
   }
 
-  Widget _buildCoverImage(context) {
+  Widget _buildCoverImage(context, size) {
     return GestureDetector(
       onTap: () {
         NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_DETAILS_TITLE,
@@ -69,8 +71,12 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
       },
       child: Stack(
         children: <Widget>[
-          MovieUtil.buildMovieCover(this.subject['images']['small'],
-              heroTag: this.widget.section + this.subject['images']['small']),
+          MovieUtil.buildMovieCover(
+            this.subject['images']['small'],
+            heroTag: this.widget.section + this.subject['images']['small'],
+            widthPx: size['width'],
+            heightPx: size['height'],
+          ),
           MovieUtil.buildFavoriteIcon(),
           MovieUtil.buildSubType(this.subject['subtype']),
           MovieUtil.buildIsNew(this.widget.isNew),
@@ -82,14 +88,11 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
   Widget _buildSpace() {
     return SizedBox(
       width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-      height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_cover_height),
     );
   }
 
   Widget _buildDescription() {
-    return Container(
-      width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_description_width),
-      height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_cover_height),
+    return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -160,9 +163,7 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
   }
 
   Widget _buildDetails() {
-    String details = "";
-
-    details = MovieUtil.getYear(this.subject) +
+    String details = MovieUtil.getYear(this.subject) +
         " / " +
         MovieUtil.getPubPlace(this.subject) +
         " / " +
@@ -171,7 +172,6 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
         MovieUtil.getDirectors(this.subject) +
         " / " +
         MovieUtil.getCasts(this.subject);
-
     return Text(
       details,
       maxLines: 6,
@@ -179,33 +179,31 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
     );
   }
 
-  Widget buildDivider() {
+  Widget buildDivider(size) {
     return Container(
       width: ScreenUtil.getInstance().setWidth(1),
-      height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_cover_height),
+      height: ScreenUtil.getInstance().setHeight(size['height']),
       color: Colors.orangeAccent,
     );
   }
 
   Widget _buildWanted(context) {
-    return Expanded(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          IconButton(
-            icon: Icon(Icons.favorite_border),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        IconButton(
+          icon: Icon(Icons.favorite_border),
+          color: Colors.orange,
+          onPressed: () {},
+        ),
+        Text(
+          LabelConstant.MOVIE_WANTED_TITLE,
+          style: TextStyle(
             color: Colors.orange,
-            onPressed: () {},
           ),
-          Text(
-            LabelConstant.MOVIE_WANTED_TITLE,
-            style: TextStyle(
-              color: Colors.orange,
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

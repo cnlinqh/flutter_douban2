@@ -87,9 +87,7 @@ class ScreenSize {
   static const double top_cover_height2 = 800;
 
   static const double movie_divider_height = 80;
-
-  //the width of movie description
-  static const double movie_description_width = 400;
+  static const double movie_divider_height2 = 140;
 
   static const double movie_cate_search_bar_hight = 75;
   // static const double radio_width = 100;

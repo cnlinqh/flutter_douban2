@@ -52,10 +52,14 @@ class MovieUtil {
     );
   }
 
-  static buildIndexNo(index) {
+  static buildIndexNo(index, {String orientation = 'Orientation.portrait'}) {
+    var width = ScreenSize.movie_cover_width + ScreenSize.padding * 2;
+    if (orientation == 'Orientation.landscape') {
+      width = ScreenSize.movie_cover_width2 + ScreenSize.padding * 2;
+    }
     return Positioned(
       bottom: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 4),
-      left: ScreenUtil.getInstance().setWidth(ScreenSize.movie_cover_width + ScreenSize.padding * 2),
+      left: ScreenUtil.getInstance().setWidth(width),
       child: Container(
         child: Text(
           "No. ${index + 1}",

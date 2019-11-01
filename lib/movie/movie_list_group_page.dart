@@ -54,6 +54,12 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
 
   @override
   Widget build(BuildContext context) {
+    var size = ScreenSize.calculateSize(
+      context: context,
+      height1: ScreenSize.movie_divider_height,
+      height2: ScreenSize.movie_divider_height2,
+    );
+
     return new Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -61,9 +67,9 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
       body: Container(
         child: Column(
           children: <Widget>[
-            _buildTopBar(),
+            _buildTopBar(size),
             Expanded(
-              child: _buildNotificationListener(),
+              child: _buildNotificationListener(size),
             )
           ],
         ),
@@ -71,7 +77,7 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
     );
   }
 
-  Widget _buildNotificationListener() {
+  Widget _buildNotificationListener(size) {
     return NotificationListener(
       onNotification: (ScrollNotification notification) {
         RenderBox boxListView = keyListView.currentContext.findRenderObject();
@@ -85,7 +91,7 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
             top2Text = _getPubdate(visibleItem['index']);
             LogUtil.log("topText $topText");
             LogUtil.log("top2Text $top2Text");
-            if (tmp < 0 - ScreenUtil.getInstance().setHeight(ScreenSize.movie_divider_height)) {
+            if (tmp < 0 - ScreenUtil.getInstance().setHeight(size['height'])) {
               this.top = 0;
               topText = top2Text;
             } else {
@@ -99,11 +105,11 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
         }
         return true;
       },
-      child: _buildListView(),
+      child: _buildListView(size),
     );
   }
 
-  Widget _buildListView() {
+  Widget _buildListView(size) {
     return ListView.separated(
       key: keyListView,
       itemCount: _dataList.length,
@@ -113,7 +119,7 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
           return Container();
         } else {
           return Container(
-            child: _buildMovieGeneral(index),
+            child: _buildMovieGeneral(size, index),
           );
         }
       },
@@ -154,10 +160,10 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
     return firstVisibleItem;
   }
 
-  Widget _buildTopBar() {
+  Widget _buildTopBar(size) {
     return Container(
       width: ScreenUtil.getInstance().setWidth(ScreenSize.width - ScreenSize.padding * 2),
-      height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_divider_height),
+      height: ScreenUtil.getInstance().setHeight(size['height']),
       child: Stack(
         children: <Widget>[
           Positioned(
@@ -165,7 +171,7 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
             top: top,
             child: Container(
               width: ScreenUtil.getInstance().setWidth(ScreenSize.width - ScreenSize.padding * 2),
-              height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_divider_height),
+              height: ScreenUtil.getInstance().setHeight(size['height']),
               child: Center(
                 child: Text(
                   topText,
@@ -176,10 +182,10 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
           ),
           Positioned(
             left: 0,
-            top: top + ScreenUtil.getInstance().setHeight(ScreenSize.movie_divider_height),
+            top: top + ScreenUtil.getInstance().setHeight(size['height']),
             child: Container(
               width: ScreenUtil.getInstance().setWidth(ScreenSize.width - ScreenSize.padding * 2),
-              height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_divider_height),
+              height: ScreenUtil.getInstance().setHeight(size['height']),
               child: Center(
                 child: Text(
                   top2Text,
@@ -193,10 +199,10 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
     );
   }
 
-  _buildIntervalBar({int index = 0}) {
+  _buildIntervalBar(size, {int index = 0}) {
     return Container(
       width: ScreenUtil.getInstance().setWidth(ScreenSize.width - ScreenSize.padding * 2),
-      height: ScreenUtil.getInstance().setHeight(ScreenSize.movie_divider_height),
+      height: ScreenUtil.getInstance().setHeight(size['height']),
       child: Center(
         child: Text(
           _getPubdate(index),
@@ -228,22 +234,22 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
     LogUtil.log('printInfo end');
   }
 
-  Widget _buildMovieGeneral(index) {
+  Widget _buildMovieGeneral(size, index) {
     return GestureDetector(
       key: keyItems[index],
       onTap: () {
         printInfo();
       },
       child: Column(
-        children: _buildChildren(index),
+        children: _buildChildren(size, index),
       ),
     );
   }
 
-  List<Widget> _buildChildren(index) {
+  List<Widget> _buildChildren(size, index) {
     List<Widget> list = [];
     if (_isNewSection(index)) {
-      list.add(_buildIntervalBar(index: index));
+      list.add(_buildIntervalBar(size, index: index));
     }
     list.add(Stack(
       children: <Widget>[
@@ -251,7 +257,7 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
           getSubject(index)['id'],
           section: this.widget.title,
         ),
-        MovieUtil.buildIndexNo(index),
+        MovieUtil.buildIndexNo(index, orientation: size['orientation']),
       ],
     ));
     return list;
