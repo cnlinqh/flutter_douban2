@@ -24,6 +24,13 @@ class _CeleSectionPhotosState extends State<CeleSectionPhotos> {
 
   @override
   Widget build(BuildContext context) {
+    var size = ScreenSize.calculateSize(
+      context: context,
+      width1: ScreenSize.director_cast_cover_width,
+      height1: ScreenSize.director_cast_cover_height,
+      width2: ScreenSize.director_cast_cover_width2,
+      height2: ScreenSize.director_cast_cover_height2,
+    );
     return Container(
       padding: EdgeInsets.only(
         top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
@@ -33,7 +40,7 @@ class _CeleSectionPhotosState extends State<CeleSectionPhotos> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           _buildHeader(),
-          _buildBody(),
+          _buildBody(size),
         ],
       ),
     );
@@ -74,21 +81,21 @@ class _CeleSectionPhotosState extends State<CeleSectionPhotos> {
     );
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(size) {
     return Consumer<CelePhotosInfo>(
       builder: (context, info, widget) {
         return SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: _buildPhotos(info),
+            children: _buildPhotos(info, size),
           ),
         );
       },
     );
   }
 
-  List<Widget> _buildPhotos(info) {
+  List<Widget> _buildPhotos(info, size) {
     List<Widget> works = [];
     for (int i = 0; i < info.photos.length; i++) {
       var photo = info.photos[i];
@@ -102,7 +109,12 @@ class _CeleSectionPhotosState extends State<CeleSectionPhotos> {
               LabelConstant.CELE_GALLERY_VIEW_TITLE,
             );
           },
-          child: MovieUtil.buildDirectorCastCover(photo['img'], size: photo['size']),
+          child: MovieUtil.buildDirectorCastCover(
+            photo['img'],
+            size: photo['size'],
+            widthPx: size['width'],
+            heightPx: size['height'],
+          ),
         ));
         works.add(SizedBox(
           width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),

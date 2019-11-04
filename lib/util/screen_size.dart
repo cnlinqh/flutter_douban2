@@ -177,5 +177,5 @@ class ScreenSize {
   static const double close_bar_height = 10;
 
   static const double movie_review_place_holder_height = 100;
-  static const double movie_review_place_holder_height2 = 260;
+  static const double movie_review_place_holder_height2 = 200;
 }

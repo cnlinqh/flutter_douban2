@@ -9,6 +9,13 @@ class CeleSectionGeneral extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = ScreenSize.calculateSize(
+      context: context,
+      width1: ScreenSize.director_cast_cover_width,
+      height1: ScreenSize.director_cast_cover_height,
+      width2: ScreenSize.director_cast_cover_width2,
+      height2: ScreenSize.director_cast_cover_height2,
+    );
     return Container(
       padding: EdgeInsets.only(
         top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
@@ -17,13 +24,17 @@ class CeleSectionGeneral extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          MovieUtil.buildDirectorCastCover(this.cele['avatars']['small']),
+          MovieUtil.buildDirectorCastCover(
+            this.cele['avatars']['small'],
+            widthPx: size['width'],
+            heightPx: size['height'],
+          ),
           SizedBox(
             width: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
           ),
           Container(
             width: ScreenUtil.getInstance().setWidth(
-              ScreenSize.width - ScreenSize.padding * 4 - ScreenSize.director_cast_cover_width,
+              ScreenSize.width - ScreenSize.padding * 4 - size['width'],
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,

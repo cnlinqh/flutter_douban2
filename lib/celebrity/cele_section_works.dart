@@ -10,6 +10,13 @@ class CeleSectionWorks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = ScreenSize.calculateSize(
+      context: context,
+      width1: ScreenSize.movie_cover_width,
+      height1: ScreenSize.movie_cover_height,
+      width2: ScreenSize.movie_cover_width2,
+      height2: ScreenSize.movie_cover_height2,
+    );
     return Container(
       padding: EdgeInsets.only(
         top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
@@ -25,13 +32,13 @@ class CeleSectionWorks extends StatelessWidget {
               fontSize: 20,
             ),
           ),
-          _buildBody(),
+          _buildBody(size),
         ],
       ),
     );
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(size) {
     if (this._cele['works'].length == 0) {
       return Text(
         '暂无',
@@ -43,21 +50,25 @@ class CeleSectionWorks extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: _buildWorks(),
+        children: _buildWorks(size),
       ),
     );
   }
 
-  List<Widget> _buildWorks() {
+  List<Widget> _buildWorks(size) {
     List<Widget> works = [];
     this._cele['works'].forEach((work) {
       works.add(Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          MovieUtil.buildMovieCover(work['subject']['images']['small']),
+          MovieUtil.buildMovieCover(
+            work['subject']['images']['small'],
+            widthPx: size['width'],
+            heightPx: size['height'],
+          ),
           Container(
-            width: ScreenUtil.getInstance().setWidth(ScreenSize.movie_cover_width),
+            width: ScreenUtil.getInstance().setWidth(size['width']),
             child: Text(
               work['subject']['title'],
               style: TextStyle(color: Colors.white),

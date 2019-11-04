@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/navigator_helper.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
-import 'package:flutter_douban2/util/screen_size.dart';
 
 class SubjectSectionMediaPhotoTapped extends StatelessWidget {
   final List _photos;

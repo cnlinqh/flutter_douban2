@@ -40,7 +40,7 @@ class _CeleSectionPhotosGridViewState extends State<CeleSectionPhotosGridView> {
         builder: (context, info, widget) {
           return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
+              crossAxisCount: MediaQuery.of(context).orientation == Orientation.portrait ? 3 : 6,
               childAspectRatio: 1,
               crossAxisSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding / 10),
               mainAxisSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding / 10),
