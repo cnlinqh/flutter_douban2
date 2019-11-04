@@ -47,8 +47,8 @@ class _MoviePageState extends State<MoviePage> {
         children: <Widget>[
           MovieViewSlider(),
           MovieViewEntrance(),
-          MovieViewSection(LabelConstant.MOVIE_IN_THEATERS_TITLE),
-          MovieViewSection(LabelConstant.MOVIE_COMING_SOON_TITLE),
+          MovieViewSection(LabelConstant.MOVIE_IN_THEATERS_TITLE, key: ValueKey('1')),
+          MovieViewSection(LabelConstant.MOVIE_COMING_SOON_TITLE, key: ValueKey('2')),
           MovieViewTopList(LabelConstant.MOVIE_RANK_LIST_TITLE),
         ],
       ),

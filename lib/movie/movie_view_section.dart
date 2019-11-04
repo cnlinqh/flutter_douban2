@@ -10,9 +10,10 @@ class MovieViewSection extends StatefulWidget {
   final double fontSize;
   MovieViewSection(
     this.title, {
+    Key key,
     this.fontSize = 24,
     this.rowCount = 2,
-  });
+  }) : super(key: key);
 
   _MovieViewSectionState createState() => _MovieViewSectionState();
 }
