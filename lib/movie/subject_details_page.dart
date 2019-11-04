@@ -142,24 +142,21 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
                   padding: EdgeInsets.all(
                     ScreenUtil.getInstance().setWidth(ScreenSize.padding),
                   ),
-                  child: RefreshIndicator(
-                    onRefresh: _getSubject,
-                    child: ListView(
-                      children: <Widget>[
-                        SubjectSectionGeneral(this._subject, key: GlobalKey(), section: this.widget.content['section']),
-                        SubjectSectionRate(this._subject, key: GlobalKey()),
-                        SubjectSectionTags(this._subject, key: GlobalKey()),
-                        SubjectSectionSummary(this._subject, key: GlobalKey()),
-                        SubjectSectionDirectorsCasts(this._subject, key: GlobalKey()),
-                        SubjectSectionMedia(this._subject),
-                        SubjectSectionAlsoLike(this._subject, section: this.widget.content['section']),
-                        SubjectSectionComments(this._subject),
-                        SubjectSectionReviewsPlaceHolder(
-                          this._subject,
-                          visible: false,
-                        ),
-                      ],
-                    ),
+                  child: ListView(
+                    children: <Widget>[
+                      SubjectSectionGeneral(this._subject, key: GlobalKey(), section: this.widget.content['section']),
+                      SubjectSectionRate(this._subject, key: GlobalKey()),
+                      SubjectSectionTags(this._subject, key: GlobalKey()),
+                      SubjectSectionSummary(this._subject),
+                      SubjectSectionDirectorsCasts(this._subject, key: GlobalKey()),
+                      SubjectSectionMedia(this._subject),
+                      SubjectSectionAlsoLike(this._subject, section: this.widget.content['section']),
+                      SubjectSectionComments(this._subject),
+                      SubjectSectionReviewsPlaceHolder(
+                        this._subject,
+                        visible: false,
+                      ),
+                    ],
                   ),
                 ),
                 Positioned(
