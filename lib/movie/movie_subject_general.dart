@@ -73,7 +73,7 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
         children: <Widget>[
           MovieUtil.buildMovieCover(
             this.subject['images']['small'],
-            heroTag: this.widget.section + this.subject['images']['small'],
+            heroTag: this.widget.section + size['orientation'] + this.subject['images']['small'],
             widthPx: size['width'],
             heightPx: size['height'],
           ),

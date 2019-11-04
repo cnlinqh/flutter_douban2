@@ -37,7 +37,7 @@ class MovieUtil {
     double heightPx = ScreenSize.movie_cover_height,
   }) {
     return Hero(
-      key: GlobalKey(),
+      // key: GlobalKey(),
       tag: heroTag != '' ? heroTag : cover,
       child: Container(
         width: ScreenUtil.getInstance().setWidth(widthPx),

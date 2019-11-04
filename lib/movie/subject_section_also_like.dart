@@ -84,7 +84,7 @@ class _SubjectSectionAlsoLikeState extends State<SubjectSectionAlsoLike> {
               },
               child: MovieUtil.buildMovieCover(
                 like['cover'],
-                heroTag: this.widget.section + like['cover'],
+                heroTag: this.widget.section  + size['orientation']+ like['cover'],
                 widthPx: size['width'],
                 heightPx: size['height'],
               ),

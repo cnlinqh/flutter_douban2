@@ -46,7 +46,7 @@ class SubjectSectionGeneral extends StatelessWidget {
   Widget _buildCover(size) {
     return MovieUtil.buildMovieCover(
       this._subject['images']['small'],
-      heroTag: this.section + this._subject['images']['small'],
+      heroTag: this.section  + size['orientation']+ this._subject['images']['small'],
       widthPx: size['width'],
       heightPx: size['height'],
     );
