@@ -37,28 +37,67 @@ class _SubjectVideoSetState extends State<SubjectVideoSet> {
       appBar: AppBar(
         title: Text(_buildTitle(this.selectedIndex)),
       ),
-      body: Container(
-        width: ScreenUtil.getInstance().setWidth(ScreenSize.width),
-        padding: EdgeInsets.all(
-          ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-        ),
-        child: Container(
-          child: Column(
-            children: <Widget>[
-              Container(
-                width: ScreenUtil.getInstance().setWidth(ScreenSize.video_width),
-                height: ScreenUtil.getInstance().setHeight(ScreenSize.video_height),
-                child: Chewie(
-                  controller: chewieController,
-                ),
+      body: OrientationBuilder(
+        builder: (context, orientation) {
+          if (orientation == Orientation.portrait) {
+            return _buildVerticalBody();
+          } else {
+            return _buildHorizontalBody();
+          }
+        },
+      ),
+    );
+  }
+
+  Widget _buildVerticalBody() {
+    return Container(
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.width),
+      padding: EdgeInsets.all(
+        ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+      ),
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            Container(
+              width: ScreenUtil.getInstance().setWidth(ScreenSize.video_width),
+              height: ScreenUtil.getInstance().setHeight(ScreenSize.video_height),
+              child: Chewie(
+                controller: chewieController,
               ),
-              Expanded(
-                child: ListView(
-                  children: _buildVideoList(context),
-                ),
-              )
-            ],
-          ),
+            ),
+            Expanded(
+              child: ListView(
+                children: _buildVideoList(context),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHorizontalBody() {
+    return Container(
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.width),
+      padding: EdgeInsets.all(
+        ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+      ),
+      child: Container(
+        child: Row(
+          children: <Widget>[
+            Container(
+              width: ScreenUtil.getInstance().setWidth(ScreenSize.video_width2),
+              height: ScreenUtil.getInstance().setHeight(ScreenSize.video_height2),
+              child: Chewie(
+                controller: chewieController,
+              ),
+            ),
+            Expanded(
+              child: ListView(
+                children: _buildVideoList(context),
+              ),
+            )
+          ],
         ),
       ),
     );
@@ -81,7 +120,7 @@ class _SubjectVideoSetState extends State<SubjectVideoSet> {
           videoPlayerControllerList[selectedIndex].pause();
           videoPlayerControllerList[selectedIndex].seekTo(Duration(seconds: 0));
           this.selectedIndex = index;
-          chewieController = chewieController;
+          chewieController = getChewieController();
         });
       }
     }
@@ -119,7 +158,7 @@ class _SubjectVideoSetState extends State<SubjectVideoSet> {
       aspectRatio: 3 / 2,
       autoPlay: true,
       looping: true,
-      allowFullScreen: false,
+      allowFullScreen: true,
       // showControls: false,
       materialProgressColors: ChewieProgressColors(
         playedColor: Colors.red,
@@ -146,12 +185,25 @@ class VideoPlaceHolder extends StatelessWidget {
   const VideoPlaceHolder(this.videoList, this.index, this.onVideoSelected);
   @override
   Widget build(BuildContext context) {
+    var size = ScreenSize.calculateSize(
+      context: context,
+      width1: ScreenSize.photo_cover_width,
+      height1: ScreenSize.photo_cover_height,
+      width2: ScreenSize.photo_cover_width2,
+      height2: ScreenSize.photo_cover_height2,
+    );
     return Container(
       child: GestureDetector(
         onTap: () {
           this.onVideoSelected(this.index);
         },
-        child: MovieUtil.buildVideoCover(this.videoList[index]['medium'], scale: 0.5),
+        child: MovieUtil.buildVideoCover(
+          this.videoList[index]['medium'],
+          scale: size['orientation'] == Orientation.portrait.toString() ? 0.5 : 0.3,
+          widthPx: size['width'],
+          heightPx: size['height'],
+          orientation: size['orientation'],
+        ),
       ),
     );
   }

@@ -256,6 +256,7 @@ class MovieUtil {
     double widthPx = ScreenSize.photo_cover_width,
     double heightPx = ScreenSize.photo_cover_height,
     double scale = 1,
+    String orientation = 'Orientation.portrait',
   }) {
     return Stack(
       children: <Widget>[
@@ -279,11 +280,17 @@ class MovieUtil {
             child: Opacity(
               opacity: 0.8,
               child: Container(
-                height: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 8),
-                width: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 8),
+                height: ScreenUtil.getInstance().setWidth(
+                  orientation == Orientation.portrait.toString() ? ScreenSize.padding * 6 : ScreenSize.padding * 3,
+                ),
+                width: ScreenUtil.getInstance().setWidth(
+                  orientation == Orientation.portrait.toString() ? ScreenSize.padding * 6 : ScreenSize.padding * 3,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.black,
-                  borderRadius: BorderRadius.circular(ScreenUtil.getInstance().setWidth(ScreenSize.padding * 6)),
+                  borderRadius: BorderRadius.circular(ScreenUtil.getInstance().setWidth(
+                    orientation == Orientation.portrait.toString() ? ScreenSize.padding * 6 : ScreenSize.padding * 3,
+                  )),
                 ),
                 child: Center(
                   child: Icon(

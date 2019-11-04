@@ -7,7 +7,7 @@ class SubjectSectionMediaVideoTapped extends StatelessWidget {
   final _subject;
   final String _cover;
   final size;
-  SubjectSectionMediaVideoTapped(this._subject, this._cover, this.size,{Key key}): super(key: key);
+  SubjectSectionMediaVideoTapped(this._subject, this._cover, this.size, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +19,7 @@ class SubjectSectionMediaVideoTapped extends StatelessWidget {
         this._cover,
         widthPx: size['width'],
         heightPx: size['height'],
+        orientation: size['orientation'],
       ),
     );
   }

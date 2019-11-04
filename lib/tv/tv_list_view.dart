@@ -52,7 +52,7 @@ class _TVListViewState extends State<TVListView> with AutomaticKeepAliveClientMi
         } else {
           return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
+              crossAxisCount: MediaQuery.of(context).orientation == Orientation.portrait ? 3 : 6,
               childAspectRatio: 0.6,
               crossAxisSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding / 10),
               mainAxisSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding / 10),

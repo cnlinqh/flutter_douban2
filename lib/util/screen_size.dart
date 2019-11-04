@@ -168,6 +168,9 @@ class ScreenSize {
   //the width & height of video
   static const double video_width = 750;
   static const double video_height = 450;
+    //the width & height of video
+  static const double video_width2 = 400;
+  static const double video_height2 = 1000;
 
   //the width & height of self define dialog
   static const double self_define_dlg_width = 400;
