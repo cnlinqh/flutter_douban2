@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'dart:math';
 
 class ScreenSize {
   static printSizeInfo(BuildContext context) {
@@ -168,7 +169,7 @@ class ScreenSize {
   //the width & height of video
   static const double video_width = 750;
   static const double video_height = 450;
-    //the width & height of video
+  //the width & height of video
   static const double video_width2 = 400;
   static const double video_height2 = 1000;
 
@@ -181,4 +182,22 @@ class ScreenSize {
 
   static const double movie_review_place_holder_height = 100;
   static const double movie_review_place_holder_height2 = 200;
+
+  static double childAspectRatio(context) {
+    var w = 0.0;
+    var h = 0.0;
+    if (MediaQuery.of(context).orientation == Orientation.portrait) {
+      w = ScreenUtil.getInstance().setWidth(ScreenSize.movie_cover_width);
+      h = ScreenUtil.getInstance().setHeight(ScreenSize.movie_cover_height);
+    } else {
+      w = ScreenUtil.getInstance().setWidth(ScreenSize.movie_cover_width2);
+      h = ScreenUtil.getInstance().setHeight(ScreenSize.movie_cover_height2);
+    }
+    // When fontSize is not given, the default size is 14 logical pixels.
+    // height of Title=14 , height of RateStar = 14
+    h = h + 14 + 14;
+    double mod = pow(10.0, 2);
+    // -0.01 to make sure enough height
+    return ((w / h * mod).floor().toDouble() / mod) - 0.01;
+  }
 }

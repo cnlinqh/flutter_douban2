@@ -50,26 +50,29 @@ class _TVListViewState extends State<TVListView> with AutomaticKeepAliveClientMi
             },
           );
         } else {
-          return GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: MediaQuery.of(context).orientation == Orientation.portrait ? 3 : 6,
-              childAspectRatio: 0.6,
-              crossAxisSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding / 10),
-              mainAxisSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding / 10),
+          return Container(
+            padding: EdgeInsets.all(ScreenUtil.getInstance().setWidth(ScreenSize.padding)),
+            child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: MediaQuery.of(context).orientation == Orientation.portrait ? 3 : 6,
+                childAspectRatio: ScreenSize.childAspectRatio(context),
+                crossAxisSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding / 10),
+                mainAxisSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding / 10),
+              ),
+              itemCount: model.tvs(this.widget.tag).length,
+              itemBuilder: (context, index) {
+                if (model.loading(this.widget.tag, index)) {
+                  model.more(this.widget.tag);
+                  return Container();
+                } else {
+                  return MovieSubjectSimple(
+                    model.tvs(this.widget.tag)[index]['id'],
+                    section: this.widget.tag,
+                    isNew: model.tvs(this.widget.tag)[index]['is_new'],
+                  );
+                }
+              },
             ),
-            itemCount: model.tvs(this.widget.tag).length,
-            itemBuilder: (context, index) {
-              if (model.loading(this.widget.tag, index)) {
-                model.more(this.widget.tag);
-                return Container();
-              } else {
-                return MovieSubjectSimple(
-                  model.tvs(this.widget.tag)[index]['id'],
-                  section: this.widget.tag,
-                  isNew: model.tvs(this.widget.tag)[index]['is_new'],
-                );
-              }
-            },
           );
         }
       },

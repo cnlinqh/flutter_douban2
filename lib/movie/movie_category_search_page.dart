@@ -241,8 +241,9 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: MediaQuery.of(context).orientation == Orientation.portrait ? 3 : 6,
-            childAspectRatio: 0.55,
-            crossAxisSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+            childAspectRatio: ScreenSize.childAspectRatio(context),
+            crossAxisSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding / 10),
+            mainAxisSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding / 10),
           ),
           itemCount: _dataList.length,
           itemBuilder: (context, index) {
