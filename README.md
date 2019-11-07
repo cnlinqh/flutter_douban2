@@ -70,6 +70,17 @@ $ cd flutter_douban2
 
 $ flutter run
 
+## Gif
+
+* [movie.gif](https://github.com/cnlinqh/flutter_douban2/blob/master/gif/movie.gif)
+* [tv.gif](https://github.com/cnlinqh/flutter_douban2/blob/master/gif/tv.gif)
+* [subject.gif](https://github.com/cnlinqh/flutter_douban2/blob/master/gif/subject.gif) 
+* [orientation.gif](https://github.com/cnlinqh/flutter_douban2/blob/master/gif/orientation.gif)
+
+![movie.gif](https://github.com/cnlinqh/flutter_douban2/blob/master/gif/movie.gif) | ![tv.gif](https://github.com/cnlinqh/flutter_douban2/blob/master/gif/tv.gif)
+![subject.gif](https://github.com/cnlinqh/flutter_douban2/blob/master/gif/subject.gif) | ![orientation.gif](https://github.com/cnlinqh/flutter_douban2/blob/master/gif/orientation.gif)
+
+
 ## Videos
 
 * [movie.mp4](https://github.com/cnlinqh/flutter_douban2/tree/master/video/movie.mp4)
