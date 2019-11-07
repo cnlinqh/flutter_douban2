@@ -38,18 +38,38 @@ class SubjectSectionTags extends StatelessWidget {
       ));
       list.add(GestureDetector(
         onTap: () {
-          LabelConstant.addOneSpecial(t);
+          var content;
+          if ((LabelConstant.sTags['list'] as List).indexOf(t) != -1) {
+            content = MovieCategorySearchPage(
+              tag: t,
+            );
+          } else if ((LabelConstant.sStyleList['list'] as List).indexOf(t) != -1) {
+            content = MovieCategorySearchPage(
+              style: t,
+            );
+          } else if ((LabelConstant.sCountriesList['list'] as List).indexOf(t) != -1) {
+            content = MovieCategorySearchPage(
+              country: t,
+            );
+          } else if ((LabelConstant.sYearList['list'] as List).indexOf(t) != -1) {
+            content = MovieCategorySearchPage(
+              year: t,
+            );
+          } else {
+            LabelConstant.addOneSpecial(t);
+            content = MovieCategorySearchPage(
+              special: t,
+            );
+          }
           NavigatorHelper.pushToPage(
             context,
             LabelConstant.MOVIE_CATEGORY_TITLE,
-            content: MovieCategorySearchPage(
-              special: t,
-            ),
+            content: content,
           );
         },
         child: Container(
           padding: EdgeInsets.all(
-            ScreenUtil.getInstance().setWidth(ScreenSize.padding ),
+            ScreenUtil.getInstance().setWidth(ScreenSize.padding),
           ),
           decoration: BoxDecoration(
             color: Colors.grey,

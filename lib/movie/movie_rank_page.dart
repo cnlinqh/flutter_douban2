@@ -72,6 +72,16 @@ class _MovieRankPageState extends State<MovieRankPage> {
       fontSize: 20,
     ));
     views.add(MovieViewSection(
+      LabelConstant.MOVIE_RANK_TOP20_FICTION,
+      rowCount: 1,
+      fontSize: 20,
+    ));
+    views.add(MovieViewSection(
+      LabelConstant.MOVIE_RANK_TOP20_DOCUMENTARY,
+      rowCount: 1,
+      fontSize: 20,
+    ));
+    views.add(MovieViewSection(
       LabelConstant.MOVIE_RANK_TOP20_SHORT,
       rowCount: 1,
       fontSize: 20,

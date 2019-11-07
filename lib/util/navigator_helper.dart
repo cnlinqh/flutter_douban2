@@ -91,6 +91,7 @@ class NavigatorHelper {
       case LabelConstant.MOVIE_RANK_TOP20_CARTOON:
       case LabelConstant.MOVIE_RANK_TOP20_FICTION:
       case LabelConstant.MOVIE_RANK_TOP20_DOCUMENTARY:
+      case LabelConstant.MOVIE_RANK_TOP20_SHORT:
       case LabelConstant.MOVIE_RANK_TOP20_LGBT:
       case LabelConstant.MOVIE_RANK_TOP20_MUSICAL:
       case LabelConstant.MOVIE_RANK_TOP20_DANCE:

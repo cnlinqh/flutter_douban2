@@ -195,7 +195,9 @@ class LabelConstant {
   static void addOneSpecial(special) {
     resetSpecialList();
     List list = sSpecialList['list'];
-    list.insert(list.length - 1, special);
+    if (list.indexOf(special) == -1) {
+      list.insert(list.length - 1, special);
+    }
   }
 
   static const String MOVIE_CHOOSE_TOPIC = "专题";

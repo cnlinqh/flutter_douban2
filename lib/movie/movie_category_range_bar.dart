@@ -22,6 +22,7 @@ class MovieCategoryRangeBar extends StatelessWidget {
       height2: ScreenSize.movie_cate_search_bar_height2,
     );
     return Container(
+      color: Colors.white,
       width: ScreenUtil.getInstance().setWidth(ScreenSize.width - 2 * ScreenSize.padding),
       height: ScreenUtil.getInstance().setHeight(size['height']),
       child: Row(

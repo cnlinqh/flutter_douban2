@@ -73,7 +73,7 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
             });
           },
           child: Text(
-            LabelConstant.MOVIE_ALL_TITLE,
+            LabelConstant.MOVIE_ALL_TITLE + '>',
             style: TextStyle(
               color: Colors.white,
             ),

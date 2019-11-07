@@ -40,7 +40,7 @@ class TVChoosePage extends StatelessWidget {
       ),
     ];
 
-    views.add(MovieViewSectionHeader("2018", navigatable: false));
+    views.add(MovieViewSectionHeader("2018年度榜单", navigatable: false));
     list2018.forEach((f) {
       views.add(MovieRankSectionYear(
         year: '2018',
@@ -50,7 +50,7 @@ class TVChoosePage extends StatelessWidget {
       ));
     });
 
-    views.add(MovieViewSectionHeader("2017", navigatable: false));
+    views.add(MovieViewSectionHeader("2017年度榜单", navigatable: false));
     list2017.forEach((f) {
       views.add(MovieRankSectionYear(
         year: '2017',
@@ -60,7 +60,7 @@ class TVChoosePage extends StatelessWidget {
       ));
     });
 
-    views.add(MovieViewSectionHeader("2016", navigatable: false));
+    views.add(MovieViewSectionHeader("2016年度榜单", navigatable: false));
     list2016.forEach((f) {
       views.add(MovieRankSectionYear(
         year: '2016',
@@ -70,7 +70,7 @@ class TVChoosePage extends StatelessWidget {
       ));
     });
 
-    views.add(MovieViewSectionHeader("2015", navigatable: false));
+    views.add(MovieViewSectionHeader("2015年度榜单", navigatable: false));
     list2015.forEach((f) {
       views.add(MovieRankSectionYear(
         year: '2015',

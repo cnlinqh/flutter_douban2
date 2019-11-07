@@ -32,6 +32,7 @@ class _MovieCategorySortBar2State extends State<MovieCategorySortBar2> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.white,
       width: ScreenUtil.getInstance().setWidth(ScreenSize.width - 2 * ScreenSize.padding),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -83,6 +84,7 @@ class _MovieCategoryRadioBarState extends State<MovieCategoryRadioBar> with Tick
       height2: ScreenSize.movie_cate_search_bar_height2,
     );
     return Container(
+      color: Colors.white,
       child: Stack(
         children: <Widget>[
           Container(

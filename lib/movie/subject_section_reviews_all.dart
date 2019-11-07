@@ -216,10 +216,10 @@ class _SubjectSectionReviewsAllState extends State<SubjectSectionReviewsAll> {
     var warning = false;
     var index = review['shortContent'].indexOf("这篇影评可能有剧透");
     var index2 = review['shortContent'].indexOf("这篇剧评可能有剧透");
-    warning = index == 0 || index2 ==0;
+    warning = index == 0 || index2 == 0;
     if (index == 0) {
       newShortContent = review['shortContent'].replaceAll(RegExp(r'这篇影评可能有剧透'), "").trim();
-    }if (index2 ==0) {
+    } else if (index2 == 0) {
       newShortContent = review['shortContent'].replaceAll(RegExp(r'这篇剧评可能有剧透'), "").trim();
     } else {
       newShortContent = review['shortContent'];

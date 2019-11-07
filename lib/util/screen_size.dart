@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/util/log_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:math';
 
@@ -197,7 +198,9 @@ class ScreenSize {
     // height of Title=14 , height of RateStar = 14
     h = h + 14 + 14;
     double mod = pow(10.0, 2);
-    // -0.01 to make sure enough height
-    return ((w / h * mod).floor().toDouble() / mod) - 0.01;
+    // -0.02 to make sure enough height
+    LogUtil.log('childAspectRatio before ${w / h}');
+    LogUtil.log('childAspectRatio after ${((w / h * mod).floor().toDouble() / mod) - 0.02}');
+    return ((w / h * mod).floor().toDouble() / mod) - 0.02;
   }
 }

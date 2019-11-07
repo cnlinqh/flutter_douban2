@@ -43,8 +43,12 @@ class _MovieViewSectionState extends State<MovieViewSection> {
       this._subjects = await client.newSearchSubjects('?start=0&sort=S&range=0,12&genres=剧情&tags=电影');
     } else if (this.widget.title == LabelConstant.MOVIE_RANK_TOP20_CARTOON) {
       this._subjects = await client.newSearchSubjects('?start=0&sort=S&range=0,12&genres=动画&tags=电影');
+    } else if (this.widget.title == LabelConstant.MOVIE_RANK_TOP20_FICTION) {
+      this._subjects = await client.newSearchSubjects('?start=0&sort=S&range=0,12&genres=科幻&tags=电影');
+    } else if (this.widget.title == LabelConstant.MOVIE_RANK_TOP20_DOCUMENTARY) {
+      this._subjects = await client.newSearchSubjects('?start=0&sort=S&range=0,12&tags=纪录片,电影');
     } else if (this.widget.title == LabelConstant.MOVIE_RANK_TOP20_SHORT) {
-      this._subjects = await client.newSearchSubjects('?start=0&sort=S&range=0,12&genres=爱情&tags=电影');
+      this._subjects = await client.newSearchSubjects('?start=0&sort=S&range=0,12&tags=短片');
     } else if (this.widget.title == LabelConstant.MOVIE_RANK_TOP20_LGBT) {
       this._subjects = await client.newSearchSubjects('?start=0&sort=S&range=0,12&genres=同性&tags=电影');
     } else if (this.widget.title == LabelConstant.MOVIE_RANK_TOP20_MUSICAL) {

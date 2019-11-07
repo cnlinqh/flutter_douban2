@@ -26,7 +26,7 @@ class MovieRankYearsPage extends StatelessWidget {
 class MovieRankList {
   static List<Widget> buildList() {
     List<Widget> list = [];
-    list.add(MovieViewSectionHeader("2018"));
+    list.add(MovieViewSectionHeader("2018年度榜单", navigatable: false));
     MovieRankList.list2018.forEach((f) {
       list.add(MovieRankSectionYear(
         year: '2018',
@@ -36,7 +36,7 @@ class MovieRankList {
       ));
     });
 
-    list.add(MovieViewSectionHeader("2017"));
+    list.add(MovieViewSectionHeader("2017年度榜单", navigatable: false));
     MovieRankList.list2017.forEach((f) {
       list.add(MovieRankSectionYear(
         year: '2017',
@@ -46,7 +46,7 @@ class MovieRankList {
       ));
     });
 
-    list.add(MovieViewSectionHeader("2016"));
+    list.add(MovieViewSectionHeader("2016年度榜单", navigatable: false));
     MovieRankList.list2016.forEach((f) {
       list.add(MovieRankSectionYear(
         year: '2016',
@@ -56,7 +56,7 @@ class MovieRankList {
       ));
     });
 
-    list.add(MovieViewSectionHeader("2015"));
+    list.add(MovieViewSectionHeader("2015年度榜单", navigatable: false));
     MovieRankList.list2015.forEach((f) {
       list.add(MovieRankSectionYear(
         year: '2015',

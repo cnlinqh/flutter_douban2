@@ -35,7 +35,7 @@ class MovieViewSectionHeader extends StatelessWidget {
               if (this.navigatable) NavigatorHelper.pushToPage(context, title, content: this.subjects);
             },
             child: Text(
-              this.navigatable ? LabelConstant.MOVIE_ALL_TITLE : '',
+              this.navigatable ? LabelConstant.MOVIE_ALL_TITLE + '>' : '',
               style: TextStyle(
                 color: Colors.black,
               ),

@@ -422,18 +422,20 @@ class ClientAPI {
     Response res = await webDio.get(url);
     var document = parse(res.toString());
     List<Element> items = document.body.getElementsByClassName('recommendations-bd');
-    items = items[0].getElementsByTagName('dl');
-    items.forEach((item) {
-      var movie = {
-        'cover': item.getElementsByTagName('img')[0].attributes['src'],
-        'title': item.getElementsByTagName('img')[0].attributes['alt'],
-        'href': item.getElementsByTagName('a')[0].attributes['href'],
-      };
-      RegExp id = new RegExp(r'\d+');
-      RegExpMatch match = id.firstMatch(movie['href'].toString());
-      movie['id'] = match.group(0);
-      movies.add(movie);
-    });
+    if (items.length > 0) {
+      items = items[0].getElementsByTagName('dl');
+      items.forEach((item) {
+        var movie = {
+          'cover': item.getElementsByTagName('img')[0].attributes['src'],
+          'title': item.getElementsByTagName('img')[0].attributes['alt'],
+          'href': item.getElementsByTagName('a')[0].attributes['href'],
+        };
+        RegExp id = new RegExp(r'\d+');
+        RegExpMatch match = id.firstMatch(movie['href'].toString());
+        movie['id'] = match.group(0);
+        movies.add(movie);
+      });
+    }
 
     Repository.setCachedObject(key, movies);
     var e = new DateTime.now();
@@ -481,7 +483,7 @@ class ClientAPI {
         'img': item.getElementsByTagName('img')[0].attributes['src'],
         'size': item.getElementsByClassName('prop')[0].text.trim(),
         'comment': item.getElementsByClassName('name')[0].firstChild.text.trim(),
-      });   
+      });
     });
     var counts = document.body.getElementsByClassName('count');
     int total = photos.length;
