@@ -5,6 +5,7 @@ class RateStar extends StatelessWidget {
   final double min;
   final double max;
   final bool labled;
+  final Color lableColor;
   final double size;
   final MainAxisAlignment mainAxisAlignment;
 
@@ -13,6 +14,7 @@ class RateStar extends StatelessWidget {
     this.min = 0.0,
     this.max = 10.0,
     this.labled = true,
+    this.lableColor = Colors.grey,
     this.size = 14,
     this.mainAxisAlignment = MainAxisAlignment.start,
   });
@@ -41,7 +43,7 @@ class RateStar extends StatelessWidget {
       Text(
         labled ? rate.toString() : "",
         style: TextStyle(
-          color: Colors.grey,
+          color: this.lableColor,
           fontSize: this.size,
         ),
       ),
@@ -53,13 +55,9 @@ class RateStar extends StatelessWidget {
     double top = range * index.toDouble();
     double bottom = range * (index.toDouble() - 1);
     return Icon(
-      rate >= top
-          ? Icons.star
-          : rate > bottom ? Icons.star_half : Icons.star_border,
+      rate >= top ? Icons.star : rate > bottom ? Icons.star_half : Icons.star_border,
       size: size,
-      color: rate >= top
-          ? Colors.orange
-          : rate > bottom ? Colors.orangeAccent : Colors.black,
+      color: rate >= top ? Colors.orange : rate > bottom ? Colors.orangeAccent : Colors.black,
     );
   }
 }

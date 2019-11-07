@@ -167,17 +167,17 @@ class MovieUtil {
     return _subject["summary"].toString();
   }
 
-  static Widget buildRate(String rating) {
+  static Widget buildRate(String rating, {Color lableColor = Colors.grey}) {
     if (rating == "") {
       rating = "0";
     }
     var rate = double.parse(rating);
     return rate != 0
-        ? RateStar(rate)
+        ? RateStar(rate, lableColor: lableColor)
         : Text(
             "暂无评分",
             style: TextStyle(
-              color: Colors.grey,
+              color: lableColor,
               fontSize: 14,
             ),
           );

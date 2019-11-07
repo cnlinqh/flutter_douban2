@@ -20,10 +20,10 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
   @override
   void initState() {
     super.initState();
-    _refresh();
+    getSubject();
   }
 
-  void _refresh() async {
+  void getSubject() async {
     subject = await ClientAPI.getInstance().getMovieSubject(widget.id);
     if (mounted) setState(() {});
   }
@@ -171,7 +171,9 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
         " / " +
         MovieUtil.getDirectors(this.subject) +
         " / " +
-        MovieUtil.getCasts(this.subject);
+        MovieUtil.getCasts(this.subject) +
+        " / " +
+        MovieUtil.getDurations(this.subject);
     return Text(
       details,
       maxLines: 6,
