@@ -8,13 +8,19 @@ import 'package:html/dom.dart';
 import 'package:html/parser.dart';
 import 'package:flutter_douban2/util/log_util.dart';
 
+// json
+
 class ClientAPI {
   static ClientAPI api = new ClientAPI();
   static getInstance() {
     return api;
   }
 
-  Dio webDio = initDio(
+  Dio homeDio = initDio(
+    baseUrl: "https://www.douban.com",
+  );
+
+  Dio movieDio = initDio(
     baseUrl: "https://movie.douban.com",
   );
   Dio apiDio = initDio(
@@ -44,7 +50,7 @@ class ClientAPI {
       });
     }
     List hots = [];
-    Response res = await webDio.get("/");
+    Response res = await movieDio.get("/");
     var document = parse(res.toString());
     List<Element> items = document.body.getElementsByClassName('gallery-frame');
     items.forEach((item) {
@@ -194,7 +200,7 @@ class ClientAPI {
       });
     }
     List celebrities = [];
-    Response res = await webDio.get("/subject/" + id + "/celebrities");
+    Response res = await movieDio.get("/subject/" + id + "/celebrities");
     var document = parse(res.toString());
     List<Element> items = document.body.getElementsByClassName('celebrity');
     items.forEach((item) {
@@ -245,7 +251,7 @@ class ClientAPI {
     LogUtil.log(">>ClientAPI: newSearchSubjects($search)");
     var s = new DateTime.now();
     String url = '/j/new_search_subjects$search';
-    Response<Map> res = await webDio.get(url);
+    Response<Map> res = await movieDio.get(url);
     var e = new DateTime.now();
     LogUtil.log("<<<<ClientAPI: newSearchSubjects($search) -----------  ${e.difference(s).inMilliseconds}");
     return res.data['data'];
@@ -256,7 +262,7 @@ class ClientAPI {
     var s = new DateTime.now();
     String url = '/ithil_j/activity/movie_annual$year/widget/$type';
     LogUtil.log(url);
-    Response<Map> res = await webDio.get(url);
+    Response<Map> res = await movieDio.get(url);
     var e = new DateTime.now();
     LogUtil.log("<<<<ClientAPI: newSearchSubjects($year, $type) -----------  ${e.difference(s).inMilliseconds}");
     return res.data['res'];
@@ -267,7 +273,7 @@ class ClientAPI {
     var s = new DateTime.now();
     String url = '/j/search_subjects?type=movie&tag=$tag&page_limit=$count&page_start=$start';
     LogUtil.log(url);
-    Response<Map> res = await webDio.get(url);
+    Response<Map> res = await movieDio.get(url);
     var e = new DateTime.now();
     LogUtil.log("<<<<ClientAPI: searchSubjects($start, $count, $tag) -----------  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
@@ -284,7 +290,7 @@ class ClientAPI {
     var s = new DateTime.now();
     List comments = [];
     var url = "/subject/$subjectId/comments?start=$start&limit=$count&sort=$sort&status=$status";
-    Response res = await webDio.get(url);
+    Response res = await movieDio.get(url);
     var document = parse(res.toString());
     List<Element> items = document.body.getElementsByClassName('comment-item');
     items.forEach((item) {
@@ -341,7 +347,7 @@ class ClientAPI {
     List reviews = [];
     var url = "/subject/$subjectId/reviews?start=$start&count=$count&sort=$sort&rating=$rating";
     LogUtil.log(url);
-    Response res = await webDio.get(url);
+    Response res = await movieDio.get(url);
     var document = parse(res.toString());
     List<Element> items = document.body.getElementsByClassName('main review-item');
     items.forEach((item) {
@@ -401,7 +407,7 @@ class ClientAPI {
         return Repository.getCachedObject(key);
       });
     }
-    Response<Map> res = await webDio.get('/j/review/$rid/full');
+    Response<Map> res = await movieDio.get('/j/review/$rid/full');
     Repository.setCachedObject(key, res.data);
     var e = new DateTime.now();
     LogUtil.log("<<<<ClientAPI: fetchFullReview($rid) -----------  ${e.difference(s).inMilliseconds}");
@@ -419,7 +425,7 @@ class ClientAPI {
     }
     List movies = [];
     var url = '/subject/$subjectId/?from=showing';
-    Response res = await webDio.get(url);
+    Response res = await movieDio.get(url);
     var document = parse(res.toString());
     List<Element> items = document.body.getElementsByClassName('recommendations-bd');
     if (items.length > 0) {
@@ -473,7 +479,7 @@ class ClientAPI {
       });
     }
     var url = '/celebrity/$id/photos/?type=C&start=$start&sortby=$sortBy&size=a&subtype=a';
-    Response res = await webDio.get(url);
+    Response res = await movieDio.get(url);
     var document = parse(res.toString());
     List<Element> items = document.body.getElementsByClassName('poster-col3 clearfix');
     items = items[0].getElementsByTagName('li');
@@ -514,9 +520,54 @@ class ClientAPI {
     var s = new DateTime.now();
     String url = '/j/search_subjects?type=tv&tag=$tag&sort=$sort&page_limit=$count&page_start=$start';
     LogUtil.log(url);
-    Response<Map> res = await webDio.get(url);
+    Response<Map> res = await movieDio.get(url);
     var e = new DateTime.now();
     LogUtil.log("<<<<ClientAPI: searchTvs($start, $count, $tag, $sort) -----------  ${e.difference(s).inMilliseconds}");
     return res.data['subjects'];
   }
+
+  Future<List> search(String text) async {
+    LogUtil.log(">>ClientAPI: search($text)");
+    var s = new DateTime.now();
+    List results = [];
+    Response res = await homeDio.get("/search?cat=1002&q=$text");
+    var document = parse(res.toString());
+    List<Element> items = document.body.getElementsByClassName('result');
+    RegExp reg1 = new RegExp(r'sid: \d+');
+    RegExp reg2 = new RegExp(r'\d+');
+    items.forEach((item) {
+      //{id: moreurl(this,{i: '0', query: '%E7%8E%8B%E7%9A%84%E7%94%B7%E4%BA%BA', from: 'dou_search_movie', sid: 1466394, qcat: '1002'})}˝
+      String onclick = item.getElementsByClassName('nbg')[0].attributes['onclick'].toString();
+      RegExpMatch match1 = reg1.firstMatch(onclick);
+      RegExpMatch match2 = reg2.firstMatch(match1.group(0));
+      String id = match2.group(0);
+
+      String subtype = item.getElementsByTagName('span')[0].text.toString();
+      if (subtype.indexOf('电影') != -1) {
+        subtype = 'movie';
+      } else if (subtype.indexOf('电视剧') != -1) {
+        subtype = 'tv';
+      }
+      var result = {
+        'id': id,
+        'subtype': subtype,
+      };
+      results.add(result);
+    });
+    var e = new DateTime.now();
+    LogUtil.log("<<<<ClientAPI: search($text) -----------  ${e.difference(s).inMilliseconds}");
+    return results;
+  }
+
+
+  Future<List> searchSuggest(String text) async {
+    LogUtil.log(">>ClientAPI: searchSuggest($text)");
+    var s = new DateTime.now();
+    Response res = await movieDio.get("/j/subject_suggest?q=$text");
+    var e = new DateTime.now();
+    LogUtil.log("<<<<ClientAPI: searchSuggest($text) -----------  ${e.difference(s).inMilliseconds}");
+    return res.data;
+  }
+
+  
 }
