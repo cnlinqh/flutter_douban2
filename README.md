@@ -73,6 +73,11 @@ $ cd flutter_douban2
 ```
 $ flutter run
 ```
+## Download
+
+**Android：** [flutter_douban2.apk](https://github.com/cnlinqh/flutter_douban2/blob/master/release/flutter_douban2.apk)
+
+**iOS：** 无。
 
 ## Gif
 
