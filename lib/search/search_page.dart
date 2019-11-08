@@ -14,9 +14,6 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  GlobalKey textFieldKey = GlobalKey();
-  GlobalKey searchIconKey = GlobalKey();
-
   bool isLoading = false;
   List results = [];
 
@@ -38,21 +35,15 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _buildAppBar(),
-      body: _buildBody(),
-      floatingActionButton: _buildAction(),
+    return OrientationBuilder(
+      builder: (contenxt, orientation) {
+        return Scaffold(
+          appBar: _buildAppBar(),
+          body: _buildBody(),
+          floatingActionButton: _buildAction(),
+        );
+      },
     );
-
-    // return OrientationBuilder(
-    //   builder: (contenxt, orientation) {
-    //     return Scaffold(
-    //       appBar: _buildAppBar(),
-    //       body: _buildBody(),
-    //       floatingActionButton: _buildAction(),
-    //     );
-    //   },
-    // );
   }
 
   Widget _buildAppBar() {
@@ -69,7 +60,6 @@ class _SearchPageState extends State<SearchPage> {
                 color: Colors.white,
                 alignment: Alignment.center,
                 child: TextField(
-                  key: textFieldKey,
                   controller: controller,
                   onChanged: (val) => debounce(const Duration(seconds: 1), onSearchTextChange, [val]),
                   decoration: InputDecoration(
@@ -80,7 +70,7 @@ class _SearchPageState extends State<SearchPage> {
                         color: Colors.red,
                       ),
                       onPressed: () {
-                        // controller.clear();
+                        // controller.clear(); workaround
                         //https://github.com/flutter/flutter/issues/17647
                         WidgetsBinding.instance.addPostFrameCallback((_) => controller.clear());
                         results.clear();
@@ -94,7 +84,6 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ),
             IconButton(
-              key: searchIconKey,
               icon: Icon(Icons.search),
               onPressed: onPressSearch,
             )
@@ -151,24 +140,22 @@ class _SearchPageState extends State<SearchPage> {
     if (isSuggesting == false || suggestions.length == 0 || controller.text.trim() == '' || isLoading == true) {
       return Container();
     }
-    RenderBox textFieldBox = this.textFieldKey.currentContext.findRenderObject();
-    RenderBox searchIconBox = this.searchIconKey.currentContext.findRenderObject();
     return Positioned(
-      left: textFieldBox.localToGlobal(Offset.zero).dx - ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
       child: Container(
-        color: Colors.white,
-        width:
-            textFieldBox.size.width + searchIconBox.size.width + ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+        decoration: BoxDecoration(
+          color: Colors.yellowAccent,
+          borderRadius: BorderRadius.all(Radius.circular(7)),
+        ),
         child: SingleChildScrollView(
           child: Column(
-            children: _buildSugChildren(context, textFieldBox, searchIconBox),
+            children: _buildSugChildren(context),
           ),
         ),
       ),
     );
   }
 
-  List _buildSugChildren(context, textFieldBox, searchIconBox) {
+  List _buildSugChildren(context) {
     List<Widget> children = [];
     children.add(Row(
       children: <Widget>[
@@ -218,8 +205,8 @@ class _SearchPageState extends State<SearchPage> {
                 width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
               ),
               Container(
-                width: textFieldBox.size.height,
-                height: textFieldBox.size.height,
+                width: kToolbarHeight,
+                height: kToolbarHeight,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: CachedNetworkImageProvider(sug['img']),
@@ -228,8 +215,11 @@ class _SearchPageState extends State<SearchPage> {
                   borderRadius: BorderRadius.all(Radius.circular(7)),
                 ),
               ),
+              SizedBox(
+                width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+              ),
               Container(
-                width: textFieldBox.size.width - textFieldBox.size.height + searchIconBox.size.width,
+                width: ScreenUtil.getInstance().setWidth(ScreenSize.width - ScreenSize.padding * 4) - kToolbarHeight,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -311,5 +301,9 @@ class _SearchPageState extends State<SearchPage> {
     results = await ClientAPI.getInstance().search(text);
     isLoading = false;
     if (mounted) setState(() {});
+    if (results.length == 0) {
+      final snackBar = new SnackBar(content: new Text('没有找到关于 “$text” 的电影，换个搜索词试试吧。'));
+      Scaffold.of(context).showSnackBar(snackBar);
+    }
   }
 }
