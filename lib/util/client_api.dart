@@ -8,7 +8,6 @@ import 'package:html/dom.dart';
 import 'package:html/parser.dart';
 import 'package:flutter_douban2/util/log_util.dart';
 
-// json
 
 class ClientAPI {
   static ClientAPI api = new ClientAPI();
@@ -559,15 +558,15 @@ class ClientAPI {
     return results;
   }
 
-
-  Future<List> searchSuggest(String text) async {
-    LogUtil.log(">>ClientAPI: searchSuggest($text)");
+  Future<List> suggest(String text) async {
+    LogUtil.log(">>ClientAPI: suggest($text)");
     var s = new DateTime.now();
-    Response res = await movieDio.get("/j/subject_suggest?q=$text");
+    var url = "/j/subject_suggest?q=$text";
+    LogUtil.log(url);
+    Response res = await movieDio.get(url);
     var e = new DateTime.now();
-    LogUtil.log("<<<<ClientAPI: searchSuggest($text) -----------  ${e.difference(s).inMilliseconds}");
+    LogUtil.log("<<<<ClientAPI: suggest($text) -----------  ${e.difference(s).inMilliseconds}");
+    LogUtil.log(res);
     return res.data;
   }
-
-  
 }

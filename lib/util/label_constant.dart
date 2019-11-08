@@ -316,4 +316,6 @@ class LabelConstant {
     "优酷",
     "爱奇艺",
   ];
+
+  static const String SEARCH_MOVIE_TV_CELE='搜索电影/电视剧/综艺/影人';
 }
