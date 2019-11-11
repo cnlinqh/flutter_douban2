@@ -14,11 +14,14 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  String searchText = '';
   bool isLoading = false;
   List results = [];
 
   bool isSuggesting = false;
   List suggestions = [];
+
+  List histories = [];
 
   final TextEditingController controller = TextEditingController();
 
@@ -107,6 +110,7 @@ class _SearchPageState extends State<SearchPage> {
               children: <Widget>[
                 _buildResults(),
                 _buildSuggestions(),
+                _buildHistories(),
               ],
             ),
     );
@@ -143,7 +147,7 @@ class _SearchPageState extends State<SearchPage> {
     return Positioned(
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.yellowAccent,
+          color: Colors.cyanAccent,
           borderRadius: BorderRadius.all(Radius.circular(7)),
         ),
         child: SingleChildScrollView(
@@ -157,34 +161,38 @@ class _SearchPageState extends State<SearchPage> {
 
   List _buildSugChildren(context) {
     List<Widget> children = [];
-    children.add(Row(
-      children: <Widget>[
-        SizedBox(
-          width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-        ),
-        Expanded(
-          child: Text('Suggestions:'),
-        ),
-        IconButton(
-          icon: Icon(
-            Icons.close,
-            color: Colors.redAccent,
+    children.add(
+      Row(
+        children: <Widget>[
+          SizedBox(
+            width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
           ),
-          onPressed: () {
-            if (mounted) {
-              setState(() {
-                this.isSuggesting = false;
-              });
-            }
-          },
-        )
-      ],
-    ));
+          Expanded(
+            child: Text('搜索建议:'),
+          ),
+          IconButton(
+            icon: Icon(
+              Icons.close,
+              color: Colors.redAccent,
+            ),
+            onPressed: () {
+              if (mounted) {
+                setState(() {
+                  this.isSuggesting = false;
+                });
+              }
+            },
+          )
+        ],
+      ),
+    );
 
     this.suggestions.forEach((sug) {
-      children.add(SizedBox(
-        height: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-      ));
+      children.add(
+        SizedBox(
+          height: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+        ),
+      );
       children.add(
         GestureDetector(
           onTap: () {
@@ -242,10 +250,98 @@ class _SearchPageState extends State<SearchPage> {
           ),
         ),
       );
-      children.add(SizedBox(
-        height: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-      ));
+      children.add(
+        SizedBox(
+          height: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+        ),
+      );
     });
+    return children;
+  }
+
+  Widget _buildHistories() {
+    if (controller.text.trim() != '') {
+      return Container();
+    }
+    if (this.histories.length == 0) {
+      return Container();
+    }
+
+    return Positioned(
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.cyanAccent,
+          borderRadius: BorderRadius.all(Radius.circular(7)),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: _buildHisChildren(),
+          ),
+        ),
+      ),
+    );
+  }
+
+  List<Widget> _buildHisChildren() {
+    List<Widget> children = [];
+    children.add(
+      SizedBox(
+        height: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+      ),
+    );
+    children.add(
+      Row(
+        children: <Widget>[
+          SizedBox(
+            width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+          ),
+          Expanded(
+            child: Text('搜索历史:'),
+          ),
+          IconButton(
+            icon: Icon(
+              Icons.delete,
+              color: Colors.grey,
+            ),
+            onPressed: () {
+              if (mounted) {
+                setState(() {
+                  this.histories.clear();
+                });
+              }
+            },
+          )
+        ],
+      ),
+    );
+    children.add(
+      SizedBox(
+        height: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+      ),
+    );
+    children.add(
+      Wrap(
+        spacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+        runSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+        alignment: WrapAlignment.start,
+        children: this.histories.map((his) {
+          return GestureDetector(
+            onTap: () {
+              controller.text = his;
+              onPressSearch();
+            },
+            child: Chip(
+              label: Text(his),
+            ),
+          );
+        }).toList(),
+      ),
+    );
+    children.add(
+      SizedBox(
+        height: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+      ),
+    );
     return children;
   }
 
@@ -256,6 +352,9 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   void onSearchTextChange(String text) {
+    if (searchText.trim() == text.trim()) {
+      return;
+    }
     suggestions.clear();
     if (mounted) setState(() {});
     if (controller.text.trim() != '') {
@@ -290,6 +389,12 @@ class _SearchPageState extends State<SearchPage> {
     if (controller.text.trim() == '') {
       return;
     }
+    if (histories.indexOf(controller.text) == -1) {
+      histories.insert(0, controller.text);
+      if (histories.length > 10) {
+        histories = histories.sublist(0, 10);
+      }
+    }
     results.clear();
     isLoading = true;
     this.isSuggesting = false;
@@ -298,6 +403,7 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   void _search(String text) async {
+    searchText = text;
     results = await ClientAPI.getInstance().search(text);
     isLoading = false;
     if (mounted) setState(() {});
