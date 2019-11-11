@@ -26,9 +26,7 @@ class _CeleSectionPhotosState extends State<CeleSectionPhotos> {
   Widget build(BuildContext context) {
     var size = ScreenSize.calculateSize(
       context: context,
-      width1: ScreenSize.director_cast_cover_width,
       height1: ScreenSize.director_cast_cover_height,
-      width2: ScreenSize.director_cast_cover_width2,
       height2: ScreenSize.director_cast_cover_height2,
     );
     return Container(
@@ -67,13 +65,52 @@ class _CeleSectionPhotosState extends State<CeleSectionPhotos> {
           Expanded(
             child: Text(''),
           ),
+          Consumer<CelePhotosInfo>(
+            builder: (context, info, child) {
+              return DropdownButton(
+                elevation: 24,
+                isDense: false,
+                iconSize: 30,
+                iconEnabledColor: Colors.white,
+                iconDisabledColor: Colors.white,
+                items: _buildDropdowns(),
+                value: info.sortBy,
+                onChanged: (value) {
+                  info.setSortBy(value);
+                },
+              );
+            },
+          ),
+          SizedBox(
+            width: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 4),
+          ),
           GestureDetector(
             onTap: () {
               NavigatorHelper.pushToPage(context, LabelConstant.CELE_GALLERY_GRID_TITLE, content: this.widget._cele);
             },
-            child: Text(
-              "全部>",
-              style: TextStyle(color: Colors.white),
+            // child: Text(
+            //   "Square>",
+            //   style: TextStyle(color: Colors.white),
+            // ),
+            child: Icon(
+              Icons.grid_on,
+              color: Colors.white,
+            ),
+          ),
+          SizedBox(
+            width: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 4),
+          ),
+          GestureDetector(
+            onTap: () {
+              NavigatorHelper.pushToPage(context, LabelConstant.CELE_GALLERY_GRID_TITLE2, content: this.widget._cele);
+            },
+            // child: Text(
+            //   "Waterfall>",
+            //   style: TextStyle(color: Colors.white),
+            // ),
+            child: Icon(
+              Icons.dashboard,
+              color: Colors.white,
             ),
           ),
         ],
@@ -112,8 +149,8 @@ class _CeleSectionPhotosState extends State<CeleSectionPhotos> {
           child: MovieUtil.buildDirectorCastCover(
             photo['img'],
             size: photo['size'],
-            widthPx: size['width'],
             heightPx: size['height'],
+            fixedSide: 'height',
           ),
         ));
         works.add(SizedBox(
@@ -122,5 +159,37 @@ class _CeleSectionPhotosState extends State<CeleSectionPhotos> {
       }
     }
     return works;
+  }
+
+  List<DropdownMenuItem> _buildDropdowns() {
+    List<DropdownMenuItem> items = List();
+    items.add(
+      DropdownMenuItem(
+        child: Text(
+          '按喜欢排序',
+          style: TextStyle(color: Colors.cyan),
+        ),
+        value: 'like',
+      ),
+    );
+    items.add(
+      DropdownMenuItem(
+        child: Text(
+          '按尺寸排序',
+          style: TextStyle(color: Colors.cyan),
+        ),
+        value: 'size',
+      ),
+    );
+    items.add(
+      DropdownMenuItem(
+        child: Text(
+          '按时间排序',
+          style: TextStyle(color: Colors.cyan),
+        ),
+        value: 'time',
+      ),
+    );
+    return items;
   }
 }

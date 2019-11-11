@@ -189,6 +189,7 @@ class MovieUtil {
     double heightPx = ScreenSize.director_cast_cover_height,
     String title = '',
     String size = '',
+    String fixedSide = 'height',
   }) {
     //make title defaut value empty, not sure why other default value not works in cele section grid/gallery
     if (cover == '') {
@@ -201,17 +202,21 @@ class MovieUtil {
       tag = tag + Random().nextDouble().toString();
     }
     var width = ScreenUtil.getInstance().setWidth(widthPx);
+    var height = ScreenUtil.getInstance().setHeight(heightPx);
     if (size != '') {
       List<String> list = size.split('x');
-      if (list.length == 2) {
+      if (fixedSide == 'height' && list.length == 2) {
         width = double.parse(list[0]) / double.parse(list[1]) * ScreenUtil.getInstance().setHeight(heightPx);
+      }
+      if (fixedSide == 'width' && list.length == 2) {
+        height = double.parse(list[1]) / double.parse(list[0]) * ScreenUtil.getInstance().setWidth(widthPx);
       }
     }
     return Hero(
       tag: tag,
       child: Container(
         width: width,
-        height: ScreenUtil.getInstance().setHeight(heightPx),
+        height: height,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: CachedNetworkImageProvider(cover),

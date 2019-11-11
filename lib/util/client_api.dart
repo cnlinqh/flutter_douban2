@@ -8,7 +8,6 @@ import 'package:html/dom.dart';
 import 'package:html/parser.dart';
 import 'package:flutter_douban2/util/log_util.dart';
 
-
 class ClientAPI {
   static ClientAPI api = new ClientAPI();
   static getInstance() {
@@ -484,11 +483,15 @@ class ClientAPI {
     items = items[0].getElementsByTagName('li');
     List photos = [];
     items.forEach((item) {
-      photos.add({
+      var photo = {
         'img': item.getElementsByTagName('img')[0].attributes['src'],
         'size': item.getElementsByClassName('prop')[0].text.trim(),
         'comment': item.getElementsByClassName('name')[0].firstChild.text.trim(),
-      });
+      };
+      LogUtil.log(photo['img']);
+      photo['img'] = photo['img'].replaceAll(RegExp(r'/m/'), '/xl/');
+      LogUtil.log(photo['img']);
+      photos.add(photo);
     });
     var counts = document.body.getElementsByClassName('count');
     int total = photos.length;

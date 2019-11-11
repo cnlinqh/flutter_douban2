@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_douban2/celebrity/cele_details_page.dart';
 import 'package:flutter_douban2/celebrity/cele_section_photos_gallery.dart';
 import 'package:flutter_douban2/celebrity/cele_section_photos_gridview.dart';
+import 'package:flutter_douban2/celebrity/cele_section_photos_gridview2.dart';
 import 'package:flutter_douban2/movie/movie_choose_page.dart';
 import 'package:flutter_douban2/movie/movie_list_group_page.dart';
 import 'package:flutter_douban2/movie/movie_list_paged_page.dart';
@@ -115,6 +116,9 @@ class NavigatorHelper {
         break;
       case LabelConstant.CELE_GALLERY_GRID_TITLE:
         _push(context, CeleSectionPhotosGridView(content));
+        break;
+      case LabelConstant.CELE_GALLERY_GRID_TITLE2:
+        _push(context, CeleSectionPhotosGridView2(content));
         break;
       case LabelConstant.CELE_GALLERY_VIEW_TITLE:
         _push(context, CeleSectionPhotosGallery(content));

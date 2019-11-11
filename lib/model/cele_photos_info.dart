@@ -6,13 +6,23 @@ class CelePhotosInfo extends ChangeNotifier {
   String _celebrityId = '';
 
   int _selectedIndex = 0;
-  int get selectedIndex {
-    return _selectedIndex;
-  }
+  int get selectedIndex =>_selectedIndex;
 
   void setSelectedIndex(int index) {
     this._selectedIndex = index;
     notifyListeners();
+  }
+
+  String _sortBy = 'like';
+  String get sortBy => _sortBy;
+  void setSortBy(String sortBy){
+    this._sortBy = sortBy;
+    _start = 0;
+    _total = 0;
+    _done = false;
+    _photos.removeRange(0, _photos.length - 1);
+    morePhotos();
+    // notifyListeners();
   }
 
   bool _calling = false;
@@ -45,6 +55,7 @@ class CelePhotosInfo extends ChangeNotifier {
   void initPhotos(id) {
     _celebrityId = id;
     _start = 0;
+    _sortBy = 'like';
     _total = 0;
     _done = false;
     _photos.removeRange(0, _photos.length - 1);
@@ -58,7 +69,7 @@ class CelePhotosInfo extends ChangeNotifier {
       return;
     }
     _calling = true;
-    var more = await ClientAPI.getInstance().getCelebrityPhotos(id: this._celebrityId, start: _start);
+    var more = await ClientAPI.getInstance().getCelebrityPhotos(id: this._celebrityId, start: _start, sortBy: _sortBy);
     _photos.insertAll(_photos.length - 1, more['list']);
     _start = _start + more['list'].length;
     _total = more['total'];
