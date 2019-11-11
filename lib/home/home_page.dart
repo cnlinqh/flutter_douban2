@@ -5,6 +5,7 @@ import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/movie/move_page.dart';
 import 'package:flutter_douban2/mine/mine_page.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -33,11 +34,13 @@ class _HomePageState extends State<HomePage> {
       "icon": Icons.account_box,
     }
   ];
-  List<BottomNavigationBarItem> _buildBottomNavigationItems() {
+  List<Widget> _buildBottomNavigationItems() {
     return _tabItems.map((item) {
-      return BottomNavigationBarItem(
-        title: Text(item['title'].toString()),
-        icon: Icon(item['icon']),
+      return Column(
+        children: <Widget>[
+          Icon(item['icon']),
+          Text(item['title']),
+        ],
       );
     }).toList();
   }
@@ -55,10 +58,13 @@ class _HomePageState extends State<HomePage> {
         children: this._tabWidgets,
       ),
       // body: this._tabWidgets[this._tabIndex],
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: CurvedNavigationBar(
         items: _buildBottomNavigationItems(),
-        type: BottomNavigationBarType.fixed,
-        currentIndex: this._tabIndex,
+        backgroundColor: Colors.cyan,
+        animationCurve: Curves.easeInOut,
+        animationDuration: Duration(milliseconds: 600),
+        buttonBackgroundColor: Colors.cyanAccent,
+        height: kToolbarHeight,
         onTap: (index) {
           if (mounted)
             setState(() {
