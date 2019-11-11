@@ -22,11 +22,12 @@ class _MoviePageState extends State<MoviePage> {
 
   Widget _buildAppBar() {
     var text = LabelConstant.MOVIE_PAGE_TITLE;
-    // if (MediaQuery.of(context).orientation == Orientation.portrait) {
-    //   text = LabelConstant.MOVIE_PAGE_TITLE + 'Portrait';
-    // } else {
-    //   text = LabelConstant.MOVIE_PAGE_TITLE + 'Landscape';
-    // }
+    //make this page orientation sensitive
+    if (MediaQuery.of(context).orientation == Orientation.portrait) {
+      text = LabelConstant.MOVIE_PAGE_TITLE;
+    } else {
+      text = LabelConstant.MOVIE_PAGE_TITLE;
+    }
     return AppBar(
       title: GestureDetector(
         onTap: () {
