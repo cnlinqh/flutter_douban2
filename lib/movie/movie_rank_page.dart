@@ -106,9 +106,9 @@ class _MovieRankPageState extends State<MovieRankPage> {
     }
   }
 
-  Future<void> _refreshData() async {
-    _buildListViews();
-  }
+  // Future<void> _refreshData() async {
+  //   _buildListViews();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -120,12 +120,12 @@ class _MovieRankPageState extends State<MovieRankPage> {
         padding: EdgeInsets.all(
           ScreenUtil.getInstance().setWidth(ScreenSize.padding),
         ),
-        child: RefreshIndicator(
-          onRefresh: this._refreshData,
-          child: ListView(
-            children: this.views,
-          ),
+        // child: RefreshIndicator(
+        // onRefresh: this._refreshData,
+        child: ListView(
+          children: this.views,
         ),
+        // ),
       ),
     );
   }

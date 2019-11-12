@@ -48,17 +48,17 @@ class _CeleDetailsPageState extends State<CeleDetailsPage> {
       padding: EdgeInsets.all(
         ScreenUtil.getInstance().setWidth(ScreenSize.padding),
       ),
-      child: RefreshIndicator(
-        onRefresh: this._getCelebrityDetails,
-        child: ListView(
-          children: [
-            CeleSectionGeneral(this._cele),
-            CeleSectionSummary(this._cele),
-            CeleSectionWorks(this._cele),
-            CeleSectionPhotos(this._cele),
-          ],
-        ),
+      // child: RefreshIndicator(
+      // onRefresh: this._getCelebrityDetails,
+      child: ListView(
+        children: [
+          CeleSectionGeneral(this._cele),
+          CeleSectionSummary(this._cele),
+          CeleSectionWorks(this._cele),
+          CeleSectionPhotos(this._cele),
+        ],
       ),
+      // ),
     );
   }
 
