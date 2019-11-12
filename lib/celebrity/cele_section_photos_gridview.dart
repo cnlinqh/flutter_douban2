@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/model/cele_photos_info.dart';
+import 'package:flutter_douban2/model/mine_settings_model.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/navigator_helper.dart';
@@ -36,11 +37,11 @@ class _CeleSectionPhotosGridViewState extends State<CeleSectionPhotosGridView> {
   Widget _buildBody() {
     return Container(
       padding: EdgeInsets.all(ScreenUtil.getInstance().setWidth(ScreenSize.padding)),
-      child: Consumer<CelePhotosInfo>(
-        builder: (context, info, widget) {
+      child: Consumer2<CelePhotosInfo, MineSettingsModel>(
+        builder: (context, info, setttings, widget) {
           return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: MediaQuery.of(context).orientation == Orientation.portrait ? 3 : 6,
+              crossAxisCount: setttings.photoColumnsNumSquare,
               childAspectRatio: 1,
               crossAxisSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding / 10),
               mainAxisSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding / 10),

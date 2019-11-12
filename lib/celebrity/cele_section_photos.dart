@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/model/cele_photos_info.dart';
+import 'package:flutter_douban2/model/mine_settings_model.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/navigator_helper.dart';
@@ -18,7 +19,10 @@ class _CeleSectionPhotosState extends State<CeleSectionPhotos> {
   @override
   void initState() {
     super.initState();
-    Provider.of<CelePhotosInfo>(context, listen: false).initPhotos(this.widget._cele['id']);
+    Provider.of<CelePhotosInfo>(context, listen: false).initPhotos(
+      this.widget._cele['id'],
+      MineSettingsModel.photoSizes[Provider.of<MineSettingsModel>(context, listen: false).photoSizeIndex],
+    );
     Provider.of<CelePhotosInfo>(context, listen: false).morePhotos();
   }
 

@@ -467,6 +467,7 @@ class ClientAPI {
     String id,
     String sortBy = 'like', //like, 按喜欢排序； size， 按尺寸排序；time，按时间排序
     int start = 0, //count cannot be set, always 30
+    String size = 'xl', //s,m,l,xl
   }) async {
     LogUtil.log(">>ClientAPI: getCelebrityPhotos($id , $sortBy, $start)");
     var s = new DateTime.now();
@@ -489,7 +490,7 @@ class ClientAPI {
         'comment': item.getElementsByClassName('name')[0].firstChild.text.trim(),
       };
       LogUtil.log(photo['img']);
-      photo['img'] = photo['img'].replaceAll(RegExp(r'/m/'), '/xl/');
+      photo['img'] = photo['img'].replaceAll(RegExp(r'/m/'), '/$size/');
       LogUtil.log(photo['img']);
       photos.add(photo);
     });

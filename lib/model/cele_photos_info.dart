@@ -6,7 +6,7 @@ class CelePhotosInfo extends ChangeNotifier {
   String _celebrityId = '';
 
   int _selectedIndex = 0;
-  int get selectedIndex =>_selectedIndex;
+  int get selectedIndex => _selectedIndex;
 
   void setSelectedIndex(int index) {
     this._selectedIndex = index;
@@ -15,7 +15,7 @@ class CelePhotosInfo extends ChangeNotifier {
 
   String _sortBy = 'like';
   String get sortBy => _sortBy;
-  void setSortBy(String sortBy){
+  void setSortBy(String sortBy) {
     this._sortBy = sortBy;
     _start = 0;
     _total = 0;
@@ -28,6 +28,7 @@ class CelePhotosInfo extends ChangeNotifier {
   bool _calling = false;
   bool _done = false;
   int _start = 0;
+  String _size = 'xl';
   int _count = 30;
   int _total = 0;
   int get total {
@@ -52,9 +53,10 @@ class CelePhotosInfo extends ChangeNotifier {
     return this._photos[index]['title'] == _LOADING;
   }
 
-  void initPhotos(id) {
+  void initPhotos(id,size) {
     _celebrityId = id;
     _start = 0;
+    _size = size;
     _sortBy = 'like';
     _total = 0;
     _done = false;
@@ -69,7 +71,12 @@ class CelePhotosInfo extends ChangeNotifier {
       return;
     }
     _calling = true;
-    var more = await ClientAPI.getInstance().getCelebrityPhotos(id: this._celebrityId, start: _start, sortBy: _sortBy);
+    var more = await ClientAPI.getInstance().getCelebrityPhotos(
+      id: this._celebrityId,
+      start: _start,
+      sortBy: _sortBy,
+      size: _size,
+    );
     _photos.insertAll(_photos.length - 1, more['list']);
     _start = _start + more['list'].length;
     _total = more['total'];

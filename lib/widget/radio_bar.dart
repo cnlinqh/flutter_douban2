@@ -13,10 +13,10 @@ class RadioBar extends StatefulWidget {
     this.onSelectionChange,
   }) : super(key: key);
 
-  _RadioBarState createState() => _RadioBarState();
+  RadioBarState createState() => RadioBarState();
 }
 
-class _RadioBarState extends State<RadioBar> with TickerProviderStateMixin {
+class RadioBarState extends State<RadioBar> with TickerProviderStateMixin {
   Animation<double> animation;
   AnimationController controller;
 

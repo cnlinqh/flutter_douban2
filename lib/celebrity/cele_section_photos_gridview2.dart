@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/model/cele_photos_info.dart';
+import 'package:flutter_douban2/model/mine_settings_model.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/navigator_helper.dart';
@@ -35,17 +36,21 @@ class _CeleSectionPhotosGridView2State extends State<CeleSectionPhotosGridView2>
   }
 
   Widget _buildBody() {
-    var size = ScreenSize.calculateSize(
-        context: context,
-        width1: (ScreenSize.width - ScreenSize.padding * 2 - 1) / 2,
-        width2: (ScreenSize.width - ScreenSize.padding * 2 - 5) / 6);
     return Container(
       padding: EdgeInsets.all(ScreenUtil.getInstance().setWidth(ScreenSize.padding)),
-      child: Consumer<CelePhotosInfo>(
-        builder: (context, info, widget) {
+      child: Consumer2<CelePhotosInfo, MineSettingsModel>(
+        builder: (context, info, settings, widget) {
+          var size = ScreenSize.calculateSize(
+              context: context,
+              width1: (ScreenSize.width - ScreenSize.padding * 2 - settings.photoColumnsNumPortait - 1) /
+                  settings.photoColumnsNumPortait,
+              width2: (ScreenSize.width - ScreenSize.padding * 2 - settings.photoColumnsNumLandscape - 1) /
+                  settings.photoColumnsNumLandscape);
           return StaggeredGridView.countBuilder(
             itemCount: info.photos.length,
-            crossAxisCount: MediaQuery.of(context).orientation == Orientation.portrait ? 4 : 12,
+            crossAxisCount: MediaQuery.of(context).orientation == Orientation.portrait
+                ? settings.photoColumnsNumPortait * 2
+                : settings.photoColumnsNumLandscape * 2,
             mainAxisSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding / 10),
             crossAxisSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding / 10),
             staggeredTileBuilder: (index) => StaggeredTile.fit(2),
@@ -73,12 +78,14 @@ class _CeleSectionPhotosGridView2State extends State<CeleSectionPhotosGridView2>
                       Positioned(
                         bottom: 0,
                         right: 0,
-                        child: Text(
-                          info.photos[index]['size'],
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
+                        child: showSize(context, settings)
+                            ? Text(
+                                info.photos[index]['size'],
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              )
+                            : Container(),
                       )
                     ],
                   ),
@@ -89,5 +96,15 @@ class _CeleSectionPhotosGridView2State extends State<CeleSectionPhotosGridView2>
         },
       ),
     );
+  }
+
+  bool showSize(context, settings) {
+    if (MediaQuery.of(context).orientation == Orientation.portrait && settings.photoColumnsNumPortait > 2) {
+      return false;
+    }
+    if (MediaQuery.of(context).orientation == Orientation.landscape && settings.photoColumnsNumLandscape > 6) {
+      return false;
+    }
+    return true;
   }
 }

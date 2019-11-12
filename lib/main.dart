@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/home/home_page.dart';
 import 'package:flutter_douban2/model/cele_photos_info.dart';
+import 'package:flutter_douban2/model/mine_settings_model.dart';
 import 'package:flutter_douban2/model/tv_list_model.dart';
 import 'package:provider/provider.dart';
 // import 'package:flutter/services.dart';
@@ -16,6 +17,9 @@ void main() {
         ),
         ChangeNotifierProvider(
           builder: (context) => TVListModel(),
+        ),
+        ChangeNotifierProvider(
+          builder: (context) => MineSettingsModel(),
         ),
       ],
       child: DoubanApp(),

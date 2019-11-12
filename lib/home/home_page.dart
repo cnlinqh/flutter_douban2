@@ -6,6 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/movie/move_page.dart';
 import 'package:flutter_douban2/mine/mine_page.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_douban2/model/mine_settings_model.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -14,6 +16,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  void initState() {
+    super.initState();
+    Provider.of<MineSettingsModel>(context, listen: false).init();
+  }
+
   int _tabIndex = 0;
   var _tabWidgets = [MoviePage(), TVPage(), SearchPage(), MinePage()];
   var _tabItems = [
