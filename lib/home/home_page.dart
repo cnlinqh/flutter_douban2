@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/search/search_page.dart';
 import 'package:flutter_douban2/tv/tv_page.dart';
+import 'package:flutter_douban2/util/log_util.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/movie/move_page.dart';
@@ -21,6 +22,7 @@ class _HomePageState extends State<HomePage> {
     Provider.of<MineSettingsModel>(context, listen: false).init();
   }
 
+  DateTime _lastPressedAt;
   int _tabIndex = 0;
   var _tabWidgets = [MoviePage(), TVPage(), SearchPage(), MinePage()];
   var _tabItems = [
@@ -59,25 +61,36 @@ class _HomePageState extends State<HomePage> {
       height: ScreenSize.height,
     )..init(context);
 
-    return Scaffold(
-      body: IndexedStack(
-        index: this._tabIndex,
-        children: this._tabWidgets,
-      ),
-      // body: this._tabWidgets[this._tabIndex],
-      bottomNavigationBar: CurvedNavigationBar(
-        items: _buildBottomNavigationItems(),
-        backgroundColor: Colors.cyan,
-        animationCurve: Curves.easeInOut,
-        animationDuration: Duration(milliseconds: 600),
-        buttonBackgroundColor: Colors.cyanAccent,
-        height: kToolbarHeight,
-        onTap: (index) {
-          if (mounted)
-            setState(() {
-              this._tabIndex = index;
-            });
-        },
+    return WillPopScope(
+      onWillPop: () async {
+        if (_lastPressedAt == null || DateTime.now().difference(_lastPressedAt) > Duration(seconds: 1)) {
+          _lastPressedAt = DateTime.now();
+          LogUtil.log('Reset last pressed time if longer than 2 sec!');
+          return false;
+        }
+        LogUtil.log('quit applications if pop twice in one second!');
+        return true;
+      },
+      child: Scaffold(
+        body: IndexedStack(
+          index: this._tabIndex,
+          children: this._tabWidgets,
+        ),
+        // body: this._tabWidgets[this._tabIndex],
+        bottomNavigationBar: CurvedNavigationBar(
+          items: _buildBottomNavigationItems(),
+          backgroundColor: Colors.cyan,
+          animationCurve: Curves.easeInOut,
+          animationDuration: Duration(milliseconds: 600),
+          buttonBackgroundColor: Colors.cyanAccent,
+          height: kToolbarHeight,
+          onTap: (index) {
+            if (mounted)
+              setState(() {
+                this._tabIndex = index;
+              });
+          },
+        ),
       ),
     );
   }
