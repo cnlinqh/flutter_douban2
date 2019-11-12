@@ -32,10 +32,7 @@ class CeleSectionGeneral extends StatelessWidget {
           SizedBox(
             width: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
           ),
-          Container(
-            width: ScreenUtil.getInstance().setWidth(
-              ScreenSize.width - ScreenSize.padding * 4 - size['width'],
-            ),
+          Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -49,7 +49,7 @@ class MineSettingsModel extends ChangeNotifier {
     _photoColumnsNumPortait = prefs.getInt('_photoColumnsNumPortait') ?? _photoColumnsNumPortait;
     _photoColumnsNumLandscape = prefs.getInt('_photoColumnsNumLandscape') ?? _photoColumnsNumLandscape;
     _photoColumnsNumSquare = prefs.getInt('_photoColumnsNumSquare') ?? _photoColumnsNumSquare;
-    _photoSizeIndex = prefs.getString('_photoSizeIndex') ?? _photoSizeIndex;
+    _photoSizeIndex = prefs.getInt('_photoSizeIndex') ?? _photoSizeIndex;
     _cacheDataInMemory = prefs.getBool('_cacheDataInMemory') ?? _cacheDataInMemory;
 
     LogUtil.log('_photoColumnsNumPortait $_photoColumnsNumPortait');
