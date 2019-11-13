@@ -92,9 +92,11 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
     } else {
       return AppBar(
         title: Text(
-          this._subject != null && this._subject['subtype'] == 'movie'
-              ? LabelConstant.MOVIE_DETAILS_TITLE
-              : LabelConstant.TV_DETAILS_TITLE,
+          this._subject == null
+              ? ''
+              : this._subject['subtype'] == 'movie'
+                  ? LabelConstant.MOVIE_DETAILS_TITLE
+                  : LabelConstant.TV_DETAILS_TITLE,
         ),
       );
     }
