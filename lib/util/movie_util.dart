@@ -190,6 +190,7 @@ class MovieUtil {
     String title = '',
     String size = '',
     String fixedSide = 'height',
+    String cover2 = '',
   }) {
     //make title defaut value empty, not sure why other default value not works in cele section grid/gallery
     if (cover == '') {
@@ -219,7 +220,7 @@ class MovieUtil {
         height: height,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: CachedNetworkImageProvider(cover),
+            image: CachedNetworkImageProvider(cover2 != ''? cover2: cover),
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.all(Radius.circular(7)),

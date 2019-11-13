@@ -74,18 +74,12 @@ class _CeleSectionPhotosGridView2State extends State<CeleSectionPhotosGridView2>
                         size: info.photos[index]['size'],
                         widthPx: size['width'],
                         fixedSide: 'width',
+                        cover2: smallCover2(context, settings, info.photos[index]),
                       ),
                       Positioned(
                         bottom: 0,
                         right: 0,
-                        child: showSize(context, settings)
-                            ? Text(
-                                info.photos[index]['size'],
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              )
-                            : Container(),
+                        child: _buildSizeWidget(context, settings, info.photos[index]),
                       )
                     ],
                   ),
@@ -98,13 +92,28 @@ class _CeleSectionPhotosGridView2State extends State<CeleSectionPhotosGridView2>
     );
   }
 
-  bool showSize(context, settings) {
+  Widget _buildSizeWidget(context, settings, photo) {
     if (MediaQuery.of(context).orientation == Orientation.portrait && settings.photoColumnsNumPortait > 2) {
-      return false;
+      return Container();
     }
     if (MediaQuery.of(context).orientation == Orientation.landscape && settings.photoColumnsNumLandscape > 6) {
-      return false;
+      return Container();
     }
-    return true;
+    return Text(
+      photo['size'],
+      style: TextStyle(
+        color: Colors.white,
+      ),
+    );
+  }
+
+  String smallCover2(context, settings, photo) {
+    if (MediaQuery.of(context).orientation == Orientation.portrait && settings.photoColumnsNumPortait > 3) {
+      return photo['imgs'];
+    }
+    if (MediaQuery.of(context).orientation == Orientation.landscape && settings.photoColumnsNumLandscape > 3) {
+      return photo['imgs'];
+    }
+    return '';
   }
 }

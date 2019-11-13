@@ -60,7 +60,10 @@ class _CeleSectionPhotosGridViewState extends State<CeleSectionPhotosGridView> {
                       LabelConstant.CELE_GALLERY_VIEW_TITLE,
                     );
                   },
-                  child: MovieUtil.buildDirectorCastCover(info.photos[index]['img']),
+                  child: MovieUtil.buildDirectorCastCover(
+                    info.photos[index]['img'],
+                    cover2: setttings.photoColumnsNumSquare > 3 ? info.photos[index]['imgs'] : '',
+                  ),
                 );
               }
             },

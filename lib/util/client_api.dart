@@ -490,6 +490,10 @@ class ClientAPI {
         'comment': item.getElementsByClassName('name')[0].firstChild.text.trim(),
       };
       LogUtil.log(photo['img']);
+      photo['imgs'] = photo['img'].replaceAll(RegExp(r'/m/'), '/s/');
+      // photo['imgm'] = photo['img'].replaceAll(RegExp(r'/m/'), '/m/');
+      // photo['imgl'] = photo['img'].replaceAll(RegExp(r'/m/'), '/l/');
+      // photo['imgxl'] = photo['img'].replaceAll(RegExp(r'/m/'), '/xl/');
       photo['img'] = photo['img'].replaceAll(RegExp(r'/m/'), '/$size/');
       LogUtil.log(photo['img']);
       photos.add(photo);
