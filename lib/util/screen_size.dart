@@ -71,6 +71,17 @@ class ScreenSize {
     }
   }
 
+  static Widget buildHDivider() {
+    return SizedBox(
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+    );
+  }
+
+  static Widget buildVDivider() {
+    return SizedBox(
+      height: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
+    );
+  }
   //iPhone 6 resolution
   //full screen width and height
   static const double width = 750;

@@ -1,8 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/movie/movie_subject_general.dart';
+import 'package:flutter_douban2/util/debounce.dart';
 import 'package:flutter_douban2/util/navigator_helper.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
@@ -13,7 +12,7 @@ class SearchPage extends StatefulWidget {
   _SearchPageState createState() => _SearchPageState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+class _SearchPageState extends State<SearchPage> with Debounce {
   String searchText = '';
   bool isLoading = false;
   List results = [];
@@ -24,17 +23,6 @@ class _SearchPageState extends State<SearchPage> {
   List histories = [];
 
   final TextEditingController controller = TextEditingController();
-
-  Map<Function, Timer> _timeouts = {};
-  void debounce(Duration timeout, Function target, [List arguments = const []]) {
-    if (_timeouts.containsKey(target)) {
-      _timeouts[target].cancel();
-    }
-    Timer timer = Timer(timeout, () {
-      Function.apply(target, arguments);
-    });
-    _timeouts[target] = timer;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +43,7 @@ class _SearchPageState extends State<SearchPage> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            SizedBox(
-              width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-            ),
+            ScreenSize.buildHDivider(),
             Expanded(
               child: Container(
                 color: Colors.white,
@@ -118,6 +104,7 @@ class _SearchPageState extends State<SearchPage> {
 
   Widget _buildAction() {
     return FloatingActionButton(
+      heroTag: LabelConstant.SEARCH_MOVIE_TV_CELE,
       child: Icon(Icons.search),
       onPressed: onPressSearch,
     );
@@ -164,9 +151,7 @@ class _SearchPageState extends State<SearchPage> {
     children.add(
       Row(
         children: <Widget>[
-          SizedBox(
-            width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-          ),
+          ScreenSize.buildHDivider(),
           Expanded(
             child: Text('搜索建议:'),
           ),
@@ -188,11 +173,7 @@ class _SearchPageState extends State<SearchPage> {
     );
 
     this.suggestions.forEach((sug) {
-      children.add(
-        SizedBox(
-          height: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-        ),
-      );
+      children.add(ScreenSize.buildVDivider());
       children.add(
         GestureDetector(
           onTap: () {
@@ -209,9 +190,7 @@ class _SearchPageState extends State<SearchPage> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              SizedBox(
-                width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-              ),
+              ScreenSize.buildHDivider(),
               Container(
                 width: kToolbarHeight,
                 height: kToolbarHeight,
@@ -223,9 +202,7 @@ class _SearchPageState extends State<SearchPage> {
                   borderRadius: BorderRadius.all(Radius.circular(7)),
                 ),
               ),
-              SizedBox(
-                width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-              ),
+              ScreenSize.buildHDivider(),
               Container(
                 width: ScreenUtil.getInstance().setWidth(ScreenSize.width - ScreenSize.padding * 4) - kToolbarHeight,
                 child: Column(
@@ -250,11 +227,7 @@ class _SearchPageState extends State<SearchPage> {
           ),
         ),
       );
-      children.add(
-        SizedBox(
-          height: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-        ),
-      );
+      children.add(ScreenSize.buildVDivider());
     });
     return children;
   }
@@ -284,17 +257,11 @@ class _SearchPageState extends State<SearchPage> {
 
   List<Widget> _buildHisChildren() {
     List<Widget> children = [];
-    children.add(
-      SizedBox(
-        height: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-      ),
-    );
+    children.add(ScreenSize.buildVDivider());
     children.add(
       Row(
         children: <Widget>[
-          SizedBox(
-            width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-          ),
+          ScreenSize.buildHDivider(),
           Expanded(
             child: Text('搜索历史:'),
           ),
@@ -314,11 +281,7 @@ class _SearchPageState extends State<SearchPage> {
         ],
       ),
     );
-    children.add(
-      SizedBox(
-        height: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-      ),
-    );
+    children.add(ScreenSize.buildVDivider());
     children.add(
       Wrap(
         spacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
@@ -337,11 +300,7 @@ class _SearchPageState extends State<SearchPage> {
         }).toList(),
       ),
     );
-    children.add(
-      SizedBox(
-        height: ScreenUtil.getInstance().setHeight(ScreenSize.padding),
-      ),
-    );
+    children.add(ScreenSize.buildVDivider());
     return children;
   }
 

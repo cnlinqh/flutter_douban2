@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/search/search_bloc_page.dart';
 import 'package:flutter_douban2/search/search_page.dart';
 import 'package:flutter_douban2/tv/tv_page.dart';
 import 'package:flutter_douban2/util/log_util.dart';
@@ -24,7 +25,7 @@ class _HomePageState extends State<HomePage> {
 
   DateTime _lastPressedAt;
   int _tabIndex = 0;
-  var _tabWidgets = [MoviePage(), TVPage(), SearchPage(), MinePage()];
+  var _tabWidgets = [MoviePage(), TVPage(), SearchPage(), SearchBlocPage(), MinePage()];
   var _tabItems = [
     {
       "title": "Movie",
@@ -37,6 +38,10 @@ class _HomePageState extends State<HomePage> {
     {
       "title": "Search",
       "icon": Icons.search,
+    },
+    {
+      "title": "Bloc",
+      "icon": Icons.view_stream,
     },
     {
       "title": "Mine",
