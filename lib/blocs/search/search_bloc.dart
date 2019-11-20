@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:flutter_douban2/util/log_util.dart';
 import './bloc.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 
@@ -54,12 +55,17 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   }
 
   Stream<SearchState> _mapSearchTextChangeEventToState(SearchTextChangeEvent event) async* {
-    try {
-      var suggestions = await ClientAPI.getInstance().suggest(event.searchText);
-      this._searchSuggestions = suggestions;
-      yield SearchSuggestionsLoadedState(suggestions: this._searchSuggestions);
-    } catch (_) {
-      yield SearchErrorState();
+    if (this._searchHistories.length > 0 && this._searchHistories[0] == event.searchText) {
+      LogUtil.log('Return empty [] if already search');
+      yield SearchSuggestionsLoadedState(suggestions: []);
+    } else {
+      try {
+        var suggestions = await ClientAPI.getInstance().suggest(event.searchText);
+        this._searchSuggestions = suggestions;
+        yield SearchSuggestionsLoadedState(suggestions: this._searchSuggestions);
+      } catch (_) {
+        yield SearchErrorState();
+      }
     }
   }
 }

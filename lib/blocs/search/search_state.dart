@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
+
 abstract class SearchState extends Equatable {
   const SearchState();
   @override
@@ -13,6 +14,7 @@ class SearchTextHistoryState extends SearchState {
   final hisitories;
   const SearchTextHistoryState({@required this.hisitories}) : assert(hisitories != null);
   @override
+  //make sure every SearchTextHistoryState instance unique to avoid debounce outgoing state
   List<Object> get props => [Random().nextDouble().toString()];
 }
 

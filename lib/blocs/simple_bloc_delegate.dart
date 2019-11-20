@@ -4,18 +4,18 @@ class SimpleBlocDelegate extends BlocDelegate{
   @override
   void onEvent(Bloc bloc, Object event) {
     super.onEvent(bloc, event);
-    LogUtil.log(event);
+    LogUtil.log('SimpleBlocDelegate onEvent $event');
   }
 
   @override
   void onTransition(Bloc bloc, Transition transition) {
     super.onTransition(bloc, transition);
-    LogUtil.log(transition);
+    LogUtil.log('SimpleBlocDelegate onTransition $transition');
   }
 
   @override
   void onError(Bloc bloc, Object error, StackTrace stacktrace) {
     super.onError(bloc, error, stacktrace);
-    LogUtil.log(error);
+    LogUtil.log('SimpleBlocDelegate onError $error');
   }
 }
