@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/model/mine_settings_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
@@ -67,6 +69,10 @@ class _MinePageState extends State<MinePage> {
                 _buildCacheEnabled(),
                 _buildDivider(),
                 _buildLogEnabled(),
+                _buildDivider(),
+                _buildThemeHeader(),
+                _buildDivider(),
+                _buildThemeList(),
               ],
             ),
           ),
@@ -277,5 +283,48 @@ class _MinePageState extends State<MinePage> {
         );
       },
     );
+  }
+
+  Widget _buildThemeHeader() {
+    return Container(
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.width),
+      child: Text(
+        '主题颜色:',
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+
+  Widget _buildThemeList() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: _buildColorList(),
+      ),
+    );
+  }
+
+  List<Widget> _buildColorList() {
+    List<Widget> children = [];
+
+    for (int i = 0; i < ThemeBloc.colors.length; i++) {
+      children.add(
+        GestureDetector(
+          onTap: () {
+            BlocProvider.of<ThemeBloc>(context).add(ThemeChangeEvent(i));
+          },
+          child: Container(
+              width: kToolbarHeight - 10,
+              height: kToolbarHeight - 10,
+              decoration: BoxDecoration(
+                color: ThemeBloc.colors[i],
+                borderRadius: BorderRadius.all(Radius.circular(kToolbarHeight)),
+              )),
+        ),
+      );
+
+      children.add(ScreenSize.buildHDivider());
+    }
+    return children;
   }
 }

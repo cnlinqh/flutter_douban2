@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_douban2/search/search_bloc_page.dart';
 import 'package:flutter_douban2/search/search_page.dart';
 import 'package:flutter_douban2/tv/tv_page.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_douban2/mine/mine_page.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_douban2/model/mine_settings_model.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -21,6 +23,11 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     Provider.of<MineSettingsModel>(context, listen: false).init();
+  }
+
+  void initTheme() async {
+    var index = await BlocProvider.of<ThemeBloc>(context).getIndex();
+    BlocProvider.of<ThemeBloc>(context).add(ThemeChangeEvent(index));
   }
 
   DateTime _lastPressedAt;

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_douban2/blocs/simple_bloc_delegate.dart';
+import 'package:flutter_douban2/blocs/theme/theme_bloc.dart';
+import 'package:flutter_douban2/blocs/theme/theme_state.dart';
 import 'package:flutter_douban2/home/home_page.dart';
 import 'package:flutter_douban2/model/cele_photos_info.dart';
 import 'package:flutter_douban2/model/mine_settings_model.dart';
@@ -23,6 +25,9 @@ void main() {
       providers: [
         BlocProvider<SearchBloc>(
           builder: (context) => SearchBloc(),
+        ),
+        BlocProvider<ThemeBloc>(
+          builder: (context) => ThemeBloc(),
         )
       ],
       child: MultiProvider(
@@ -47,13 +52,13 @@ class DoubanApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Douban2',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.cyan,
-      ),
-      home: HomePage(),
-    );
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
+      return MaterialApp(
+        title: 'Douban2',
+        debugShowCheckedModeBanner: false,
+        theme: themeState.themeData,
+        home: HomePage(),
+      );
+    });
   }
 }
