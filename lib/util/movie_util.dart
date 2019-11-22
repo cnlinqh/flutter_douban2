@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -64,11 +65,13 @@ class MovieUtil {
       child: Container(
         child: Text(
           "No. ${index + 1}",
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
+          style: TextStyle(color: ThemeBloc.white, fontWeight: FontWeight.bold, fontSize: 14),
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(3)),
-          color: index == 0 ? Colors.red : index == 1 ? Colors.redAccent : index == 2 ? Colors.orange : Colors.grey,
+          color: index == 0
+              ? ThemeBloc.red
+              : index == 1 ? ThemeBloc.redAccent : index == 2 ? ThemeBloc.orange : ThemeBloc.grey,
         ),
       ),
     );
@@ -80,18 +83,18 @@ class MovieUtil {
         onTap: () {},
         child: Icon(
           Icons.favorite_border,
-          color: Colors.orangeAccent,
+          color: ThemeBloc.orangeAccent,
         ),
       ),
     );
   }
 
-  static buildSubType(String subtype) {
+  static buildSubType(String subtype, {Color color = ThemeBloc.red}) {
     return Positioned(
       bottom: 0,
       child: Icon(
         subtype == 'movie' ? Icons.movie : Icons.tv,
-        color: Colors.cyan,
+        color: color,
       ),
     );
   }
@@ -102,7 +105,7 @@ class MovieUtil {
         right: 0,
         child: Icon(
           Icons.fiber_new,
-          color: Colors.green,
+          color: ThemeBloc.green,
         ),
       );
     } else {
@@ -167,7 +170,7 @@ class MovieUtil {
     return _subject["summary"].toString();
   }
 
-  static Widget buildRate(String rating, {Color lableColor = Colors.grey}) {
+  static Widget buildRate(String rating, {Color lableColor = ThemeBloc.grey}) {
     if (rating == "") {
       rating = "0";
     }
@@ -220,7 +223,7 @@ class MovieUtil {
         height: height,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: CachedNetworkImageProvider(cover2 != ''? cover2: cover),
+            image: CachedNetworkImageProvider(cover2 != '' ? cover2 : cover),
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.all(Radius.circular(7)),
@@ -293,7 +296,7 @@ class MovieUtil {
                   orientation == Orientation.portrait.toString() ? ScreenSize.padding * 6 : ScreenSize.padding * 3,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.black,
+                  color: ThemeBloc.black,
                   borderRadius: BorderRadius.circular(ScreenUtil.getInstance().setWidth(
                     orientation == Orientation.portrait.toString() ? ScreenSize.padding * 6 : ScreenSize.padding * 3,
                   )),
@@ -301,7 +304,7 @@ class MovieUtil {
                 child: Center(
                   child: Icon(
                     Icons.play_arrow,
-                    color: Colors.white,
+                    color: ThemeBloc.white,
                   ),
                 ),
               ),
@@ -341,11 +344,11 @@ class MovieUtil {
     Share.share(url);
   }
 
-  static saveImage(url) async {
+  static saveImage(url, color) async {
     Fluttertoast.showToast(
       msg: '正在保存...',
-      backgroundColor: Colors.cyan,
-      textColor: Colors.white,
+      backgroundColor: color,
+      textColor: ThemeBloc.white,
     );
     var response = await http.get(url);
     var filePath = await ImagePickerSaver.saveFile(fileData: response.bodyBytes);
@@ -353,12 +356,12 @@ class MovieUtil {
     Future<File>.sync(() => savedFile);
     Fluttertoast.showToast(
       msg: '保存成功',
-      backgroundColor: Colors.cyan,
-      textColor: Colors.white,
+      backgroundColor: color,
+      textColor: ThemeBloc.white,
     );
   }
 
-  static buildImageActions(getImageUrl) {
+  static buildImageActions(getImageUrl, color) {
     List<Widget> actions = [
       GestureDetector(
         child: Container(
@@ -385,12 +388,10 @@ class MovieUtil {
           ),
         ),
         onTap: () {
-          MovieUtil.saveImage(getImageUrl());
+          MovieUtil.saveImage(getImageUrl(), color);
         },
       ),
     ];
     return actions;
   }
-
-
 }

@@ -116,7 +116,7 @@ class _SubjectSectionCommentTemplateState extends State<SubjectSectionCommentTem
       Container(
         width: ScreenUtil.getInstance().setWidth(ScreenSize.width - ScreenSize.padding * 10),
         height: 1,
-        color: Colors.grey,
+        color: Theme.of(context).dividerColor,
       )
     ];
   }

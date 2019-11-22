@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 
 class RateStar extends StatelessWidget {
   final double rate;
@@ -14,7 +15,7 @@ class RateStar extends StatelessWidget {
     this.min = 0.0,
     this.max = 10.0,
     this.labled = true,
-    this.lableColor = Colors.grey,
+    this.lableColor = ThemeBloc.grey,
     this.size = 14,
     this.mainAxisAlignment = MainAxisAlignment.start,
   });
@@ -57,7 +58,7 @@ class RateStar extends StatelessWidget {
     return Icon(
       rate >= top ? Icons.star : rate > bottom ? Icons.star_half : Icons.star_border,
       size: size,
-      color: rate >= top ? Colors.orange : rate > bottom ? Colors.orangeAccent : Colors.black,
+      color: rate >= top ? ThemeBloc.orange : rate > bottom ? ThemeBloc.orangeAccent : ThemeBloc.black,
     );
   }
 }

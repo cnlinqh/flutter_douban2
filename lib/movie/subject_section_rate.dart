@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_douban2/widget/rate_star.dart';
@@ -42,18 +43,18 @@ class SubjectSectionRate extends StatelessWidget {
       ),
       child: Stack(
         children: <Widget>[
-          _buildContentLayer(size),
+          _buildContentLayer(size, context),
           _buildOpacityLayer(size),
         ],
       ),
     );
   }
 
-  Widget _buildContentLayer(size) {
+  Widget _buildContentLayer(size, context) {
     return Container(
       width: ScreenUtil.getInstance().setWidth(ScreenSize.width - ScreenSize.padding * 2),
       decoration: BoxDecoration(
-        color: Colors.grey,
+        color: Theme.of(context).backgroundColor,
         borderRadius: BorderRadius.all(
           Radius.circular(7),
         ),
@@ -84,7 +85,7 @@ class SubjectSectionRate extends StatelessWidget {
               .setWidth(size['size']['point_width'] + size['size']['graph_width'] - ScreenSize.padding * 4),
           height: ScreenUtil.getInstance().setHeight(size['size']['rate_height'] - ScreenSize.padding * 2),
           decoration: BoxDecoration(
-            color: Colors.white10,
+            color: ThemeBloc.white,
             borderRadius: BorderRadius.all(
               Radius.circular(7),
             ),
@@ -106,7 +107,7 @@ class SubjectSectionRate extends StatelessWidget {
             child: Text(
               LabelConstant.MOVIE_DOUBAN_RATE,
               style: TextStyle(
-                color: Colors.white,
+                color: ThemeBloc.white,
               ),
             ),
           ),
@@ -115,7 +116,7 @@ class SubjectSectionRate extends StatelessWidget {
               child: Text(
                 this._subject['rating']['average'].toString(),
                 style: TextStyle(
-                  color: Colors.white,
+                  color: ThemeBloc.white,
                   fontSize: 24,
                 ),
               ),
@@ -208,7 +209,7 @@ class SubjectSectionRate extends StatelessWidget {
                     children: <Widget>[
                       Container(
                         decoration: BoxDecoration(
-                          color: Colors.orange[50],
+                          color: ThemeBloc.white,
                           borderRadius: BorderRadius.all(
                             Radius.circular(7),
                           ),
@@ -221,7 +222,7 @@ class SubjectSectionRate extends StatelessWidget {
                           percent.toStringAsFixed(0) + "%",
                           style: TextStyle(
                             fontSize: 10,
-                            color: Colors.white,
+                            color: ThemeBloc.white,
                           ),
                         ),
                       )
@@ -235,7 +236,7 @@ class SubjectSectionRate extends StatelessWidget {
                     children: <Widget>[
                       Container(
                         decoration: BoxDecoration(
-                          color: Colors.orange,
+                          color: ThemeBloc.orange,
                           borderRadius: BorderRadius.all(
                             Radius.circular(7),
                           ),
@@ -256,7 +257,7 @@ class SubjectSectionRate extends StatelessWidget {
 
   Container _buildDividerPart(size) {
     return Container(
-      color: Colors.white,
+      color: ThemeBloc.white,
       width: ScreenUtil.getInstance()
           .setWidth(size['size']['point_width'] + size['size']['graph_width'] - ScreenSize.padding * 4),
       height: ScreenUtil.getInstance().setHeight(1),
@@ -274,7 +275,7 @@ class SubjectSectionRate extends StatelessWidget {
             this._subject['rating']['average'] == 0
                 ? LabelConstant.MOVIE_NO_RATE
                 : LabelConstant.MOVIE_TOTAL_RATE + " :" + _getRateTotal(size).toStringAsFixed(0),
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: ThemeBloc.white),
           )
         ],
       ),

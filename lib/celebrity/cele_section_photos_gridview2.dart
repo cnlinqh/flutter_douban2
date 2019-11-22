@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/model/cele_photos_info.dart';
 import 'package:flutter_douban2/model/mine_settings_model.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
@@ -102,7 +103,7 @@ class _CeleSectionPhotosGridView2State extends State<CeleSectionPhotosGridView2>
     return Text(
       photo['size'],
       style: TextStyle(
-        color: Colors.white,
+        color: ThemeBloc.white,
       ),
     );
   }

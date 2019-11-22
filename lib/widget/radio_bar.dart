@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 
@@ -107,7 +108,7 @@ class RadioBarState extends State<RadioBar> with TickerProviderStateMixin {
         padding: EdgeInsets.all(
             ScreenUtil.getInstance().setWidth(ScreenSize.padding)),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: ThemeBloc.white,
           borderRadius: BorderRadius.all(
             Radius.circular(14),
           ),
@@ -116,7 +117,7 @@ class RadioBarState extends State<RadioBar> with TickerProviderStateMixin {
           child: Text(
             widget.radios[this.selectedIndex]["label"],
             style: TextStyle(
-                color: this.labelVisible ? Colors.black : Colors.black),
+                color: this.labelVisible ? ThemeBloc.black : ThemeBloc.black),
           ),
         ),
       ),
@@ -197,7 +198,7 @@ class _RadioButtonState extends State<RadioButton> {
           child: Text(widget.label),
         ),
         decoration: BoxDecoration(
-          color: Colors.grey,
+          color: Theme.of(context).disabledColor,
           borderRadius: _getBorderRadius(),
         ),
       ),

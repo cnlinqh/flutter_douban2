@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -141,7 +142,7 @@ class _SubjectVideoSetState extends State<SubjectVideoSet> {
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 style: TextStyle(
-                  color: this.selectedIndex == i ? Colors.cyan : Colors.black,
+                  color: this.selectedIndex == i ? Theme.of(context).primaryColor : ThemeBloc.black,
                 ),
               ),
             ),
@@ -161,13 +162,13 @@ class _SubjectVideoSetState extends State<SubjectVideoSet> {
       allowFullScreen: true,
       // showControls: false,
       materialProgressColors: ChewieProgressColors(
-        playedColor: Colors.red,
-        handleColor: Colors.blue,
-        backgroundColor: Colors.grey,
-        bufferedColor: Colors.lightGreen,
+        playedColor: ThemeBloc.red,
+        handleColor: ThemeBloc.blue,
+        backgroundColor: ThemeBloc.grey,
+        bufferedColor: ThemeBloc.green,
       ),
       placeholder: Container(
-        color: Colors.grey,
+        color: ThemeBloc.grey,
       ),
       // autoInitialize: true,
     );

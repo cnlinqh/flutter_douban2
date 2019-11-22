@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/model/tv_list_model.dart';
 import 'package:flutter_douban2/tv/tv_list_view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -88,7 +89,7 @@ class _TVPageState extends State<TVPage> with SingleTickerProviderStateMixin {
               child: Container(
                 child: Icon(
                   Icons.chrome_reader_mode,
-                  color: model.mode == "ListView" ? Colors.orange : null,
+                  color: model.mode == "ListView" ? ThemeBloc.orange : null,
                 ),
               ),
             ),
@@ -109,7 +110,7 @@ class _TVPageState extends State<TVPage> with SingleTickerProviderStateMixin {
               child: Container(
                 child: Icon(
                   Icons.apps,
-                  color: model.mode == "GridView" ? Colors.orange : null,
+                  color: model.mode == "GridView" ? ThemeBloc.orange : null,
                 ),
               ),
             ),
@@ -123,8 +124,8 @@ class _TVPageState extends State<TVPage> with SingleTickerProviderStateMixin {
         builder: (context, model, widget) {
           return Center(
             child: DropdownButton(
-              iconEnabledColor: Colors.white,
-              iconDisabledColor: Colors.white,
+              iconEnabledColor: ThemeBloc.white,
+              iconDisabledColor: ThemeBloc.white,
               items: [
                 DropdownMenuItem(
                   child: Text("推荐"),

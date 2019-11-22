@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_douban2/widget/max_lines_text.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,7 +21,7 @@ class CeleSectionSummary extends StatelessWidget {
           Text(
             "简介",
             style: TextStyle(
-              color: Colors.white,
+              color: ThemeBloc.white,
               fontSize: 20,
             ),
           ),
@@ -28,13 +29,13 @@ class CeleSectionSummary extends StatelessWidget {
             text: this._cele['summary'] == '' ? '暂无' : this._cele['summary'],
             maxLines: 5,
             style: TextStyle(
-              color: Colors.white,
+              color: ThemeBloc.white,
             ),
             unfoldTextStyle: TextStyle(
-              color: Colors.white,
+              color: ThemeBloc.white,
               fontSize: 14,
             ),
-            unfoldArrowColor: Colors.white,
+            unfoldArrowColor: ThemeBloc.white,
           )
         ],
       ),

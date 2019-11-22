@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/movie/movie_subject_general.dart';
 import 'package:flutter_douban2/util/debounce.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchPage extends StatefulWidget {
   _SearchPageState createState() => _SearchPageState();
@@ -46,7 +48,7 @@ class _SearchPageState extends State<SearchPage> with Debounce {
             ScreenSize.buildHDivider(),
             Expanded(
               child: Container(
-                color: Colors.white,
+                color: ThemeBloc.white,
                 alignment: Alignment.center,
                 child: TextField(
                   controller: controller,
@@ -56,7 +58,7 @@ class _SearchPageState extends State<SearchPage> with Debounce {
                     suffixIcon: IconButton(
                       icon: Icon(
                         Icons.clear,
-                        color: Colors.red,
+                        color: ThemeBloc.red,
                       ),
                       onPressed: () {
                         // controller.clear(); workaround
@@ -131,18 +133,22 @@ class _SearchPageState extends State<SearchPage> with Debounce {
     if (isSuggesting == false || suggestions.length == 0 || controller.text.trim() == '' || isLoading == true) {
       return Container();
     }
-    return Positioned(
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.cyanAccent,
-          borderRadius: BorderRadius.all(Radius.circular(7)),
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            children: _buildSugChildren(context),
+    return BlocBuilder<ThemeBloc, ThemeState>(
+      builder: (context, state) {
+        return Positioned(
+          child: Container(
+            decoration: BoxDecoration(
+              color: state.colorAccent,
+              borderRadius: BorderRadius.all(Radius.circular(7)),
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                children: _buildSugChildren(context),
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
@@ -158,7 +164,7 @@ class _SearchPageState extends State<SearchPage> with Debounce {
           IconButton(
             icon: Icon(
               Icons.close,
-              color: Colors.redAccent,
+              color: ThemeBloc.redAccent,
             ),
             onPressed: () {
               if (mounted) {
@@ -239,19 +245,22 @@ class _SearchPageState extends State<SearchPage> with Debounce {
     if (this.histories.length == 0) {
       return Container();
     }
-
-    return Positioned(
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.cyanAccent,
-          borderRadius: BorderRadius.all(Radius.circular(7)),
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            children: _buildHisChildren(),
+    return BlocBuilder<ThemeBloc, ThemeState>(
+      builder: (context, state) {
+        return Positioned(
+          child: Container(
+            decoration: BoxDecoration(
+              color: state.colorAccent,
+              borderRadius: BorderRadius.all(Radius.circular(7)),
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                children: _buildHisChildren(),
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
@@ -268,7 +277,6 @@ class _SearchPageState extends State<SearchPage> with Debounce {
           IconButton(
             icon: Icon(
               Icons.delete,
-              color: Colors.grey,
             ),
             onPressed: () {
               if (mounted) {

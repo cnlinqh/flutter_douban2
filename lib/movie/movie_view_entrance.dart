@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/navigator_helper.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
@@ -23,7 +25,7 @@ class MovieViewEntrance extends StatelessWidget {
             () {
               NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_ENTRANCE_SELECT_ICON);
             },
-            Icon(Icons.find_in_page, color: Colors.white),
+            Icon(Icons.find_in_page, color: ThemeBloc.white),
             LabelConstant.MOVIE_ENTRANCE_SELECT_ICON,
           ),
           _buildEntrance(
@@ -31,7 +33,7 @@ class MovieViewEntrance extends StatelessWidget {
             () {
               NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_RANK_LIST_TITLE);
             },
-            Icon(Icons.assessment, color: Colors.white),
+            Icon(Icons.assessment, color: ThemeBloc.white),
             LabelConstant.MOVIE_ENTRANCE_RANK_ICON,
           ),
           _buildEntrance(
@@ -43,7 +45,7 @@ class MovieViewEntrance extends StatelessWidget {
                     tag: '电影',
                   ));
             },
-            Icon(Icons.category, color: Colors.white),
+            Icon(Icons.category, color: ThemeBloc.white),
             LabelConstant.MOVIE_ENTRANCE_CATEGORY_ICON,
           ),
         ],
@@ -61,24 +63,25 @@ class MovieViewEntrance extends StatelessWidget {
       onTap: () {},
       child: Column(
         children: <Widget>[
-          Container(
-            width: ScreenUtil.getInstance().setWidth(size['width']),
-            height: ScreenUtil.getInstance().setWidth(size['width']),
-            decoration: BoxDecoration(
-              color: Colors.cyan,
-              borderRadius: BorderRadius.all(Radius.circular(60)),
-            ),
-            child: Center(
-              child: IconButton(
-                onPressed: toPage,
-                icon: icon,
-              ),
-            ),
+          BlocBuilder<ThemeBloc, ThemeState>(
+            builder: (context, state) {
+              return Container(
+                width: ScreenUtil.getInstance().setWidth(size['width']),
+                height: ScreenUtil.getInstance().setWidth(size['width']),
+                decoration: BoxDecoration(
+                  color: state.color,
+                  borderRadius: BorderRadius.all(Radius.circular(60)),
+                ),
+                child: Center(
+                  child: IconButton(
+                    onPressed: toPage,
+                    icon: icon,
+                  ),
+                ),
+              );
+            },
           ),
-          Text(
-            label,
-            style: TextStyle(color: Colors.grey),
-          )
+          Text(label)
         ],
       ),
     );

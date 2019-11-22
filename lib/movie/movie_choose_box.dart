@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/navigator_helper.dart';
@@ -120,7 +121,7 @@ class _MovieChooseBoxState extends State<MovieChooseBox> {
           width: ScreenUtil.getInstance().setWidth(size['width']),
           height: ScreenUtil.getInstance().setHeight(size['height']),
           decoration: BoxDecoration(
-            color: Colors.black,
+            color: ThemeBloc.black,
             borderRadius: BorderRadius.all(Radius.circular(3)),
           ),
         ),
@@ -136,7 +137,7 @@ class _MovieChooseBoxState extends State<MovieChooseBox> {
         child: Center(
           child: Text(
             widget.label,
-            style: TextStyle(color: Colors.white, fontSize: 16),
+            style: TextStyle(color: ThemeBloc.white, fontSize: 16),
           ),
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
@@ -29,7 +30,7 @@ class SubjectSectionTags extends StatelessWidget {
     List<Widget> list = [];
     list.add(Text(
       LabelConstant.MOVIE_TAGS_TITLE,
-      style: TextStyle(color: Colors.grey),
+      style: TextStyle(color: ThemeBloc.white),
     ));
 
     this._subject['tags'].forEach((t) {
@@ -72,13 +73,13 @@ class SubjectSectionTags extends StatelessWidget {
             ScreenUtil.getInstance().setWidth(ScreenSize.padding),
           ),
           decoration: BoxDecoration(
-            color: Colors.grey,
+            color: Theme.of(context).backgroundColor,
             borderRadius: BorderRadius.all(Radius.circular(7)),
           ),
           child: Text(
             t + ">",
             style: TextStyle(
-              color: Colors.white,
+              color: ThemeBloc.white,
             ),
           ),
         ),

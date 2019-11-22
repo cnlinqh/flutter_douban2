@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/movie/movie_subject_general.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -175,7 +176,7 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
               child: Center(
                 child: Text(
                   topText,
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Theme.of(context).primaryColor),
                 ),
               ),
             ),
@@ -189,7 +190,7 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
               child: Center(
                 child: Text(
                   top2Text,
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: ThemeBloc.red),
                 ),
               ),
             ),
@@ -206,7 +207,7 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
       child: Center(
         child: Text(
           _getPubdate(index),
-          style: TextStyle(color: Colors.cyan),
+          style: TextStyle(color: Theme.of(context).primaryColorLight),
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,7 +29,7 @@ class SubjectSectionGeneral extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          _buildCoverImage(size),
+          _buildCoverImage(size, context),
           _buildSpace(),
           _buildDescription(context),
         ],
@@ -36,7 +37,7 @@ class SubjectSectionGeneral extends StatelessWidget {
     );
   }
 
-  Widget _buildCoverImage(size) {
+  Widget _buildCoverImage(size, context) {
     return Stack(
       children: <Widget>[
         MovieUtil.buildMovieCover(
@@ -46,7 +47,7 @@ class SubjectSectionGeneral extends StatelessWidget {
           heightPx: size['height'],
         ),
         MovieUtil.buildFavoriteIcon(),
-        MovieUtil.buildSubType(this._subject['subtype']),
+        MovieUtil.buildSubType(this._subject['subtype'], color: Theme.of(context).primaryColor),
       ],
     );
   }
@@ -65,7 +66,7 @@ class SubjectSectionGeneral extends StatelessWidget {
           _buildTitle(),
           MovieUtil.buildRate(
             this._subject['rating']['average'].toString(),
-            lableColor: Colors.white,
+            lableColor: ThemeBloc.white,
           ),
           _buildDetails(context),
         ],
@@ -81,14 +82,14 @@ class SubjectSectionGeneral extends StatelessWidget {
             text: this._subject['title'],
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: ThemeBloc.white,
               fontSize: 20,
             ),
           ),
           TextSpan(
             text: " (${this._subject['year']})",
             style: TextStyle(
-              color: Colors.white,
+              color: ThemeBloc.white,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -135,7 +136,7 @@ class SubjectSectionGeneral extends StatelessWidget {
         details,
         maxLines: 6,
         overflow: TextOverflow.ellipsis,
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(color: ThemeBloc.white),
       ),
     );
   }
@@ -165,7 +166,7 @@ class SubjectSectionGeneral extends StatelessWidget {
   Widget _buildBottomSheetContent() {
     return Container(
         height: ScreenUtil.screenHeight,
-        color: Colors.white,
+        color: ThemeBloc.white,
         padding: EdgeInsets.fromLTRB(
           ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
           ScreenUtil.getInstance().setHeight(ScreenSize.padding),
@@ -244,7 +245,7 @@ class SubjectSectionGeneral extends StatelessWidget {
           width: ScreenUtil.getInstance().setWidth(ScreenSize.key_width),
           child: Text(
             key,
-            style: TextStyle(color: Colors.grey),
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
         Container(

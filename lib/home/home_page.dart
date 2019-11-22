@@ -23,6 +23,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     Provider.of<MineSettingsModel>(context, listen: false).init();
+    initTheme();
   }
 
   void initTheme() async {
@@ -89,18 +90,22 @@ class _HomePageState extends State<HomePage> {
           children: this._tabWidgets,
         ),
         // body: this._tabWidgets[this._tabIndex],
-        bottomNavigationBar: CurvedNavigationBar(
-          items: _buildBottomNavigationItems(),
-          backgroundColor: Colors.cyan,
-          animationCurve: Curves.easeInOut,
-          animationDuration: Duration(milliseconds: 600),
-          buttonBackgroundColor: Colors.cyanAccent,
-          height: kToolbarHeight,
-          onTap: (index) {
-            if (mounted)
-              setState(() {
-                this._tabIndex = index;
-              });
+        bottomNavigationBar: BlocBuilder<ThemeBloc, ThemeState>(
+          builder: (context, state) {
+            return CurvedNavigationBar(
+              items: _buildBottomNavigationItems(),
+              backgroundColor: state.color,
+              animationCurve: Curves.easeInOut,
+              animationDuration: Duration(milliseconds: 600),
+              buttonBackgroundColor: state.colorAccent,
+              height: kToolbarHeight,
+              onTap: (index) {
+                if (mounted)
+                  setState(() {
+                    this._tabIndex = index;
+                  });
+              },
+            );
           },
         ),
       ),

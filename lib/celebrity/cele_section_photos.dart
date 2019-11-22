@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/model/cele_photos_info.dart';
 import 'package:flutter_douban2/model/mine_settings_model.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
@@ -41,14 +42,14 @@ class _CeleSectionPhotosState extends State<CeleSectionPhotos> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          _buildHeader(),
+          _buildHeader(context),
           _buildBody(size),
         ],
       ),
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(context) {
     return Consumer<CelePhotosInfo>(
       builder: (context, info, widget) {
         if (info.total == 0) {
@@ -62,7 +63,7 @@ class _CeleSectionPhotosState extends State<CeleSectionPhotos> {
           Text(
             "相册",
             style: TextStyle(
-              color: Colors.white,
+              color: ThemeBloc.white,
               fontSize: 20,
             ),
           ),
@@ -75,9 +76,9 @@ class _CeleSectionPhotosState extends State<CeleSectionPhotos> {
                 elevation: 24,
                 isDense: false,
                 iconSize: 30,
-                iconEnabledColor: Colors.white,
-                iconDisabledColor: Colors.white,
-                items: _buildDropdowns(),
+                iconEnabledColor: ThemeBloc.white,
+                iconDisabledColor: ThemeBloc.white,
+                items: _buildDropdowns(context),
                 value: info.sortBy,
                 onChanged: (value) {
                   info.setSortBy(value);
@@ -92,13 +93,9 @@ class _CeleSectionPhotosState extends State<CeleSectionPhotos> {
             onTap: () {
               NavigatorHelper.pushToPage(context, LabelConstant.CELE_GALLERY_GRID_TITLE, content: this.widget._cele);
             },
-            // child: Text(
-            //   "Square>",
-            //   style: TextStyle(color: Colors.white),
-            // ),
             child: Icon(
               Icons.grid_on,
-              color: Colors.white,
+              color: ThemeBloc.white,
             ),
           ),
           SizedBox(
@@ -108,13 +105,9 @@ class _CeleSectionPhotosState extends State<CeleSectionPhotos> {
             onTap: () {
               NavigatorHelper.pushToPage(context, LabelConstant.CELE_GALLERY_GRID_TITLE2, content: this.widget._cele);
             },
-            // child: Text(
-            //   "Waterfall>",
-            //   style: TextStyle(color: Colors.white),
-            // ),
             child: Icon(
               Icons.dashboard,
-              color: Colors.white,
+              color: ThemeBloc.white,
             ),
           ),
         ],
@@ -165,13 +158,13 @@ class _CeleSectionPhotosState extends State<CeleSectionPhotos> {
     return works;
   }
 
-  List<DropdownMenuItem> _buildDropdowns() {
+  List<DropdownMenuItem> _buildDropdowns(context) {
     List<DropdownMenuItem> items = List();
     items.add(
       DropdownMenuItem(
         child: Text(
           '按喜欢排序',
-          style: TextStyle(color: Colors.cyan),
+          style: TextStyle(color: Theme.of(context).primaryColor),
         ),
         value: 'like',
       ),
@@ -180,7 +173,7 @@ class _CeleSectionPhotosState extends State<CeleSectionPhotos> {
       DropdownMenuItem(
         child: Text(
           '按尺寸排序',
-          style: TextStyle(color: Colors.cyan),
+          style: TextStyle(color: Theme.of(context).primaryColor),
         ),
         value: 'size',
       ),
@@ -189,7 +182,7 @@ class _CeleSectionPhotosState extends State<CeleSectionPhotos> {
       DropdownMenuItem(
         child: Text(
           '按时间排序',
-          style: TextStyle(color: Colors.cyan),
+          style: TextStyle(color: Theme.of(context).primaryColor),
         ),
         value: 'time',
       ),

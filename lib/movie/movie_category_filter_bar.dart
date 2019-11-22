@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_douban2/movie/movie_category_condition_bars.dart';
@@ -126,7 +127,7 @@ class _MovieCategoryFilterBarState extends State<MovieCategoryFilterBar> {
   Widget _buildBottomSheetContent() {
     return Container(
       height: ScreenUtil.screenHeight,
-      color: Colors.white,
+      color: ThemeBloc.white,
       padding: EdgeInsets.fromLTRB(
         ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
         ScreenUtil.getInstance().setHeight(ScreenSize.padding),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -44,24 +45,24 @@ class CeleSectionGeneral extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: ThemeBloc.white,
                   ),
                 ),
                 Text(
                   this.cele['name_en'],
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: ThemeBloc.white),
                 ),
                 Text(
                   this.cele['aka'].join(", "),
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: ThemeBloc.white),
                 ),
                 Text(
                   this.cele['born_place'],
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: ThemeBloc.white),
                 ),
                 Text(
                   this.cele['birthday'] + " / " + this.cele['constellation'] + " / " + this.cele['gender'],
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: ThemeBloc.white),
                 ),
               ],
             ),

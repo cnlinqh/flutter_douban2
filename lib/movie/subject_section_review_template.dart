@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/navigator_helper.dart';
@@ -64,7 +65,7 @@ class SubjectSectionReviewTemplate extends StatelessWidget {
     list.addAll(_buildHeader());
     list.addAll(_buildTitle());
     list.addAll(_buildContent(context));
-    list.addAll(_buildFooter());
+    list.addAll(_buildFooter(context));
     return list;
   }
 
@@ -112,7 +113,7 @@ class SubjectSectionReviewTemplate extends StatelessWidget {
       return [
         Text(
           '这篇影/剧评可能有剧透',
-          style: TextStyle(color: Colors.red),
+          style: TextStyle(color: ThemeBloc.red),
         ),
         Text(this.shortContent),
         _buildUnfoldAction(context),
@@ -142,7 +143,7 @@ class SubjectSectionReviewTemplate extends StatelessWidget {
     );
   }
 
-  List<Widget> _buildFooter() {
+  List<Widget> _buildFooter(context) {
     return [
       Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -159,7 +160,7 @@ class SubjectSectionReviewTemplate extends StatelessWidget {
       Container(
         width: ScreenUtil.getInstance().setWidth(ScreenSize.width - ScreenSize.padding * 10),
         height: 1,
-        color: Colors.grey,
+        color: Theme.of(context).dividerColor,
       )
     ];
   }

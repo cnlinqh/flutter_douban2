@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
@@ -60,7 +61,7 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
     return Opacity(
       opacity: 1,
       child: Container(
-        color: Colors.white,
+        color: ThemeBloc.white,
       ),
     );
   }
@@ -201,18 +202,18 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
                   ScreenUtil.getInstance().setWidth(ScreenSize.padding / 2)),
               decoration: BoxDecoration(
                 color:
-                    this.widget.selected == text ? Colors.cyan : Colors.white60,
+                    this.widget.selected == text ? Theme.of(context).primaryColor : ThemeBloc.transparent,
                 borderRadius: BorderRadius.all(Radius.circular(3)),
               ),
               child: Text(
                 text,
                 style: TextStyle(
                   color: text == LabelConstant.MOVIE_SPECIAL_SELF_DEFINE
-                      ? Colors.green
-                      : Colors.black,
-                  fontWeight: this.widget.selected == text
-                      ? FontWeight.bold
-                      : FontWeight.normal,
+                      ? ThemeBloc.green
+                      : ThemeBloc.black,
+                  // fontWeight: this.widget.selected == text
+                  //     ? FontWeight.bold
+                  //     : FontWeight.normal,
                 ),
               ),
             )
@@ -258,7 +259,7 @@ class _InputDialogState extends State<InputDialog> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     var mediaQueryData = MediaQueryData.fromWindow(ui.window);
     return AnimatedContainer(
-      color: Colors.transparent,
+      color: ThemeBloc.transparent,
       duration: const Duration(milliseconds: 300),
       padding: EdgeInsets.only(bottom: mediaQueryData.viewInsets.bottom),
       child: Material(

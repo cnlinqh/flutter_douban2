@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/movie/movie_category_condition_bars.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
@@ -127,7 +128,7 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
           ),
           child: Icon(
             Icons.chrome_reader_mode,
-            color: this._isListView ? Colors.orange : null,
+            color: this._isListView ? Theme.of(context).appBarTheme.color : null,
           ),
         ),
         onTap: () {
@@ -146,7 +147,7 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
           ),
           child: Icon(
             Icons.apps,
-            color: !this._isListView ? Colors.orange : null,
+            color: !this._isListView ? ThemeBloc.orange : null,
           ),
         ),
         onTap: () {
@@ -165,7 +166,7 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
           ),
           child: Icon(
             Icons.search,
-            color: this._isFilterShow ? Colors.orange : null,
+            color: this._isFilterShow ? ThemeBloc.orange : null,
           ),
         ),
         onTap: () {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/movie/subject_section_comment_template.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
@@ -85,7 +86,7 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
               width: ScreenUtil.getInstance().setWidth(ScreenSize.close_bar_width),
               height: ScreenUtil.getInstance().setHeight(ScreenSize.close_bar_height),
               decoration: BoxDecoration(
-                color: Colors.grey,
+                color: Theme.of(context).disabledColor,
                 borderRadius: BorderRadius.all(Radius.circular(7)),
               ),
             ),
@@ -150,12 +151,12 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
             ),
             margin: EdgeInsets.all(ScreenUtil.getInstance().setWidth(ScreenSize.padding)),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: ThemeBloc.white,
               borderRadius: BorderRadius.all(
                 Radius.circular(14),
               ),
               border: Border.all(
-                color: Colors.black,
+                color: ThemeBloc.black,
               ),
             ),
             child: Center(
@@ -219,7 +220,7 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
               new SimpleDialogOption(
                 child: Container(
                   child: new Text(LabelConstant.MOIVE_COMMENT_ALREADY),
-                  color: this._status == 'P' ? Colors.cyan : Colors.transparent,
+                  color: this._status == 'P' ? Theme.of(context).primaryColor : ThemeBloc.transparent,
                 ),
                 onPressed: () {
                   Navigator.of(context).pop("P");
@@ -228,7 +229,7 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
               new SimpleDialogOption(
                 child: Container(
                   child: new Text(LabelConstant.MOIVE_COMMENT_WANT),
-                  color: this._status == 'F' ? Colors.cyan : Colors.transparent,
+                  color: this._status == 'F' ? Theme.of(context).primaryColor : ThemeBloc.transparent,
                 ),
                 onPressed: () {
                   Navigator.of(context).pop("F");
@@ -237,7 +238,7 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
               new SimpleDialogOption(
                 child: Container(
                   child: new Text(LabelConstant.MOIVE_COMMENT_DLG_CANCEL),
-                  color: this._status == 'C' ? Colors.cyan : Colors.transparent,
+                  color: this._status == 'C' ? Theme.of(context).primaryColor : ThemeBloc.transparent,
                 ),
                 onPressed: () {
                   Navigator.of(context).pop("C");
@@ -261,21 +262,21 @@ class SelectDialog extends StatelessWidget {
         children: <Widget>[
           RaisedButton(
             child: Text(LabelConstant.MOIVE_COMMENT_ALREADY),
-            color: this.status == 'P' ? Colors.cyan : Colors.grey,
+            color: this.status == 'P' ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
             onPressed: () {
               Navigator.of(context).pop('P');
             },
           ),
           RaisedButton(
             child: Text(LabelConstant.MOIVE_COMMENT_WANT),
-            color: this.status == 'F' ? Colors.cyan : Colors.grey,
+            color: this.status == 'F' ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
             onPressed: () {
               Navigator.of(context).pop('F');
             },
           ),
           RaisedButton(
             child: Text(LabelConstant.MOIVE_COMMENT_DLG_CANCEL),
-            color: this.status == 'C' ? Colors.cyan : Colors.grey,
+            color: this.status == 'C' ? Theme.of(context).primaryColor : Theme.of(context).disabledColor,
             onPressed: () {
               Navigator.of(context).pop('C');
             },

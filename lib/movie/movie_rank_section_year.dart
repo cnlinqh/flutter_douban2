@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -136,7 +137,7 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
         width: ScreenUtil.getInstance().setWidth(size['size']['triangle_top_width']),
         height: ScreenUtil.getInstance().setHeight(size['size']['rank_bg_cover_height']),
         decoration: BoxDecoration(
-          color: Colors.transparent,
+          color: ThemeBloc.transparent,
         ),
         child: CustomPaint(
           painter: TriangleCustomPainter(this.color),
@@ -152,7 +153,7 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
       child: Text(
         widget.year,
         style: TextStyle(
-          color: Colors.grey,
+          color: Theme.of(context).disabledColor,
           fontSize: 24,
           fontWeight: FontWeight.bold,
         ),
@@ -181,7 +182,7 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
       child: Text(
         widget.title,
         style: TextStyle(
-          color: Colors.white,
+          color: ThemeBloc.white,
           fontSize: 24,
           fontWeight: FontWeight.bold,
         ),
@@ -196,7 +197,7 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
       child: Text(
         widget.subTitle,
         style: TextStyle(
-          color: Colors.white,
+          color: ThemeBloc.white,
           fontSize: 12,
         ),
       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/animation.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -91,7 +92,7 @@ class _MovieViewSliderState extends State<MovieViewSlider> {
       opacity: 0.2,
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.black,
+          color: ThemeBloc.black,
           borderRadius: BorderRadius.all(Radius.circular(7)),
         ),
       ),
@@ -106,7 +107,7 @@ class _MovieViewSliderState extends State<MovieViewSlider> {
         Text(
           item['title'],
           style: TextStyle(
-            color: Colors.blue,
+            color: ThemeBloc.blue,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -114,7 +115,7 @@ class _MovieViewSliderState extends State<MovieViewSlider> {
           item['summary'],
           overflow: TextOverflow.ellipsis,
           maxLines: 2,
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: ThemeBloc.white),
         ),
       ],
     );

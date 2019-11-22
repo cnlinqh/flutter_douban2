@@ -44,7 +44,7 @@ class _CeleDetailsPageState extends State<CeleDetailsPage> {
       );
     }
     return Container(
-      color: Colors.blueGrey,
+      color: Theme.of(context).primaryColor,
       padding: EdgeInsets.all(
         ScreenUtil.getInstance().setWidth(ScreenSize.padding),
       ),

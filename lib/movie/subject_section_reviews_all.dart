@@ -98,7 +98,7 @@ class _SubjectSectionReviewsAllState extends State<SubjectSectionReviewsAll> {
               width: ScreenUtil.getInstance().setWidth(ScreenSize.close_bar_width),
               height: ScreenUtil.getInstance().setHeight(ScreenSize.close_bar_height),
               decoration: BoxDecoration(
-                color: Colors.grey,
+                color: Theme.of(context).disabledColor,
                 borderRadius: BorderRadius.all(Radius.circular(7)),
               ),
             ),

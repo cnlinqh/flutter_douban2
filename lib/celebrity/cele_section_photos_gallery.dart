@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/model/cele_photos_info.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:photo_view/photo_view.dart';
@@ -30,7 +31,7 @@ class _CeleSectionPhotosGalleryState extends State<CeleSectionPhotosGallery> {
           return Text('${info.selectedIndex + 1} / ${info.total}');
         },
       ),
-      actions: MovieUtil.buildImageActions(getImageUrl),
+      actions: MovieUtil.buildImageActions(getImageUrl, Theme.of(context).primaryColor),
     );
   }
 
@@ -77,8 +78,10 @@ class _CeleSectionPhotosGalleryState extends State<CeleSectionPhotosGallery> {
                 left: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 10),
                 bottom: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 10),
                 child: Text(
-                  info.photos[info.selectedIndex]['comment'] != null ? info.photos[info.selectedIndex]['comment'] : 'loading',
-                  style: TextStyle(color: Colors.white),
+                  info.photos[info.selectedIndex]['comment'] != null
+                      ? info.photos[info.selectedIndex]['comment']
+                      : 'loading',
+                  style: TextStyle(color: ThemeBloc.white),
                 ),
               )
             ],

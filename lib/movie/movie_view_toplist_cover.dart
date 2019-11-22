@@ -5,6 +5,8 @@ import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
+import 'dart:math';
 
 class MovieViewTopListCover extends StatefulWidget {
   final String title;
@@ -23,19 +25,19 @@ class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
     super.initState();
     if (widget.title == LabelConstant.MOVIE_TOP_WEEKLY) {
       this._subTitle = LabelConstant.MOVIE_TOP_WEEKLY_SUB;
-      this._color = Colors.brown[100];
+      this._color = ThemeBloc.colors[Random().nextInt(ThemeBloc.colors.length - 1)];
       this._future = ClientAPI.getInstance().getMovieWeekly();
     } else if (widget.title == LabelConstant.MOVIE_TOP_TOP250) {
       this._subTitle = LabelConstant.MOVIE_TOP_TOP250_SUB;
-      this._color = Colors.black26;
+      this._color = ThemeBloc.colors[Random().nextInt(ThemeBloc.colors.length - 1)];
       this._future = ClientAPI.getInstance().getMovieTop250();
     } else if (widget.title == LabelConstant.MOVIE_TOP_NEW) {
       this._subTitle = LabelConstant.MOVIE_TOP_NEW_SUB;
       this._future = ClientAPI.getInstance().getMovieNew();
-      this._color = Colors.green;
+      this._color = ThemeBloc.colors[Random().nextInt(ThemeBloc.colors.length - 1)];
     } else if (widget.title == LabelConstant.MOVIE_TOP_US) {
       this._subTitle = LabelConstant.MOVIE_TOP_US_SUB;
-      this._color = Colors.teal;
+      this._color = ThemeBloc.colors[Random().nextInt(ThemeBloc.colors.length - 1)];
       this._future = ClientAPI.getInstance().getMovieUSBox();
     }
   }
@@ -162,7 +164,7 @@ class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
       right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
       child: Text(
         this._subTitle,
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(color: ThemeBloc.white),
       ),
     );
   }
@@ -174,7 +176,7 @@ class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
       child: Text(
         widget.title,
         style: TextStyle(
-          color: Colors.white,
+          color: ThemeBloc.white,
           fontSize: 20,
         ),
       ),
@@ -237,7 +239,7 @@ class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
             TextSpan(text: str),
             TextSpan(
               text: "  " + _getSubject(subject)['rating']['average'].toString(),
-              style: TextStyle(color: Colors.orange),
+              style: TextStyle(color: ThemeBloc.orange),
             ),
           ],
         ),

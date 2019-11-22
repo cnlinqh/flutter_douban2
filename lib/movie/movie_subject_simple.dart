@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/navigator_helper.dart';
@@ -83,7 +84,7 @@ class _MovieSubjectSimpleState extends State<MovieSubjectSimple> {
             heightPx: size['height'],
           ),
           MovieUtil.buildFavoriteIcon(),
-          MovieUtil.buildSubType(this.subject['subtype']),
+          MovieUtil.buildSubType(this.subject['subtype'], color: Theme.of(context).primaryColor),
           MovieUtil.buildIsNew(this.widget.isNew),
         ],
       ),
@@ -103,13 +104,13 @@ class _MovieSubjectSimpleState extends State<MovieSubjectSimple> {
                     text: '新',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.green,
+                      color: ThemeBloc.green,
                     ),
                   ),
                   TextSpan(
                     text: ' ' + this.subject['title'],
                     style: TextStyle(
-                      color: Colors.black,
+                      color: ThemeBloc.black,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -134,7 +135,7 @@ class _MovieSubjectSimpleState extends State<MovieSubjectSimple> {
         : Text(
             LabelConstant.MOVIE_NO_RATE,
             style: TextStyle(
-              color: Colors.grey,
+              color: Theme.of(context).disabledColor,
             ),
           );
   }
@@ -144,7 +145,7 @@ class _MovieSubjectSimpleState extends State<MovieSubjectSimple> {
       padding: EdgeInsets.all(ScreenUtil.getInstance().setWidth(5)),
       decoration: BoxDecoration(
         border: Border.all(
-          color: Colors.red,
+          color: ThemeBloc.red,
           width: 2.0,
           style: BorderStyle.solid,
         ),
@@ -153,7 +154,7 @@ class _MovieSubjectSimpleState extends State<MovieSubjectSimple> {
       child: Text(
         this.subject['mainland_pubdate'],
         style: TextStyle(
-          color: Colors.red,
+          color: ThemeBloc.red,
           fontSize: 10,
         ),
       ),

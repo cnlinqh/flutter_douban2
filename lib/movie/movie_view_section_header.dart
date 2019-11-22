@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/navigator_helper.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
@@ -24,7 +25,7 @@ class MovieViewSectionHeader extends StatelessWidget {
             child: Text(
               this.title,
               style: TextStyle(
-                color: Colors.black,
+                color: ThemeBloc.black,
                 fontSize: this.fontSize,
                 fontWeight: FontWeight.bold,
               ),
@@ -37,7 +38,7 @@ class MovieViewSectionHeader extends StatelessWidget {
             child: Text(
               this.navigatable ? LabelConstant.MOVIE_ALL_TITLE + '>' : '',
               style: TextStyle(
-                color: Colors.black,
+                color: ThemeBloc.black,
               ),
             ),
           ),

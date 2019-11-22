@@ -28,7 +28,7 @@ class _SubjectSectionMediaPhotosGalleryState extends State<SubjectSectionMediaPh
     return Scaffold(
       appBar: AppBar(
         title: Text('$_title / $_length'),
-        actions: MovieUtil.buildImageActions(getImageUrl),
+        actions: MovieUtil.buildImageActions(getImageUrl, Theme.of(context).primaryColor),
       ),
       body: Container(
         child: PhotoViewGallery.builder(

@@ -73,6 +73,46 @@ class _MinePageState extends State<MinePage> {
                 _buildThemeHeader(),
                 _buildDivider(),
                 _buildThemeList(),
+                _buildDivider(),
+                _colorDisplayBox("突出颜色", "highlightColor", Theme.of(context).highlightColor),
+                _buildDivider(),
+                _colorDisplayBox("提示颜色", "hintColor", Theme.of(context).hintColor),
+                _buildDivider(),
+                _colorDisplayBox("文本选择手柄颜色", "textSelectionHandleColor", Theme.of(context).textSelectionHandleColor),
+                _buildDivider(),
+                _colorDisplayBox("文字选择颜色", "textSelectionColor", Theme.of(context).textSelectionColor),
+                _buildDivider(),
+                _colorDisplayBox("背景颜色", "backgroundColor", Theme.of(context).backgroundColor),
+                _buildDivider(),
+                _colorDisplayBox("强调颜色", "accentColor", Theme.of(context).accentColor),
+                _buildDivider(),
+                _colorDisplayBox("画布颜色", "canvasColor", Theme.of(context).canvasColor),
+                _buildDivider(),
+                _colorDisplayBox("卡片颜色", "cardColor", Theme.of(context).cardColor),
+                _buildDivider(),
+                _colorDisplayBox("按钮颜色", "buttonColor", Theme.of(context).buttonColor),
+                _buildDivider(),
+                _colorDisplayBox("对话框背景颜色", "dialogBackgroundColor", Theme.of(context).dialogBackgroundColor),
+                _buildDivider(),
+                _colorDisplayBox("禁用颜色", "disabledColor", Theme.of(context).disabledColor),
+                _buildDivider(),
+                _colorDisplayBox("分频器颜色", "dividerColor", Theme.of(context).dividerColor),
+                _buildDivider(),
+                _colorDisplayBox("错误颜色", "errorColor", Theme.of(context).errorColor),
+                _buildDivider(),
+                _colorDisplayBox("指示灯颜色", "indicatorColor", Theme.of(context).indicatorColor),
+                _buildDivider(),
+                _colorDisplayBox("原色", "primaryColor", Theme.of(context).primaryColor),
+                _buildDivider(),
+                _colorDisplayBox("脚手架背景颜色", "scaffoldBackgroundColor", Theme.of(context).scaffoldBackgroundColor),
+                _buildDivider(),
+                _colorDisplayBox("次标头颜色", "secondaryHeaderColor", Theme.of(context).secondaryHeaderColor),
+                _buildDivider(),
+                _colorDisplayBox("选择行颜色", "selectedRowColor", Theme.of(context).selectedRowColor),
+                _buildDivider(),
+                _colorDisplayBox("飞溅颜色", "splashColor", Theme.of(context).splashColor),
+                _buildDivider(),
+                _colorDisplayBox("未选择的控件颜色", "unselectedWidgetColor", Theme.of(context).unselectedWidgetColor),
               ],
             ),
           ),
@@ -110,6 +150,8 @@ class _MinePageState extends State<MinePage> {
             Slider(
               value: settings.photoColumnsNumPortait.toDouble(),
               label: '${settings.photoColumnsNumPortait}',
+              activeColor: Theme.of(context).primaryColor,
+              inactiveColor: Theme.of(context).disabledColor,
               min: 1.0,
               max: 10.0,
               divisions: 9,
@@ -136,6 +178,8 @@ class _MinePageState extends State<MinePage> {
             Slider(
               value: settings.photoColumnsNumLandscape.toDouble(),
               label: '${settings.photoColumnsNumLandscape}',
+              activeColor: Theme.of(context).primaryColor,
+              inactiveColor: Theme.of(context).disabledColor,
               min: 1.0,
               max: 10.0,
               divisions: 9,
@@ -162,6 +206,8 @@ class _MinePageState extends State<MinePage> {
             Slider(
               value: settings.photoColumnsNumSquare.toDouble(),
               label: '${settings.photoColumnsNumSquare}',
+              activeColor: Theme.of(context).primaryColor,
+              inactiveColor: Theme.of(context).disabledColor,
               min: 1.0,
               max: 10.0,
               divisions: 9,
@@ -184,6 +230,7 @@ class _MinePageState extends State<MinePage> {
             new Radio(
               value: 0,
               groupValue: settings.photoSizeIndex,
+              activeColor: Theme.of(context).primaryColor,
               onChanged: (value) {
                 settings.setPhotoSizeIndex(value);
               },
@@ -194,6 +241,7 @@ class _MinePageState extends State<MinePage> {
             new Radio(
               value: 1,
               groupValue: settings.photoSizeIndex,
+              activeColor: Theme.of(context).primaryColor,
               onChanged: (value) {
                 settings.setPhotoSizeIndex(value);
               },
@@ -204,6 +252,7 @@ class _MinePageState extends State<MinePage> {
             new Radio(
               value: 2,
               groupValue: settings.photoSizeIndex,
+              activeColor: Theme.of(context).primaryColor,
               onChanged: (value) {
                 settings.setPhotoSizeIndex(value);
               },
@@ -214,6 +263,7 @@ class _MinePageState extends State<MinePage> {
             new Radio(
               value: 3,
               groupValue: settings.photoSizeIndex,
+              activeColor: Theme.of(context).primaryColor,
               onChanged: (value) {
                 settings.setPhotoSizeIndex(value);
               },
@@ -257,6 +307,7 @@ class _MinePageState extends State<MinePage> {
             Text('内存缓存数据:'),
             Checkbox(
               value: settings.cacheDataInMemory,
+              activeColor: Theme.of(context).primaryColor,
               onChanged: (value) {
                 settings.setCacheDataInMemory(value);
               },
@@ -275,6 +326,7 @@ class _MinePageState extends State<MinePage> {
             Text('日志输出:        '),
             Checkbox(
               value: settings.logEnabled,
+              activeColor: Theme.of(context).primaryColor,
               onChanged: (value) {
                 settings.setLogEnabled(value);
               },
@@ -296,35 +348,56 @@ class _MinePageState extends State<MinePage> {
   }
 
   Widget _buildThemeList() {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: _buildColorList(),
-      ),
+    return Wrap(
+      spacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+      runSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+      alignment: WrapAlignment.start,
+      children: _buildColorList(),
     );
   }
 
   List<Widget> _buildColorList() {
     List<Widget> children = [];
-
     for (int i = 0; i < ThemeBloc.colors.length; i++) {
       children.add(
         GestureDetector(
           onTap: () {
             BlocProvider.of<ThemeBloc>(context).add(ThemeChangeEvent(i));
           },
-          child: Container(
-              width: kToolbarHeight - 10,
-              height: kToolbarHeight - 10,
-              decoration: BoxDecoration(
-                color: ThemeBloc.colors[i],
-                borderRadius: BorderRadius.all(Radius.circular(kToolbarHeight)),
-              )),
+          child: BlocBuilder<ThemeBloc, ThemeState>(
+            builder: (context, state) {
+              return Container(
+                width: kToolbarHeight - 20,
+                height: kToolbarHeight - 20,
+                decoration: BoxDecoration(
+                  color: ThemeBloc.colors[i],
+                  borderRadius: BorderRadius.all(Radius.circular(state.index == i ? kToolbarHeight : 7)),
+                  border: Border.all(),
+                ),
+              );
+            },
+          ),
         ),
       );
-
-      children.add(ScreenSize.buildHDivider());
     }
+
     return children;
+  }
+
+  Widget _colorDisplayBox(String explanation, String name, Color color) {
+    return Row(
+      children: <Widget>[
+        new Text("$explanation\n$name\n${color.toString()}\t\t"),
+        new Container(
+          width: kToolbarHeight - 20,
+          height: kToolbarHeight - 20,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.all(Radius.circular(kToolbarHeight)),
+            border: Border.all(),
+          ),
+        ),
+      ],
+    );
   }
 }

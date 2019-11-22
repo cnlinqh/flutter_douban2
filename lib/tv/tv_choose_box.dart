@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/navigator_helper.dart';
@@ -145,7 +146,7 @@ class _TVChooseBoxState extends State<TVChooseBox> {
           width: ScreenUtil.getInstance().setWidth(size['width']),
           height: ScreenUtil.getInstance().setHeight(size['height']),
           decoration: BoxDecoration(
-            color: Colors.black,
+            color: ThemeBloc.black,
             borderRadius: BorderRadius.all(Radius.circular(3)),
           ),
         ),
@@ -161,7 +162,7 @@ class _TVChooseBoxState extends State<TVChooseBox> {
         child: Center(
           child: Text(
             widget.label,
-            style: TextStyle(color: Colors.white, fontSize: 16),
+            style: TextStyle(color: ThemeBloc.white, fontSize: 16),
           ),
         ),
       ),

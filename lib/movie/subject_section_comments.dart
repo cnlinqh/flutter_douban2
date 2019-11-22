@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/movie/subject_section_comment_template.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
@@ -12,9 +13,10 @@ class SubjectSectionComments extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Container(
       decoration: BoxDecoration(
-        color: Colors.cyanAccent,
+        color: Theme.of(context).backgroundColor,
         borderRadius: BorderRadius.all(Radius.circular(7)),
       ),
       margin: EdgeInsets.fromLTRB(
@@ -86,7 +88,7 @@ class SubjectSectionComments extends StatelessWidget {
     return Container(
       width: ScreenUtil.screenWidth,
       height: ScreenUtil.screenHeight,
-      color: Colors.white,
+      color: ThemeBloc.white,
       padding: EdgeInsets.fromLTRB(
         ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
         ScreenUtil.getInstance().setHeight(ScreenSize.padding),

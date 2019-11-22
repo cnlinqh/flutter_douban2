@@ -52,13 +52,15 @@ class DoubanApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, themeState) {
-      return MaterialApp(
-        title: 'Douban2',
-        debugShowCheckedModeBanner: false,
-        theme: themeState.themeData,
-        home: HomePage(),
-      );
-    });
+    return BlocBuilder<ThemeBloc, ThemeState>(
+      builder: (context, themeState) {
+        return MaterialApp(
+          title: 'Douban2',
+          debugShowCheckedModeBanner: false,
+          theme: themeState.themeData,
+          home: HomePage(),
+        );
+      },
+    );
   }
 }

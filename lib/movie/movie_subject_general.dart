@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
@@ -78,7 +79,7 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
             heightPx: size['height'],
           ),
           MovieUtil.buildFavoriteIcon(),
-          MovieUtil.buildSubType(this.subject['subtype']),
+          MovieUtil.buildSubType(this.subject['subtype'], color: Theme.of(context).primaryColor),
           MovieUtil.buildIsNew(this.widget.isNew),
         ],
       ),
@@ -115,21 +116,20 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
               text: '新',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Colors.green,
-                // backgroundColor: Colors.green,
+                color: ThemeBloc.green,
               ),
             ),
             TextSpan(
               text: ' ' + this.subject['title'],
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
+                color: ThemeBloc.black,
               ),
             ),
             TextSpan(
               text: " (${this.subject['year']})",
               style: TextStyle(
-                color: Colors.grey,
+                color: Theme.of(context).disabledColor,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -146,13 +146,13 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
               text: this.subject['title'],
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
+                color: ThemeBloc.black,
               ),
             ),
             TextSpan(
               text: " (${this.subject['year']})",
               style: TextStyle(
-                color: Colors.grey,
+                color: Theme.of(context).disabledColor,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -185,7 +185,7 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
     return Container(
       width: ScreenUtil.getInstance().setWidth(1),
       height: ScreenUtil.getInstance().setHeight(size['height']),
-      color: Colors.orangeAccent,
+      color: Theme.of(context).dividerColor,
     );
   }
 
@@ -196,13 +196,13 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
       children: <Widget>[
         IconButton(
           icon: Icon(Icons.favorite_border),
-          color: Colors.orange,
+          color: ThemeBloc.orange,
           onPressed: () {},
         ),
         Text(
           LabelConstant.MOVIE_WANTED_TITLE,
           style: TextStyle(
-            color: Colors.orange,
+            color: ThemeBloc.orange,
           ),
         ),
       ],

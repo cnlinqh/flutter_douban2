@@ -34,7 +34,7 @@ class SearchBlocPage extends StatelessWidget with Debounce {
             ScreenSize.buildHDivider(),
             Expanded(
               child: Container(
-                color: Colors.white,
+                color: ThemeBloc.white,
                 alignment: Alignment.center,
                 child: TextField(
                   controller: controller,
@@ -44,7 +44,7 @@ class SearchBlocPage extends StatelessWidget with Debounce {
                     suffixIcon: IconButton(
                       icon: Icon(
                         Icons.clear,
-                        color: Colors.red,
+                        color: ThemeBloc.red,
                       ),
                       onPressed: () {
                         // controller.clear(); workaround
@@ -189,19 +189,23 @@ class HistoriesBlocPage extends StatelessWidget {
     if (histories.length == 0) {
       return Container();
     }
-    return Container(
-      padding: EdgeInsets.all(
-        ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-      ),
-      decoration: BoxDecoration(
-        color: Colors.cyanAccent,
-        borderRadius: BorderRadius.all(Radius.circular(7)),
-      ),
-      child: SingleChildScrollView(
-        child: Column(
-          children: _buildHisChildren(context, histories),
-        ),
-      ),
+    return BlocBuilder<ThemeBloc, ThemeState>(
+      builder: (context, state) {
+        return Container(
+          padding: EdgeInsets.all(
+            ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+          ),
+          decoration: BoxDecoration(
+            color: state.colorAccent,
+            borderRadius: BorderRadius.all(Radius.circular(7)),
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: _buildHisChildren(context, histories),
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -218,7 +222,6 @@ class HistoriesBlocPage extends StatelessWidget {
           IconButton(
             icon: Icon(
               Icons.delete,
-              color: Colors.grey,
             ),
             onPressed: () {
               BlocProvider.of<SearchBloc>(context).add(SearchTextHistoryEvent('clear'));
@@ -276,16 +279,20 @@ class SuggestionBlocPage extends StatelessWidget {
     if (suggestions.length == 0) {
       return Container();
     }
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.cyanAccent,
-        borderRadius: BorderRadius.all(Radius.circular(7)),
-      ),
-      child: SingleChildScrollView(
-        child: Column(
-          children: _buildSugChildren(context, suggestions),
-        ),
-      ),
+    return BlocBuilder<ThemeBloc, ThemeState>(
+      builder: (context, state) {
+        return Container(
+          decoration: BoxDecoration(
+            color: state.colorAccent,
+            borderRadius: BorderRadius.all(Radius.circular(7)),
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: _buildSugChildren(context, suggestions),
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -301,7 +308,7 @@ class SuggestionBlocPage extends StatelessWidget {
           IconButton(
             icon: Icon(
               Icons.close,
-              color: Colors.redAccent,
+              color: ThemeBloc.redAccent,
             ),
             onPressed: () {
               BlocProvider.of<SearchBloc>(context).add(SearchSuggestionsClearEvent());

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/movie/movie_subject_general.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
@@ -58,7 +59,7 @@ class _MovieRankListStaticPageState extends State<MovieRankListStaticPage> {
     }
     return Text(
       widget.res['payload']['title'],
-      style: TextStyle(color: Colors.black),
+      style: TextStyle(color: ThemeBloc.black),
     );
   }
 
@@ -73,12 +74,12 @@ class _MovieRankListStaticPageState extends State<MovieRankListStaticPage> {
         children: <Widget>[
           Text(
             widget.res['payload']['title'],
-            style: TextStyle(color: Colors.white, fontSize: 14),
+            style: TextStyle(color: ThemeBloc.white, fontSize: 14),
           ),
           Text(
             LabelConstant.MOVIE_RANK_YEAR_LIST,
             style: TextStyle(
-              color: Colors.white,
+              color: ThemeBloc.white,
               fontSize: 10,
             ),
           ),

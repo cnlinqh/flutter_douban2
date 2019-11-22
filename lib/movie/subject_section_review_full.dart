@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -136,10 +137,10 @@ class _SubjectSectionReviewFullState extends State<SubjectSectionReviewFull> {
       data: this.html == null ? '' : this.html,
       //Optional parameters:
       padding: EdgeInsets.all(8.0),
-      backgroundColor: Colors.white70,
+      backgroundColor: ThemeBloc.white,
       defaultTextStyle: TextStyle(fontFamily: 'serif'),
       linkStyle: const TextStyle(
-        color: Colors.redAccent,
+        color: ThemeBloc.redAccent,
       ),
       onLinkTap: (url) {
         // open url in a webview

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/navigator_helper.dart';
@@ -41,7 +42,7 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
           child: Text(
             LabelConstant.MOVIE_ALL_PEOPLE,
             style: TextStyle(
-              color: Colors.white,
+              color: ThemeBloc.white,
               fontSize: 20,
             ),
           ),
@@ -75,7 +76,7 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
           child: Text(
             LabelConstant.MOVIE_ALL_TITLE + '>',
             style: TextStyle(
-              color: Colors.white,
+              color: ThemeBloc.white,
             ),
           ),
         ),
@@ -140,7 +141,7 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
             child: Text(
               obj['name'],
               style: TextStyle(
-                color: Colors.white,
+                color: ThemeBloc.white,
               ),
             ),
           ),
@@ -151,7 +152,7 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
                   ? LabelConstant.MOVIE_DIRECTOR + '/' + obj['name_en']
                   : LabelConstant.MOVIE_ACTOR + '/' + obj['name_en'],
               style: TextStyle(
-                color: Colors.white,
+                color: ThemeBloc.white,
                 fontSize: 10,
               ),
             ),
@@ -164,7 +165,7 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
   Widget _buildBottomSheetContent(celebrities, context, size) {
     return Container(
         height: ScreenUtil.screenHeight,
-        color: Colors.white,
+        color: ThemeBloc.white,
         padding: EdgeInsets.fromLTRB(
           ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
           ScreenUtil.getInstance().setHeight(ScreenSize.padding),
@@ -229,7 +230,7 @@ class SubjectSectionDirectorsCasts extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      color: Colors.grey,
+                      color: Theme.of(context).disabledColor,
                     ),
                   ),
                   Spacer(
