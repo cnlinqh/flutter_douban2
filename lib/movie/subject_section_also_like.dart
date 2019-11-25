@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
@@ -43,17 +42,14 @@ class _SubjectSectionAlsoLikeState extends State<SubjectSectionAlsoLike> {
         height: ScreenUtil.getInstance().setHeight(size['height']),
       );
     }
-    
+
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
             this.widget.subject['subtype'] == 'movie' ? '喜欢这部电影的人也喜欢' : '喜欢这部电视的人也喜欢',
-            style: TextStyle(
-              color: ThemeBloc.white,
-              fontSize: 24,
-            ),
+            style: TextStyle(fontSize: 24),
           ),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -85,19 +81,14 @@ class _SubjectSectionAlsoLikeState extends State<SubjectSectionAlsoLike> {
               },
               child: MovieUtil.buildMovieCover(
                 like['cover'],
-                heroTag: this.widget.section  + size['orientation']+ like['cover'],
+                heroTag: this.widget.section + size['orientation'] + like['cover'],
                 widthPx: size['width'],
                 heightPx: size['height'],
               ),
             ),
             Container(
               width: ScreenUtil.getInstance().setWidth(size['width']),
-              child: Text(
-                like['title'],
-                style: TextStyle(
-                  color: ThemeBloc.white,
-                ),
-              ),
+              child: Text(like['title']),
             ),
           ],
         ),

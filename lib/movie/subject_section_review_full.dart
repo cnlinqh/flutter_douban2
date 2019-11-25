@@ -137,7 +137,6 @@ class _SubjectSectionReviewFullState extends State<SubjectSectionReviewFull> {
       data: this.html == null ? '' : this.html,
       //Optional parameters:
       padding: EdgeInsets.all(8.0),
-      backgroundColor: ThemeBloc.white,
       defaultTextStyle: TextStyle(fontFamily: 'serif'),
       linkStyle: const TextStyle(
         color: ThemeBloc.redAccent,

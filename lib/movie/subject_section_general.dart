@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -63,10 +62,9 @@ class SubjectSectionGeneral extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          _buildTitle(),
+          _buildTitle(context),
           MovieUtil.buildRate(
             this._subject['rating']['average'].toString(),
-            lableColor: ThemeBloc.white,
           ),
           _buildDetails(context),
         ],
@@ -74,7 +72,7 @@ class SubjectSectionGeneral extends StatelessWidget {
     );
   }
 
-  Widget _buildTitle() {
+  Widget _buildTitle(context) {
     return RichText(
       text: TextSpan(
         children: <TextSpan>[
@@ -82,15 +80,15 @@ class SubjectSectionGeneral extends StatelessWidget {
             text: this._subject['title'],
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: ThemeBloc.white,
+              color: Theme.of(context).primaryColor,
               fontSize: 20,
             ),
           ),
           TextSpan(
             text: " (${this._subject['year']})",
             style: TextStyle(
-              color: ThemeBloc.white,
               fontWeight: FontWeight.bold,
+              color: Theme.of(context).primaryColor,
             ),
           ),
         ],
@@ -136,7 +134,6 @@ class SubjectSectionGeneral extends StatelessWidget {
         details,
         maxLines: 6,
         overflow: TextOverflow.ellipsis,
-        style: TextStyle(color: ThemeBloc.white),
       ),
     );
   }
@@ -166,7 +163,6 @@ class SubjectSectionGeneral extends StatelessWidget {
   Widget _buildBottomSheetContent() {
     return Container(
         height: ScreenUtil.screenHeight,
-        color: ThemeBloc.white,
         padding: EdgeInsets.fromLTRB(
           ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
           ScreenUtil.getInstance().setHeight(ScreenSize.padding),

@@ -151,7 +151,6 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
             ),
             margin: EdgeInsets.all(ScreenUtil.getInstance().setWidth(ScreenSize.padding)),
             decoration: BoxDecoration(
-              color: ThemeBloc.white,
               borderRadius: BorderRadius.all(
                 Radius.circular(14),
               ),

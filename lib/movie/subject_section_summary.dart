@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
@@ -23,21 +22,15 @@ class SubjectSectionSummary extends StatelessWidget {
           Text(
             LabelConstant.MOVIE_SUMMARY,
             style: TextStyle(
-              color: ThemeBloc.white,
               fontSize: 20,
             ),
           ),
           MaxLinesText(
             text: MovieUtil.getSummary(this._subject),
             maxLines: 5,
-            style: TextStyle(
-              color: ThemeBloc.white,
-            ),
             unfoldTextStyle: TextStyle(
-              color: ThemeBloc.white,
               fontSize: 14,
             ),
-            unfoldArrowColor: ThemeBloc.white,
           )
         ],
       ),

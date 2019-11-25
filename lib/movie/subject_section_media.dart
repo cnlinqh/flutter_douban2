@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
@@ -53,7 +52,6 @@ class _SubjectSectionMediaState extends State<SubjectSectionMedia> {
             Text(
               LabelConstant.MOVIE_PHOTOS_TITLE,
               style: TextStyle(
-                color: ThemeBloc.white,
                 fontSize: 20,
               ),
             ),

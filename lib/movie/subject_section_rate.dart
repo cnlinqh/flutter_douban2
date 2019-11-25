@@ -64,10 +64,10 @@ class SubjectSectionRate extends StatelessWidget {
           Row(
             children: <Widget>[
               _buildPointPart(size),
-              _buildGraphPart(size),
+              _buildGraphPart(context, size),
             ],
           ),
-          _buildDividerPart(size),
+          _buildDividerPart(context, size),
           _buildSummaryPart(size),
         ],
       ),
@@ -85,7 +85,6 @@ class SubjectSectionRate extends StatelessWidget {
               .setWidth(size['size']['point_width'] + size['size']['graph_width'] - ScreenSize.padding * 4),
           height: ScreenUtil.getInstance().setHeight(size['size']['rate_height'] - ScreenSize.padding * 2),
           decoration: BoxDecoration(
-            color: ThemeBloc.white,
             borderRadius: BorderRadius.all(
               Radius.circular(7),
             ),
@@ -104,21 +103,13 @@ class SubjectSectionRate extends StatelessWidget {
           Positioned(
             left: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
             top: ScreenUtil.getInstance().setHeight(ScreenSize.padding * 2),
-            child: Text(
-              LabelConstant.MOVIE_DOUBAN_RATE,
-              style: TextStyle(
-                color: ThemeBloc.white,
-              ),
-            ),
+            child: Text(LabelConstant.MOVIE_DOUBAN_RATE),
           ),
           Positioned(
             child: Center(
               child: Text(
                 this._subject['rating']['average'].toString(),
-                style: TextStyle(
-                  color: ThemeBloc.white,
-                  fontSize: 24,
-                ),
+                style: TextStyle(fontSize: 24),
               ),
             ),
           ),
@@ -140,7 +131,7 @@ class SubjectSectionRate extends StatelessWidget {
     );
   }
 
-  Container _buildGraphPart(size) {
+  Container _buildGraphPart(context, size) {
     return Container(
       width: ScreenUtil.getInstance().setWidth(size['size']['graph_width']),
       height: ScreenUtil.getInstance().setHeight(size['size']['rate_height']),
@@ -148,11 +139,11 @@ class SubjectSectionRate extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          _buildRatingDetailsRow(5, size),
-          _buildRatingDetailsRow(4, size),
-          _buildRatingDetailsRow(3, size),
-          _buildRatingDetailsRow(2, size),
-          _buildRatingDetailsRow(1, size),
+          _buildRatingDetailsRow(context, 5, size),
+          _buildRatingDetailsRow(context, 4, size),
+          _buildRatingDetailsRow(context, 3, size),
+          _buildRatingDetailsRow(context, 2, size),
+          _buildRatingDetailsRow(context, 1, size),
         ],
       ),
     );
@@ -168,7 +159,7 @@ class SubjectSectionRate extends StatelessWidget {
     return sum == 0 ? 1 : sum;
   }
 
-  Row _buildRatingDetailsRow(int level, size) {
+  Row _buildRatingDetailsRow(context, int level, size) {
     var details = this._subject['rating']['details'];
     double sum = _getRateTotal(size);
     var percent = double.parse(details[level.toString()].toString()) / sum * 100;
@@ -209,7 +200,7 @@ class SubjectSectionRate extends StatelessWidget {
                     children: <Widget>[
                       Container(
                         decoration: BoxDecoration(
-                          color: ThemeBloc.white,
+                          color: Theme.of(context).scaffoldBackgroundColor,
                           borderRadius: BorderRadius.all(
                             Radius.circular(7),
                           ),
@@ -220,10 +211,7 @@ class SubjectSectionRate extends StatelessWidget {
                       Expanded(
                         child: Text(
                           percent.toStringAsFixed(0) + "%",
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: ThemeBloc.white,
-                          ),
+                          style: TextStyle(fontSize: 10),
                         ),
                       )
                     ],
@@ -255,9 +243,9 @@ class SubjectSectionRate extends StatelessWidget {
     );
   }
 
-  Container _buildDividerPart(size) {
+  Container _buildDividerPart(context, size) {
     return Container(
-      color: ThemeBloc.white,
+      color: Theme.of(context).dividerColor,
       width: ScreenUtil.getInstance()
           .setWidth(size['size']['point_width'] + size['size']['graph_width'] - ScreenSize.padding * 4),
       height: ScreenUtil.getInstance().setHeight(1),
@@ -271,12 +259,9 @@ class SubjectSectionRate extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
-          Text(
-            this._subject['rating']['average'] == 0
-                ? LabelConstant.MOVIE_NO_RATE
-                : LabelConstant.MOVIE_TOTAL_RATE + " :" + _getRateTotal(size).toStringAsFixed(0),
-            style: TextStyle(color: ThemeBloc.white),
-          )
+          Text(this._subject['rating']['average'] == 0
+              ? LabelConstant.MOVIE_NO_RATE
+              : LabelConstant.MOVIE_TOTAL_RATE + " :" + _getRateTotal(size).toStringAsFixed(0))
         ],
       ),
     );

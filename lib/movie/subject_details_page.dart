@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/theme/theme_bloc.dart';
 import 'package:flutter_douban2/movie/subject_section_comments.dart';
 import 'package:flutter_douban2/movie/subject_section_general.dart';
 import 'package:flutter_douban2/movie/subject_section_media.dart';
@@ -14,6 +15,7 @@ import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_douban2/widget/rate_star.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:palette_generator/palette_generator.dart';
 
 class SubjectDetailsPage extends StatefulWidget {
   // content['id]        -> the subject id
@@ -27,6 +29,7 @@ class SubjectDetailsPage extends StatefulWidget {
 
 class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
   var _subject;
+  var _pickedColor = ThemeBloc.black;
   bool isTitleShow = false;
 
   double _position = 0.0;
@@ -37,19 +40,29 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
   @override
   void initState() {
     super.initState();
+    // _pickedColor = Theme.of(context).primaryColor;
     _getSubject();
   }
 
   Future<void> _getSubject() async {
     this._subject = await ClientAPI.getInstance().getMovieSubject(this.widget.content['id']);
+    var pg = await PaletteGenerator.fromImageProvider(NetworkImage(this._subject['images']['small']));
+    if (pg != null && pg.colors.isNotEmpty) {
+      this._pickedColor = pg.colors.toList()[0];
+    }
     if (mounted) this.setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: _buildAppBar(),
-      body: _buildBody(context),
+    return Theme(
+      data: ThemeData(
+        primarySwatch: ThemeBloc.convert2MaterialColor(this._pickedColor)
+      ),
+      child: Scaffold(
+        appBar: _buildAppBar(),
+        body: _buildBody(context),
+      ),
     );
   }
 
@@ -140,7 +153,7 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
             child: Stack(
               children: <Widget>[
                 Container(
-                  color: Theme.of(context).primaryColor,
+                  // color: this._pickedColor,
                   padding: EdgeInsets.all(
                     ScreenUtil.getInstance().setWidth(ScreenSize.padding),
                   ),
