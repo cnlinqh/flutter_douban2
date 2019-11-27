@@ -222,7 +222,11 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
         itemBuilder: (context, index) {
           if (_dataList[index]['title'] == _loading) {
             _retrieveData(context);
-            return Container();
+            return this._done
+                ? Container()
+                : Center(
+                    child: CircularProgressIndicator(),
+                  );
           } else {
             return Container(
               child: MovieSubjectGeneral(
