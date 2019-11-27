@@ -245,12 +245,22 @@ class ClientAPI {
     return res.data['photos'];
   }
 
-  Future newSearchSubjects(search) async {
+  Future newSearchSubjects(search, {bool cache = false}) async {
     LogUtil.log(">>ClientAPI: newSearchSubjects($search)");
     var s = new DateTime.now();
+    var key = "newSearchSubjects($search)";
+    if (Repository.isCached(key) && cache) {
+      return new Future<List>(() {
+        return Repository.getCachedList(key);
+      });
+    }
     String url = '/j/new_search_subjects$search';
+    print(search);
     Response<Map> res = await movieDio.get(url);
     var e = new DateTime.now();
+    if (cache) {
+      Repository.setCachedList(key, res.data['data']);
+    }
     LogUtil.log("<<<<ClientAPI: newSearchSubjects($search) -----------  ${e.difference(s).inMilliseconds}");
     return res.data['data'];
   }
@@ -262,7 +272,7 @@ class ClientAPI {
     LogUtil.log(url);
     Response<Map> res = await movieDio.get(url);
     var e = new DateTime.now();
-    LogUtil.log("<<<<ClientAPI: newSearchSubjects($year, $type) -----------  ${e.difference(s).inMilliseconds}");
+    LogUtil.log("<<<<ClientAPI: yearRankList($year, $type) -----------  ${e.difference(s).inMilliseconds}");
     return res.data['res'];
   }
 

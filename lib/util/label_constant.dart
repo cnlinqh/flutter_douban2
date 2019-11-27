@@ -207,54 +207,171 @@ class LabelConstant {
   static const String MOVIE_CHOOSE_TOPIC_HIGH = "豆瓣高分";
   static const String MOVIE_CHOOSE_TOPIC_CLASSIC = "经典电影";
   static const List MOVIE_CHOOSE_TOPIC_LIST = [
-    MOVIE_CHOOSE_TOPIC_HOT,
-    MOVIE_CHOOSE_TOPIC_NEW,
-    MOVIE_CHOOSE_TOPIC_COOL,
-    MOVIE_CHOOSE_TOPIC_HIGH,
-    MOVIE_CHOOSE_TOPIC_CLASSIC
+    {
+      'label': MOVIE_CHOOSE_TOPIC_HOT,
+      'img': '',
+    },
+    {
+      'label': MOVIE_CHOOSE_TOPIC_NEW,
+      'img': '',
+    },
+    {
+      'label': MOVIE_CHOOSE_TOPIC_COOL,
+      'img': '',
+    },
+    {
+      'label': MOVIE_CHOOSE_TOPIC_HIGH,
+      'img': '',
+    },
+    {
+      'label': MOVIE_CHOOSE_TOPIC_CLASSIC,
+      'img': '',
+    },
   ];
   static const String MOVIE_CHOOSE_TYPE = "类型";
   static const List MOVIE_CHOOSE_TYPE_LIST = [
-    "喜剧",
-    "动作",
-    "爱情",
-    "科幻",
-    "动画",
-    "纪录片",
-    "悬疑",
-    "犯罪",
-    "奇幻",
-    "歌舞",
-    "同性",
+    {
+      'label': "喜剧",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2572847101.jpg',
+    },
+    {
+      'label': "动作",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p511118051.jpg',
+    },
+    {
+      'label': "爱情",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2572166063.jpg',
+    },
+    {
+      'label': "科幻",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2545472803.jpg',
+    },
+    {
+      'label': "动画",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2572847101.jpg',
+    },
+    {
+      'label': "纪录片",
+      'img': 'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2461080848.jpg',
+    },
+    {
+      'label': "悬疑",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p513344864.jpg',
+    },
+    {
+      'label': "犯罪",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2567198874.jpg',
+    },
+    {
+      'label': "奇幻",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2563780504.jpg',
+    },
+    {
+      'label': "歌舞",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p579729551.jpg',
+    },
+    {
+      'label': "同性",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2561716440.jpg',
+    },
   ];
   static const String MOVIE_CHOOSE_PLACE = "地区";
   static const List MOVIE_CHOOSE_PLACE_LIST = [
-    "中国大陆",
-    "美国",
-    "中国香港",
-    "日本",
-    "韩国",
-    "中国台湾",
-    "英国",
-    "法国",
-    "德国",
+    {
+      'label': "中国大陆",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2572166063.jpg',
+    },
+    {
+      'label': "美国",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2567198874.jpg',
+    },
+    {
+      'label': "中国香港",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2561716440.jpg',
+    },
+    {
+      'label': "日本",
+      'img': 'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2557573348.jpg',
+    },
+    {
+      'label': "韩国",
+      'img': 'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2360940399.jpg',
+    },
+    {
+      'label': "中国台湾",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p1784592701.jpg',
+    },
+    {
+      'label': "英国",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p513344864.jpg',
+    },
+    {
+      'label': "法国",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p511118051.jpg',
+    },
+    {
+      'label': "德国",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p1910824951.jpg',
+    },
   ];
   static const String MOVIE_CHOOSE_SPEICAL = "特色";
   static const List MOVIE_CHOOSE_SPEICAL_LIST = [
-    "青春",
-    "古装",
-    "治愈",
-    "文艺",
-    "女性",
-    "小说改编",
-    "超级英雄",
-    "美食",
-    "宗教",
-    "励志",
-    "探案",
-    "律政",
-    "医疗",
-    "政治",
+    {
+      'label': "青春",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2572166063.jpg',
+    },
+    {
+      'label': "古装",
+      'img': 'https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2455050536.jpg',
+    },
+    {
+      'label': "治愈",
+      'img': 'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2395733377.jpg',
+    },
+    {
+      'label': "文艺",
+      'img': 'https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2574551676.jpg',
+    },
+    {
+      'label': "女性",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2572847101.jpg',
+    },
+    {
+      'label': "小说改编",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2572166063.jpg',
+    },
+    {
+      'label': "超级英雄",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2567198874.jpg',
+    },
+    {
+      'label': "美食",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p1910899751.jpg',
+    },
+    {
+      'label': "宗教",
+      'img': 'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2571312408.jpg',
+    },
+    {
+      'label': "励志",
+      'img': 'https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2574551676.jpg',
+    },
+    {
+      'label': "探案",
+      'img': 'https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2176188256.jpg',
+    },
+    {
+      'label': "律政",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2158166535.jpg',
+    },
+    {
+      'label': "医疗",
+      'img': 'https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2238253026.jpg',
+    },
+    {
+      'label': "政治",
+      'img': 'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p1512562287.jpg',
+    },
   ];
 
   //Celebrity
@@ -279,44 +396,127 @@ class LabelConstant {
 
   static const String TV_CHOOSE_PLACE = "地区";
   static const List TV_CHOOSE_PLACE_LIST = [
-    "中国大陆",
-    "美国",
-    "英国",
-    "日本",
-    "韩国",
-    "泰国",
-    "中国香港",
-    "中国台湾",
+    {
+      'label': "中国大陆",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2574861321.jpg',
+    },
+    {
+      'label': "美国",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2566967861.jpg',
+    },
+    {
+      'label': "英国",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2570938064.jpg',
+    },
+    {
+      'label': "日本",
+      'img': 'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2510604929.jpg',
+    },
+    {
+      'label': "韩国",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2568879190.jpg',
+    },
+    {
+      'label': "中国香港",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p1639170690.jpg',
+    },
+    {
+      'label': "中国台湾",
+      'img': 'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2572473009.jpg',
+    },
   ];
 
   static const String TV_CHOOSE_TYPE = "类型";
   static const List TV_CHOOSE_TYPE_LIST = [
-    "动漫",
-    "喜剧",
-    "科幻",
-    "青春",
-    "古装",
-    "武侠",
-    "历史",
-    "探案",
-    "律政",
-    "医疗",
-    "政治",
-    "纪录片",
+    {
+      'label': "动漫",
+      'img': 'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2573033857.jpg',
+    },
+    {
+      'label': "喜剧",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2570938064.jpg',
+    },
+    {
+      'label': "科幻",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2566627804.jpg',
+    },
+    {
+      'label': "青春",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2570938064.jpg',
+    },
+    {
+      'label': "古装",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2574861321.jpg',
+    },
+    {
+      'label': "武侠",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2574861321.jpg',
+    },
+    {
+      'label': "历史",
+      'img': 'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2182571149.jpg',
+    },
+    {
+      'label': "探案",
+      'img': 'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2153367599.jpg',
+    },
+    {
+      'label': "律政",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p1901775591.jpg',
+    },
+    {
+      'label': "医疗",
+      'img': 'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2510604929.jpg',
+    },
+    {
+      'label': "政治",
+      'img': 'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2568719989.jpg',
+    },
+    {
+      'label': "纪录片",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2572619550.jpg',
+    },
   ];
 
   static const String TV_CHOOSE_CHANNEL = "播出平台";
   static const List TV_CHOOSE_CHANNEL_LIST = [
-    "湖南卫视",
-    "HBO",
-    "Netflix",
-    "BBC",
-    "NHK",
-    "tvN",
-    "腾讯",
-    "优酷",
-    "爱奇艺",
+    {
+      'label': "湖南卫视",
+      'img': 'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2428342967.jpg',
+    },
+    {
+      'label': "HBO",
+      'img': 'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p896064368.jpg',
+    },
+    {
+      'label': "Netflix",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2570938064.jpg',
+    },
+    {
+      'label': "BBC",
+      'img': 'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2568719989.jpg',
+    },
+    {
+      'label': "NHK",
+      'img': 'https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2561629246.jpg',
+    },
+    {
+      'label': "tvN",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2272563445.jpg',
+    },
+    {
+      'label': "腾讯",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2519142845.jpg',
+    },
+    {
+      'label': "优酷",
+      'img': 'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2483150767.jpg',
+    },
+    {
+      'label': "爱奇艺",
+      'img': 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2492172704.jpg',
+    },
   ];
 
-  static const String SEARCH_MOVIE_TV_CELE='搜索电影/电视剧/综艺/影人';
+  static const String SEARCH_MOVIE_TV_CELE = '搜索电影/电视剧/综艺/影人';
 }

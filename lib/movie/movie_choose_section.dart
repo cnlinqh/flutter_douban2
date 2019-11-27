@@ -62,7 +62,8 @@ class MovieChooseSection extends StatelessWidget {
       itemBuilder: (context, index) {
         return MovieChooseBox(
           this.title,
-          list[index],
+          list[index]['label'],
+          list[index]['img'],
         );
       },
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/client_api.dart';
+// import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/navigator_helper.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
@@ -11,7 +12,8 @@ import 'package:flutter_douban2/movie/movie_category_search_page.dart';
 class MovieChooseBox extends StatefulWidget {
   final String title;
   final String label;
-  MovieChooseBox(this.title, this.label);
+  final String img;
+  MovieChooseBox(this.title, this.label, this.img);
   _MovieChooseBoxState createState() => _MovieChooseBoxState();
 }
 
@@ -161,30 +163,50 @@ class _MovieChooseBoxState extends State<MovieChooseBox> {
   }
 
   void _getPhotoUrl() async {
-    var url;
-    var subjects = [];
     if (widget.title == LabelConstant.MOVIE_CHOOSE_TOPIC) {
       var tag = this._mapToTag(widget.label);
-      subjects = await ClientAPI.getInstance().searchSubjects(
+      var subjects = await ClientAPI.getInstance().searchSubjects(
         tag: tag,
         count: 1,
       );
-    } else if (widget.title == LabelConstant.MOVIE_CHOOSE_TYPE) {
-      url = '?start=0&sort=U&range=0,10&genres=${widget.label}&tags=电影';
-      subjects = await ClientAPI.getInstance().newSearchSubjects(url);
-    } else if (widget.title == LabelConstant.MOVIE_CHOOSE_PLACE) {
-      url = '?start=0&sort=U&range=0,10&countries=${widget.label}&tags=电影';
-      subjects = await ClientAPI.getInstance().newSearchSubjects(url);
-    } else if (widget.title == LabelConstant.MOVIE_CHOOSE_SPEICAL) {
-      url = "?start=0&sort=U&range=0,10&tags=电影,${widget.label}";
-      subjects = await ClientAPI.getInstance().newSearchSubjects(url);
-    }
-    if (subjects.length > 0) {
+      if (subjects.length > 0) {
+        if (mounted) {
+          setState(() {
+            this._photoUrl = subjects[0]['cover'];
+          });
+        }
+      }
+    } else {
       if (mounted) {
         setState(() {
-          this._photoUrl = subjects[0]['cover'];
+          this._photoUrl = this.widget.img;
         });
       }
     }
+    //   var url;
+    //   var subjects = [];
+    //   if (widget.title == LabelConstant.MOVIE_CHOOSE_TOPIC) {
+    //     var tag = this._mapToTag(widget.label);
+    //     subjects = await ClientAPI.getInstance().searchSubjects(
+    //       tag: tag,
+    //       count: 1,
+    //     );
+    //   } else if (widget.title == LabelConstant.MOVIE_CHOOSE_TYPE) {
+    //     url = '?start=0&sort=U&range=0,10&genres=${widget.label}&tags=电影';
+    //     subjects = await ClientAPI.getInstance().newSearchSubjects(url);
+    //   } else if (widget.title == LabelConstant.MOVIE_CHOOSE_PLACE) {
+    //     url = '?start=0&sort=U&range=0,10&countries=${widget.label}&tags=电影';
+    //     subjects = await ClientAPI.getInstance().newSearchSubjects(url);
+    //   } else if (widget.title == LabelConstant.MOVIE_CHOOSE_SPEICAL) {
+    //     url = '?start=0&sort=U&range=0,10&tags=电影,${widget.label}';
+    //     subjects = await ClientAPI.getInstance().newSearchSubjects(url);
+    //   }
+    //   if (subjects.length > 0) {
+    //     if (mounted) {
+    //       setState(() {
+    //         this._photoUrl = subjects[0]['cover'];
+    //       });
+    //     }
+    //   }
   }
 }

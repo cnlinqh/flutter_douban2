@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_douban2/blocs/blocs.dart';
-import 'package:flutter_douban2/util/client_api.dart';
+// import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/navigator_helper.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
@@ -11,7 +11,8 @@ import 'package:flutter_douban2/movie/movie_category_search_page.dart';
 class TVChooseBox extends StatefulWidget {
   final String title;
   final String label;
-  TVChooseBox(this.title, this.label);
+  final String img;
+  TVChooseBox(this.title, this.label, this.img);
   _TVChooseBoxState createState() => _TVChooseBoxState();
 }
 
@@ -170,37 +171,42 @@ class _TVChooseBoxState extends State<TVChooseBox> {
   }
 
   void _getPhotoUrl() async {
-    var url;
-    var subjects = [];
-    if (widget.title == LabelConstant.TV_CHOOSE_PLACE) {
-      url = '?start=0&sort=U&range=0,10&countries=${widget.label}&tags=电视剧';
-      subjects = await ClientAPI.getInstance().newSearchSubjects(url);
-    } else if (widget.title == LabelConstant.TV_CHOOSE_TYPE) {
-      if (widget.label == '动漫' || widget.label == '纪录片') {
-        url = '?start=0&sort=U&range=0,10&tags=${widget.label}';
-      }
-      if (widget.label == '喜剧' || widget.label == '科幻' || widget.label == '武侠' || widget.label == '历史') {
-        url = '?start=0&sort=U&range=0,10&genres=${widget.label}&tags=电视剧';
-      }
-      if (widget.label == '青春' ||
-          widget.label == '古装' ||
-          widget.label == '探案' ||
-          widget.label == '律政' ||
-          widget.label == '医疗' ||
-          widget.label == '政治') {
-        url = '?start=0&sort=U&range=0,10&tags=电视剧,${widget.label}';
-      }
-      subjects = await ClientAPI.getInstance().newSearchSubjects(url);
-    } else if (widget.title == LabelConstant.TV_CHOOSE_TOPIC_CHANNEL) {
-      url = "?start=0&sort=U&range=0,10&tags=电视剧,${widget.label}";
-      subjects = await ClientAPI.getInstance().newSearchSubjects(url);
+    if (mounted) {
+      setState(() {
+        this._photoUrl = this.widget.img;
+      });
     }
-    if (subjects.length > 0) {
-      if (mounted) {
-        setState(() {
-          this._photoUrl = subjects[0]['cover'];
-        });
-      }
-    }
+    // var url;
+    // var subjects = [];
+    // if (widget.title == LabelConstant.TV_CHOOSE_PLACE) {
+    //   url = '?start=0&sort=U&range=0,10&countries=${widget.label}&tags=电视剧';
+    //   subjects = await ClientAPI.getInstance().newSearchSubjects(url);
+    // } else if (widget.title == LabelConstant.TV_CHOOSE_TYPE) {
+    //   if (widget.label == '动漫' || widget.label == '纪录片') {
+    //     url = '?start=0&sort=U&range=0,10&tags=${widget.label}';
+    //   }
+    //   if (widget.label == '喜剧' || widget.label == '科幻' || widget.label == '武侠' || widget.label == '历史') {
+    //     url = '?start=0&sort=U&range=0,10&genres=${widget.label}&tags=电视剧';
+    //   }
+    //   if (widget.label == '青春' ||
+    //       widget.label == '古装' ||
+    //       widget.label == '探案' ||
+    //       widget.label == '律政' ||
+    //       widget.label == '医疗' ||
+    //       widget.label == '政治') {
+    //     url = '?start=0&sort=U&range=0,10&tags=电视剧,${widget.label}';
+    //   }
+    //   subjects = await ClientAPI.getInstance().newSearchSubjects(url);
+    // } else if (widget.title == LabelConstant.TV_CHOOSE_TOPIC_CHANNEL) {
+    //   url = "?start=0&sort=U&range=0,10&tags=电视剧,${widget.label}";
+    //   subjects = await ClientAPI.getInstance().newSearchSubjects(url);
+    // }
+    // if (subjects.length > 0) {
+    //   if (mounted) {
+    //     setState(() {
+    //       this._photoUrl = subjects[0]['cover'];
+    //     });
+    //   }
+    // }
   }
 }

@@ -62,7 +62,8 @@ class TVChooseSection extends StatelessWidget {
       itemBuilder: (context, index) {
         return TVChooseBox(
           this.title,
-          list[index],
+          list[index]['label'],
+          list[index]['img'],
         );
       },
     );
