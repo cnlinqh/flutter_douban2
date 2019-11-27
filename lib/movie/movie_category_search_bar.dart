@@ -37,10 +37,8 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
       height2: ScreenSize.movie_cate_search_bar_height2,
     );
     return Container(
-      width: ScreenUtil.getInstance()
-          .setWidth(ScreenSize.width - 2 * ScreenSize.padding),
-      height: ScreenUtil.getInstance()
-          .setHeight(size['height']),
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.width - 2 * ScreenSize.padding),
+      height: ScreenUtil.getInstance().setHeight(size['height']),
       child: Stack(
         children: <Widget>[
           _buildHiddenChild(),
@@ -112,8 +110,7 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
       }
     }
     if (to != 0) {
-      _controller.animateTo(to,
-          duration: Duration(milliseconds: 200), curve: Curves.ease);
+      _controller.animateTo(to, duration: Duration(milliseconds: 200), curve: Curves.ease);
     }
   }
 
@@ -179,9 +176,7 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
             showHasInputDialog().then((newSpecial) {
               if (newSpecial == null) return;
               setState(() {
-                this
-                    .localList['list']
-                    .insert(this.localList['list'].length - 1, newSpecial);
+                this.localList['list'].insert(this.localList['list'].length - 1, newSpecial);
                 this._hkeys.insert(this._hkeys.length - 1, GlobalKey());
                 this._vkeys.insert(this._vkeys.length - 1, GlobalKey());
                 if (this.widget.onSelectionChange != null) {
@@ -198,19 +193,15 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
               margin: EdgeInsets.all(
                 ScreenUtil.getInstance().setWidth(ScreenSize.padding),
               ),
-              padding: EdgeInsets.all(
-                  ScreenUtil.getInstance().setWidth(ScreenSize.padding / 2)),
+              padding: EdgeInsets.all(ScreenUtil.getInstance().setWidth(ScreenSize.padding / 2)),
               decoration: BoxDecoration(
-                color:
-                    this.widget.selected == text ? Theme.of(context).primaryColor : ThemeBloc.transparent,
+                color: this.widget.selected == text ? Theme.of(context).primaryColor : ThemeBloc.transparent,
                 borderRadius: BorderRadius.all(Radius.circular(3)),
               ),
               child: Text(
                 text,
                 style: TextStyle(
-                  color: text == LabelConstant.MOVIE_SPECIAL_SELF_DEFINE
-                      ? ThemeBloc.green
-                      : ThemeBloc.black,
+                  color: text == LabelConstant.MOVIE_SPECIAL_SELF_DEFINE ? ThemeBloc.green : null,
                   // fontWeight: this.widget.selected == text
                   //     ? FontWeight.bold
                   //     : FontWeight.normal,
@@ -264,10 +255,8 @@ class _InputDialogState extends State<InputDialog> with WidgetsBindingObserver {
       padding: EdgeInsets.only(bottom: mediaQueryData.viewInsets.bottom),
       child: Material(
           child: Container(
-        width:
-            ScreenUtil.getInstance().setWidth(ScreenSize.self_define_dlg_width),
-        height: ScreenUtil.getInstance()
-            .setHeight(ScreenSize.self_define_dlg_height),
+        width: ScreenUtil.getInstance().setWidth(ScreenSize.self_define_dlg_width),
+        height: ScreenUtil.getInstance().setHeight(ScreenSize.self_define_dlg_height),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

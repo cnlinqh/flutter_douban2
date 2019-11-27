@@ -57,10 +57,7 @@ class _MovieRankListStaticPageState extends State<MovieRankListStaticPage> {
     if (!_collapsed) {
       return null;
     }
-    return Text(
-      widget.res['payload']['title'],
-      style: TextStyle(color: ThemeBloc.black),
-    );
+    return Text(widget.res['payload']['title']);
   }
 
   Widget _buildFlexibleSpace() {

@@ -57,10 +57,7 @@ class _MovieRankTop20StaticPageState extends State<MovieRankTop20StaticPage> {
     if (!_collapsed) {
       return null;
     }
-    return Text(
-      widget.res['title'],
-      style: TextStyle(color: ThemeBloc.black),
-    );
+    return Text(widget.res['title']);
   }
 
   Widget _buildFlexibleSpace() {

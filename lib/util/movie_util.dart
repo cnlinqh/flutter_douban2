@@ -266,6 +266,7 @@ class MovieUtil {
     double heightPx = ScreenSize.photo_cover_height,
     double scale = 1,
     String orientation = 'Orientation.portrait',
+    Color color = ThemeBloc.black,
   }) {
     return Stack(
       children: <Widget>[
@@ -296,7 +297,7 @@ class MovieUtil {
                   orientation == Orientation.portrait.toString() ? ScreenSize.padding * 6 : ScreenSize.padding * 3,
                 ),
                 decoration: BoxDecoration(
-                  color: ThemeBloc.black,
+                  color: color,
                   borderRadius: BorderRadius.circular(ScreenUtil.getInstance().setWidth(
                     orientation == Orientation.portrait.toString() ? ScreenSize.padding * 6 : ScreenSize.padding * 3,
                   )),

@@ -89,10 +89,10 @@ class _MovieViewSliderState extends State<MovieViewSlider> {
 
   Widget _buildOpacity() {
     return Opacity(
-      opacity: 0.2,
+      opacity: 0.1,
       child: Container(
         decoration: BoxDecoration(
-          color: ThemeBloc.black,
+          color: Theme.of(context).primaryColor,
           borderRadius: BorderRadius.all(Radius.circular(7)),
         ),
       ),

@@ -142,7 +142,7 @@ class _SubjectVideoSetState extends State<SubjectVideoSet> {
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 style: TextStyle(
-                  color: this.selectedIndex == i ? Theme.of(context).primaryColor : ThemeBloc.black,
+                  color: this.selectedIndex == i ? Theme.of(context).primaryColor : null,
                 ),
               ),
             ),
@@ -204,6 +204,7 @@ class VideoPlaceHolder extends StatelessWidget {
           widthPx: size['width'],
           heightPx: size['height'],
           orientation: size['orientation'],
+          color: Theme.of(context).primaryColor
         ),
       ),
     );

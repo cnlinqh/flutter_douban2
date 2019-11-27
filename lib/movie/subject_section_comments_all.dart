@@ -155,7 +155,7 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
                 Radius.circular(14),
               ),
               border: Border.all(
-                color: ThemeBloc.black,
+                color: Theme.of(context).primaryColor,
               ),
             ),
             child: Center(

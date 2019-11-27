@@ -20,6 +20,7 @@ class SubjectSectionMediaVideoTapped extends StatelessWidget {
         widthPx: size['width'],
         heightPx: size['height'],
         orientation: size['orientation'],
+        color: Theme.of(context).primaryColor,
       ),
     );
   }

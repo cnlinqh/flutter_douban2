@@ -117,13 +117,13 @@ class _MovieChooseBoxState extends State<MovieChooseBox> {
 
   Widget _buildOpacity(size) {
     return Opacity(
-      opacity: 0.4,
+      opacity: 0.1,
       child: Center(
         child: Container(
           width: ScreenUtil.getInstance().setWidth(size['width']),
           height: ScreenUtil.getInstance().setHeight(size['height']),
           decoration: BoxDecoration(
-            color: ThemeBloc.black,
+            color: Theme.of(context).primaryColor,
             borderRadius: BorderRadius.all(Radius.circular(3)),
           ),
         ),

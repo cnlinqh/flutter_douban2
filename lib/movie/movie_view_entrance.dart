@@ -25,7 +25,7 @@ class MovieViewEntrance extends StatelessWidget {
             () {
               NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_ENTRANCE_SELECT_ICON);
             },
-            Icon(Icons.find_in_page, color: ThemeBloc.white),
+            Icon(Icons.find_in_page, color: Theme.of(context).scaffoldBackgroundColor),
             LabelConstant.MOVIE_ENTRANCE_SELECT_ICON,
           ),
           _buildEntrance(
@@ -33,7 +33,7 @@ class MovieViewEntrance extends StatelessWidget {
             () {
               NavigatorHelper.pushToPage(context, LabelConstant.MOVIE_RANK_LIST_TITLE);
             },
-            Icon(Icons.assessment, color: ThemeBloc.white),
+            Icon(Icons.assessment, color: Theme.of(context).scaffoldBackgroundColor),
             LabelConstant.MOVIE_ENTRANCE_RANK_ICON,
           ),
           _buildEntrance(
@@ -45,7 +45,7 @@ class MovieViewEntrance extends StatelessWidget {
                     tag: '电影',
                   ));
             },
-            Icon(Icons.category, color: ThemeBloc.white),
+            Icon(Icons.category, color: Theme.of(context).scaffoldBackgroundColor),
             LabelConstant.MOVIE_ENTRANCE_CATEGORY_ICON,
           ),
         ],
