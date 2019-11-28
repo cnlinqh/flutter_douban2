@@ -72,7 +72,9 @@ class _MinePageState extends State<MinePage> {
                 _buildDivider(),
                 _buildThemeHeader(),
                 _buildDivider(),
-                _buildThemeList(),
+                _buildPrimarySwatchList(),
+                _buildDivider(),
+                _buildBrightness(),
                 _buildDivider(),
                 _colorDisplayBox("突出颜色", "highlightColor", Theme.of(context).highlightColor),
                 _buildDivider(),
@@ -347,7 +349,7 @@ class _MinePageState extends State<MinePage> {
     );
   }
 
-  Widget _buildThemeList() {
+  Widget _buildPrimarySwatchList() {
     return Wrap(
       spacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
       runSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
@@ -358,11 +360,11 @@ class _MinePageState extends State<MinePage> {
 
   List<Widget> _buildColorList() {
     List<Widget> children = [];
-    for (int i = 0; i < ThemeBloc.colors.length; i++) {
+    for (int i = 0; i < ThemeBloc.primarySwatchList.length; i++) {
       children.add(
         GestureDetector(
           onTap: () {
-            BlocProvider.of<ThemeBloc>(context).add(ThemeChangeEvent(i));
+            BlocProvider.of<ThemeBloc>(context).add(ThemeEvent(primarySwatchIndex: i));
           },
           child: BlocBuilder<ThemeBloc, ThemeState>(
             builder: (context, state) {
@@ -370,8 +372,10 @@ class _MinePageState extends State<MinePage> {
                 width: kToolbarHeight - 20,
                 height: kToolbarHeight - 20,
                 decoration: BoxDecoration(
-                  color: ThemeBloc.colors[i],
-                  borderRadius: BorderRadius.all(Radius.circular(state.index == i ? kToolbarHeight : 7)),
+                  color: ThemeBloc.primarySwatchList[i],
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(state.primarySwatchIndex == i ? kToolbarHeight : 7),
+                  ),
                   border: Border.all(),
                 ),
               );
@@ -382,6 +386,29 @@ class _MinePageState extends State<MinePage> {
     }
 
     return children;
+  }
+
+  Widget _buildBrightness() {
+    return Consumer<MineSettingsModel>(
+      builder: (context, settings, child) {
+        return Row(
+          children: <Widget>[
+            Text('暗黑主题:        '),
+            BlocBuilder<ThemeBloc, ThemeState>(
+              builder: (context, state) {
+                return Checkbox(
+                  value: state.brightnessIndex == 1,
+                  activeColor: Theme.of(context).primaryColor,
+                  onChanged: (value) {
+                    BlocProvider.of<ThemeBloc>(context).add(ThemeEvent(brightnessIndex: value == false ? 0 : 1));
+                  },
+                );
+              },
+            )
+          ],
+        );
+      },
+    );
   }
 
   Widget _colorDisplayBox(String explanation, String name, Color color) {

@@ -255,7 +255,7 @@ class ClientAPI {
       });
     }
     String url = '/j/new_search_subjects$search';
-    print(search);
+    LogUtil.log('search url: $url');
     Response<Map> res = await movieDio.get(url);
     var e = new DateTime.now();
     if (cache) {

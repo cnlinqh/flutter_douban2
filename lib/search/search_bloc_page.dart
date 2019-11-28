@@ -34,7 +34,6 @@ class SearchBlocPage extends StatelessWidget with Debounce {
             ScreenSize.buildHDivider(),
             Expanded(
               child: Container(
-                color: ThemeBloc.white,
                 alignment: Alignment.center,
                 child: TextField(
                   controller: controller,
@@ -196,7 +195,6 @@ class HistoriesBlocPage extends StatelessWidget {
             ScreenUtil.getInstance().setWidth(ScreenSize.padding),
           ),
           decoration: BoxDecoration(
-            color: state.colorAccent,
             borderRadius: BorderRadius.all(Radius.circular(7)),
           ),
           child: SingleChildScrollView(
@@ -283,7 +281,6 @@ class SuggestionBlocPage extends StatelessWidget {
       builder: (context, state) {
         return Container(
           decoration: BoxDecoration(
-            color: state.colorAccent,
             borderRadius: BorderRadius.all(Radius.circular(7)),
           ),
           child: SingleChildScrollView(

@@ -48,7 +48,6 @@ class _SearchPageState extends State<SearchPage> with Debounce {
             ScreenSize.buildHDivider(),
             Expanded(
               child: Container(
-                color: ThemeBloc.white,
                 alignment: Alignment.center,
                 child: TextField(
                   controller: controller,
@@ -138,7 +137,6 @@ class _SearchPageState extends State<SearchPage> with Debounce {
         return Positioned(
           child: Container(
             decoration: BoxDecoration(
-              color: state.colorAccent,
               borderRadius: BorderRadius.all(Radius.circular(7)),
             ),
             child: SingleChildScrollView(
@@ -250,7 +248,6 @@ class _SearchPageState extends State<SearchPage> with Debounce {
         return Positioned(
           child: Container(
             decoration: BoxDecoration(
-              color: state.colorAccent,
               borderRadius: BorderRadius.all(Radius.circular(7)),
             ),
             child: SingleChildScrollView(

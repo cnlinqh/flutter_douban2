@@ -27,8 +27,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void initTheme() async {
-    var index = await BlocProvider.of<ThemeBloc>(context).getIndex();
-    BlocProvider.of<ThemeBloc>(context).add(ThemeChangeEvent(index));
+    BlocProvider.of<ThemeBloc>(context).initialThemeBlocFromStorage();
   }
 
   DateTime _lastPressedAt;
@@ -36,23 +35,23 @@ class _HomePageState extends State<HomePage> {
   var _tabWidgets = [MoviePage(), TVPage(), SearchPage(), SearchBlocPage(), MinePage()];
   var _tabItems = [
     {
-      "title": "Movie",
+      "title": " Movie  ",
       "icon": Icons.movie,
     },
     {
-      "title": "TV",
+      "title": "   TV   ",
       "icon": Icons.tv,
     },
     {
-      "title": "Search",
+      "title": " Search ",
       "icon": Icons.search,
     },
     {
-      "title": "Bloc",
+      "title": "  Bloc  ",
       "icon": Icons.view_stream,
     },
     {
-      "title": "Mine",
+      "title": "  Mine  ",
       "icon": Icons.account_box,
     }
   ];
@@ -85,6 +84,7 @@ class _HomePageState extends State<HomePage> {
         return true;
       },
       child: Scaffold(
+        //IndexedStack to keep the tab status during switching
         body: IndexedStack(
           index: this._tabIndex,
           children: this._tabWidgets,
@@ -94,16 +94,21 @@ class _HomePageState extends State<HomePage> {
           builder: (context, state) {
             return CurvedNavigationBar(
               items: _buildBottomNavigationItems(),
-              backgroundColor: state.color,
+              color: state.themeData.scaffoldBackgroundColor,
+              backgroundColor: state.themeData.primaryColor,
+              buttonBackgroundColor: state.brightnessIndex == 0
+                  ? ThemeBloc.primarySwatchList[state.primarySwatchIndex][400]
+                  : state.themeData.buttonColor,
               animationCurve: Curves.easeInOut,
               animationDuration: Duration(milliseconds: 600),
-              buttonBackgroundColor: state.colorAccent,
               height: kToolbarHeight,
               onTap: (index) {
                 if (mounted)
-                  setState(() {
-                    this._tabIndex = index;
-                  });
+                  setState(
+                    () {
+                      this._tabIndex = index;
+                    },
+                  );
               },
             );
           },

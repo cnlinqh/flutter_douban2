@@ -25,19 +25,19 @@ class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
     super.initState();
     if (widget.title == LabelConstant.MOVIE_TOP_WEEKLY) {
       this._subTitle = LabelConstant.MOVIE_TOP_WEEKLY_SUB;
-      this._color = ThemeBloc.colors[Random().nextInt(ThemeBloc.colors.length - 1)];
+      this._color = ThemeBloc.primarySwatchList[Random().nextInt(ThemeBloc.primarySwatchList.length - 1)];
       this._future = ClientAPI.getInstance().getMovieWeekly();
     } else if (widget.title == LabelConstant.MOVIE_TOP_TOP250) {
       this._subTitle = LabelConstant.MOVIE_TOP_TOP250_SUB;
-      this._color = ThemeBloc.colors[Random().nextInt(ThemeBloc.colors.length - 1)];
+      this._color = ThemeBloc.primarySwatchList[Random().nextInt(ThemeBloc.primarySwatchList.length - 1)];
       this._future = ClientAPI.getInstance().getMovieTop250();
     } else if (widget.title == LabelConstant.MOVIE_TOP_NEW) {
       this._subTitle = LabelConstant.MOVIE_TOP_NEW_SUB;
       this._future = ClientAPI.getInstance().getMovieNew();
-      this._color = ThemeBloc.colors[Random().nextInt(ThemeBloc.colors.length - 1)];
+      this._color = ThemeBloc.primarySwatchList[Random().nextInt(ThemeBloc.primarySwatchList.length - 1)];
     } else if (widget.title == LabelConstant.MOVIE_TOP_US) {
       this._subTitle = LabelConstant.MOVIE_TOP_US_SUB;
-      this._color = ThemeBloc.colors[Random().nextInt(ThemeBloc.colors.length - 1)];
+      this._color = ThemeBloc.primarySwatchList[Random().nextInt(ThemeBloc.primarySwatchList.length - 1)];
       this._future = ClientAPI.getInstance().getMovieUSBox();
     }
   }

@@ -69,7 +69,7 @@ class MovieViewEntrance extends StatelessWidget {
                 width: ScreenUtil.getInstance().setWidth(size['width']),
                 height: ScreenUtil.getInstance().setWidth(size['width']),
                 decoration: BoxDecoration(
-                  color: state.color,
+                  color: state.brightnessIndex == 0 ? state.themeData.primaryColor: state.themeData.iconTheme.color,
                   borderRadius: BorderRadius.all(Radius.circular(60)),
                 ),
                 child: Center(

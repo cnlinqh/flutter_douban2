@@ -5,7 +5,15 @@ import './bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
-  static const List<MaterialColor> colors = [
+  int _primarySwatchIndex = 0;
+  int _brightnessIndex = 0;
+
+  static const List<Brightness> brightnessList = [
+    Brightness.light,
+    Brightness.dark,
+  ];
+
+  static const List<MaterialColor> primarySwatchList = [
     Colors.red,
     Colors.pink,
     Colors.purple,
@@ -23,24 +31,24 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
     Colors.orange,
     Colors.deepOrange,
   ];
-  static const List<Color> accents = [
-    Colors.redAccent,
-    Colors.pinkAccent,
-    Colors.purpleAccent,
-    Colors.deepPurpleAccent,
-    Colors.indigoAccent,
-    Colors.blueAccent,
-    Colors.lightBlueAccent,
-    Colors.cyanAccent,
-    Colors.tealAccent,
-    Colors.greenAccent,
-    Colors.lightGreenAccent,
-    Colors.limeAccent,
-    Colors.yellowAccent,
-    Colors.amberAccent,
-    Colors.orangeAccent,
-    Colors.deepOrangeAccent,
-  ];
+  // static const List<Color> accents = [
+  //   Colors.redAccent,
+  //   Colors.pinkAccent,
+  //   Colors.purpleAccent,
+  //   Colors.deepPurpleAccent,
+  //   Colors.indigoAccent,
+  //   Colors.blueAccent,
+  //   Colors.lightBlueAccent,
+  //   Colors.cyanAccent,
+  //   Colors.tealAccent,
+  //   Colors.greenAccent,
+  //   Colors.lightGreenAccent,
+  //   Colors.limeAccent,
+  //   Colors.yellowAccent,
+  //   Colors.amberAccent,
+  //   Colors.orangeAccent,
+  //   Colors.deepOrangeAccent,
+  // ];
   static const Color red = Colors.red;
   static const Color redAccent = Colors.redAccent;
   static const Color orange = Colors.orange;
@@ -51,7 +59,7 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   static const Color white = Colors.white;
   static const Color black = Colors.black;
   static const Color transparent = Colors.transparent;
-  
+
   static MaterialColor convert2MaterialColor(Color primaryColor) {
     Map<int, Color> colors = {
       50: Color.fromRGBO(primaryColor.red, primaryColor.green, primaryColor.blue, .1),
@@ -65,44 +73,54 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
       800: Color.fromRGBO(primaryColor.red, primaryColor.green, primaryColor.blue, .9),
       900: Color.fromRGBO(primaryColor.red, primaryColor.green, primaryColor.blue, 1),
     };
-
     return MaterialColor(primaryColor.value, colors);
   }
 
   @override
   ThemeState get initialState {
     return ThemeState(
-      index: 0,
+      primarySwatchIndex: 0,
+      brightnessIndex: 0,
       themeData: ThemeData(
-        primaryColor: ThemeBloc.colors[0],
+        primaryColor: ThemeBloc.primarySwatchList[0],
+        brightness: ThemeBloc.brightnessList[0],
       ),
-      color: ThemeBloc.colors[0],
-      colorAccent: ThemeBloc.accents[0],
     );
   }
 
-  Future<int> getIndex() async {
+  Future<void> initialThemeBlocFromStorage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var themeIndex = prefs.getInt('themeIndex');
-    return themeIndex ?? 0;
+    this.add(
+      ThemeEvent(
+        primarySwatchIndex: prefs.getInt('_primarySwatchIndex') ?? 0,
+        brightnessIndex: prefs.getInt('_brightnessIndex') ?? 0,
+      ),
+    );
   }
 
   @override
   Stream<ThemeState> mapEventToState(
     ThemeEvent event,
   ) async* {
-    if (event is ThemeChangeEvent) {
+    if (event is ThemeEvent) {
+      if (event.primarySwatchIndex != -1) {
+        this._primarySwatchIndex = event.primarySwatchIndex;
+      }
+      if (event.brightnessIndex != -1) {
+        this._brightnessIndex = event.brightnessIndex;
+      }
       yield ThemeState(
-        index: event.index,
+        primarySwatchIndex: this._primarySwatchIndex,
+        brightnessIndex: this._brightnessIndex,
         themeData: ThemeData(
-          primarySwatch: ThemeBloc.colors[event.index],
+          primarySwatch: ThemeBloc.primarySwatchList[this._primarySwatchIndex],
+          brightness: ThemeBloc.brightnessList[this._brightnessIndex],
         ),
-        color: ThemeBloc.colors[event.index],
-        colorAccent: ThemeBloc.accents[event.index],
       );
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setInt('themeIndex', event.index);
+      prefs.setInt('_primarySwatchIndex', this._primarySwatchIndex);
+      prefs.setInt('_brightnessIndex', this._brightnessIndex);
     }
   }
 }

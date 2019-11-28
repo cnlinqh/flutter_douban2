@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 
-abstract class ThemeEvent extends Equatable {
-  const ThemeEvent();
-}
-
-class ThemeChangeEvent extends ThemeEvent {
-  final index;
-  ThemeChangeEvent(this.index);
-  List<Object> get props => [index];
+class ThemeEvent extends Equatable {
+  final int primarySwatchIndex;
+  final int brightnessIndex;
+  ThemeEvent({
+    this.primarySwatchIndex = -1,
+    this.brightnessIndex = -1,
+  });
+  List<Object> get props => [primarySwatchIndex, brightnessIndex];
 }
