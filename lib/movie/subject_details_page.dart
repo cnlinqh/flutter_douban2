@@ -29,7 +29,7 @@ class SubjectDetailsPage extends StatefulWidget {
 
 class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
   var _subject;
-  var _pickedColor = ThemeBloc.black;
+  var _pickedColor;
   bool isTitleShow = false;
 
   double _position = 0.0;
@@ -40,7 +40,6 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
   @override
   void initState() {
     super.initState();
-    // _pickedColor = Theme.of(context).primaryColor;
     _getSubject();
   }
 
@@ -57,7 +56,8 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
   Widget build(BuildContext context) {
     return Theme(
       data: ThemeData(
-        primarySwatch: ThemeBloc.convert2MaterialColor(this._pickedColor)
+        primarySwatch: ThemeBloc.convert2MaterialColor(this._pickedColor),
+        brightness: Theme.of(context).brightness,
       ),
       child: Scaffold(
         appBar: _buildAppBar(),

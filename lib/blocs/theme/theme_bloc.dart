@@ -61,6 +61,9 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   static const Color transparent = Colors.transparent;
 
   static MaterialColor convert2MaterialColor(Color primaryColor) {
+    if(primaryColor == null){
+      primaryColor = ThemeBloc.black;
+    }
     Map<int, Color> colors = {
       50: Color.fromRGBO(primaryColor.red, primaryColor.green, primaryColor.blue, .1),
       100: Color.fromRGBO(primaryColor.red, primaryColor.green, primaryColor.blue, .2),

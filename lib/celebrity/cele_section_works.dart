@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
 import 'package:flutter_douban2/widget/rate_star.dart';
@@ -28,10 +27,7 @@ class CeleSectionWorks extends StatelessWidget {
         children: <Widget>[
           Text(
             "主要作品",
-            style: TextStyle(
-              color: ThemeBloc.white,
-              fontSize: 20,
-            ),
+            style: TextStyle(fontSize: 20),
           ),
           _buildBody(size),
         ],
@@ -41,10 +37,7 @@ class CeleSectionWorks extends StatelessWidget {
 
   Widget _buildBody(size) {
     if (this._cele['works'].length == 0) {
-      return Text(
-        '暂无',
-        style: TextStyle(color: ThemeBloc.white),
-      );
+      return Text('暂无');
     }
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -70,10 +63,7 @@ class CeleSectionWorks extends StatelessWidget {
           ),
           Container(
             width: ScreenUtil.getInstance().setWidth(size['width']),
-            child: Text(
-              work['subject']['title'],
-              style: TextStyle(color: ThemeBloc.white),
-            ),
+            child: Text(work['subject']['title']),
           ),
           RateStar(
             double.parse(work['subject']['rating']['average'].toString()),

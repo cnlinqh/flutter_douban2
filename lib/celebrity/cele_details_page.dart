@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/theme/theme_bloc.dart';
 import 'package:flutter_douban2/celebrity/cele_section_general.dart';
 import 'package:flutter_douban2/celebrity/cele_section_summary.dart';
 import 'package:flutter_douban2/celebrity/cele_section_works.dart';
@@ -25,15 +26,23 @@ class _CeleDetailsPageState extends State<CeleDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _buildAppBar(),
-      body: _buildBody(),
+    return Theme(
+      data: ThemeData(
+        primarySwatch: ThemeBloc.convert2MaterialColor(ThemeBloc.white),
+        brightness: Theme.of(context).brightness,
+      ),
+      child: Scaffold(
+        appBar: _buildAppBar(),
+        body: _buildBody(),
+      ),
     );
   }
 
   Widget _buildAppBar() {
     return AppBar(
       title: Text(LabelConstant.CELE_DETAILS_TITLE),
+      //remove the shadow below the app bar
+      elevation:0,
     );
   }
 
@@ -44,7 +53,7 @@ class _CeleDetailsPageState extends State<CeleDetailsPage> {
       );
     }
     return Container(
-      color: Theme.of(context).primaryColor,
+      // color: Theme.of(context).primaryColor,
       padding: EdgeInsets.all(
         ScreenUtil.getInstance().setWidth(ScreenSize.padding),
       ),

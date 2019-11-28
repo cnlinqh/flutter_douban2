@@ -163,7 +163,10 @@ class _TVChooseBoxState extends State<TVChooseBox> {
         child: Center(
           child: Text(
             widget.label,
-            style: TextStyle(color: ThemeBloc.white, fontSize: 16),
+            style: TextStyle(
+              color: ThemeBloc.white,
+              fontSize: 16,
+            ),
           ),
         ),
       ),

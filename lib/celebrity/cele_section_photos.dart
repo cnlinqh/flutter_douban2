@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/model/cele_photos_info.dart';
 import 'package:flutter_douban2/model/mine_settings_model.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
@@ -62,10 +61,7 @@ class _CeleSectionPhotosState extends State<CeleSectionPhotos> {
         children: <Widget>[
           Text(
             "相册",
-            style: TextStyle(
-              color: ThemeBloc.white,
-              fontSize: 20,
-            ),
+            style: TextStyle(fontSize: 20),
           ),
           Expanded(
             child: Text(''),
@@ -76,8 +72,6 @@ class _CeleSectionPhotosState extends State<CeleSectionPhotos> {
                 elevation: 24,
                 isDense: false,
                 iconSize: 30,
-                iconEnabledColor: ThemeBloc.white,
-                iconDisabledColor: ThemeBloc.white,
                 items: _buildDropdowns(context),
                 value: info.sortBy,
                 onChanged: (value) {
@@ -93,10 +87,7 @@ class _CeleSectionPhotosState extends State<CeleSectionPhotos> {
             onTap: () {
               NavigatorHelper.pushToPage(context, LabelConstant.CELE_GALLERY_GRID_TITLE, content: this.widget._cele);
             },
-            child: Icon(
-              Icons.grid_on,
-              color: ThemeBloc.white,
-            ),
+            child: Icon(Icons.grid_on),
           ),
           SizedBox(
             width: ScreenUtil.getInstance().setWidth(ScreenSize.padding * 4),
@@ -105,10 +96,7 @@ class _CeleSectionPhotosState extends State<CeleSectionPhotos> {
             onTap: () {
               NavigatorHelper.pushToPage(context, LabelConstant.CELE_GALLERY_GRID_TITLE2, content: this.widget._cele);
             },
-            child: Icon(
-              Icons.dashboard,
-              color: ThemeBloc.white,
-            ),
+            child: Icon(Icons.dashboard),
           ),
         ],
       ),
@@ -162,28 +150,19 @@ class _CeleSectionPhotosState extends State<CeleSectionPhotos> {
     List<DropdownMenuItem> items = List();
     items.add(
       DropdownMenuItem(
-        child: Text(
-          '按喜欢排序',
-          style: TextStyle(color: Theme.of(context).primaryColor),
-        ),
+        child: Text('按喜欢排序'),
         value: 'like',
       ),
     );
     items.add(
       DropdownMenuItem(
-        child: Text(
-          '按尺寸排序',
-          style: TextStyle(color: Theme.of(context).primaryColor),
-        ),
+        child: Text('按尺寸排序'),
         value: 'size',
       ),
     );
     items.add(
       DropdownMenuItem(
-        child: Text(
-          '按时间排序',
-          style: TextStyle(color: Theme.of(context).primaryColor),
-        ),
+        child: Text('按时间排序'),
         value: 'time',
       ),
     );
