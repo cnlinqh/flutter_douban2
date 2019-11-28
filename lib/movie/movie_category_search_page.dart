@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/movie/movie_category_condition_bars.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
@@ -126,19 +125,17 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
             left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
             right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
           ),
-          child: Icon(
-            Icons.chrome_reader_mode,
-            color: this._isListView ? Theme.of(context).appBarTheme.color : null,
-          ),
+          child: Icon(this._isListView ? Icons.apps : Icons.chrome_reader_mode),
         ),
         onTap: () {
           if (mounted) {
             setState(() {
-              this._isListView = true;
+              this._isListView = !this._isListView;
             });
           }
         },
       ),
+      ScreenSize.buildHDivider(),
       GestureDetector(
         child: Container(
           padding: EdgeInsets.only(
@@ -146,27 +143,7 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
             right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
           ),
           child: Icon(
-            Icons.apps,
-            color: !this._isListView ? ThemeBloc.orange : null,
-          ),
-        ),
-        onTap: () {
-          if (mounted) {
-            setState(() {
-              this._isListView = false;
-            });
-          }
-        },
-      ),
-      GestureDetector(
-        child: Container(
-          padding: EdgeInsets.only(
-            left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-            right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-          ),
-          child: Icon(
-            Icons.search,
-            color: this._isFilterShow ? ThemeBloc.orange : null,
+            this._isFilterShow ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
           ),
         ),
         onTap: () {

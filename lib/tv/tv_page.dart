@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/model/tv_list_model.dart';
 import 'package:flutter_douban2/tv/tv_list_view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -86,46 +85,19 @@ class _TVPageState extends State<TVPage> with SingleTickerProviderStateMixin {
                 left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
                 right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
               ),
-              child: Container(
-                child: Icon(
-                  Icons.chrome_reader_mode,
-                  color: model.mode == "ListView" ? ThemeBloc.orange : null,
-                ),
-              ),
+              child: Icon(model.mode == "ListView" ? Icons.apps : Icons.chrome_reader_mode),
             ),
             onTap: () {
-              model.mode = "ListView";
+              model.mode = model.mode == "ListView" ? 'GridView' : 'ListView';
             },
           );
         },
       ),
-      Consumer<TVListModel>(
-        builder: (context, model, widget) {
-          return GestureDetector(
-            child: Container(
-              padding: EdgeInsets.only(
-                left: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-                right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-              ),
-              child: Container(
-                child: Icon(
-                  Icons.apps,
-                  color: model.mode == "GridView" ? ThemeBloc.orange : null,
-                ),
-              ),
-            ),
-            onTap: () {
-              model.mode = "GridView";
-            },
-          );
-        },
-      ),
+      ScreenSize.buildHDivider(),
       Consumer<TVListModel>(
         builder: (context, model, widget) {
           return Center(
             child: DropdownButton(
-              iconEnabledColor: ThemeBloc.white,
-              iconDisabledColor: ThemeBloc.white,
               items: [
                 DropdownMenuItem(
                   child: Text("推荐"),
@@ -153,6 +125,7 @@ class _TVPageState extends State<TVPage> with SingleTickerProviderStateMixin {
           );
         },
       ),
+      ScreenSize.buildHDivider(),
       IconButton(
         icon: Icon(Icons.category),
         onPressed: () {
@@ -165,6 +138,7 @@ class _TVPageState extends State<TVPage> with SingleTickerProviderStateMixin {
           );
         },
       ),
+      ScreenSize.buildHDivider(),
       IconButton(
         icon: Icon(Icons.sort),
         onPressed: () {
