@@ -195,13 +195,13 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
               ),
               padding: EdgeInsets.all(ScreenUtil.getInstance().setWidth(ScreenSize.padding / 2)),
               decoration: BoxDecoration(
-                color: this.widget.selected == text ? Theme.of(context).colorScheme.primary : ThemeBloc.transparent,
+                color: this.widget.selected == text ? Theme.of(context).colorScheme.primary : ThemeBloc.highLights['transparent'],
                 borderRadius: BorderRadius.all(Radius.circular(3)),
               ),
               child: Text(
                 text,
                 style: TextStyle(
-                  color: text == LabelConstant.MOVIE_SPECIAL_SELF_DEFINE ? ThemeBloc.green : null,
+                  color: text == LabelConstant.MOVIE_SPECIAL_SELF_DEFINE ? Theme.of(context).accentColor : null,
                   // fontWeight: this.widget.selected == text
                   //     ? FontWeight.bold
                   //     : FontWeight.normal,
@@ -250,7 +250,7 @@ class _InputDialogState extends State<InputDialog> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     var mediaQueryData = MediaQueryData.fromWindow(ui.window);
     return AnimatedContainer(
-      color: ThemeBloc.transparent,
+      color: ThemeBloc.highLights['transparent'],
       duration: const Duration(milliseconds: 300),
       padding: EdgeInsets.only(bottom: mediaQueryData.viewInsets.bottom),
       child: Material(

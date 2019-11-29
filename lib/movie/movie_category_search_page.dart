@@ -262,7 +262,14 @@ class _MovieCategorySearchPageState extends State<MovieCategorySearchPage> {
     _dataList.insertAll(_dataList.length - 1, list.toList());
     _start = _start + list.length;
     if (_done && this._dataList.length == 1) {
-      final snackBar = new SnackBar(content: new Text('No Result!'));
+      final snackBar = new SnackBar(
+        content: Text(
+          'No Result! IP may be banned by douban or no movie/tv matched, please try later!',
+          style: TextStyle(
+            color: Theme.of(context).errorColor,
+          ),
+        ),
+      );
       Scaffold.of(context).showSnackBar(snackBar);
     }
     if (mounted) setState(() {});

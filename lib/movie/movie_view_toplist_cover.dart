@@ -239,7 +239,7 @@ class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
             TextSpan(text: str),
             TextSpan(
               text: "  " + _getSubject(subject)['rating']['average'].toString(),
-              style: TextStyle(color: ThemeBloc.orange),
+              style: TextStyle(color: ThemeBloc.highLights['orange']),
             ),
           ],
         ),

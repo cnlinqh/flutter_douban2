@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
+import 'package:flutter_douban2/widget/full_screen_image_page.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:flutter_douban2/widget/rate_star.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_douban2/util/client_api.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SubjectSectionReviewFull extends StatefulWidget {
   final content;
@@ -136,16 +138,28 @@ class _SubjectSectionReviewFullState extends State<SubjectSectionReviewFull> {
     return Html(
       data: this.html == null ? '' : this.html,
       //Optional parameters:
-      padding: EdgeInsets.all(8.0),
-      defaultTextStyle: TextStyle(fontFamily: 'serif'),
-      linkStyle: const TextStyle(
-        color: ThemeBloc.redAccent,
+      padding: EdgeInsets.all(ScreenUtil.getInstance().setWidth(ScreenSize.padding)),
+      // defaultTextStyle: TextStyle(fontFamily: 'serif'),
+      defaultTextStyle: TextStyle(
+        fontFamily: DefaultTextStyle.of(context).style.fontFamily,
+      ),
+      linkStyle: TextStyle(
+        color: ThemeBloc.highLights['red'],
       ),
       onLinkTap: (url) {
-        // open url in a webview
+        _launchURL(url);
       },
       onImageTap: (src) {
         // Display the image in large form.
+        print(src);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) {
+              return FullScreenImagePage(src);
+            },
+          ),
+        );
       },
       //Must have useRichText set to false for this to work.
       // customRender: (node, children) {
@@ -175,6 +189,14 @@ class _SubjectSectionReviewFullState extends State<SubjectSectionReviewFull> {
         return baseStyle;
       },
     );
+  }
+
+  void _launchURL(url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   String _formatDate(date) {

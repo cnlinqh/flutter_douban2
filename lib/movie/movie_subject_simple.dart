@@ -104,7 +104,7 @@ class _MovieSubjectSimpleState extends State<MovieSubjectSimple> {
                     text: '新',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: ThemeBloc.green,
+                      color: ThemeBloc.highLights['green'],
                     ),
                   ),
                   TextSpan(
@@ -145,7 +145,7 @@ class _MovieSubjectSimpleState extends State<MovieSubjectSimple> {
       padding: EdgeInsets.all(ScreenUtil.getInstance().setWidth(5)),
       decoration: BoxDecoration(
         border: Border.all(
-          color: ThemeBloc.red,
+          color: ThemeBloc.highLights['red'],
           width: 2.0,
           style: BorderStyle.solid,
         ),
@@ -154,7 +154,7 @@ class _MovieSubjectSimpleState extends State<MovieSubjectSimple> {
       child: Text(
         this.subject['mainland_pubdate'],
         style: TextStyle(
-          color: ThemeBloc.red,
+          color: ThemeBloc.highLights['red'],
           fontSize: 10,
         ),
       ),

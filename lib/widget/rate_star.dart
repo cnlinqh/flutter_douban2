@@ -58,7 +58,9 @@ class RateStar extends StatelessWidget {
     return Icon(
       rate >= top ? Icons.star : rate > bottom ? Icons.star_half : Icons.star_border,
       size: size,
-      color: rate >= top ? ThemeBloc.orange : rate > bottom ? ThemeBloc.orangeAccent : ThemeBloc.black,
+      color: rate >= top
+          ? ThemeBloc.highLights['orange']
+          : rate > bottom ? ThemeBloc.highLights['orangeAccent'] : ThemeBloc.highLights['black'],
     );
   }
 }

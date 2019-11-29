@@ -48,16 +48,22 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
     Brightness.light,
     Brightness.dark,
   ];
-  static const Color red = Colors.red;
-  static const Color redAccent = Colors.redAccent;
-  static const Color orange = Colors.orange;
-  static const Color orangeAccent = Colors.orangeAccent;
-  static const Color green = Colors.green;
-  static const Color blue = Colors.blue;
+
+  static const highLights = const {
+    'red': Colors.red,
+    'redAccent': Colors.redAccent,
+    'orange': Colors.orange,
+    'orangeAccent': Colors.orangeAccent,
+    'green': Colors.green,
+    'blue': Colors.blue,
+    'grey': ThemeBloc.grey,
+    'white': Colors.white,
+    'black': Colors.black,
+  };
+
   static const Color grey = Colors.grey;
   static const Color white = Colors.white;
   static const Color black = Colors.black;
-  static const Color transparent = Colors.transparent;
 
   static MaterialColor convert2MaterialColor(Color primaryColor) {
     if (primaryColor == null) {

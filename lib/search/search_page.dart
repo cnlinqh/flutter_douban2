@@ -57,7 +57,7 @@ class _SearchPageState extends State<SearchPage> with Debounce {
                     suffixIcon: IconButton(
                       icon: Icon(
                         Icons.clear,
-                        color: ThemeBloc.red,
+                        color: ThemeBloc.highLights['red'],
                       ),
                       onPressed: () {
                         // controller.clear(); workaround
@@ -165,7 +165,7 @@ class _SearchPageState extends State<SearchPage> with Debounce {
           IconButton(
             icon: Icon(
               Icons.close,
-              color: ThemeBloc.redAccent,
+              color: ThemeBloc.highLights['redAccent'],
             ),
             onPressed: () {
               if (mounted) {

@@ -224,7 +224,7 @@ class SubjectSectionRate extends StatelessWidget {
                     children: <Widget>[
                       Container(
                         decoration: BoxDecoration(
-                          color: ThemeBloc.orange,
+                          color: ThemeBloc.highLights['orange'],
                           borderRadius: BorderRadius.all(
                             Radius.circular(7),
                           ),

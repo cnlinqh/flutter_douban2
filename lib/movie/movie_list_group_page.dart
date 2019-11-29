@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/movie/movie_subject_general.dart';
 import 'package:flutter_douban2/util/movie_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -174,10 +173,7 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
               width: ScreenUtil.getInstance().setWidth(ScreenSize.width - ScreenSize.padding * 2),
               height: ScreenUtil.getInstance().setHeight(size['height']),
               child: Center(
-                child: Text(
-                  topText,
-                  style: TextStyle(color: Theme.of(context).primaryColor),
-                ),
+                child: Text(topText),
               ),
             ),
           ),
@@ -188,10 +184,7 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
               width: ScreenUtil.getInstance().setWidth(ScreenSize.width - ScreenSize.padding * 2),
               height: ScreenUtil.getInstance().setHeight(size['height']),
               child: Center(
-                child: Text(
-                  top2Text,
-                  style: TextStyle(color: ThemeBloc.red),
-                ),
+                child: Text(top2Text),
               ),
             ),
           ),
@@ -205,10 +198,7 @@ class _MovieListGroupPageState extends State<MovieListGroupPage> {
       width: ScreenUtil.getInstance().setWidth(ScreenSize.width - ScreenSize.padding * 2),
       height: ScreenUtil.getInstance().setHeight(size['height']),
       child: Center(
-        child: Text(
-          _getPubdate(index),
-          style: TextStyle(color: Theme.of(context).primaryColorLight),
-        ),
+        child: Text(_getPubdate(index)),
       ),
     );
   }

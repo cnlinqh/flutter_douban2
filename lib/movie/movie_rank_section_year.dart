@@ -137,7 +137,7 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
         width: ScreenUtil.getInstance().setWidth(size['size']['triangle_top_width']),
         height: ScreenUtil.getInstance().setHeight(size['size']['rank_bg_cover_height']),
         decoration: BoxDecoration(
-          color: ThemeBloc.transparent,
+          color: ThemeBloc.highLights['transparent'],
         ),
         child: CustomPaint(
           painter: TriangleCustomPainter(this.color),

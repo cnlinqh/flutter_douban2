@@ -107,7 +107,7 @@ class _MovieViewSliderState extends State<MovieViewSlider> {
         Text(
           item['title'],
           style: TextStyle(
-            color: ThemeBloc.blue,
+            color: ThemeBloc.highLights['blue'],
             fontWeight: FontWeight.bold,
           ),
         ),

@@ -113,7 +113,7 @@ class SubjectSectionReviewTemplate extends StatelessWidget {
       return [
         Text(
           '这篇影/剧评可能有剧透',
-          style: TextStyle(color: ThemeBloc.red),
+          style: TextStyle(color: ThemeBloc.highLights['red']),
         ),
         Text(this.shortContent),
         _buildUnfoldAction(context),

@@ -70,8 +70,10 @@ class MovieUtil {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(3)),
           color: index == 0
-              ? ThemeBloc.red
-              : index == 1 ? ThemeBloc.redAccent : index == 2 ? ThemeBloc.orange : ThemeBloc.grey,
+              ? ThemeBloc.highLights['red']
+              : index == 1
+                  ? ThemeBloc.highLights['redAccent']
+                  : (index == 2 ? ThemeBloc.highLights['orange'] : ThemeBloc.highLights['grey']),
         ),
       ),
     );
@@ -83,13 +85,13 @@ class MovieUtil {
         onTap: () {},
         child: Icon(
           Icons.favorite_border,
-          color: ThemeBloc.orangeAccent,
+          color: ThemeBloc.highLights['orage'],
         ),
       ),
     );
   }
 
-  static buildSubType(String subtype, {Color color = ThemeBloc.red}) {
+  static buildSubType(String subtype, {Color color}) {
     return Positioned(
       bottom: 0,
       child: Icon(
@@ -105,7 +107,7 @@ class MovieUtil {
         right: 0,
         child: Icon(
           Icons.fiber_new,
-          color: ThemeBloc.green,
+          color: ThemeBloc.highLights['green'],
         ),
       );
     } else {
