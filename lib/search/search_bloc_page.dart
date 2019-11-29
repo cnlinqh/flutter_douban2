@@ -58,7 +58,10 @@ class SearchBlocPage extends StatelessWidget with Debounce {
               ),
             ),
             IconButton(
-              icon: Icon(Icons.search),
+              icon: Icon(
+                Icons.search,
+                color: Theme.of(context).primaryColor,
+              ),
               onPressed: () {
                 var searchText = controller.text.trim();
                 if (searchText != '') {

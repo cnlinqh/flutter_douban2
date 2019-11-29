@@ -72,49 +72,91 @@ class _MinePageState extends State<MinePage> {
                 _buildDivider(),
                 _buildThemeHeader(),
                 _buildDivider(),
+                _buildPrimaryHeader(),
+                _buildDivider(),
                 _buildPrimarySwatchList(),
+                _buildDivider(),
+                _buildSecondHeader(),
+                _buildDivider(),
+                _buildAccentColorList(),
                 _buildDivider(),
                 _buildBrightness(),
                 _buildDivider(),
-                _colorDisplayBox("突出颜色", "highlightColor", Theme.of(context).highlightColor),
+                _colorDisplayBox("colorScheme.primary", Theme.of(context).colorScheme.primary),
                 _buildDivider(),
-                _colorDisplayBox("提示颜色", "hintColor", Theme.of(context).hintColor),
+                _colorDisplayBox("colorScheme.onPrimary", Theme.of(context).colorScheme.onPrimary),
                 _buildDivider(),
-                _colorDisplayBox("文本选择手柄颜色", "textSelectionHandleColor", Theme.of(context).textSelectionHandleColor),
+                _colorDisplayBox("colorScheme.primaryVariant", Theme.of(context).colorScheme.primaryVariant),
                 _buildDivider(),
-                _colorDisplayBox("文字选择颜色", "textSelectionColor", Theme.of(context).textSelectionColor),
+                _colorDisplayBox("colorScheme.secondary", Theme.of(context).colorScheme.secondary),
                 _buildDivider(),
-                _colorDisplayBox("背景颜色", "backgroundColor", Theme.of(context).backgroundColor),
+                _colorDisplayBox("colorScheme.onSecondary", Theme.of(context).colorScheme.onSecondary),
                 _buildDivider(),
-                _colorDisplayBox("强调颜色", "accentColor", Theme.of(context).accentColor),
+                _colorDisplayBox("colorScheme.secondaryVariant", Theme.of(context).colorScheme.secondaryVariant),
                 _buildDivider(),
-                _colorDisplayBox("画布颜色", "canvasColor", Theme.of(context).canvasColor),
+                _colorDisplayBox("colorScheme.surface", Theme.of(context).colorScheme.surface),
                 _buildDivider(),
-                _colorDisplayBox("卡片颜色", "cardColor", Theme.of(context).cardColor),
+                _colorDisplayBox("colorScheme.onSurface", Theme.of(context).colorScheme.onSurface),
                 _buildDivider(),
-                _colorDisplayBox("按钮颜色", "buttonColor", Theme.of(context).buttonColor),
+                _colorDisplayBox("colorScheme.background", Theme.of(context).colorScheme.background),
                 _buildDivider(),
-                _colorDisplayBox("对话框背景颜色", "dialogBackgroundColor", Theme.of(context).dialogBackgroundColor),
+                _colorDisplayBox("colorScheme.onBackground", Theme.of(context).colorScheme.onBackground),
                 _buildDivider(),
-                _colorDisplayBox("禁用颜色", "disabledColor", Theme.of(context).disabledColor),
+                _colorDisplayBox("primarycolorScheme.errorColor", Theme.of(context).colorScheme.error),
                 _buildDivider(),
-                _colorDisplayBox("分频器颜色", "dividerColor", Theme.of(context).dividerColor),
+                _colorDisplayBox("colorScheme.onError", Theme.of(context).colorScheme.onError),
                 _buildDivider(),
-                _colorDisplayBox("错误颜色", "errorColor", Theme.of(context).errorColor),
+                _colorDisplayBox("primaryColor", Theme.of(context).primaryColor),
                 _buildDivider(),
-                _colorDisplayBox("指示灯颜色", "indicatorColor", Theme.of(context).indicatorColor),
+                _colorDisplayBox("primaryColorLight", Theme.of(context).primaryColorLight),
                 _buildDivider(),
-                _colorDisplayBox("原色", "primaryColor", Theme.of(context).primaryColor),
+                _colorDisplayBox("primaryColorDark", Theme.of(context).primaryColorDark),
                 _buildDivider(),
-                _colorDisplayBox("脚手架背景颜色", "scaffoldBackgroundColor", Theme.of(context).scaffoldBackgroundColor),
+                _colorDisplayBox("canvasColor", Theme.of(context).canvasColor),
                 _buildDivider(),
-                _colorDisplayBox("次标头颜色", "secondaryHeaderColor", Theme.of(context).secondaryHeaderColor),
+                _colorDisplayBox("accentColor", Theme.of(context).accentColor),
                 _buildDivider(),
-                _colorDisplayBox("选择行颜色", "selectedRowColor", Theme.of(context).selectedRowColor),
+                _colorDisplayBox("scaffoldBackgroundColor", Theme.of(context).scaffoldBackgroundColor),
                 _buildDivider(),
-                _colorDisplayBox("飞溅颜色", "splashColor", Theme.of(context).splashColor),
+                _colorDisplayBox("bottomAppBarColor", Theme.of(context).bottomAppBarColor),
                 _buildDivider(),
-                _colorDisplayBox("未选择的控件颜色", "unselectedWidgetColor", Theme.of(context).unselectedWidgetColor),
+                _colorDisplayBox("cardColor", Theme.of(context).cardColor),
+                _buildDivider(),
+                _colorDisplayBox("dividerColor", Theme.of(context).dividerColor),
+                _buildDivider(),
+                _colorDisplayBox("focusColor", Theme.of(context).focusColor),
+                _buildDivider(),
+                _colorDisplayBox("hoverColor", Theme.of(context).hoverColor),
+                _buildDivider(),
+                _colorDisplayBox("splashColor", Theme.of(context).splashColor),
+                _buildDivider(),
+                _colorDisplayBox("selectedRowColor", Theme.of(context).selectedRowColor),
+                _buildDivider(),
+                _colorDisplayBox("unselectedWidgetColor", Theme.of(context).unselectedWidgetColor),
+                _buildDivider(),
+                _colorDisplayBox("disabledColor", Theme.of(context).disabledColor),
+                _buildDivider(),
+                _colorDisplayBox("buttonColor", Theme.of(context).buttonColor),
+                _buildDivider(),
+                _colorDisplayBox("secondaryHeaderColor", Theme.of(context).secondaryHeaderColor),
+                _buildDivider(),
+                _colorDisplayBox("textSelectionColor", Theme.of(context).textSelectionColor),
+                _buildDivider(),
+                _colorDisplayBox("cursorColor", Theme.of(context).cursorColor),
+                _buildDivider(),
+                _colorDisplayBox("textSelectionHandleColor", Theme.of(context).textSelectionHandleColor),
+                _buildDivider(),
+                _colorDisplayBox("backgroundColor", Theme.of(context).backgroundColor),
+                _buildDivider(),
+                _colorDisplayBox("dialogBackgroundColor", Theme.of(context).dialogBackgroundColor),
+                _buildDivider(),
+                _colorDisplayBox("indicatorColor", Theme.of(context).indicatorColor),
+                _buildDivider(),
+                _colorDisplayBox("hintColor", Theme.of(context).hintColor),
+                _buildDivider(),
+                _colorDisplayBox("errorColor", Theme.of(context).errorColor),
+                _buildDivider(),
+                _colorDisplayBox("toggleableActiveColor", Theme.of(context).toggleableActiveColor),
               ],
             ),
           ),
@@ -152,7 +194,7 @@ class _MinePageState extends State<MinePage> {
             Slider(
               value: settings.photoColumnsNumPortait.toDouble(),
               label: '${settings.photoColumnsNumPortait}',
-              activeColor: Theme.of(context).primaryColor,
+              activeColor: Theme.of(context).toggleableActiveColor,
               inactiveColor: Theme.of(context).disabledColor,
               min: 1.0,
               max: 10.0,
@@ -180,7 +222,7 @@ class _MinePageState extends State<MinePage> {
             Slider(
               value: settings.photoColumnsNumLandscape.toDouble(),
               label: '${settings.photoColumnsNumLandscape}',
-              activeColor: Theme.of(context).primaryColor,
+              activeColor: Theme.of(context).toggleableActiveColor,
               inactiveColor: Theme.of(context).disabledColor,
               min: 1.0,
               max: 10.0,
@@ -208,7 +250,7 @@ class _MinePageState extends State<MinePage> {
             Slider(
               value: settings.photoColumnsNumSquare.toDouble(),
               label: '${settings.photoColumnsNumSquare}',
-              activeColor: Theme.of(context).primaryColor,
+              activeColor: Theme.of(context).toggleableActiveColor,
               inactiveColor: Theme.of(context).disabledColor,
               min: 1.0,
               max: 10.0,
@@ -232,7 +274,7 @@ class _MinePageState extends State<MinePage> {
             new Radio(
               value: 0,
               groupValue: settings.photoSizeIndex,
-              activeColor: Theme.of(context).primaryColor,
+              activeColor: Theme.of(context).toggleableActiveColor,
               onChanged: (value) {
                 settings.setPhotoSizeIndex(value);
               },
@@ -243,7 +285,7 @@ class _MinePageState extends State<MinePage> {
             new Radio(
               value: 1,
               groupValue: settings.photoSizeIndex,
-              activeColor: Theme.of(context).primaryColor,
+              activeColor: Theme.of(context).toggleableActiveColor,
               onChanged: (value) {
                 settings.setPhotoSizeIndex(value);
               },
@@ -254,7 +296,7 @@ class _MinePageState extends State<MinePage> {
             new Radio(
               value: 2,
               groupValue: settings.photoSizeIndex,
-              activeColor: Theme.of(context).primaryColor,
+              activeColor: Theme.of(context).toggleableActiveColor,
               onChanged: (value) {
                 settings.setPhotoSizeIndex(value);
               },
@@ -265,7 +307,7 @@ class _MinePageState extends State<MinePage> {
             new Radio(
               value: 3,
               groupValue: settings.photoSizeIndex,
-              activeColor: Theme.of(context).primaryColor,
+              activeColor: Theme.of(context).toggleableActiveColor,
               onChanged: (value) {
                 settings.setPhotoSizeIndex(value);
               },
@@ -309,7 +351,7 @@ class _MinePageState extends State<MinePage> {
             Text('内存缓存数据:'),
             Checkbox(
               value: settings.cacheDataInMemory,
-              activeColor: Theme.of(context).primaryColor,
+              activeColor: Theme.of(context).toggleableActiveColor,
               onChanged: (value) {
                 settings.setCacheDataInMemory(value);
               },
@@ -328,7 +370,7 @@ class _MinePageState extends State<MinePage> {
             Text('日志输出:        '),
             Checkbox(
               value: settings.logEnabled,
-              activeColor: Theme.of(context).primaryColor,
+              activeColor: Theme.of(context).toggleableActiveColor,
               onChanged: (value) {
                 settings.setLogEnabled(value);
               },
@@ -349,22 +391,50 @@ class _MinePageState extends State<MinePage> {
     );
   }
 
+  Widget _buildPrimaryHeader() {
+    return Container(
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.width),
+      child: Text('第一颜色:'),
+    );
+  }
+
+  Widget _buildSecondHeader() {
+    return Container(
+      width: ScreenUtil.getInstance().setWidth(ScreenSize.width),
+      child: Text('第二颜色:'),
+    );
+  }
+
   Widget _buildPrimarySwatchList() {
     return Wrap(
       spacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
       runSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
       alignment: WrapAlignment.start,
-      children: _buildColorList(),
+      children: _buildColorList(true, ThemeBloc.primarySwatchList),
     );
   }
 
-  List<Widget> _buildColorList() {
+  Widget _buildAccentColorList() {
+    return Wrap(
+      spacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+      runSpacing: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
+      alignment: WrapAlignment.start,
+      children: _buildColorList(false, ThemeBloc.accentColorList),
+    );
+  }
+
+  List<Widget> _buildColorList(bool isPrimary, List list) {
     List<Widget> children = [];
-    for (int i = 0; i < ThemeBloc.primarySwatchList.length; i++) {
+
+    for (int i = 0; i < list.length; i++) {
       children.add(
         GestureDetector(
           onTap: () {
-            BlocProvider.of<ThemeBloc>(context).add(ThemeEvent(primarySwatchIndex: i));
+            if (isPrimary) {
+              BlocProvider.of<ThemeBloc>(context).add(ThemeEvent(primarySwatchIndex: i));
+            } else {
+              BlocProvider.of<ThemeBloc>(context).add(ThemeEvent(accentColorIndex: i));
+            }
           },
           child: BlocBuilder<ThemeBloc, ThemeState>(
             builder: (context, state) {
@@ -372,9 +442,11 @@ class _MinePageState extends State<MinePage> {
                 width: kToolbarHeight - 20,
                 height: kToolbarHeight - 20,
                 decoration: BoxDecoration(
-                  color: ThemeBloc.primarySwatchList[i],
+                  color: list[i],
                   borderRadius: BorderRadius.all(
-                    Radius.circular(state.primarySwatchIndex == i ? kToolbarHeight : 7),
+                    isPrimary
+                        ? Radius.circular(state.primarySwatchIndex == i ? kToolbarHeight : 7)
+                        : Radius.circular(state.accentColorIndex == i ? kToolbarHeight : 7),
                   ),
                   border: Border.all(),
                 ),
@@ -398,7 +470,7 @@ class _MinePageState extends State<MinePage> {
               builder: (context, state) {
                 return Checkbox(
                   value: state.brightnessIndex == 1,
-                  activeColor: Theme.of(context).primaryColor,
+                  activeColor: Theme.of(context).toggleableActiveColor,
                   onChanged: (value) {
                     BlocProvider.of<ThemeBloc>(context).add(ThemeEvent(brightnessIndex: value == false ? 0 : 1));
                   },
@@ -411,10 +483,10 @@ class _MinePageState extends State<MinePage> {
     );
   }
 
-  Widget _colorDisplayBox(String explanation, String name, Color color) {
+  Widget _colorDisplayBox(String name, Color color) {
     return Row(
       children: <Widget>[
-        new Text("$explanation\n$name\n${color.toString()}\t\t"),
+        new Text("$name\n(0x${color.value.toRadixString(16).padLeft(8, '0')})\t\t"),
         new Container(
           width: kToolbarHeight - 20,
           height: kToolbarHeight - 20,

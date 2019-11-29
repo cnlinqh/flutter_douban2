@@ -96,9 +96,10 @@ class _HomePageState extends State<HomePage> {
               items: _buildBottomNavigationItems(),
               color: state.themeData.scaffoldBackgroundColor,
               backgroundColor: state.themeData.primaryColor,
-              buttonBackgroundColor: state.brightnessIndex == 0
-                  ? ThemeBloc.primarySwatchList[state.primarySwatchIndex][400]
-                  : state.themeData.buttonColor,
+              // buttonBackgroundColor: state.brightnessIndex == 0
+              //     ? ThemeBloc.primarySwatchList[state.primarySwatchIndex][400]
+              //     : state.themeData.buttonColor,
+              buttonBackgroundColor: state.themeData.colorScheme.secondary,
               animationCurve: Curves.easeInOut,
               animationDuration: Duration(milliseconds: 600),
               height: kToolbarHeight,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
@@ -23,7 +22,7 @@ class MovieCategoryRangeBar extends StatelessWidget {
       height2: ScreenSize.movie_cate_search_bar_height2,
     );
     return Container(
-      color: ThemeBloc.white,
+      color: Theme.of(context).scaffoldBackgroundColor,
       width: ScreenUtil.getInstance().setWidth(ScreenSize.width - 2 * ScreenSize.padding),
       height: ScreenUtil.getInstance().setHeight(size['height']),
       child: Row(

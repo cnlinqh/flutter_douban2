@@ -74,7 +74,10 @@ class _SearchPageState extends State<SearchPage> with Debounce {
               ),
             ),
             IconButton(
-              icon: Icon(Icons.search),
+              icon: Icon(
+                Icons.search,
+                color: Theme.of(context).primaryColor,
+              ),
               onPressed: onPressSearch,
             )
           ],

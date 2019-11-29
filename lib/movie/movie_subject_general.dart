@@ -123,13 +123,13 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
               text: ' ' + this.subject['title'],
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: ThemeBloc.black,
+                color: Theme.of(context).textTheme.title.color,
               ),
             ),
             TextSpan(
               text: " (${this.subject['year']})",
               style: TextStyle(
-                color: Theme.of(context).disabledColor,
+                color: Theme.of(context).textTheme.title.color,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -146,13 +146,13 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
               text: this.subject['title'],
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: ThemeBloc.black,
+                color: Theme.of(context).textTheme.title.color,
               ),
             ),
             TextSpan(
               text: " (${this.subject['year']})",
               style: TextStyle(
-                color: Theme.of(context).disabledColor,
+                color: Theme.of(context).textTheme.title.color,
                 fontWeight: FontWeight.bold,
               ),
             ),

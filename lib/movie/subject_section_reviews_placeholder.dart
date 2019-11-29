@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_douban2/blocs/theme/theme_bloc.dart';
 import 'package:flutter_douban2/util/client_api.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
@@ -79,15 +80,15 @@ class SubjectSectionReviewsPlaceHolderState extends State<SubjectSectionReviewsP
                   LabelConstant.MOVIE_LONG_REVIEW,
                   style: TextStyle(
                     fontSize: 24,
-                    color: Theme.of(context).scaffoldBackgroundColor,
+                    color: Theme.of(context).brightness == Brightness.light ? Theme.of(context).colorScheme.onPrimary : ThemeBloc.white,
                   ),
                 ),
-                SizedBox(
-                  width: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
-                ),
+                ScreenSize.buildHDivider(),
                 Text(
                   this.total,
-                  style: TextStyle(color: Theme.of(context).scaffoldBackgroundColor),
+                  style: TextStyle(
+                    color: Theme.of(context).brightness == Brightness.light ? Theme.of(context).colorScheme.onPrimary : ThemeBloc.white,
+                  ),
                 )
               ],
             ),

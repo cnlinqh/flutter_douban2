@@ -59,7 +59,7 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
     return Opacity(
       opacity: 1,
       child: Container(
-        color: ThemeBloc.white,
+        color: Theme.of(context).scaffoldBackgroundColor,
       ),
     );
   }
@@ -195,7 +195,7 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
               ),
               padding: EdgeInsets.all(ScreenUtil.getInstance().setWidth(ScreenSize.padding / 2)),
               decoration: BoxDecoration(
-                color: this.widget.selected == text ? Theme.of(context).primaryColor : ThemeBloc.transparent,
+                color: this.widget.selected == text ? Theme.of(context).colorScheme.primary : ThemeBloc.transparent,
                 borderRadius: BorderRadius.all(Radius.circular(3)),
               ),
               child: Text(

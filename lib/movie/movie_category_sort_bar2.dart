@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_douban2/blocs/blocs.dart';
 import 'package:flutter_douban2/util/label_constant.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_douban2/util/screen_size.dart';
@@ -33,7 +32,7 @@ class _MovieCategorySortBar2State extends State<MovieCategorySortBar2> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: ThemeBloc.white,
+      color: Theme.of(context).scaffoldBackgroundColor,
       width: ScreenUtil.getInstance().setWidth(ScreenSize.width - 2 * ScreenSize.padding),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -85,7 +84,6 @@ class _MovieCategoryRadioBarState extends State<MovieCategoryRadioBar> with Tick
       height2: ScreenSize.movie_cate_search_bar_height2,
     );
     return Container(
-      color: ThemeBloc.white,
       child: Stack(
         children: <Widget>[
           Container(
@@ -112,7 +110,7 @@ class _MovieCategoryRadioBarState extends State<MovieCategoryRadioBar> with Tick
                       ),
                       padding: EdgeInsets.all(ScreenUtil.getInstance().setWidth(ScreenSize.padding / 2)),
                       decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
+                        color: Theme.of(context).colorScheme.primary,
                         borderRadius: BorderRadius.all(Radius.circular(3)),
                       ),
                       child: Text(
@@ -236,7 +234,6 @@ class _MovieCategoryRadioButtonState extends State<MovieCategoryRadioButton> {
           child: Text(widget.label),
         ),
         decoration: BoxDecoration(
-          color: ThemeBloc.white,
           borderRadius: widget.index == 0
               ? BorderRadius.only(topLeft: Radius.circular(3), bottomLeft: Radius.circular(3))
               : widget.index == widget.length - 1

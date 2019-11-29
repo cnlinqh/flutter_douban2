@@ -80,7 +80,7 @@ class SubjectSectionGeneral extends StatelessWidget {
             text: this._subject['title'],
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).textTheme.title.color,
               fontSize: 20,
             ),
           ),
@@ -88,7 +88,7 @@ class SubjectSectionGeneral extends StatelessWidget {
             text: " (${this._subject['year']})",
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).textTheme.title.color,
             ),
           ),
         ],
