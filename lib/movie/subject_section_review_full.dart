@@ -144,14 +144,13 @@ class _SubjectSectionReviewFullState extends State<SubjectSectionReviewFull> {
         fontFamily: DefaultTextStyle.of(context).style.fontFamily,
       ),
       linkStyle: TextStyle(
-        color: ThemeBloc.highLights['red'],
+        color: ThemeBloc.colors['red'],
       ),
       onLinkTap: (url) {
         _launchURL(url);
       },
       onImageTap: (src) {
         // Display the image in large form.
-        print(src);
         Navigator.push(
           context,
           MaterialPageRoute(

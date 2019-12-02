@@ -219,7 +219,7 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
               new SimpleDialogOption(
                 child: Container(
                   child: new Text(LabelConstant.MOIVE_COMMENT_ALREADY),
-                  color: this._status == 'P' ? Theme.of(context).primaryColor : ThemeBloc.highLights['transparent'],
+                  color: this._status == 'P' ? Theme.of(context).primaryColor : ThemeBloc.colors['transparent'],
                 ),
                 onPressed: () {
                   Navigator.of(context).pop("P");
@@ -228,7 +228,7 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
               new SimpleDialogOption(
                 child: Container(
                   child: new Text(LabelConstant.MOIVE_COMMENT_WANT),
-                  color: this._status == 'F' ? Theme.of(context).primaryColor : ThemeBloc.highLights['transparent'],
+                  color: this._status == 'F' ? Theme.of(context).primaryColor : ThemeBloc.colors['transparent'],
                 ),
                 onPressed: () {
                   Navigator.of(context).pop("F");
@@ -237,7 +237,7 @@ class _SubjectSectionCommentsAllState extends State<SubjectSectionCommentsAll> {
               new SimpleDialogOption(
                 child: Container(
                   child: new Text(LabelConstant.MOIVE_COMMENT_DLG_CANCEL),
-                  color: this._status == 'C' ? Theme.of(context).primaryColor : ThemeBloc.highLights['transparent'],
+                  color: this._status == 'C' ? Theme.of(context).primaryColor : ThemeBloc.colors['transparent'],
                 ),
                 onPressed: () {
                   Navigator.of(context).pop("C");

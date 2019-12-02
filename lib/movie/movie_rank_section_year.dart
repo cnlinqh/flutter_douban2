@@ -137,7 +137,7 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
         width: ScreenUtil.getInstance().setWidth(size['size']['triangle_top_width']),
         height: ScreenUtil.getInstance().setHeight(size['size']['rank_bg_cover_height']),
         decoration: BoxDecoration(
-          color: ThemeBloc.highLights['transparent'],
+          color: ThemeBloc.colors['transparent'],
         ),
         child: CustomPaint(
           painter: TriangleCustomPainter(this.color),
@@ -182,7 +182,7 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
       child: Text(
         widget.title,
         style: TextStyle(
-          color: ThemeBloc.white,
+          color: ThemeBloc.colors['white'],
           fontSize: 24,
           fontWeight: FontWeight.bold,
         ),
@@ -197,7 +197,7 @@ class _MovieRankSectionYearState extends State<MovieRankSectionYear> {
       child: Text(
         widget.subTitle,
         style: TextStyle(
-          color: ThemeBloc.white,
+          color: ThemeBloc.colors['white'],
           fontSize: 12,
         ),
       ),

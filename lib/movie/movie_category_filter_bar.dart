@@ -127,7 +127,7 @@ class _MovieCategoryFilterBarState extends State<MovieCategoryFilterBar> {
   Widget _buildBottomSheetContent() {
     return Container(
       height: ScreenUtil.screenHeight,
-      color: ThemeBloc.white,
+      color: ThemeBloc.colors['white'],
       padding: EdgeInsets.fromLTRB(
         ScreenUtil.getInstance().setWidth(ScreenSize.padding * 2),
         ScreenUtil.getInstance().setHeight(ScreenSize.padding),

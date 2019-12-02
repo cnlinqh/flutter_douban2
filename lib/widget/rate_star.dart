@@ -15,7 +15,7 @@ class RateStar extends StatelessWidget {
     this.min = 0.0,
     this.max = 10.0,
     this.labled = true,
-    this.lableColor = ThemeBloc.grey,
+    this.lableColor = Colors.grey,
     this.size = 14,
     this.mainAxisAlignment = MainAxisAlignment.start,
   });
@@ -59,8 +59,8 @@ class RateStar extends StatelessWidget {
       rate >= top ? Icons.star : rate > bottom ? Icons.star_half : Icons.star_border,
       size: size,
       color: rate >= top
-          ? ThemeBloc.highLights['orange']
-          : rate > bottom ? ThemeBloc.highLights['orangeAccent'] : ThemeBloc.highLights['black'],
+          ? ThemeBloc.colors['orange']
+          : rate > bottom ? ThemeBloc.colors['orangeAccent'] : ThemeBloc.colors['black'],
     );
   }
 }

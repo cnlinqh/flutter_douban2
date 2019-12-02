@@ -116,7 +116,7 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
               text: '新',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: ThemeBloc.highLights['green'],
+                color: ThemeBloc.colors['green'],
               ),
             ),
             TextSpan(
@@ -196,13 +196,13 @@ class _MovieSubjectGeneralState extends State<MovieSubjectGeneral> {
       children: <Widget>[
         IconButton(
           icon: Icon(Icons.favorite_border),
-          color: ThemeBloc.highLights['orange'],
+          color: ThemeBloc.colors['orange'],
           onPressed: () {},
         ),
         Text(
           LabelConstant.MOVIE_WANTED_TITLE,
           style: TextStyle(
-            color: ThemeBloc.highLights['orange'],
+            color: ThemeBloc.colors['orange'],
           ),
         ),
       ],

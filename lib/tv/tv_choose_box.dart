@@ -164,7 +164,7 @@ class _TVChooseBoxState extends State<TVChooseBox> {
           child: Text(
             widget.label,
             style: TextStyle(
-              color: ThemeBloc.white,
+              color: ThemeBloc.colors['white'],
               fontSize: 16,
             ),
           ),

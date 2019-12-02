@@ -153,7 +153,7 @@ class _SubjectDetailsPageState extends State<SubjectDetailsPage> {
             child: Stack(
               children: <Widget>[
                 Container(
-                  // color: this._pickedColor,
+                  color: ThemeBloc.convert2MaterialColor(this._pickedColor)[100],
                   padding: EdgeInsets.all(
                     ScreenUtil.getInstance().setWidth(ScreenSize.padding),
                   ),

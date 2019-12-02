@@ -66,8 +66,7 @@ class RadioBarState extends State<RadioBar> with TickerProviderStateMixin {
     double newLeft = _getNewLeft(this.selectedIndex);
     if (controller != null) controller.dispose();
     _runAnimation(newLeft);
-    if (widget.onSelectionChange != null)
-      widget.onSelectionChange(widget.radios[this.selectedIndex]['id']);
+    if (widget.onSelectionChange != null) widget.onSelectionChange(widget.radios[this.selectedIndex]['id']);
   }
 
   void _onAfterBuild(Duration timeStamp) {
@@ -105,21 +104,14 @@ class RadioBarState extends State<RadioBar> with TickerProviderStateMixin {
       top: 0,
       left: animation != null ? animation.value : 0,
       child: Container(
-        padding: EdgeInsets.all(
-            ScreenUtil.getInstance().setWidth(ScreenSize.padding)),
+        padding: EdgeInsets.all(ScreenUtil.getInstance().setWidth(ScreenSize.padding)),
         decoration: BoxDecoration(
-          color: ThemeBloc.white,
+          color: ThemeBloc.colors['white'],
           borderRadius: BorderRadius.all(
             Radius.circular(14),
           ),
         ),
-        child: Center(
-          child: Text(
-            widget.radios[this.selectedIndex]["label"],
-            style: TextStyle(
-                color: this.labelVisible ? ThemeBloc.black : ThemeBloc.black),
-          ),
-        ),
+        child: Center(child: Text(widget.radios[this.selectedIndex]["label"])),
       ),
     );
   }
@@ -127,15 +119,13 @@ class RadioBarState extends State<RadioBar> with TickerProviderStateMixin {
   double _getNewLeft(index) {
     double newLeft = 0;
     for (int i = 0; i < index; i++) {
-      newLeft = newLeft +
-          this.radioKeys[i].currentContext.findRenderObject().size.width;
+      newLeft = newLeft + this.radioKeys[i].currentContext.findRenderObject().size.width;
     }
     return newLeft;
   }
 
   void _runAnimation(double newLeft) {
-    controller = new AnimationController(
-        duration: const Duration(milliseconds: 500), vsync: this);
+    controller = new AnimationController(duration: const Duration(milliseconds: 500), vsync: this);
     animation = new Tween(begin: this.left, end: newLeft).animate(controller);
     animation.addListener(() {
       if (mounted) setState(() {});

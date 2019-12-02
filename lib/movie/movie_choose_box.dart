@@ -139,7 +139,7 @@ class _MovieChooseBoxState extends State<MovieChooseBox> {
         child: Center(
           child: Text(
             widget.label,
-            style: TextStyle(color: ThemeBloc.white, fontSize: 16),
+            style: TextStyle(color: ThemeBloc.colors['white'], fontSize: 16),
           ),
         ),
       ),

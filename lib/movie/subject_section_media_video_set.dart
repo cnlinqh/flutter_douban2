@@ -162,13 +162,13 @@ class _SubjectVideoSetState extends State<SubjectVideoSet> {
       allowFullScreen: true,
       // showControls: false,
       materialProgressColors: ChewieProgressColors(
-        playedColor: ThemeBloc.highLights['red'],
-        handleColor: ThemeBloc.highLights['blue'],
-        backgroundColor: ThemeBloc.highLights['grey'],
-        bufferedColor: ThemeBloc.highLights['green'],
+        playedColor: ThemeBloc.colors['red'],
+        handleColor: ThemeBloc.colors['blue'],
+        backgroundColor: ThemeBloc.colors['grey'],
+        bufferedColor: ThemeBloc.colors['green'],
       ),
       placeholder: Container(
-        color: ThemeBloc.highLights['grey'],
+        color: ThemeBloc.colors['grey'],
       ),
       // autoInitialize: true,
     );

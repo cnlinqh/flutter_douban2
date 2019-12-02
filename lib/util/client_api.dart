@@ -262,7 +262,6 @@ class ClientAPI {
       Repository.setCachedList(key, res.data['data']);
     }
     LogUtil.log("<<<<ClientAPI: newSearchSubjects($search) -----------  ${e.difference(s).inMilliseconds}");
-    print(res.data);
     // {msg: 检测到有异常请求从您的IP发出，请登录再试!, r: 1}
     if(res.data['msg'] == '检测到有异常请求从您的IP发出，请登录再试!'){
       return [];

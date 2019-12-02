@@ -103,7 +103,7 @@ class _CeleSectionPhotosGridView2State extends State<CeleSectionPhotosGridView2>
     return Text(
       photo['size'],
       style: TextStyle(
-        color: ThemeBloc.white,
+        color: ThemeBloc.colors['white'],
       ),
     );
   }

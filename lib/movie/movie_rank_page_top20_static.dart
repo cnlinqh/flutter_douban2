@@ -72,14 +72,14 @@ class _MovieRankTop20StaticPageState extends State<MovieRankTop20StaticPage> {
           Text(
             widget.res['title'],
             style: TextStyle(
-              color: ThemeBloc.white,
+              color: ThemeBloc.colors['white'],
               fontSize: 14,
             ),
           ),
           Text(
             LabelConstant.MOVIE_RANK_YEAR_TOP20,
             style: TextStyle(
-              color: ThemeBloc.white,
+              color: ThemeBloc.colors['white'],
               fontSize: 10,
             ),
           ),

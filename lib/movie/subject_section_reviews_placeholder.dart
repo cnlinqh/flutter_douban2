@@ -80,14 +80,18 @@ class SubjectSectionReviewsPlaceHolderState extends State<SubjectSectionReviewsP
                   LabelConstant.MOVIE_LONG_REVIEW,
                   style: TextStyle(
                     fontSize: 24,
-                    color: Theme.of(context).brightness == Brightness.light ? Theme.of(context).colorScheme.onPrimary : ThemeBloc.white,
+                    color: Theme.of(context).brightness == Brightness.light
+                        ? Theme.of(context).colorScheme.onPrimary
+                        : ThemeBloc.colors['white'],
                   ),
                 ),
                 ScreenSize.buildHDivider(),
                 Text(
                   this.total,
                   style: TextStyle(
-                    color: Theme.of(context).brightness == Brightness.light ? Theme.of(context).colorScheme.onPrimary : ThemeBloc.white,
+                    color: Theme.of(context).brightness == Brightness.light
+                        ? Theme.of(context).colorScheme.onPrimary
+                        : ThemeBloc.colors['white'],
                   ),
                 )
               ],

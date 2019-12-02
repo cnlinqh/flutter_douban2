@@ -65,15 +65,15 @@ class MovieUtil {
       child: Container(
         child: Text(
           "No. ${index + 1}",
-          style: TextStyle(color: ThemeBloc.white, fontWeight: FontWeight.bold, fontSize: 14),
+          style: TextStyle(color: ThemeBloc.colors['white'], fontWeight: FontWeight.bold, fontSize: 14),
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(3)),
           color: index == 0
-              ? ThemeBloc.highLights['red']
+              ? ThemeBloc.colors['red']
               : index == 1
-                  ? ThemeBloc.highLights['redAccent']
-                  : (index == 2 ? ThemeBloc.highLights['orange'] : ThemeBloc.highLights['grey']),
+                  ? ThemeBloc.colors['redAccent']
+                  : (index == 2 ? ThemeBloc.colors['orange'] : ThemeBloc.colors['grey']),
         ),
       ),
     );
@@ -85,7 +85,7 @@ class MovieUtil {
         onTap: () {},
         child: Icon(
           Icons.favorite_border,
-          color: ThemeBloc.highLights['orage'],
+          color: ThemeBloc.colors['orange'],
         ),
       ),
     );
@@ -107,7 +107,7 @@ class MovieUtil {
         right: 0,
         child: Icon(
           Icons.fiber_new,
-          color: ThemeBloc.highLights['green'],
+          color: ThemeBloc.colors['green'],
         ),
       );
     } else {
@@ -172,9 +172,12 @@ class MovieUtil {
     return _subject["summary"].toString();
   }
 
-  static Widget buildRate(String rating, {Color lableColor = ThemeBloc.grey}) {
+  static Widget buildRate(String rating, {Color lableColor}) {
     if (rating == "") {
       rating = "0";
+    }
+    if (lableColor == null) {
+      lableColor = ThemeBloc.colors['grey'];
     }
     var rate = double.parse(rating);
     return rate != 0
@@ -268,7 +271,7 @@ class MovieUtil {
     double heightPx = ScreenSize.photo_cover_height,
     double scale = 1,
     String orientation = 'Orientation.portrait',
-    Color color = ThemeBloc.black,
+    @required Color color,
   }) {
     return Stack(
       children: <Widget>[
@@ -307,7 +310,7 @@ class MovieUtil {
                 child: Center(
                   child: Icon(
                     Icons.play_arrow,
-                    color: ThemeBloc.white,
+                    color: ThemeBloc.colors['white'],
                   ),
                 ),
               ),
@@ -351,7 +354,7 @@ class MovieUtil {
     Fluttertoast.showToast(
       msg: '正在保存...',
       backgroundColor: color,
-      textColor: ThemeBloc.white,
+      textColor: ThemeBloc.colors['white'],
     );
     var response = await http.get(url);
     var filePath = await ImagePickerSaver.saveFile(fileData: response.bodyBytes);
@@ -360,7 +363,7 @@ class MovieUtil {
     Fluttertoast.showToast(
       msg: '保存成功',
       backgroundColor: color,
-      textColor: ThemeBloc.white,
+      textColor: ThemeBloc.colors['white'],
     );
   }
 

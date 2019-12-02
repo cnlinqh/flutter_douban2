@@ -107,7 +107,7 @@ class _MovieViewSliderState extends State<MovieViewSlider> {
         Text(
           item['title'],
           style: TextStyle(
-            color: ThemeBloc.highLights['blue'],
+            color: ThemeBloc.colors['blue'],
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -115,7 +115,7 @@ class _MovieViewSliderState extends State<MovieViewSlider> {
           item['summary'],
           overflow: TextOverflow.ellipsis,
           maxLines: 2,
-          style: TextStyle(color: ThemeBloc.white),
+          style: TextStyle(color: ThemeBloc.colors['white']),
         ),
       ],
     );

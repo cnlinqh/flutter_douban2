@@ -164,7 +164,7 @@ class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
       right: ScreenUtil.getInstance().setWidth(ScreenSize.padding),
       child: Text(
         this._subTitle,
-        style: TextStyle(color: ThemeBloc.white),
+        style: TextStyle(color: ThemeBloc.colors['white']),
       ),
     );
   }
@@ -176,7 +176,7 @@ class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
       child: Text(
         widget.title,
         style: TextStyle(
-          color: ThemeBloc.white,
+          color: ThemeBloc.colors['white'],
           fontSize: 20,
         ),
       ),
@@ -239,7 +239,7 @@ class _MovieViewTopListCoverState extends State<MovieViewTopListCover> {
             TextSpan(text: str),
             TextSpan(
               text: "  " + _getSubject(subject)['rating']['average'].toString(),
-              style: TextStyle(color: ThemeBloc.highLights['orange']),
+              style: TextStyle(color: ThemeBloc.colors['orange']),
             ),
           ],
         ),

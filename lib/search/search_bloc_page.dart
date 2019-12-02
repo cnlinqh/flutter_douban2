@@ -43,7 +43,7 @@ class SearchBlocPage extends StatelessWidget with Debounce {
                     suffixIcon: IconButton(
                       icon: Icon(
                         Icons.clear,
-                        color: ThemeBloc.highLights['red'],
+                        color: ThemeBloc.colors['red'],
                       ),
                       onPressed: () {
                         // controller.clear(); workaround
@@ -308,7 +308,7 @@ class SuggestionBlocPage extends StatelessWidget {
           IconButton(
             icon: Icon(
               Icons.close,
-              color: ThemeBloc.highLights['redAccent'],
+              color: ThemeBloc.colors['redAccent'],
             ),
             onPressed: () {
               BlocProvider.of<SearchBloc>(context).add(SearchSuggestionsClearEvent());

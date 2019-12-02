@@ -81,7 +81,7 @@ class _CeleSectionPhotosGalleryState extends State<CeleSectionPhotosGallery> {
                   info.photos[info.selectedIndex]['comment'] != null
                       ? info.photos[info.selectedIndex]['comment']
                       : 'loading',
-                  style: TextStyle(color: ThemeBloc.white),
+                  style: TextStyle(color: ThemeBloc.colors['white']),
                 ),
               )
             ],

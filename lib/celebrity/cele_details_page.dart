@@ -28,7 +28,7 @@ class _CeleDetailsPageState extends State<CeleDetailsPage> {
   Widget build(BuildContext context) {
     return Theme(
       data: ThemeData(
-        primarySwatch: ThemeBloc.convert2MaterialColor(ThemeBloc.white),
+        primarySwatch: ThemeBloc.convert2MaterialColor(ThemeBloc.colors['white']),
         brightness: Theme.of(context).brightness,
       ),
       child: Scaffold(

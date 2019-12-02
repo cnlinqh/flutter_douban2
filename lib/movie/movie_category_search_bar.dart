@@ -195,7 +195,7 @@ class _MovieCategorySearchBarState extends State<MovieCategorySearchBar> {
               ),
               padding: EdgeInsets.all(ScreenUtil.getInstance().setWidth(ScreenSize.padding / 2)),
               decoration: BoxDecoration(
-                color: this.widget.selected == text ? Theme.of(context).colorScheme.primary : ThemeBloc.highLights['transparent'],
+                color: this.widget.selected == text ? Theme.of(context).colorScheme.primary : ThemeBloc.colors['transparent'],
                 borderRadius: BorderRadius.all(Radius.circular(3)),
               ),
               child: Text(
@@ -250,7 +250,7 @@ class _InputDialogState extends State<InputDialog> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     var mediaQueryData = MediaQueryData.fromWindow(ui.window);
     return AnimatedContainer(
-      color: ThemeBloc.highLights['transparent'],
+      color: ThemeBloc.colors['transparent'],
       duration: const Duration(milliseconds: 300),
       padding: EdgeInsets.only(bottom: mediaQueryData.viewInsets.bottom),
       child: Material(

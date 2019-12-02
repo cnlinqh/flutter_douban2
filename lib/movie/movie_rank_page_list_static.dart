@@ -71,12 +71,12 @@ class _MovieRankListStaticPageState extends State<MovieRankListStaticPage> {
         children: <Widget>[
           Text(
             widget.res['payload']['title'],
-            style: TextStyle(color: ThemeBloc.white, fontSize: 14),
+            style: TextStyle(color: ThemeBloc.colors['white'], fontSize: 14),
           ),
           Text(
             LabelConstant.MOVIE_RANK_YEAR_LIST,
             style: TextStyle(
-              color: ThemeBloc.white,
+              color: ThemeBloc.colors['white'],
               fontSize: 10,
             ),
           ),
